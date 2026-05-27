@@ -1,0 +1,2984 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Éthologie du Cheval</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --sand: #f5ede0;
+  --earth: #8b5e3c;
+  --dark: #2c1a0e;
+  --cream: #fdf8f2;
+  --sage: #7a8c6e;
+  --rust: #c0522a;
+  --gold: #c9963e;
+  --mist: #e8ddd0;
+  --soft: #f0e6d8;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--sand);
+  min-height: 100vh;
+  padding: 24px 20px 48px;
+  background-image:
+    radial-gradient(ellipse at 10% 15%, rgba(139,94,60,0.09) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 80%, rgba(201,150,62,0.11) 0%, transparent 50%);
+}
+
+/* ===== SCREENS ===== */
+.screen { display: none; }
+.screen.active { display: block; animation: fadeUp 0.5s ease both; }
+
+/* ===== HOME ===== */
+.home-header { text-align: center; margin-bottom: 28px; padding-top: 16px; }
+.home-badge { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 3.5px; text-transform: uppercase; color: var(--earth); background: var(--mist); border-radius: 100px; padding: 6px 18px; margin-bottom: 18px; }
+.home-header h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 6vw, 52px); color: var(--dark); line-height: 1.12; font-weight: 700; }
+.home-header h1 em { color: var(--earth); font-style: italic; }
+.home-header p { margin-top: 14px; color: var(--earth); font-size: 15px; font-weight: 300; opacity: 0.8; max-width: 420px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+
+.quiz-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; max-width: 860px; margin: 0 auto; }
+
+.quiz-card {
+  background: var(--cream);
+  border: 1.5px solid rgba(139,94,60,0.12);
+  border-radius: 20px;
+  padding: 30px 28px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.quiz-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--earth), var(--gold));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: left;
+}
+.quiz-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(44,26,14,0.13); border-color: rgba(139,94,60,0.3); }
+.quiz-card:hover::before { transform: scaleX(1); }
+
+.quiz-card-icon { font-size: 36px; margin-bottom: 14px; display: block; }
+.quiz-card-title { font-family: 'Playfair Display', serif; font-size: 19px; color: var(--dark); font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+.quiz-card-desc { font-size: 13px; color: var(--earth); opacity: 0.8; line-height: 1.6; margin-bottom: 18px; }
+.quiz-card-meta { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--earth); opacity: 0.5; }
+
+.quiz-card.done .quiz-card-meta { color: var(--sage); opacity: 1; }
+.quiz-card.done::after { content: '✓'; position: absolute; top: 16px; right: 18px; font-size: 13px; color: var(--sage); font-weight: 700; background: rgba(122,140,110,0.15); width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+.home-footer { text-align: center; margin-top: 36px; font-size: 13px; color: var(--earth); opacity: 0.45; }
+
+/* ===== QUIZ SCREEN ===== */
+.quiz-container { max-width: 680px; margin: 0 auto; }
+
+.quiz-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+.back-btn { background: none; border: 1.5px solid var(--mist); border-radius: 100px; padding: 8px 18px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--earth); cursor: pointer; transition: all 0.2s; font-weight: 500; }
+.back-btn:hover { background: var(--mist); border-color: var(--earth); }
+.quiz-top-title { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--dark); font-weight: 700; font-style: italic; }
+
+.progress-wrap { margin-bottom: 6px; background: var(--mist); border-radius: 100px; height: 5px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--earth), var(--gold)); border-radius: 100px; transition: width 0.5s cubic-bezier(.4,0,.2,1); }
+.progress-info { display: flex; justify-content: space-between; margin-bottom: 22px; }
+.progress-label { font-size: 12px; color: var(--earth); opacity: 0.55; font-weight: 500; }
+
+.card { background: var(--cream); border-radius: 20px; padding: 38px 42px; box-shadow: 0 4px 40px rgba(44,26,14,0.09), 0 1px 4px rgba(44,26,14,0.05); border: 1px solid rgba(139,94,60,0.09); }
+
+.q-num { font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--earth); opacity: 0.55; margin-bottom: 12px; }
+.q-text { font-family: 'Playfair Display', serif; font-size: clamp(16px, 3vw, 21px); color: var(--dark); line-height: 1.52; margin-bottom: 28px; font-weight: 700; }
+
+.options { display: flex; flex-direction: column; gap: 11px; }
+.opt-btn { background: none; border: 1.5px solid var(--mist); border-radius: 13px; padding: 15px 18px; text-align: left; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--dark); cursor: pointer; transition: all 0.2s ease; display: flex; align-items: flex-start; gap: 13px; line-height: 1.45; }
+.opt-btn:hover:not(:disabled) { border-color: var(--earth); transform: translateX(4px); box-shadow: 0 2px 14px rgba(139,94,60,0.11); }
+.opt-letter { min-width: 28px; height: 28px; border-radius: 50%; background: var(--mist); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--earth); transition: all 0.2s; flex-shrink: 0; margin-top: 1px; }
+.opt-btn.correct { border-color: var(--sage); background: rgba(122,140,110,0.09); }
+.opt-btn.correct .opt-letter { background: var(--sage); color: white; }
+.opt-btn.wrong { border-color: var(--rust); background: rgba(192,82,42,0.06); opacity: 0.65; }
+.opt-btn.wrong .opt-letter { background: var(--rust); color: white; }
+.opt-btn:disabled { cursor: default; }
+
+.feedback { margin-top: 20px; border-radius: 13px; padding: 16px 20px; font-size: 13.5px; line-height: 1.68; color: var(--dark); display: none; border-left: 3px solid transparent; }
+.feedback.show { display: block; animation: fadeIn 0.35s ease both; }
+.feedback.fb-ok { background: rgba(122,140,110,0.10); border-left-color: var(--sage); }
+.feedback.fb-ko { background: rgba(192,82,42,0.07); border-left-color: var(--rust); }
+.fb-head { font-weight: 600; display: block; margin-bottom: 6px; font-size: 13px; }
+.fb-ok .fb-head { color: var(--sage); }
+.fb-ko .fb-head { color: var(--rust); }
+
+.next-btn { margin-top: 22px; width: 100%; background: var(--dark); color: var(--sand); border: none; border-radius: 13px; padding: 16px 24px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; display: none; transition: all 0.2s; letter-spacing: 0.3px; }
+.next-btn:hover { background: var(--earth); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(44,26,14,0.17); }
+.next-btn.show { display: block; animation: fadeIn 0.35s ease both; }
+
+/* ===== SCORE SCREEN ===== */
+.score-container { max-width: 620px; margin: 0 auto; }
+.score-top { display: flex; justify-content: flex-start; margin-bottom: 28px; }
+.score-card { background: var(--cream); border-radius: 20px; padding: 44px 42px; box-shadow: 0 4px 40px rgba(44,26,14,0.09); border: 1px solid rgba(139,94,60,0.09); text-align: center; }
+.score-icon { font-size: 60px; margin-bottom: 10px; display: block; animation: popIn 0.6s cubic-bezier(.34,1.56,.64,1) both 0.2s; }
+.score-quiz-name { font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--earth); opacity: 0.6; margin-bottom: 6px; }
+.score-headline { font-family: 'Playfair Display', serif; font-size: clamp(22px, 4vw, 30px); color: var(--dark); font-weight: 700; margin-bottom: 6px; }
+.score-num { font-family: 'Playfair Display', serif; font-size: 80px; color: var(--earth); font-weight: 700; line-height: 1; margin: 18px 0 4px; }
+.score-denom { font-size: 12px; color: var(--dark); opacity: 0.35; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+.score-msg { font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: var(--dark); line-height: 1.7; max-width: 380px; margin: 0 auto 32px; padding: 20px 22px; background: var(--mist); border-radius: 14px; }
+
+.score-actions { display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+.btn-retry { background: var(--dark); color: white; border: none; border-radius: 13px; padding: 15px 30px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+.btn-retry:hover { background: var(--earth); transform: translateY(-1px); }
+.btn-home { background: none; border: 1.5px solid var(--mist); border-radius: 13px; padding: 15px 30px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: var(--earth); cursor: pointer; transition: all 0.2s; }
+.btn-home:hover { background: var(--mist); border-color: var(--earth); }
+
+.review-section { margin-top: 8px; text-align: left; }
+.review-heading { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--dark); margin-bottom: 16px; }
+.review-item { background: var(--soft); border: 1px solid var(--mist); border-radius: 13px; padding: 16px 18px; margin-bottom: 11px; }
+.rv-q { font-weight: 600; font-size: 13px; color: var(--dark); margin-bottom: 5px; line-height: 1.4; }
+.rv-status { font-size: 11px; font-weight: 600; margin-bottom: 5px; letter-spacing: 0.5px; }
+.rv-status.ok { color: var(--sage); }
+.rv-status.ko { color: var(--rust); }
+.rv-expl { font-size: 12.5px; color: var(--earth); line-height: 1.58; opacity: 0.9; }
+
+/* ===== MAIN HOME ===== */
+.main-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; max-width: 900px; margin: 0 auto; }
+
+.main-card {
+  background: var(--cream);
+  border: 1.5px solid rgba(139,94,60,0.12);
+  border-radius: 22px;
+  padding: 44px 32px 38px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.main-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--earth), var(--gold));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: left;
+}
+.main-card:hover { transform: translateY(-5px); box-shadow: 0 14px 44px rgba(44,26,14,0.14); border-color: rgba(139,94,60,0.3); }
+.main-card:hover::before { transform: scaleX(1); }
+.main-card-icon { font-size: 44px; margin-bottom: 18px; display: block; }
+.main-card-title { font-family: 'Playfair Display', serif; font-size: 21px; color: var(--dark); font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
+.main-card-desc { font-size: 13.5px; color: var(--earth); opacity: 0.75; line-height: 1.65; }
+
+/* ===== SUB-SECTION HEADER ===== */
+.sub-header { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
+.sub-header-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--dark); font-weight: 700; font-style: italic; }
+
+/* ===== PLACEHOLDER SCREENS ===== */
+.placeholder-container { max-width: 680px; margin: 0 auto; }
+.placeholder-card { background: var(--cream); border-radius: 20px; padding: 64px 42px; text-align: center; border: 1.5px solid rgba(139,94,60,0.10); }
+.placeholder-icon { font-size: 56px; display: block; margin-bottom: 22px; }
+.placeholder-title { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--dark); font-weight: 700; margin-bottom: 14px; }
+.placeholder-desc { font-size: 14px; color: var(--earth); opacity: 0.65; line-height: 1.75; }
+
+/* ===== FICHES PRATIQUES — GRILLE ===== */
+.fiches-container { max-width: 900px; margin: 0 auto; }
+.fiche-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+
+.fiche-card {
+  background: var(--cream);
+  border: 1.5px solid rgba(139,94,60,0.12);
+  border-radius: 18px;
+  padding: 22px 20px;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+.fiche-card:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(44,26,14,0.12); border-color: rgba(139,94,60,0.28); }
+.fiche-card:hover .fiche-card-arrow { opacity: 0.7; transform: translateX(3px); }
+.fiche-card-icon { font-size: 26px; flex-shrink: 0; margin-top: 1px; }
+.fiche-card-body { flex: 1; min-width: 0; }
+.fiche-card-title { font-family: 'Playfair Display', serif; font-size: 15.5px; color: var(--dark); font-weight: 700; margin-bottom: 4px; line-height: 1.3; }
+.fiche-card-teaser { font-size: 12px; color: var(--earth); opacity: 0.72; line-height: 1.5; }
+.fiche-card-arrow { font-size: 13px; color: var(--earth); opacity: 0.25; transition: all 0.2s; flex-shrink: 0; margin-top: 4px; }
+
+/* ===== FICHES PRATIQUES — DÉTAIL ===== */
+.fiche-detail-container { max-width: 680px; margin: 0 auto; }
+
+.fiche-detail-hero {
+  background: var(--cream);
+  border-radius: 20px;
+  padding: 38px 42px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(139,94,60,0.09);
+  box-shadow: 0 4px 40px rgba(44,26,14,0.08);
+}
+.fiche-detail-icon { font-size: 40px; display: block; margin-bottom: 14px; }
+.fiche-detail-title { font-family: 'Playfair Display', serif; font-size: clamp(20px, 4vw, 26px); color: var(--dark); font-weight: 700; margin-bottom: 12px; line-height: 1.25; }
+.fiche-detail-desc { font-size: 14.5px; color: var(--earth); line-height: 1.72; }
+
+.fiche-section {
+  background: var(--cream);
+  border-radius: 18px;
+  padding: 26px 36px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(139,94,60,0.09);
+}
+.fiche-section-label { font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--earth); opacity: 0.5; margin-bottom: 16px; }
+.fiche-points { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.fiche-points li { font-size: 14px; color: var(--dark); line-height: 1.55; padding-left: 18px; position: relative; }
+.fiche-points li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--earth); opacity: 0.4; }
+.fiche-pratique-text { font-size: 14px; color: var(--dark); line-height: 1.75; font-style: italic; opacity: 0.85; }
+
+.fiche-image-placeholder { border: 1.5px dashed rgba(139,94,60,0.2); border-radius: 12px; padding: 28px 24px; text-align: center; color: var(--earth); opacity: 0.4; font-size: 12.5px; line-height: 1.5; }
+.fiche-image-placeholder-icon { font-size: 26px; display: block; margin-bottom: 8px; }
+
+/* ===== CARNET D'OBSERVATION ===== */
+.carnet-container { max-width: 720px; margin: 0 auto; }
+.horse-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+.horse-card { background: var(--cream); border: 1.5px solid rgba(139,94,60,0.12); border-radius: 18px; padding: 20px 24px; cursor: pointer; transition: all 0.22s ease; display: flex; align-items: center; gap: 18px; }
+.horse-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(44,26,14,0.11); border-color: rgba(139,94,60,0.25); }
+.horse-card:hover .horse-card-arrow { opacity: 0.65; transform: translateX(2px); }
+.horse-avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--mist); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; overflow: hidden; }
+.horse-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.horse-card-name { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--dark); font-weight: 700; margin-bottom: 3px; }
+.horse-card-count { font-size: 12px; color: var(--earth); opacity: 0.6; }
+.horse-card-arrow { font-size: 13px; color: var(--earth); opacity: 0.22; margin-left: auto; transition: all 0.2s; flex-shrink: 0; }
+.empty-state { text-align: center; padding: 52px 24px; background: var(--cream); border: 1.5px dashed rgba(139,94,60,0.18); border-radius: 20px; margin-bottom: 20px; }
+.empty-state-icon { font-size: 44px; display: block; margin-bottom: 16px; opacity: 0.6; }
+.empty-state-title { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--dark); margin-bottom: 10px; }
+.empty-state-desc { font-size: 13.5px; color: var(--earth); opacity: 0.62; line-height: 1.72; max-width: 300px; margin: 0 auto; }
+.btn-create { display: block; width: 100%; background: var(--dark); color: var(--sand); border: none; border-radius: 13px; padding: 16px 24px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.2s; letter-spacing: 0.3px; box-sizing: border-box; }
+.btn-create:hover { background: var(--earth); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(44,26,14,0.17); }
+.btn-outline { display: block; width: 100%; background: none; border: 1.5px solid var(--mist); border-radius: 13px; padding: 14px 24px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: var(--earth); cursor: pointer; transition: all 0.2s; box-sizing: border-box; }
+.btn-outline:hover { background: var(--mist); border-color: rgba(139,94,60,0.35); }
+.carnet-form { background: var(--cream); border-radius: 20px; padding: 34px 38px; border: 1px solid rgba(139,94,60,0.09); box-shadow: 0 4px 40px rgba(44,26,14,0.07); }
+.form-field { margin-bottom: 24px; }
+.form-label { display: block; font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--earth); opacity: 0.55; margin-bottom: 10px; }
+.form-input { width: 100%; background: var(--soft); border: 1.5px solid var(--mist); border-radius: 11px; padding: 13px 15px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--dark); outline: none; transition: border-color 0.2s; box-sizing: border-box; }
+.form-input:focus { border-color: rgba(139,94,60,0.45); background: var(--cream); }
+.form-input::placeholder { color: var(--earth); opacity: 0.38; }
+.form-textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+.photo-zone { border: 1.5px dashed rgba(139,94,60,0.25); border-radius: 14px; padding: 26px 24px; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--soft); overflow: hidden; }
+.photo-zone:hover { border-color: rgba(139,94,60,0.5); background: var(--mist); }
+.photo-zone-icon { font-size: 24px; display: block; margin-bottom: 7px; opacity: 0.4; }
+.photo-zone-text { font-size: 12.5px; color: var(--earth); opacity: 0.5; }
+.photo-zone img { width: 100%; max-height: 160px; object-fit: cover; border-radius: 10px; display: block; }
+.horse-profile-header { background: var(--cream); border-radius: 20px; padding: 28px 32px; margin-bottom: 20px; border: 1px solid rgba(139,94,60,0.09); box-shadow: 0 4px 24px rgba(44,26,14,0.07); display: flex; align-items: center; gap: 20px; }
+.horse-profile-avatar { width: 66px; height: 66px; border-radius: 50%; overflow: hidden; background: var(--mist); display: flex; align-items: center; justify-content: center; font-size: 27px; flex-shrink: 0; }
+.horse-profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.horse-profile-name { font-family: 'Playfair Display', serif; font-size: 23px; color: var(--dark); font-weight: 700; margin-bottom: 3px; }
+.horse-profile-meta { font-size: 12px; color: var(--earth); opacity: 0.55; }
+.obs-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.obs-heading { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--dark); font-weight: 700; font-style: italic; }
+.btn-add-obs { background: var(--dark); color: var(--sand); border: none; border-radius: 100px; padding: 9px 20px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+.btn-add-obs:hover { background: var(--earth); }
+.obs-list { display: flex; flex-direction: column; gap: 12px; }
+.obs-card { background: var(--cream); border-radius: 18px; padding: 24px 28px; border: 1px solid rgba(139,94,60,0.09); transition: box-shadow 0.2s; }
+.obs-card:hover { box-shadow: 0 6px 24px rgba(44,26,14,0.09); }
+.obs-card-photo { width: 100%; max-height: 200px; object-fit: cover; border-radius: 11px; margin-bottom: 16px; display: block; }
+.obs-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.obs-date { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--earth); opacity: 0.5; }
+.obs-cat-badge { display: inline-block; padding: 3px 11px; border-radius: 100px; font-size: 10.5px; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
+.obs-cat-badge.cat-detente    { background: rgba(122,140,110,0.15); color: var(--sage); }
+.obs-cat-badge.cat-curiosite  { background: rgba(201,150,62,0.15);  color: var(--gold); }
+.obs-cat-badge.cat-vigilance  { background: rgba(201,150,62,0.15);  color: var(--gold); }
+.obs-cat-badge.cat-interaction{ background: rgba(201,150,62,0.15);  color: var(--gold); }
+.obs-cat-badge.cat-stress     { background: rgba(192,82,42,0.10);   color: var(--rust); }
+.obs-cat-badge.cat-inconfort  { background: rgba(192,82,42,0.10);   color: var(--rust); }
+.obs-cat-badge.cat-agacement  { background: rgba(192,82,42,0.10);   color: var(--rust); }
+.obs-cat-badge.cat-autre      { background: var(--mist);             color: var(--earth); }
+.obs-fields { display: flex; flex-direction: column; gap: 9px; margin-bottom: 2px; }
+.obs-field-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--earth); opacity: 0.45; margin-bottom: 2px; }
+.obs-field-value { font-size: 13.5px; color: var(--dark); line-height: 1.6; }
+.obs-divider { border: none; border-top: 1px solid rgba(139,94,60,0.07); margin: 13px 0; }
+.obs-section-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--earth); opacity: 0.42; margin-bottom: 6px; }
+.obs-interpretation { font-family: 'Playfair Display', serif; font-size: 14px; color: var(--dark); line-height: 1.74; font-style: italic; }
+.obs-a-verifier { font-size: 13px; color: var(--earth); opacity: 0.7; line-height: 1.6; }
+.obs-empty { text-align: center; padding: 40px 24px; background: var(--cream); border: 1.5px dashed rgba(139,94,60,0.15); border-radius: 16px; }
+.obs-empty-icon { font-size: 32px; display: block; margin-bottom: 12px; opacity: 0.4; }
+.obs-empty-text { font-size: 13.5px; color: var(--earth); opacity: 0.6; line-height: 1.7; font-style: italic; }
+.form-section-title { font-family: 'Playfair Display', serif; font-size: 14px; color: var(--dark); font-weight: 700; margin-bottom: 11px; font-style: italic; }
+.category-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.category-chip { background: var(--soft); border: 1.5px solid var(--mist); border-radius: 100px; padding: 7px 15px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--earth); cursor: pointer; transition: all 0.18s; user-select: none; }
+.category-chip:hover { border-color: rgba(139,94,60,0.38); }
+.category-chip.selected { background: var(--dark); border-color: var(--dark); color: var(--sand); }
+.obs-zone { border: 1px solid rgba(139,94,60,0.10); border-radius: 15px; padding: 20px 22px; background: var(--soft); display: flex; flex-direction: column; gap: 15px; }
+.obs-zone-label { display: block; font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--earth); opacity: 0.48; margin-bottom: 6px; }
+.obs-zone-input { width: 100%; background: var(--cream); border: 1.5px solid var(--mist); border-radius: 9px; padding: 10px 13px; font-family: 'DM Sans', sans-serif; font-size: 13.5px; color: var(--dark); outline: none; resize: none; min-height: 60px; line-height: 1.55; transition: border-color 0.2s; box-sizing: border-box; }
+.obs-zone-input:focus { border-color: rgba(139,94,60,0.4); }
+.obs-zone-input::placeholder { color: var(--earth); opacity: 0.3; font-style: italic; }
+@media (max-width: 500px) {
+  .carnet-form { padding: 22px 18px; }
+  .horse-profile-header { padding: 20px 16px; }
+  .obs-card { padding: 18px 18px; }
+}
+
+/* ===== BUDGET-TEMPS TABLE ===== */
+.bt-section-title { font-family: 'Playfair Display', serif; font-size: 19px; color: var(--dark); font-weight: 700; font-style: italic; margin-bottom: 18px; }
+.bt-table-wrap { background: var(--cream); border-radius: 20px; border: 1px solid rgba(139,94,60,0.09); box-shadow: 0 4px 40px rgba(44,26,14,0.07); overflow: hidden; margin-bottom: 20px; }
+.bt-table { width: 100%; border-collapse: collapse; }
+.bt-table thead tr { background: var(--soft); }
+.bt-table th { padding: 13px 18px; font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--earth); opacity: 0.6; text-align: left; }
+.bt-table tr + tr td { border-top: 1px solid rgba(139,94,60,0.07); }
+.bt-table tbody tr:hover td { background: rgba(139,94,60,0.025); }
+.bt-row-label { padding: 14px 18px; font-size: 13.5px; color: var(--dark); font-weight: 500; white-space: nowrap; width: 40%; vertical-align: middle; }
+.bt-row-icon { margin-right: 8px; font-size: 15px; }
+.bt-input { width: 100%; border: none; background: transparent; padding: 14px 15px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--dark); outline: none; transition: background 0.18s; box-sizing: border-box; }
+.bt-input::placeholder { color: var(--earth); opacity: 0.3; font-style: italic; }
+.bt-input:focus { background: rgba(245,237,224,0.7); }
+.bt-actions { display: flex; flex-direction: column; gap: 11px; margin-bottom: 8px; }
+.bt-save-confirm { display: none; text-align: center; font-size: 13px; color: var(--sage); font-weight: 500; padding: 10px; animation: fadeIn 0.3s ease both; }
+.bt-assign { background: var(--cream); border-radius: 18px; padding: 26px 28px; border: 1px solid rgba(139,94,60,0.09); margin-top: 20px; }
+.bt-assign-label { font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--earth); opacity: 0.55; margin-bottom: 12px; display: block; }
+.bt-select { width: 100%; background: var(--soft); border: 1.5px solid var(--mist); border-radius: 11px; padding: 13px 15px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--dark); outline: none; appearance: none; cursor: pointer; margin-bottom: 14px; transition: border-color 0.2s; box-sizing: border-box; }
+.bt-select:focus { border-color: rgba(139,94,60,0.45); background: var(--cream); }
+.bt-card { background: var(--cream); border-radius: 18px; padding: 22px 26px; border: 1px solid rgba(139,94,60,0.09); margin-bottom: 12px; transition: box-shadow 0.2s; }
+.bt-card:hover { box-shadow: 0 6px 24px rgba(44,26,14,0.09); }
+.bt-card-date { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--earth); opacity: 0.5; margin-bottom: 16px; }
+.bt-card-rows { display: flex; flex-direction: column; gap: 8px; }
+.bt-card-row { display: grid; grid-template-columns: 160px 90px 1fr; gap: 10px; font-size: 13px; line-height: 1.5; align-items: baseline; }
+.bt-card-row-label { font-weight: 500; color: var(--earth); opacity: 0.8; }
+.bt-card-row-dur { color: var(--dark); }
+.bt-card-row-note { color: var(--dark); opacity: 0.65; font-style: italic; }
+.bt-section-header { display: flex; align-items: center; justify-content: space-between; margin: 28px 0 14px; }
+.bt-section-title-sm { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--dark); font-weight: 700; font-style: italic; }
+.bt-empty { text-align: center; padding: 32px 24px; background: var(--cream); border: 1.5px dashed rgba(139,94,60,0.15); border-radius: 16px; font-size: 13px; color: var(--earth); opacity: 0.6; font-style: italic; line-height: 1.7; }
+@media (max-width: 500px) { .bt-card-row { grid-template-columns: 1fr 1fr; } .bt-card-row-note { grid-column: 1/-1; } }
+@media (max-width: 540px) {
+  .bt-table th:last-child, .bt-table td:last-child { display: none; }
+  .bt-row-label { width: auto; }
+}
+
+/* ===== HORSE PROFILE REDESIGN ===== */
+.hp-hero-card { background: var(--cream); border-radius: 24px; overflow: hidden; margin-bottom: 28px; border: 1px solid rgba(139,94,60,0.08); box-shadow: 0 4px 32px rgba(44,26,14,0.08); }
+.hp-hero-zone { width: 100%; height: 230px; cursor: pointer; position: relative; background: linear-gradient(135deg, var(--soft) 0%, var(--mist) 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+.hp-hero-zone:hover .hp-hero-overlay { opacity: 1; }
+.hp-hero-emoji { font-size: 52px; opacity: 0.28; margin-bottom: 10px; pointer-events: none; display: block; }
+.hp-hero-hint-text { font-size: 12px; color: var(--earth); opacity: 0.36; font-style: italic; pointer-events: none; letter-spacing: 0.2px; }
+.hp-hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hp-hero-overlay { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: flex-end; padding: 16px; background: linear-gradient(transparent 45%, rgba(44,26,14,0.3)); opacity: 0; transition: opacity 0.25s ease; }
+.hp-hero-overlay-badge { font-size: 11.5px; color: rgba(255,255,255,0.92); font-weight: 500; font-family: 'DM Sans', sans-serif; background: rgba(44,26,14,0.28); backdrop-filter: blur(6px); padding: 6px 14px; border-radius: 100px; letter-spacing: 0.3px; }
+.hp-hero-info { padding: 24px 30px 28px; }
+.hp-hero-name { font-family: 'Playfair Display', serif; font-size: 30px; color: var(--dark); font-weight: 700; margin-bottom: 7px; line-height: 1.15; letter-spacing: -0.3px; }
+.hp-hero-meta { font-size: 12.5px; color: var(--earth); opacity: 0.5; letter-spacing: 0.3px; }
+
+/* Date journal dans les cartes d'observation */
+.obs-card-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+.obs-date-weekday { font-size: 9.5px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--earth); opacity: 0.38; margin-bottom: 3px; }
+.obs-date-main { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--dark); font-weight: 700; line-height: 1.2; }
+
+@media (max-width: 500px) {
+  .hp-hero-zone { height: 180px; }
+  .hp-hero-info { padding: 18px 20px 22px; }
+  .hp-hero-name { font-size: 24px; }
+}
+
+/* ===== HORSE OVERVIEW SECTION ===== */
+.hp-overview-card { background: var(--cream); border-radius: 22px; padding: 26px 30px 28px; margin-bottom: 24px; border: 1px solid rgba(139,94,60,0.09); box-shadow: 0 2px 20px rgba(44,26,14,0.06); }
+.hp-overview-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.hp-overview-title { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--dark); font-weight: 700; font-style: italic; }
+.hp-overview-edit-btn { background: none; border: 1px solid rgba(139,94,60,0.2); border-radius: 100px; padding: 6px 16px; font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--earth); cursor: pointer; transition: all 0.2s; opacity: 0.72; letter-spacing: 0.2px; }
+.hp-overview-edit-btn:hover { background: var(--mist); opacity: 1; border-color: rgba(139,94,60,0.4); }
+.hp-pf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 18px 28px; }
+.hp-pf--wide { grid-column: 1 / -1; }
+.hp-pf { display: flex; flex-direction: column; gap: 5px; }
+.hp-pf-label { font-size: 9.5px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--earth); opacity: 0.42; }
+.hp-pf-value { font-size: 14px; color: var(--dark); line-height: 1.62; }
+.hp-pf-empty { text-align: center; padding: 14px 0 6px; color: var(--earth); opacity: 0.4; font-size: 13.5px; font-style: italic; line-height: 1.8; }
+.hp-pf-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+@media (max-width: 500px) { .hp-pf-form-grid { grid-template-columns: 1fr; } .hp-overview-card { padding: 20px 18px 22px; } }
+
+/* ===== CARNET — VISUAL REFRESH ===== */
+
+/* Fiches chevaux */
+.horse-list { gap: 14px; }
+.horse-card { padding: 22px 28px; gap: 22px; border-radius: 22px; border-width: 1px; }
+.horse-avatar { width: 64px; height: 64px; font-size: 26px; border-radius: 18px; flex-shrink: 0; }
+.horse-avatar img { border-radius: 18px; }
+.horse-card-name { font-size: 18px; margin-bottom: 5px; letter-spacing: -0.2px; }
+.horse-card-count { font-size: 12.5px; opacity: 0.52; letter-spacing: 0.2px; }
+.horse-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(44,26,14,0.13); }
+
+/* En-tête profil cheval */
+.horse-profile-header {
+  padding: 30px 36px; margin-bottom: 28px; gap: 24px;
+  background: linear-gradient(135deg, var(--cream) 70%, rgba(201,150,62,0.06) 100%);
+}
+.horse-profile-avatar { width: 82px; height: 82px; font-size: 34px; border-radius: 22px; }
+.horse-profile-avatar img { border-radius: 22px; }
+.horse-profile-name { font-size: 26px; margin-bottom: 6px; }
+.horse-profile-meta { font-size: 12.5px; letter-spacing: 0.3px; }
+
+/* En-tête observations */
+.obs-header { margin-bottom: 22px; }
+.obs-heading { font-size: 19px; }
+
+/* Cartes observations — sensation journal */
+.obs-list { gap: 16px; }
+.obs-card {
+  padding: 28px 32px; border-radius: 22px;
+  border: none;
+  border-left: 3px solid rgba(139,94,60,0.12);
+  box-shadow: 0 2px 16px rgba(44,26,14,0.06), 0 0 0 1px rgba(139,94,60,0.07);
+  transition: all 0.28s ease;
+}
+.obs-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(44,26,14,0.12), 0 0 0 1px rgba(139,94,60,0.10);
+  border-left-color: rgba(139,94,60,0.38);
+}
+
+/* Photo dans une observation */
+.obs-card-photo {
+  max-height: 280px; border-radius: 15px; margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(44,26,14,0.12);
+}
+
+/* Ligne date + badge */
+.obs-card-top { margin-bottom: 18px; align-items: center; }
+.obs-date { font-size: 11px; letter-spacing: 1.5px; font-style: italic; opacity: 0.52; }
+.obs-cat-badge { padding: 5px 14px; font-size: 11px; letter-spacing: 0.4px; border-radius: 100px; }
+
+/* Champs observés */
+.obs-fields { gap: 14px; margin-bottom: 4px; }
+.obs-field-label { font-size: 9px; letter-spacing: 2.2px; opacity: 0.38; margin-bottom: 3px; }
+.obs-field-value { font-size: 14px; line-height: 1.68; }
+
+/* Interprétation & À vérifier */
+.obs-divider { margin: 17px 0; opacity: 0.6; }
+.obs-section-label { font-size: 9px; letter-spacing: 2.2px; opacity: 0.38; margin-bottom: 7px; }
+.obs-interpretation { font-size: 14.5px; line-height: 1.82; color: var(--dark); }
+.obs-a-verifier { font-size: 13.5px; line-height: 1.68; }
+
+/* État vide */
+.obs-empty { padding: 52px 24px; border-radius: 20px; }
+.obs-empty-icon { font-size: 38px; margin-bottom: 15px; }
+.obs-empty-text { font-size: 14px; }
+
+/* Bouton photo profil cheval */
+.hp-photo-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 11px; background: none; border: 1px solid rgba(139,94,60,0.22); border-radius: 100px; padding: 5px 13px; font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--earth); cursor: pointer; transition: all 0.2s; opacity: 0.72; letter-spacing: 0.2px; }
+.hp-photo-btn:hover { background: var(--mist); opacity: 1; border-color: rgba(139,94,60,0.45); }
+/* Avatar cliquable */
+.horse-profile-avatar.clickable { cursor: pointer; transition: opacity 0.18s; }
+.horse-profile-avatar.clickable:hover { opacity: 0.82; }
+
+/* Photo dans le formulaire — aperçu plus grand */
+.photo-zone img { max-height: 220px; border-radius: 12px; }
+
+@media (max-width: 500px) {
+  .obs-card { padding: 22px 20px; }
+  .horse-profile-header { padding: 22px 20px; }
+  .horse-profile-avatar { width: 66px; height: 66px; font-size: 28px; }
+}
+
+/* ===== DÉFIS D'OBSERVATION ===== */
+.defis-card-pill { font-size: 11px; color: var(--earth); opacity: 0.38; margin-top: 12px; }
+.defis-card-pill.complete { color: var(--sage); opacity: 0.7; }
+
+.defis-page-container { max-width: 680px; margin: 0 auto; }
+.defis-page-intro { font-size: 14px; color: var(--earth); opacity: 0.62; line-height: 1.75; margin-bottom: 28px; }
+.defis-page-progress { display: flex; align-items: center; gap: 14px; margin-bottom: 34px; }
+.defis-page-bar-wrap { flex: 1; background: var(--mist); border-radius: 100px; height: 4px; overflow: hidden; }
+.defis-page-bar-fill { height: 100%; background: linear-gradient(90deg, var(--earth), var(--gold)); border-radius: 100px; transition: width 0.6s cubic-bezier(.4,0,.2,1); }
+.defis-page-fraction { font-size: 11px; font-weight: 600; letter-spacing: 1px; color: var(--earth); opacity: 0.38; flex-shrink: 0; }
+
+.defi-page-card { background: var(--cream); border: 1px solid rgba(139,94,60,0.09); border-radius: 18px; padding: 22px 24px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 18px; transition: all 0.2s ease; }
+.defi-page-card:not(.done):hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(44,26,14,0.09); border-color: rgba(139,94,60,0.2); }
+.defi-page-card.done { opacity: 0.3; }
+.defi-page-num { width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid rgba(139,94,60,0.17); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 12px; color: var(--earth); opacity: 0.5; font-weight: 600; }
+.defi-page-num.done { background: rgba(122,140,110,0.12); border-color: rgba(122,140,110,0.28); color: var(--sage); opacity: 1; font-size: 15px; }
+.defi-page-body { flex: 1; min-width: 0; }
+.defi-page-label { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--dark); font-weight: 700; margin-bottom: 4px; line-height: 1.35; }
+.defi-page-subdesc { font-size: 12.5px; color: var(--earth); opacity: 0.5; line-height: 1.55; margin-bottom: 10px; }
+.defi-page-reward { display: inline-flex; align-items: center; gap: 6px; padding: 5px 13px; border-radius: 100px; font-size: 11px; }
+.defi-page-reward.locked { background: var(--mist); color: var(--earth); opacity: 0.55; }
+.defi-page-reward.unlocked { background: rgba(122,140,110,0.11); color: var(--sage); }
+
+.defis-expert-wrap { margin-top: 48px; padding-top: 26px; border-top: 1px solid rgba(139,94,60,0.07); text-align: center; }
+.defis-expert-lbl { font-size: 9.5px; font-weight: 600; letter-spacing: 2.2px; text-transform: uppercase; color: var(--earth); opacity: 0.28; margin-bottom: 14px; }
+.defis-expert-toggle { display: inline-flex; align-items: center; gap: 8px; background: none; border: 1.5px solid rgba(139,94,60,0.14); border-radius: 100px; padding: 10px 26px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--earth); opacity: 0.38; cursor: pointer; transition: all 0.22s; }
+.defis-expert-toggle:hover { opacity: 0.65; border-color: rgba(139,94,60,0.28); }
+.defis-expert-toggle.active { color: var(--gold); border-color: rgba(201,150,62,0.32); opacity: 0.85; background: rgba(201,150,62,0.06); }
+.defis-expert-banner { background: rgba(201,150,62,0.07); border: 1px solid rgba(201,150,62,0.17); border-radius: 14px; padding: 14px 20px; margin-bottom: 26px; font-size: 13px; color: var(--dark); line-height: 1.65; }
+.defis-expert-banner strong { color: var(--gold); font-weight: 600; }
+
+.fiche-locked-hint { font-size: 10.5px; color: var(--earth); opacity: 0.42; margin-top: 6px; line-height: 1.4; }
+
+#expert-toggle { opacity: 0.1; cursor: pointer; user-select: none; transition: opacity 0.2s; margin-left: 5px; font-style: normal; }
+#expert-toggle:hover { opacity: 0.35; }
+#expert-toggle.active { opacity: 0.7; color: var(--gold); }
+
+/* ===== SYSTÈME DE DÉCOUVERTES ===== */
+.discovery-banner-wrap { max-width: 900px; margin: 0 auto 20px; }
+.discovery-banner { background: var(--cream); border: 1px solid rgba(201,150,62,0.22); border-radius: 16px; padding: 15px 22px; display: flex; align-items: center; gap: 16px; cursor: pointer; transition: all 0.22s ease; }
+.discovery-banner:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(44,26,14,0.09); border-color: rgba(201,150,62,0.4); }
+.discovery-icon { font-size: 14px; color: var(--gold); flex-shrink: 0; }
+.discovery-text { flex: 1; min-width: 0; }
+.discovery-label { font-size: 9px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); opacity: 0.8; margin-bottom: 3px; }
+.discovery-title { font-family: 'Playfair Display', serif; font-size: 14.5px; color: var(--dark); font-weight: 700; }
+.discovery-arrow { font-size: 13px; color: var(--earth); opacity: 0.25; flex-shrink: 0; transition: all 0.2s; }
+.discovery-banner:hover .discovery-arrow { opacity: 0.55; transform: translateX(2px); }
+
+/* Toast post-observation */
+.obs-discovery-toast { background: rgba(122,140,110,0.09); border: 1px solid rgba(122,140,110,0.18); border-radius: 15px; padding: 15px 20px; margin-bottom: 22px; display: none; animation: fadeIn 0.4s ease both; }
+.obs-discovery-toast-label { font-size: 9px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--sage); margin-bottom: 5px; }
+.obs-discovery-toast-text { font-size: 13.5px; color: var(--dark); line-height: 1.65; }
+
+/* Fiches émergentes */
+.fiche-emergentes-sep { grid-column: 1 / -1; padding-top: 10px; border-top: 1px solid rgba(139,94,60,0.08); margin-top: 6px; }
+.fiche-emergentes-sep-label { font-size: 9.5px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--earth); opacity: 0.35; }
+.fiche-card-badge { font-size: 9px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 100px; padding: 3px 10px; display: inline-block; margin-bottom: 9px; }
+.fiche-card-badge.badge-unlocked { color: var(--sage); background: rgba(122,140,110,0.12); }
+.fiche-card-badge.badge-locked   { color: var(--earth); background: var(--mist); opacity: 0.6; }
+.fiche-card.fiche-locked { opacity: 0.42; cursor: default; pointer-events: none; }
+
+/* ===== HERO OBSERVATION DU JOUR ===== */
+.obs-du-jour { max-width: 900px; margin: 0 auto 40px; }
+
+.hero-obs-card {
+  position: relative;
+  background: var(--dark);
+  border-radius: 28px;
+  padding: clamp(48px, 7vw, 72px) clamp(28px, 6vw, 72px);
+  overflow: hidden;
+  text-align: center;
+  min-height: 290px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+.hero-obs-card:hover { box-shadow: 0 20px 60px rgba(44,26,14,0.28); }
+.hero-obs-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 12%; right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,150,62,0.4), transparent);
+}
+
+.hero-obs-halo {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%; height: 75%;
+  background: radial-gradient(ellipse at center, rgba(201,150,62,0.13) 0%, rgba(139,94,60,0.06) 45%, transparent 72%);
+  animation: heroBreath 7s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes heroBreath {
+  0%,100% { opacity: 0.65; transform: translate(-50%,-50%) scale(1); }
+  50%      { opacity: 1;    transform: translate(-50%,-53%) scale(1.2); }
+}
+
+.hero-obs-content { position: relative; z-index: 1; max-width: 580px; }
+
+.hero-obs-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); opacity: 0.55; margin-bottom: 20px; }
+
+.hero-obs-phrase {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(18px, 3vw, 26px);
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.55;
+  margin-bottom: 34px;
+  opacity: 0.88;
+}
+
+.hero-obs-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(201,150,62,0.09);
+  border: 1px solid rgba(201,150,62,0.22);
+  border-radius: 100px;
+  padding: 12px 30px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: rgba(201,150,62,0.75);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  letter-spacing: 0.3px;
+  pointer-events: none; /* hérite du click du card parent */
+}
+.hero-obs-card:hover .hero-obs-cta {
+  background: rgba(201,150,62,0.16);
+  border-color: rgba(201,150,62,0.42);
+  color: var(--gold);
+}
+
+.hero-obs-daynum { position: absolute; bottom: 20px; right: 26px; font-size: 9px; font-weight: 600; letter-spacing: 1.8px; color: rgba(255,255,255,0.08); }
+.hero-obs-done { position: absolute; bottom: 22px; left: clamp(28px,6vw,72px); font-size: 9px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(201,150,62,0.42); }
+
+/* ===== OBS IMMERSIVE ===== */
+#screen-obs-immersive { background: var(--dark); min-height: 100vh; margin: -24px -20px -48px; padding: 0; }
+.oi-header { display: flex; align-items: center; gap: 12px; padding: 20px 24px 16px; }
+.oi-back { background: none; border: none; color: rgba(255,255,255,0.22); font-family: 'DM Sans', sans-serif; font-size: 12px; cursor: pointer; padding: 6px 10px; border-radius: 100px; transition: color 0.2s; white-space: nowrap; flex-shrink: 0; }
+.oi-back:hover { color: rgba(255,255,255,0.5); }
+.oi-progress-wrap { flex: 1; height: 1px; background: rgba(255,255,255,0.07); border-radius: 1px; overflow: hidden; }
+.oi-progress-bar { height: 100%; background: linear-gradient(90deg, var(--earth), var(--gold)); width: 0%; transition: width 0.8s ease; }
+.oi-content { min-height: calc(100vh - 60px); display: flex; align-items: center; justify-content: center; padding: 20px 28px 60px; max-width: 700px; margin: 0 auto; }
+
+.oi-seuil-wrap { text-align: center; }
+.oi-seuil-text { font-family: 'Playfair Display', serif; font-size: clamp(20px,3.5vw,28px); font-style: italic; color: var(--cream); line-height: 1.55; opacity: 0; animation: oiFadeIn 1.4s ease 0.3s forwards; }
+
+.oi-scene-wrap { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.oi-video-box { width: 100%; max-width: 640px; aspect-ratio: 16/9; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 18px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+.oi-video-box iframe { width: 100%; height: 100%; border: none; }
+.oi-video-desc { font-family: 'Playfair Display', serif; font-size: 13.5px; font-style: italic; color: rgba(255,255,255,0.25); text-align: center; padding: 28px 36px; line-height: 1.7; }
+.oi-timer-wrap { width: 100%; max-width: 640px; height: 1px; background: rgba(255,255,255,0.06); }
+.oi-timer-bar { height: 100%; background: rgba(201,150,62,0.35); width: 0%; }
+.oi-question-block { width: 100%; max-width: 640px; text-align: center; opacity: 0; transform: translateY(10px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.oi-question-block.visible { opacity: 1; transform: none; }
+.oi-question-label { font-size: 9px; font-weight: 600; letter-spacing: 3.5px; text-transform: uppercase; color: rgba(201,150,62,0.45); margin-bottom: 18px; }
+.oi-zones { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 26px; }
+.oi-zone-chip { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: 100px; padding: 8px 20px; font-size: 13px; color: rgba(255,255,255,0.38); cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; user-select: none; }
+.oi-zone-chip:hover, .oi-zone-chip.active { background: rgba(201,150,62,0.1); border-color: rgba(201,150,62,0.32); color: rgba(201,150,62,0.8); }
+
+.oi-miseaupoint-wrap { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 28px; }
+.oi-guidage { font-family: 'Playfair Display', serif; font-size: clamp(15px,2.4vw,18px); font-style: italic; color: rgba(255,255,255,0.6); text-align: center; line-height: 1.7; max-width: 520px; opacity: 0; animation: oiFadeIn 0.9s ease 0.5s forwards; }
+
+.oi-revelation-wrap { max-width: 560px; text-align: center; }
+.oi-revelation-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: 3.5px; text-transform: uppercase; color: rgba(201,150,62,0.38); margin-bottom: 28px; opacity: 0; animation: oiFadeIn 0.6s ease 0.2s forwards; }
+.oi-revelation-text { font-family: 'Playfair Display', serif; font-size: clamp(17px,2.8vw,22px); font-style: italic; color: var(--cream); line-height: 1.7; margin-bottom: 28px; opacity: 0; animation: oiFadeIn 1.1s ease 0.7s forwards; }
+.oi-fiche-lien { font-size: 12px; color: rgba(201,150,62,0.4); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; background: none; border: none; font-family: 'DM Sans', sans-serif; transition: color 0.2s; margin-bottom: 32px; display: inline-block; opacity: 0; animation: oiFadeIn 0.6s ease 1.5s forwards; }
+.oi-fiche-lien:hover { color: var(--gold); }
+
+.oi-ancrage-wrap { max-width: 460px; text-align: center; border: 1px solid rgba(255,255,255,0.07); border-radius: 24px; padding: 44px 40px; }
+.oi-ancrage-question { font-family: 'Playfair Display', serif; font-size: clamp(16px,2.4vw,19px); font-style: italic; color: rgba(255,255,255,0.65); line-height: 1.65; margin-bottom: 32px; opacity: 0; animation: oiFadeIn 0.9s ease 0.3s forwards; }
+.oi-ancrage-actions { display: flex; flex-direction: column; gap: 12px; align-items: center; opacity: 0; animation: oiFadeIn 0.7s ease 0.9s forwards; }
+.oi-btn-note { background: rgba(201,150,62,0.1); border: 1px solid rgba(201,150,62,0.28); border-radius: 100px; padding: 13px 40px; color: rgba(201,150,62,0.8); font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; transition: all 0.22s; }
+.oi-btn-note:hover { background: rgba(201,150,62,0.18); border-color: var(--gold); color: var(--gold); }
+.oi-btn-retiens { background: none; border: none; color: rgba(255,255,255,0.22); font-family: 'DM Sans', sans-serif; font-size: 13px; cursor: pointer; padding: 8px 16px; transition: color 0.2s; }
+.oi-btn-retiens:hover { color: rgba(255,255,255,0.48); }
+.oi-btn-continue { background: none; border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; padding: 11px 32px; color: rgba(255,255,255,0.3); font-family: 'DM Sans', sans-serif; font-size: 13px; cursor: pointer; transition: all 0.2s; }
+.oi-btn-continue:hover { border-color: rgba(255,255,255,0.28); color: rgba(255,255,255,0.62); }
+
+@keyframes oiFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.modules-label { font-size: 9px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--earth); opacity: 0.28; max-width: 900px; margin: 0 auto 16px; }
+
+.page-citation { text-align: center; font-family: 'Playfair Display', serif; font-size: 12.5px; font-style: italic; color: var(--earth); opacity: 0.3; margin-bottom: 28px; line-height: 1.6; }
+
+/* ===== SÉRIE D'OBSERVATION ===== */
+.streak-widget { max-width: 900px; margin: 0 auto 32px; text-align: center; }
+.streak-inner { display: inline-flex; align-items: center; gap: 9px; font-size: 14px; color: var(--earth); opacity: 0.6; font-weight: 400; letter-spacing: 0.2px; line-height: 1; transition: opacity 0.3s ease; }
+.streak-inner:hover { opacity: 0.85; }
+.streak-count { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--dark); font-style: italic; }
+
+/* ===== OBSERVER & COMPRENDRE ===== */
+.observer-container { max-width: 780px; margin: 0 auto; }
+.observer-intro { font-size: 14px; color: var(--earth); opacity: 0.62; line-height: 1.75; margin-bottom: 36px; }
+
+.obs-vid-card { background: var(--cream); border: 1px solid rgba(139,94,60,0.10); border-radius: 22px; overflow: hidden; transition: box-shadow 0.22s ease; }
+.obs-vid-card + .obs-vid-card { margin-top: 24px; }
+.obs-vid-card:hover { box-shadow: 0 8px 36px rgba(44,26,14,0.10); }
+
+.obs-vid-thumb { width: 100%; aspect-ratio: 16/9; background: linear-gradient(145deg, rgba(139,94,60,0.07) 0%, rgba(201,150,62,0.10) 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; border-bottom: 1px solid rgba(139,94,60,0.07); }
+.obs-vid-play { width: 54px; height: 54px; border-radius: 50%; background: rgba(255,255,255,0.88); display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 4px 20px rgba(44,26,14,0.14); padding-left: 3px; }
+.obs-vid-thumb-label { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--dark); font-style: italic; opacity: 0.55; text-align: center; padding: 0 32px; line-height: 1.45; }
+.obs-vid-placeholder-note { font-size: 9.5px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--earth); opacity: 0.28; }
+
+.obs-vid-body { padding: 26px 30px 30px; }
+.obs-vid-title { font-family: 'Playfair Display', serif; font-size: 19px; color: var(--dark); font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+.obs-vid-context { font-size: 13px; color: var(--earth); opacity: 0.58; line-height: 1.68; margin-bottom: 22px; }
+.obs-vid-question { font-size: 13.5px; color: var(--dark); line-height: 1.6; padding: 14px 18px; background: var(--soft); border-radius: 12px; border-left: 3px solid rgba(139,94,60,0.25); margin-bottom: 22px; opacity: 0.85; }
+
+.obs-vid-fields-label { font-size: 9.5px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--earth); opacity: 0.38; margin-bottom: 12px; }
+.obs-vid-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+.obs-vid-field label { font-size: 9px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--earth); opacity: 0.45; display: block; margin-bottom: 5px; }
+.obs-vid-field input { width: 100%; background: var(--soft); border: 1px solid rgba(139,94,60,0.09); border-radius: 9px; padding: 9px 11px; font-family: 'DM Sans', sans-serif; font-size: 12.5px; color: var(--dark); outline: none; transition: all 0.18s; }
+.obs-vid-field input:focus { border-color: rgba(139,94,60,0.27); background: var(--cream); }
+.obs-vid-field input::placeholder { color: var(--earth); opacity: 0.28; }
+
+.obs-vid-reveal-btn { background: none; border: none; padding: 0; font-family: 'DM Sans', sans-serif; font-size: 12.5px; color: var(--earth); opacity: 0.4; cursor: pointer; transition: opacity 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+.obs-vid-reveal-btn:hover { opacity: 0.72; }
+
+.obs-vid-analysis { display: none; margin-top: 22px; padding-top: 22px; border-top: 1px solid rgba(139,94,60,0.08); }
+.obs-vid-analysis.shown { display: block; animation: fadeIn 0.35s ease both; }
+.obs-vid-analysis-label { font-size: 9.5px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--earth); opacity: 0.35; margin-bottom: 14px; }
+.obs-vid-analysis ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.obs-vid-analysis li { font-size: 13px; color: var(--dark); line-height: 1.68; opacity: 0.72; padding-left: 18px; position: relative; }
+.obs-vid-analysis li::before { content: '—'; position: absolute; left: 0; color: var(--earth); opacity: 0.35; }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popIn { 0% { transform: scale(0.4); opacity: 0; } 80% { transform: scale(1.12); } 100% { transform: scale(1); opacity: 1; } }
+
+@media (max-width: 500px) {
+  .card, .score-card { padding: 26px 20px; }
+  .quiz-top-title { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== MAIN HOME ===== -->
+<div class="screen active" id="screen-main">
+  <div class="home-header">
+    <div class="home-badge">Éthologie équine</div>
+    <h1>Comprendre<br>le <em>Cheval</em></h1>
+    <p>Explorez le comportement, les émotions et les besoins naturels du cheval.</p>
+  </div>
+  <div id="obs-du-jour" class="obs-du-jour"></div>
+  <div class="modules-label">Explorer</div>
+  <div class="main-grid">
+    <div class="main-card" onclick="showScreen('quiz-home')">
+      <span class="main-card-icon">🎯</span>
+      <div class="main-card-title">Les Quiz</div>
+      <div class="main-card-desc">Testez vos connaissances à travers cinq parcours thématiques sur l'éthologie équine.</div>
+    </div>
+    <div class="main-card" onclick="showScreen('fiches')">
+      <span class="main-card-icon">📚</span>
+      <div class="main-card-title">Les Fiches Pratiques</div>
+      <div class="main-card-desc">Des fiches de référence pour mieux comprendre et observer le cheval au quotidien.</div>
+    </div>
+    <div class="main-card" onclick="showScreen('carnet')">
+      <span class="main-card-icon">📔</span>
+      <div class="main-card-title">Mon Carnet d'Observation</div>
+      <div class="main-card-desc">Notez et suivez vos observations comportementales pour progresser en éthologie.</div>
+    </div>
+    <div class="main-card" onclick="showScreen('budget-temps')">
+      <span class="main-card-icon">⏳</span>
+      <div class="main-card-title">Budget-Temps</div>
+      <div class="main-card-desc">Analysez comment votre cheval répartit ses activités sur 24 heures pour évaluer son bien-être.</div>
+    </div>
+    <div class="main-card" onclick="showScreen('defis')">
+      <span class="main-card-icon">🗝️</span>
+      <div class="main-card-title">Défis d'observation</div>
+      <div class="main-card-desc">Afin de débloquer progressivement les fiches pratiques.</div>
+      <div id="defis-card-pill" class="defis-card-pill"></div>
+    </div>
+    <div class="main-card" onclick="showScreen('observer')">
+      <span class="main-card-icon">🎥</span>
+      <div class="main-card-title">Observer & Comprendre</div>
+      <div class="main-card-desc">Observer des situations réelles et entraîner son regard éthologique.</div>
+    </div>
+  </div>
+  <div id="streak-widget" class="streak-widget" style="margin-top:28px;"></div>
+  <div id="discovery-banner" class="discovery-banner-wrap" style="margin-top:16px;"></div>
+  <div class="home-footer">Basé sur les connaissances en éthologie équine contemporaine <em id="expert-toggle" title="">✦</em></div>
+</div>
+
+<!-- ===== QUIZ HOME SUB-SECTION ===== -->
+<div class="screen" id="screen-quiz-home">
+  <div class="sub-header">
+    <button class="back-btn" onclick="showScreen('main')">← Accueil</button>
+    <div class="sub-header-title">🎯 Les Quiz</div>
+  </div>
+  <div class="quiz-grid" id="quiz-grid"></div>
+  <div class="home-footer">Basé sur les connaissances en éthologie équine contemporaine</div>
+</div>
+
+<!-- ===== QUIZ SCREEN ===== -->
+<div class="screen" id="screen-quiz">
+  <div class="quiz-container">
+    <div class="quiz-top">
+      <button class="back-btn" onclick="goHome()">← Accueil</button>
+      <div class="quiz-top-title" id="quiz-top-title"></div>
+      <div style="width:80px"></div>
+    </div>
+    <div class="progress-wrap"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <div class="progress-info">
+      <span class="progress-label" id="progress-left">Question 1 / 10</span>
+      <span class="progress-label" id="progress-score">Score : 0</span>
+    </div>
+    <div class="card">
+      <div class="q-num" id="q-num">Question 01</div>
+      <div class="q-text" id="q-text"></div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+      <button class="next-btn" id="next-btn">Question suivante →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FICHES PRATIQUES ===== -->
+<div class="screen" id="screen-fiches">
+  <div class="fiches-container">
+    <div class="sub-header">
+      <button class="back-btn" onclick="showScreen('main')">← Accueil</button>
+      <div class="sub-header-title">📚 Les Fiches Pratiques</div>
+    </div>
+    <p class="page-citation">"Observer, c'est déjà commencer à comprendre."</p>
+    <div class="fiche-grid" id="fiche-grid"></div>
+  </div>
+</div>
+
+<!-- ===== FICHE DÉTAIL ===== -->
+<div class="screen" id="screen-fiche-detail">
+  <div class="fiche-detail-container">
+    <div class="sub-header">
+      <button class="back-btn" onclick="showScreen('fiches')">← Les Fiches</button>
+    </div>
+    <div class="fiche-detail-hero">
+      <span class="fiche-detail-icon" id="fd-icon"></span>
+      <div class="fiche-detail-title" id="fd-title"></div>
+      <div class="fiche-detail-desc" id="fd-desc"></div>
+    </div>
+    <div class="fiche-section">
+      <div class="fiche-section-label">Points clés</div>
+      <ul class="fiche-points" id="fd-points"></ul>
+    </div>
+    <div class="fiche-section">
+      <div class="fiche-section-label">À observer en pratique</div>
+      <div class="fiche-pratique-text" id="fd-pratique"></div>
+    </div>
+    <div class="fiche-section">
+      <div class="fiche-section-label">Illustration</div>
+      <div class="fiche-image-placeholder">
+        <span class="fiche-image-placeholder-icon">🖼️</span>
+        Emplacement pour une illustration ou une photographie
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CARNET — LISTE DES CHEVAUX ===== -->
+<div class="screen" id="screen-carnet">
+  <div class="carnet-container">
+    <div class="sub-header">
+      <button class="back-btn" onclick="showScreen('main')">← Accueil</button>
+      <div class="sub-header-title">📔 Mon Carnet</div>
+    </div>
+    <p class="page-citation">"Avant d'interpréter, prendre le temps de regarder."</p>
+    <div id="carnet-body"></div>
+  </div>
+</div>
+
+<!-- ===== CARNET — CRÉER UN CHEVAL ===== -->
+<div class="screen" id="screen-carnet-form-horse">
+  <div class="carnet-container">
+    <div class="sub-header">
+      <button class="back-btn" onclick="showScreen('carnet')">← Mon Carnet</button>
+      <div class="sub-header-title">Nouveau cheval</div>
+    </div>
+    <div class="carnet-form">
+      <div class="form-field">
+        <label class="form-label" for="horse-name-input">Nom du cheval</label>
+        <input class="form-input" id="horse-name-input" type="text" placeholder="Ex. : Belle, Sirocco, Lumière…" autocomplete="off"
+          oninput="document.getElementById('btn-horse-name').textContent = this.value.trim() || 'ce cheval'">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Photo (optionnel)</label>
+        <div class="photo-zone" id="photo-zone" onclick="document.getElementById('horse-photo-input').click()">
+          <div id="photo-zone-placeholder">
+            <span class="photo-zone-icon">📷</span>
+            <div class="photo-zone-text">Appuyer pour ajouter une photo</div>
+          </div>
+          <img id="photo-preview-img" style="display:none" alt="Aperçu">
+        </div>
+        <input type="file" id="horse-photo-input" accept="image/*" style="display:none" onchange="previewPhoto(this)">
+      </div>
+      <button class="btn-create" onclick="saveHorse()">
+        Créer le carnet de <span id="btn-horse-name">ce cheval</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CARNET — PROFIL CHEVAL ===== -->
+<div class="screen" id="screen-carnet-horse">
+  <div class="carnet-container">
+    <div class="sub-header">
+      <button class="back-btn" onclick="showScreen('carnet')">← Mon Carnet</button>
+    </div>
+
+    <!-- En-tête immersif -->
+    <div class="hp-hero-card">
+      <div class="hp-hero-zone" onclick="triggerHorsePhotoChange()">
+        <span class="hp-hero-emoji" id="hp-hero-emoji">🐴</span>
+        <span class="hp-hero-hint-text" id="hp-hero-hint">Appuyer pour ajouter une photo</span>
+        <img class="hp-hero-photo" id="hp-hero-photo" alt="">
+        <div class="hp-hero-overlay">
+          <span class="hp-hero-overlay-badge">📷 Changer la photo</span>
+        </div>
+      </div>
+      <div class="hp-hero-info">
+        <div class="hp-hero-name" id="hp-name"></div>
+        <div class="hp-hero-meta" id="hp-meta"></div>
+      </div>
+    </div>
+    <input type="file" id="hp-photo-input" accept="image/*" style="display:none" onchange="applyHorsePhoto(this)">
+
+    <!-- Aperçu du cheval -->
+    <div class="obs-header">
+      <div class="obs-heading">Mon cheval</div>
+      <button class="hp-overview-edit-btn" id="hp-overview-edit-btn" onclick="toggleHorseProfile()">✎ Modifier</button>
+    </div>
+    <div class="hp-overview-card">
+
+      <!-- Affichage -->
+      <div id="hp-profile-display"></div>
+
+      <!-- Formulaire (caché par défaut) -->
+      <div id="hp-profile-form" style="display:none">
+        <div class="hp-pf-form-grid">
+          <div class="form-field">
+            <label class="form-label" for="hpf-age">Âge</label>
+            <input class="form-input" id="hpf-age" type="text" placeholder="Ex. : 8 ans…" autocomplete="off">
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="hpf-sexe">Sexe</label>
+            <input class="form-input" id="hpf-sexe" type="text" placeholder="Jument, hongre, étalon…" autocomplete="off">
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="hpf-race">Race</label>
+            <input class="form-input" id="hpf-race" type="text" placeholder="Ex. : Lusitanien, KWPN…" autocomplete="off">
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="hpf-robe">Robe</label>
+            <input class="form-input" id="hpf-robe" type="text" placeholder="Ex. : Bai brun, Gris…" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="hpf-conditionsVie">Conditions de vie</label>
+          <textarea class="form-input form-textarea" id="hpf-conditionsVie" style="min-height:78px" placeholder="Box, paddock, pré… nature de son environnement quotidien"></textarea>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="hpf-alimentation">Type d'alimentation</label>
+          <textarea class="form-input form-textarea" id="hpf-alimentation" style="min-height:78px" placeholder="Foin, herbe, concentrés, compléments…"></textarea>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="hpf-travail">Travail / activité</label>
+          <textarea class="form-input form-textarea" id="hpf-travail" style="min-height:78px" placeholder="Dressage, balade, liberté, pas de travail…"></textarea>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="hpf-particularites">Particularités ou historique</label>
+          <textarea class="form-input form-textarea" id="hpf-particularites" style="min-height:88px" placeholder="Blessures passées, comportements particuliers, histoire du cheval…"></textarea>
+        </div>
+        <div class="form-field" style="margin-bottom:0">
+          <label class="form-label" for="hpf-notes">Notes générales</label>
+          <textarea class="form-input form-textarea" id="hpf-notes" style="min-height:88px" placeholder="Tout ce que vous souhaitez noter librement…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div id="obs-discovery-toast" class="obs-discovery-toast"></div>
+
+    <!-- Observations -->
+    <div class="obs-header">
+      <div class="obs-heading">Observations</div>
+      <button class="btn-add-obs" onclick="showAddObs()">+ Nouvelle observation</button>
+    </div>
+    <div id="obs-list"></div>
+
+    <!-- Budgets-temps -->
+    <div class="bt-section-header" style="margin-top:32px;">
+      <div class="bt-section-title-sm">Budgets-temps</div>
+    </div>
+    <div id="bt-cards-list"></div>
+  </div>
+</div>
+
+<!-- ===== CARNET — AJOUTER UNE OBSERVATION ===== -->
+<div class="screen" id="screen-carnet-form-obs">
+  <div class="carnet-container">
+    <div class="sub-header">
+      <button class="back-btn" onclick="openHorse(currentHorseId)">← Observations</button>
+      <div class="sub-header-title">Nouvelle observation</div>
+    </div>
+    <div class="carnet-form">
+
+      <!-- Photo -->
+      <div class="form-field">
+        <label class="form-label">Photo <span style="opacity:.4;font-style:italic;font-size:11px;font-family:'DM Sans';letter-spacing:0;text-transform:none">— optionnelle</span></label>
+        <div class="photo-zone" id="obs-photo-zone" onclick="document.getElementById('obs-photo-input').click()">
+          <div id="obs-photo-placeholder">
+            <span class="photo-zone-icon">📷</span>
+            <div class="photo-zone-text">Associer une photo à cette observation</div>
+          </div>
+          <img id="obs-photo-preview" style="display:none" alt="Photo de l'observation">
+        </div>
+        <input type="file" id="obs-photo-input" accept="image/*" style="display:none" onchange="previewObsPhoto(this)">
+      </div>
+
+      <!-- Date -->
+      <div class="form-field">
+        <label class="form-label" for="obs-date-input">Date</label>
+        <input class="form-input" id="obs-date-input" type="date">
+      </div>
+
+      <!-- Catégorie -->
+      <div class="form-field">
+        <label class="form-label">Catégorie</label>
+        <div class="category-chips" id="category-chips">
+          <div class="category-chip" data-cat="détente"             onclick="selectCategory(this)">🌿 Détente</div>
+          <div class="category-chip" data-cat="curiosité"           onclick="selectCategory(this)">🔍 Curiosité</div>
+          <div class="category-chip" data-cat="vigilance"           onclick="selectCategory(this)">⚠️ Vigilance</div>
+          <div class="category-chip" data-cat="interaction sociale" onclick="selectCategory(this)">🤝 Interaction sociale</div>
+          <div class="category-chip" data-cat="stress"              onclick="selectCategory(this)">🌊 Stress</div>
+          <div class="category-chip" data-cat="inconfort"           onclick="selectCategory(this)">😣 Inconfort</div>
+          <div class="category-chip" data-cat="agacement"           onclick="selectCategory(this)">⚡ Agacement</div>
+          <div class="category-chip" data-cat="autre"               onclick="selectCategory(this)">· Autre</div>
+        </div>
+      </div>
+
+      <!-- Ce que j'observe -->
+      <div class="form-field">
+        <div class="form-section-title">Ce que j'observe</div>
+        <div class="obs-zone">
+          <div>
+            <span class="obs-zone-label">👂 Oreilles</span>
+            <textarea class="obs-zone-input" id="obs-oreilles" placeholder="Ex. : en avant, mobiles, couchées…"></textarea>
+          </div>
+          <div>
+            <span class="obs-zone-label">👁 Regard</span>
+            <textarea class="obs-zone-input" id="obs-regard" placeholder="Ex. : doux, fixe, blanc visible…"></textarea>
+          </div>
+          <div>
+            <span class="obs-zone-label">Posture</span>
+            <textarea class="obs-zone-input" id="obs-posture" placeholder="Ex. : corps bas, encolure tendue…"></textarea>
+          </div>
+          <div>
+            <span class="obs-zone-label">Queue</span>
+            <textarea class="obs-zone-input" id="obs-queue" placeholder="Ex. : détendue, agitée latéralement…"></textarea>
+          </div>
+          <div>
+            <span class="obs-zone-label">Tension générale</span>
+            <textarea class="obs-zone-input" id="obs-tension" placeholder="Ex. : muscles relâchés, corps rigide…"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mon interprétation -->
+      <div class="form-field">
+        <label class="form-label" for="obs-interpretation">Mon interprétation</label>
+        <textarea class="form-input form-textarea" id="obs-interpretation"
+          placeholder="Ce que je pense que le cheval ressentait dans ce moment…"></textarea>
+      </div>
+
+      <!-- À vérifier -->
+      <div class="form-field">
+        <label class="form-label" for="obs-a-verifier">À vérifier plus tard</label>
+        <textarea class="form-input form-textarea" id="obs-a-verifier"
+          placeholder="Questions ouvertes, points à observer lors des prochaines sessions…"></textarea>
+      </div>
+
+      <button class="btn-create" onclick="saveObs()">Enregistrer cette observation</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BUDGET-TEMPS ===== -->
+<div class="screen" id="screen-budget-temps">
+  <div class="fiche-detail-container">
+    <div class="sub-header">
+      <button class="back-btn" onclick="showScreen('main')">← Accueil</button>
+      <div class="sub-header-title">⏳ Budget-Temps</div>
+    </div>
+
+    <!-- Intro -->
+    <div class="fiche-detail-hero">
+      <span class="fiche-detail-icon">⏳</span>
+      <div class="fiche-detail-title">Comment réaliser un budget-temps ?</div>
+      <div class="fiche-detail-desc">Observer comment un cheval occupe ses journées, c'est apprendre à le voir vraiment. Avant tout outil, il y a l'art de regarder sans interpréter.</div>
+    </div>
+
+    <!-- Matériel -->
+    <div class="fiche-section">
+      <div class="fiche-section-label">Le matériel</div>
+      <ul class="fiche-points">
+        <li>Un carnet ou une feuille — pour noter sans perdre le fil</li>
+        <li>Un crayon — simple, discret, toujours disponible</li>
+        <li>Un chronomètre ou votre téléphone — pour mesurer les durées</li>
+        <li>Un tableau d'observation (optionnel) — pour structurer vos relevés</li>
+      </ul>
+    </div>
+
+    <!-- Durée & moments -->
+    <div class="fiche-section">
+      <div class="fiche-section-label">Quand et combien de temps observer ?</div>
+      <ul class="fiche-points">
+        <li>Minimum 30 à 60 minutes par session pour avoir une image représentative</li>
+        <li>Variez les moments : matin, midi, fin d'après-midi, soirée</li>
+        <li>Répétez sur plusieurs jours — les patterns se révèlent dans la régularité</li>
+        <li>L'idéal : couvrir au moins une journée complète sur plusieurs semaines</li>
+      </ul>
+    </div>
+
+    <!-- Comportements -->
+    <div class="fiche-section">
+      <div class="fiche-section-label">Les comportements à noter</div>
+      <ul class="fiche-points">
+        <li><strong>Alimentation</strong> — brouter, manger du foin, boire</li>
+        <li><strong>Repos</strong> — debout immobile, couché, somnolence</li>
+        <li><strong>Déplacement</strong> — marche, trot spontané, exploration du terrain</li>
+        <li><strong>Interactions sociales</strong> — toilettage mutuel, jeu, contact avec congénères</li>
+        <li><strong>Vigilance</strong> — tête levée, regard fixe, oreilles mobiles vers un stimulus</li>
+        <li><strong>Exploration</strong> — flairer le sol, enquêter sur un objet ou une odeur</li>
+        <li><strong>Agitation / stress</strong> — trépignement, stéréotypies, nervosité persistante</li>
+      </ul>
+    </div>
+
+    <!-- Comment observer -->
+    <div class="fiche-section">
+      <div class="fiche-section-label">L'état d'esprit de l'observateur</div>
+      <div class="fiche-pratique-text">Notez ce que vous voyez, pas ce que vous pensez. "Il mange" est une observation. "Il est heureux" est une interprétation. Gardez vos notes neutres et régulières — les conclusions viendront d'elles-mêmes, avec le temps.</div>
+    </div>
+
+    <!-- Citation -->
+    <div style="text-align:center; padding: 32px 24px 28px;">
+      <p style="font-family:'Playfair Display',serif; font-style:italic; font-size:15.5px; color:var(--dark); line-height:1.78; max-width:420px; margin:0 auto; opacity:0.72;">
+        "Apprendre à voir le cheval tel qu'il est — avant de vouloir le changer — est peut-être la compétence la plus précieuse en éthologie."
+      </p>
+    </div>
+
+    <!-- Tableau interactif -->
+    <div style="margin-top: 8px;">
+      <div class="bt-section-title">Mon relevé de budget-temps</div>
+      <div class="bt-table-wrap">
+        <table class="bt-table">
+          <thead>
+            <tr>
+              <th>Comportement</th>
+              <th>Durée observée</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="bt-row-label"><span class="bt-row-icon">🌿</span>Alimentation</td>
+              <td><input class="bt-input" id="bt-dur-0" type="text" placeholder="ex. 2h30…" autocomplete="off"></td>
+              <td><input class="bt-input" id="bt-note-0" type="text" placeholder="Observations…" autocomplete="off"></td>
+            </tr>
+            <tr>
+              <td class="bt-row-label"><span class="bt-row-icon">🌙</span>Repos</td>
+              <td><input class="bt-input" id="bt-dur-1" type="text" placeholder="ex. 45min…" autocomplete="off"></td>
+              <td><input class="bt-input" id="bt-note-1" type="text" placeholder="Observations…" autocomplete="off"></td>
+            </tr>
+            <tr>
+              <td class="bt-row-label"><span class="bt-row-icon">🚶</span>Déplacement</td>
+              <td><input class="bt-input" id="bt-dur-2" type="text" placeholder="ex. 1h…" autocomplete="off"></td>
+              <td><input class="bt-input" id="bt-note-2" type="text" placeholder="Observations…" autocomplete="off"></td>
+            </tr>
+            <tr>
+              <td class="bt-row-label"><span class="bt-row-icon">🤝</span>Interactions sociales</td>
+              <td><input class="bt-input" id="bt-dur-3" type="text" placeholder="ex. 20min…" autocomplete="off"></td>
+              <td><input class="bt-input" id="bt-note-3" type="text" placeholder="Observations…" autocomplete="off"></td>
+            </tr>
+            <tr>
+              <td class="bt-row-label"><span class="bt-row-icon">👁️</span>Vigilance</td>
+              <td><input class="bt-input" id="bt-dur-4" type="text" placeholder="ex. continu…" autocomplete="off"></td>
+              <td><input class="bt-input" id="bt-note-4" type="text" placeholder="Observations…" autocomplete="off"></td>
+            </tr>
+            <tr>
+              <td class="bt-row-label"><span class="bt-row-icon">🔍</span>Exploration</td>
+              <td><input class="bt-input" id="bt-dur-5" type="text" placeholder="ex. 15min…" autocomplete="off"></td>
+              <td><input class="bt-input" id="bt-note-5" type="text" placeholder="Observations…" autocomplete="off"></td>
+            </tr>
+            <tr>
+              <td class="bt-row-label"><span class="bt-row-icon">⚡</span>Agitation / stress</td>
+              <td><input class="bt-input" id="bt-dur-6" type="text" placeholder="ex. rare…" autocomplete="off"></td>
+              <td><input class="bt-input" id="bt-note-6" type="text" placeholder="Observations…" autocomplete="off"></td>
+            </tr>
+            <tr>
+              <td class="bt-row-label"><span class="bt-row-icon">✦</span>Autre</td>
+              <td><input class="bt-input" id="bt-dur-7" type="text" placeholder="…" autocomplete="off"></td>
+              <td><input class="bt-input" id="bt-note-7" type="text" placeholder="Observations…" autocomplete="off"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bt-actions">
+        <button class="btn-create" onclick="saveBudget()">Enregistrer mon budget-temps</button>
+        <button class="btn-outline" onclick="resetBudget()">Réinitialiser</button>
+      </div>
+      <div class="bt-save-confirm" id="bt-save-confirm">✓ Budget-temps enregistré</div>
+    </div>
+
+    <!-- Association à un cheval -->
+    <div class="bt-assign">
+      <span class="bt-assign-label">Associer à un cheval</span>
+      <select class="bt-select" id="bt-horse-select">
+        <option value="">— Choisir un cheval —</option>
+      </select>
+      <button class="btn-create" onclick="saveBudgetToHorse()">Ajouter ce budget-temps à la fiche du cheval</button>
+      <div class="bt-save-confirm" id="bt-horse-confirm" style="margin-top:8px;">✓ Budget-temps ajouté à la fiche</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== OBSERVER & COMPRENDRE ===== -->
+<div class="screen" id="screen-observer">
+  <div class="sub-header">
+    <button class="back-btn" onclick="showScreen('main')">← Accueil</button>
+    <div class="sub-header-title">🎥 Observer & Comprendre</div>
+  </div>
+  <div class="observer-container">
+    <p class="observer-intro">Chaque situation est une invitation à regarder autrement. Prenez le temps d'observer, notez ce qui attire votre attention — sans chercher la bonne réponse. L'analyse vient après.</p>
+    <div id="observer-list"></div>
+  </div>
+</div>
+
+<!-- ===== DÉFIS D'OBSERVATION ===== -->
+<div class="screen" id="screen-defis">
+  <div class="sub-header">
+    <button class="back-btn" onclick="showScreen('main')">← Accueil</button>
+    <div class="sub-header-title">🗝️ Défis d'observation</div>
+  </div>
+  <div id="defis-page-content" class="defis-page-container"></div>
+</div>
+
+<!-- ===== SCORE SCREEN ===== -->
+<div class="screen" id="screen-score">
+  <div class="score-container">
+    <div class="score-top">
+      <button class="back-btn" onclick="goHome()">← Accueil</button>
+    </div>
+    <div class="score-card">
+      <span class="score-icon" id="s-icon">🏆</span>
+      <div class="score-quiz-name" id="s-name"></div>
+      <div class="score-headline" id="s-headline"></div>
+      <div class="score-num" id="s-num">0</div>
+      <div class="score-denom">/ 10 bonnes réponses</div>
+      <div class="score-msg" id="s-msg"></div>
+      <div class="score-actions">
+        <button class="btn-retry" onclick="retryQuiz()">↺ Réessayer ce quiz</button>
+        <button class="btn-home" onclick="goHome()">← Choisir un autre quiz</button>
+      </div>
+      <div class="review-section">
+        <div class="review-heading">📖 Récapitulatif complet</div>
+        <div id="review-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== OBS IMMERSIVE ===== -->
+<div class="screen" id="screen-obs-immersive">
+  <div class="oi-header">
+    <button class="oi-back" onclick="oiQuitter()">← Retour</button>
+    <div class="oi-progress-wrap"><div class="oi-progress-bar" id="oi-progress"></div></div>
+  </div>
+  <div class="oi-content" id="oi-content"></div>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const quizzes = [
+  {
+    id: 0,
+    icon: '🐴',
+    title: 'Comportement social',
+    subtitle: 'Vie en troupeau, hiérarchie',
+    desc: 'Explorez la vie collective du cheval : structure du groupe, relations sociales et hiérarchie.',
+    questions: [
+      { q: "Quel terme désigne le mode de vie naturel du cheval, en groupe ?", opts: ["Solitaire territorial", "Grégaire", "Nomade solitaire", "Opportuniste"], c: 1, e: "Le cheval est un animal grégaire : il vit naturellement en groupe car cela lui confère sécurité et bien-être. L'isolement prolongé est une source majeure de stress pour lui, pouvant engendrer des troubles comportementaux." },
+      { q: "Dans un troupeau de chevaux sauvages (band), qui assure généralement le déplacement quotidien du groupe ?", opts: ["L'étalon, chef incontesté", "Le poulain de l'année", "Une jument aînée et expérimentée", "Le cheval le plus rapide"], c: 2, e: "C'est une jument de rang élevé et expérimentée qui guide les déplacements : elle connaît les ressources (eau, nourriture, abri). L'étalon protège le groupe contre les prédateurs et les rivaux, mais ne dirige pas les trajets quotidiens." },
+      { q: "Que signifie l'allogrooming chez le cheval ?", opts: ["Un rituel d'intimidation entre deux rivaux", "Le fait qu'un cheval se roule seul dans la poussière", "Le toilettage mutuel entre deux congénères", "Un comportement alimentaire collectif"], c: 2, e: "L'allogrooming est le toilettage mutuel : deux chevaux se placent tête-bêche et se mordillent le garrot, l'encolure et le dos. Ce comportement renforce les liens d'amitié, abaisse le rythme cardiaque et réduit le stress." },
+      { q: "Comment les chevaux sauvages gèrent-ils généralement les conflits au sein du troupeau ?", opts: ["Par de violents combats quotidiens", "Par des signaux subtils avant d'escalader vers la confrontation physique", "En expulsant systématiquement les individus dominés", "Ils n'ont aucune forme de hiérarchie"], c: 1, e: "La plupart des conflits sont réglés par des signaux d'avertissement (oreilles en arrière, postures) sans contact physique. La violence franche est rare et coûteuse énergétiquement. La hiérarchie stable réduit le besoin de confrontations." },
+      { q: "Quelle est la taille typique d'un groupe familial (band) chez les chevaux sauvages comme les Mustangs ?", opts: ["30 à 50 individus", "Un seul mâle et une seule femelle", "3 à 12 individus environ", "Plus de 100 individus"], c: 2, e: "Un band comprend généralement un étalon, quelques juments et leurs poulains, soit 3 à 12 individus en moyenne. Ces groupes stables peuvent coexister avec d'autres bands sur un même territoire sans se mélanger." },
+      { q: "Que se passe-t-il généralement pour les jeunes étalons lorsqu'ils arrivent à maturité ?", opts: ["Ils restent dans le groupe familial toute leur vie", "Ils prennent la place de l'étalon dominant sans combat", "Ils forment des groupes de célibataires avant d'acquérir leur propre band", "Ils vivent en solitaires définitifs"], c: 2, e: "Les jeunes mâles sont progressivement chassés du band familial vers 2-3 ans. Ils rejoignent alors des groupes de jeunes célibataires (bachelor groups) où ils affinent leurs comportements sociaux avant de tenter de constituer leur propre groupe." },
+      { q: "Qu'est-ce que la « distance de fuite » chez le cheval ?", opts: ["La distance maximale qu'un cheval peut parcourir au galop", "La distance minimale qu'un prédateur doit franchir pour déclencher la fuite", "La distance entre deux membres d'un troupeau au pâturage", "La largeur d'un obstacle qu'un cheval refuse de franchir"], c: 1, e: "La distance de fuite (ou distance critique) est le seuil spatial à partir duquel un animal perçoit une menace et déclenche sa réponse de fuite. Elle varie selon l'individu, son expérience avec l'homme et le contexte. La domestication tend à la réduire." },
+      { q: "Pourquoi les chevaux se placent-ils parfois tête-bêche en somnolant ?", opts: ["Pour maximiser l'espace disponible", "Pour se protéger mutuellement des insectes avec leur queue", "Pour se réchauffer mutuellement", "Pour faciliter la digestion"], c: 1, e: "En position tête-bêche, les deux chevaux balancent leur queue près de la tête de l'autre, chassant efficacement les insectes piqueurs. C'est un exemple d'avantage mutuel direct du comportement grégaire." },
+      { q: "Comment les chevaux expriment-ils une relation d'amitié privilégiée ?", opts: ["En se poursuivant régulièrement à grande vitesse", "En partageant exclusivement les ressources alimentaires", "En restant proches l'un de l'autre, en pratiquant l'allogrooming et en se synchronisant dans les activités", "En produisant des vocalises spécifiques en continu"], c: 2, e: "Les chevaux amis maintiennent une proximité spatiale préférentielle, se toilettent mutuellement, synchronisent leurs activités (manger, dormir, se déplacer ensemble) et se défendent mutuellement. Ces liens peuvent durer des années." },
+      { q: "Qu'est-ce que le « leadership by attraction » chez le cheval ?", opts: ["Un type de dressage utilisant la carotte", "Un mode de leadership basé sur la séduction amoureuse entre étalons", "Un mode d'influence sociale où un individu entraîne les autres sans les contraindre", "Une technique d'équitation en liberté"], c: 2, e: "Le leadership par attraction désigne le fait qu'un cheval influent se déplace et que les autres le suivent volontairement. Ce n'est pas la force ou la peur qui guide, mais la confiance et le rang social acquis sur le long terme." }
+    ]
+  },
+  {
+    id: 1,
+    icon: '👁️',
+    title: 'Communication',
+    subtitle: 'Oreilles, queue, postures',
+    desc: 'Apprenez à lire les signaux corporels du cheval et à décoder son langage silencieux.',
+    questions: [
+      { q: "Des oreilles pointées vers l'avant signifient généralement que le cheval…", opts: ["Est en colère et prêt à mordre", "Est attentif, curieux ou en alerte vers ce qui est devant lui", "Souffre d'une infection auriculaire", "Est en train de somnoler"], c: 1, e: "Les oreilles pointées vers l'avant indiquent une attention dirigée vers quelque chose d'intéressant ou potentiellement menaçant. C'est un signe de vigilance active. Le cheval capte ainsi les sons vers lesquels il dirige son regard." },
+      { q: "Que signifie le flehmen, ce comportement où le cheval retrousse les lèvres supérieures ?", opts: ["Il imite un sourire humain qu'il a appris", "Il dirige des molécules odorantes vers l'organe voméronasal pour les analyser", "Il signale une douleur dentaire aiguë", "Il cherche à intimider un congénère"], c: 1, e: "Le flehmen permet de diriger des phéromones ou des odeurs complexes vers l'organe de Jacobson (voméronasal), très sensible. On l'observe souvent chez l'étalon face à une jument en chaleur, mais aussi chez les deux sexes face à des odeurs insolites." },
+      { q: "Un cheval qui agite sa queue vigoureusement de côté (hors contexte d'insectes) exprime probablement…", opts: ["De la joie et de l'excitation positive", "De l'irritation, du mécontentement ou de la tension", "Un besoin de déféquer imminent", "Un signal de soumission à l'égard d'un dominant"], c: 1, e: "L'agitation latérale de la queue est un signal d'irritation ou d'inconfort émotionnel. Associée à d'autres signaux (oreilles en arrière, regard dur), elle avertit d'un état de tension. Elle diffère du mouvement naturel anti-insectes, généralement vertical et régulier." },
+      { q: "Que signifie la posture dite « de soumission » ou « apaisement » du poulain (claquements des lèvres) ?", opts: ["Il demande du lait à sa mère", "Il exprime une disposition non menaçante face à un adulte dominant", "Il souffre d'une douleur abdominale", "Il appelle d'autres poulains pour jouer"], c: 1, e: "Le « snapping » ou claquement de lèvres (parfois appelé champing) est un signal d'apaisement produit surtout par les jeunes chevaux face aux adultes : il signifie « je suis inoffensif, ne me menacez pas ». C'est un signal de communication sociale crucial." },
+      { q: "Un cheval aux yeux mi-clos, lèvre inférieure pendante, poids sur trois jambes… est probablement…", opts: ["En train de tomber malade", "En état de relaxation ou de somnolence", "En colère et préparant une ruade", "Douloureux à un membre"], c: 1, e: "Cet ensemble de signaux forme le tableau classique du cheval détendu et somnolent. Le repos sur trois membres (camper un postérieur) est normal et alternant. La lèvre pendante et les yeux mi-clos indiquent un état de relaxation profonde." },
+      { q: "Que traduit généralement le hennissement long et sonore ?", opts: ["Une menace envers un prédateur", "Un appel social : le cheval cherche un contact avec un congénère absent", "Une douleur aiguë", "Un signal de dominance territoriale"], c: 1, e: "Le hennissement est avant tout un appel social à longue portée. Il permet de maintenir le contact avec des membres du groupe hors de vue. Un cheval séparé de ses compagnons hennit fréquemment — signe d'une détresse sociale." },
+      { q: "Une posture d'intimidation avec l'encolure tendue, les oreilles plaquées et la tête serpentine (« snaking ») est typiquement produite par…", opts: ["Une jument allaitante protégeant son poulain", "Un cheval joueur qui invite à la course", "Un étalon en train de rassembler ou diriger ses juments", "Un cheval âgé en déficit sensoriel"], c: 2, e: "Le snaking — encolure basse, tête qui zigzague vers le sol — est caractéristique de l'étalon qui rassemble ses juments ou les pousse à se déplacer. C'est un comportement de contrôle social associé à la reproduction et à la cohésion du band." },
+      { q: "Des naseaux dilatés, des yeux grands ouverts avec le blanc visible, une posture haute et rigide indiquent que le cheval est…", opts: ["En train de renifler des herbes aromatiques", "Dans un état d'alerte élevé ou de peur", "Prêt à s'endormir debout", "En train d'appeler ses congénères pour jouer"], c: 1, e: "Ce tableau correspond à l'état d'hypervigilance ou de peur : les naseaux dilatent pour capter les odeurs, les yeux s'ouvrent pour élargir le champ visuel, le corps se rigidifie pour être prêt à fuir. C'est la réponse de pré-fuite du cheval-proie." },
+      { q: "Que signifie le « piaffement » spontané (trépigner sur place) en dehors d'un contexte de dressage ?", opts: ["Une douleur neurologique aux membres", "Un état d'excitation ou d'impatience intense", "Un signal d'invitation au jeu entre poulains", "Une stratégie pour chasser les mouches des antérieurs"], c: 1, e: "Le piaffement spontané traduit une excitation ou une tension émotionnelle forte : le cheval est en attente, anxieux, ou très stimulé. L'énergie s'exprime par des mouvements des membres sans déplacement. En dressage, ce mouvement naturel est canalisé et codifié." },
+      { q: "Un cheval qui présente la croupe (dos tourné) à un congénère avec les postérieurs légèrement relevés envoie quel message ?", opts: ["Il invite à l'allogrooming", "Il lance un avertissement clair pouvant précéder une ruade", "Il se prépare à galoper", "Il demande à être nourri"], c: 1, e: "Présenter la croupe avec les postérieurs préparés est un avertissement fort : « éloigne-toi ou je rue ». Ce signal précède souvent la ruade si ignoré. C'est un message direct qui doit être respecté pour éviter un accident." }
+    ]
+  },
+  {
+    id: 2,
+    icon: '🌿',
+    title: 'Besoins naturels',
+    subtitle: 'Alimentation, sommeil, déplacement',
+    desc: 'Découvrez les besoins vitaux du cheval et comment son mode de vie naturel les satisfait.',
+    questions: [
+      { q: "Combien d'heures par jour le cheval consacre-t-il naturellement à se nourrir ?", opts: ["2 à 4 heures", "6 à 8 heures", "14 à 16 heures", "Seulement 1 à 2 heures"], c: 2, e: "Le cheval est un brouteur continu : à l'état sauvage, il passe 14 à 16 heures par jour à se nourrir, ingérant de petites quantités régulièrement. Son estomac, petit et à sécrétion acide continue, est adapté à cet apport constant de fourrage." },
+      { q: "De combien de sommeil paradoxal (REM) le cheval a-t-il besoin par jour ?", opts: ["4 à 5 heures", "Aucun, les chevaux ne font pas de rêves", "30 minutes à 2 heures environ", "8 heures comme l'humain"], c: 2, e: "Le cheval a besoin d'environ 30 min à 2 h de sommeil paradoxal (REM) par jour, indispensable à sa santé cérébrale. Or le REM nécessite l'allongement complet. Si le cheval ne peut pas se coucher (sol inadapté, stress, manque de confiance), il accumule une dette de sommeil." },
+      { q: "Quelle distance un cheval sauvage peut-il parcourir quotidiennement en cherchant nourriture et eau ?", opts: ["500 mètres à 1 km", "2 à 5 km", "15 à 30 km (parfois plus)", "Plus de 100 km"], c: 2, e: "Les études sur les chevaux sauvages montrent des déplacements de 15 à 30 km par jour, parfois davantage selon la disponibilité des ressources. Ce besoin de mouvement explique pourquoi le box seul est problématique pour le bien-être équin." },
+      { q: "Quel type d'estomac a le cheval, et quelle conséquence cela a-t-il ?", opts: ["Un estomac très grand à vidange lente, adapté aux grands repas", "Un estomac monogastrique relativement petit à sécrétion acide continue, nécessitant un apport régulier de fourrage", "Un estomac semblable à celui du ruminant, avec rumination", "Un estomac adaptable qui s'agrandit selon les saisons"], c: 1, e: "L'estomac du cheval est petit (8 à 15 L) et sécrète de l'acide en continu. Sans fourrage régulier pour tamponner cette acidité, des ulcères gastriques se développent. Les repas rares et copieux sont contraires à la physiologie équine." },
+      { q: "Quelle position le cheval adopte-t-il pour entrer en sommeil profond (paradoxal) ?", opts: ["Debout, grâce à l'appareil de verrouillage de ses membres", "Couché sur le côté (décubitus latéral)", "Couché sur le sternum (décubitus sternal)", "Semi-couché, les postérieurs repliés"], c: 1, e: "Seul le décubitus latéral (couché sur le côté, membres étendus) permet au cheval d'atteindre le sommeil paradoxal. Sa musculature se relâche complètement. Un cheval qui ne peut jamais se coucher souffre de privation de sommeil REM." },
+      { q: "Pourquoi le cheval a-t-il besoin d'un accès quasi-permanent au foin ou aux pâtures ?", opts: ["Pour maintenir une température corporelle stable", "Pour prévenir l'ulcère gastrique et répondre à son besoin comportemental de brouter", "Uniquement pour des raisons caloriques", "Pour user naturellement ses dents de façon uniforme"], c: 1, e: "Deux raisons majeures : la sécrétion acide gastrique continue réclame un tampon fibreux constant (prévention des ulcères), et le comportement de brouter est un besoin ethologique fondamental occupant 14-16 h/jour. La privation engendre stress et stéréotypies." },
+      { q: "Qu'est-ce qu'une stéréotypie chez le cheval, et qu'est-ce qu'elle signale ?", opts: ["Une performance sportive répétée lors d'entraînements intensifs", "Un comportement répétitif et invariant (tic, tic à l'air, tournage) signalant un environnement inadapté aux besoins naturels", "Une race de cheval particulièrement nerveuse", "Un signe de dominance chez l'étalon"], c: 1, e: "Les stéréotypies (tic à l'appui, tic à l'air, tournage en box, etc.) sont des comportements répétitifs et rigides qui émergent quand les besoins éthologiques sont frustrés : manque de mouvement, d'interactions sociales ou de fourrage. Elles sont difficiles à supprimer une fois installées." },
+      { q: "Quelle quantité de fourrage (foin/herbe) un cheval adulte doit-il idéalement consommer par jour ?", opts: ["500 g à 1 kg de foin suffit", "Environ 1,5 à 2,5 % de son poids vif en fourrage", "Le concentré (grain) doit représenter la majorité de la ration", "Il n'y a pas de règle, chaque cheval est différent"], c: 1, e: "La recommandation éthologique et vétérinaire est de fournir 1,5 à 2,5 % du poids vif en fourrage par jour (soit environ 7,5 à 12 kg pour un cheval de 500 kg). Le fourrage doit constituer la base de l'alimentation, les concentrés étant un complément si nécessaire." },
+      { q: "Pourquoi les sabots du cheval sauvage s'usent-ils naturellement sans soins humains ?", opts: ["Leurs sabots poussent très lentement", "Les déplacements quotidiens sur des terrains variés assurent une usure régulière et équilibrée", "Leurs sabots ne poussent pas comme ceux des chevaux domestiques", "Leur alimentation naturelle renforce la corne et limite leur croissance"], c: 1, e: "Les 15 à 30 km parcourus quotidiennement sur des sols variés (rochers, terre, herbe) assurent une usure naturelle et régulière. Le cheval domestique confiné, moins mobile, nécessite l'intervention d'un maréchal-ferrant pour compenser cette usure insuffisante." },
+      { q: "Quel est le besoin en eau journalier moyen d'un cheval adulte au repos par temps tempéré ?", opts: ["5 à 10 litres", "20 à 30 litres environ", "50 à 60 litres", "Moins de 5 litres s'il mange de l'herbe fraîche"], c: 1, e: "Un cheval adulte boit en moyenne 20 à 30 litres par jour au repos, davantage par temps chaud ou lors d'efforts physiques (jusqu'à 60 L). L'accès permanent à l'eau fraîche et propre est un besoin vital fondamental souvent sous-estimé." }
+    ]
+  },
+  {
+    id: 3,
+    icon: '😨',
+    title: 'Stress et émotions',
+    subtitle: 'Peur, calme, signaux d\'alerte',
+    desc: 'Reconnaître les états émotionnels du cheval et comprendre ses réactions de peur et de stress.',
+    questions: [
+      { q: "Le cheval est un animal proie. Comment cela influence-t-il fondamentalement son rapport au monde ?", opts: ["Il est naturellement agressif envers tout inconnu", "Il est naturellement orienté vers la détection des menaces, avec un réflexe de fuite dominant", "Il ne ressent pas la peur comme les prédateurs", "Il est indifférent à son environnement si nourri régulièrement"], c: 1, e: "En tant que proie, le cheval a évolué avec une réponse de fuite rapide et automatique face à tout stimulus inhabituel. Ce réflexe survivaliste est ancré dans sa neurologie : mieux vaut fuir une fausse alarme que rester face à un vrai prédateur." },
+      { q: "Qu'est-ce que la réponse de « freeze » (gel) chez le cheval ?", opts: ["Un comportement adaptatif où il se fige pour évaluer une menace avant de fuir", "Un signe de douleur articulaire qui l'empêche de bouger", "Un comportement appris de l'humain pour rester immobile", "Un état catatonique pathologique"], c: 0, e: "Avant de fuir, le cheval peut se figer brièvement pour identifier précisément la menace (direction, intensité). Cette phase de gel permet une évaluation rapide. Si la menace est confirmée, la fuite s'enclenche immédiatement. C'est une étape normale de la réponse stress." },
+      { q: "Qu'est-ce que la « désensibilisation » dans le travail avec le cheval ?", opts: ["Un traitement médicamenteux pour réduire l'anxiété", "Une méthode qui expose progressivement le cheval à un stimulus stressant jusqu'à ce qu'il n'y réagisse plus", "Une technique pour rendre le cheval insensible à la douleur", "Un type de dressage basé sur la punition"], c: 1, e: "La désensibilisation (ou habituation) consiste à exposer le cheval à un stimulus anxiogène de façon progressive et contrôlée, en doses supportables, jusqu'à ce que la réponse de peur s'éteigne. C'est une base fondamentale de la préparation à la manipulation et au travail." },
+      { q: "Quels sont les principaux signes physiques d'un cheval en état de stress aigu ?", opts: ["Yeux mi-clos, lèvre pendante, posture basse", "Naseaux dilatés, sudation, muscles tendus, regard fixe avec blanc de l'œil visible, trépignement", "Bâillements fréquents, comportement de broutage", "Couché sur le flanc, respiration lente"], c: 1, e: "Le stress aigu active le système sympathique (combat ou fuite) : naseaux dilatés pour capter les odeurs, adrénaline provoquant sudation et tension musculaire, yeux écarquillés. Ce tableau est l'opposé du cheval détendu. Le reconnaître permet d'éviter les accidents." },
+      { q: "Qu'est-ce que la « sensibilisation » ou « sur-réactivité » chez un cheval stressé chroniquement ?", opts: ["Il devient moins réactif aux stimuli car il s'y habitue", "Il devient hypersensible : de petits stimuli déclenchent des réactions exagérées", "Il développe des allergies cutanées au stress", "Il mange plus que d'habitude pour compenser"], c: 1, e: "Un cheval en état de stress chronique peut devenir hypersensible (sensibilisé) : son seuil de réaction s'abaisse, et il réagit de façon exagérée à des stimuli anodins. C'est l'opposé de l'habituation et signale un bien-être dégradé nécessitant une intervention." },
+      { q: "Le cortisol est souvent mesuré pour évaluer le stress équin. Que signifie un taux élevé de cortisol ?", opts: ["Le cheval est en bonne santé et bien entraîné", "Le cheval est dans un état de stress physique ou psychologique", "Le cheval a mangé trop de concentrés", "Le cheval produit trop de mélatonine la nuit"], c: 1, e: "Le cortisol est l'hormone du stress : produit par les glandes surrénales en réponse à une situation stressante, il mobilise l'énergie pour la réponse de fuite ou de combat. Un taux chroniquement élevé est délétère pour la santé (système immunitaire, digestion, comportement)." },
+      { q: "Un cheval « sur l'œil » face à quelque chose d'inhabituel — tête haute, regard fixe, naseaux frémissants — est en train d'évaluer une menace potentielle. Quelle est la meilleure réponse à adopter ?", opts: ["Le punir pour stopper la réaction avant qu'elle s'emballe", "Lui laisser le temps d'observer à son rythme, sans le forcer ni le brusquer", "L'ignorer complètement, il finira par se calmer seul", "L'isoler immédiatement, c'est signe de maladie"], c: 1, e: "Un cheval en alerte évalue activement la situation avec ses sens. Le forcer à avancer ou le punir renforce la peur. Lui permettre d'observer — tête libre, à son rythme — lui permet de conclure que la menace est sans danger. C'est la base de la confiance et de la désensibilisation." },
+      { q: "Pourquoi un cheval peut-il 'exploser' de façon apparemment soudaine alors qu'aucun signe n'était visible ?", opts: ["Parce que le cheval est imprévisible par nature", "Parce que l'humain n'a pas su lire les signaux subtils envoyés avant la réaction", "Parce que les chevaux peuvent masquer totalement leur peur", "Parce que certains chevaux ont des troubles neurologiques"], c: 1, e: "La plupart des 'explosions' soudaines sont précédées de signaux discrets (micro-tensions, oreilles, regard, modification de la posture) que l'humain inexpérimenté ne détecte pas. Apprendre à lire ces signaux précoces permet d'anticiper et de désamorcer." },
+      { q: "Qu'est-ce que la 'résignation apprise' chez le cheval et pourquoi est-elle problématique ?", opts: ["Un état où le cheval ne réagit plus car il a appris que ses comportements de résistance sont vains", "Une technique d'entraînement très efficace", "Un comportement de repos adaptatif", "Un signe de soumission sain dans la relation humain-cheval"], c: 0, e: "La résignation apprise (ou impuissance acquise) est un état dans lequel l'animal cesse de réagir car aucune de ses actions n'a modifié la situation aversive. Ce cheval 'calme' est en réalité désespéré. C'est un grave indicateur de maltraitance ou de méthodes coercitives excessives." },
+      { q: "Quel rôle joue le contact physique doux (caresses, grattages) sur l'état émotionnel du cheval ?", opts: ["Aucun rôle physiologique prouvé", "Il active le système parasympathique et libère des opioïdes endogènes, favorisant la détente", "Il provoque toujours de l'excitation et d'agitation", "Il est utile uniquement pour les poulains, pas les adultes"], c: 1, e: "Des études ont montré que le grattage dans des zones appréciées (garrot notamment) abaisse le rythme cardiaque et active le système parasympathique (détente). Des opioïdes endogènes sont libérés. Ces contacts doux sont un outil puissant pour créer la confiance et réduire le stress." }
+    ]
+  },
+  {
+    id: 4,
+    icon: '🤝',
+    title: 'Relation homme-cheval',
+    subtitle: 'Apprentissage, confiance',
+    desc: 'Comment le cheval apprend-il et quelle relation peut-il tisser avec l\'être humain ?',
+    questions: [
+      { q: "Sur quel type de renforcement repose classiquement l'apprentissage équestre traditionnel ?", opts: ["Le renforcement positif uniquement (récompense)", "Le renforcement négatif (retrait d'une pression lorsque le comportement souhaité apparaît)", "La punition physique systématique", "L'imitation d'autres chevaux dressés"], c: 1, e: "Le renforcement négatif — retirer une pression (de la jambe, du filet, de la chambrière) au moment précis où le cheval produit le comportement voulu — est le fondement de l'équitation classique. La précision du timing est capitale : le retrait doit être immédiat pour que le cheval associe son action au soulagement." },
+      { q: "Qu'est-ce que le principe du « timing » dans l'apprentissage équin ?", opts: ["L'heure de la journée où l'entraînement est le plus efficace", "L'intervalle de temps entre le comportement du cheval et la récompense ou le retrait de la pression", "La durée totale d'une séance d'entraînement", "Le rythme des allures du cheval"], c: 1, e: "Le timing désigne l'intervalle entre le comportement produit et le signal de récompense/soulagement. Des recherches montrent que cet intervalle doit être inférieur à 3 secondes pour que le cheval associe clairement son action à la conséquence. Un mauvais timing crée de la confusion." },
+      { q: "Qu'est-ce que le clicker training et comment fonctionne-t-il chez le cheval ?", opts: ["Un type de harnachement cliquant pour guider le cheval", "Une technique basée sur le renforcement positif : un son (clic) marque précisément le bon comportement, suivi d'une récompense", "Un entraînement intensif utilisant des sons forts pour stimuler", "Une méthode uniquement applicable aux chevaux de cirque"], c: 1, e: "Le clicker training utilise un conditionnement opérant avec renforcement positif : le clic est un marqueur précis du comportement souhaité, immédiatement suivi d'une récompense (généralement alimentaire). Il permet d'enseigner des comportements complexes avec une grande précision et sans contrainte." },
+      { q: "Pourquoi est-il important de respecter le « cheval en tant que cheval » dans la relation humain-cheval ?", opts: ["Pour des raisons légales uniquement", "Parce qu'imposer des comportements contraires à sa nature génère stress, confusion et perte de confiance", "Parce que les chevaux ne peuvent pas apprendre de comportements humains", "Il n'y a pas de raison particulière"], c: 1, e: "Le cheval a des besoins comportementaux, perceptifs et sociaux propres à son espèce. Ignorer sa nature — le traiter comme un automate ou lui imputer des intentions humaines (anthropomorphisme) — conduit à des erreurs de communication qui génèrent frustration, résistance et accidents." },
+      { q: "Qu'est-ce que la « pression-relâché » (pressure and release) dans le travail en main ou monté ?", opts: ["Un exercice de musculation pour le cavalier", "Appliquer une pression pour indiquer une direction ou un mouvement, puis la relâcher immédiatement quand le cheval répond correctement", "Alterner entre travail en box et en liberté", "Un type de massage musculaire pour le cheval"], c: 1, e: "La pression-relâché est le mécanisme fondamental du renforcement négatif : la pression (jambe, rêne, chambrière) crée un inconfort que le cheval cherche à faire cesser. Quand il produit le comportement voulu, la pression est immédiatement retirée. C'est ce retrait qui est la récompense." },
+      { q: "Comment le cheval perçoit-il la cohérence humaine dans les interactions répétées ?", opts: ["Il n'établit pas de relation de cause à effet avec l'humain", "Il apprend à anticiper les réactions humaines et construit un sentiment de sécurité ou d'insécurité selon la prévisibilité de l'humain", "Il oublie chaque interaction en moins d'une heure", "Il réagit uniquement à la nourriture, pas aux comportements humains"], c: 1, e: "Les chevaux ont d'excellentes capacités de mémoire associative. Un humain cohérent et prévisible (signaux clairs, réactions constantes) devient une source de sécurité. Un humain imprévisible (réactions changeantes, colères soudaines) engendre de l'anxiété et de la méfiance." },
+      { q: "Qu'est-ce que la « zone de confort » du cheval et comment l'utiliser dans l'apprentissage ?", opts: ["La température idéale de l'écurie pour le cheval", "L'état dans lequel le cheval est calme et réceptif : sortir légèrement de cette zone pour apprendre, puis y revenir pour récompenser", "L'espace dans le pré où le cheval préfère se reposer", "La selle et le harnachement adaptés à sa morphologie"], c: 1, e: "La zone de confort est l'état émotionnel de calme et de sécurité. Un apprentissage efficace consiste à faire sortir légèrement le cheval de cette zone (nouveau stimulus, légère difficulté) puis à l'y ramener rapidement (pause, relâché). C'est là que l'apprentissage se consolide, pas dans le stress." },
+      { q: "Qu'est-ce que la « généralisation » dans l'apprentissage équin ?", opts: ["Le fait qu'un cheval applique une règle apprise dans un contexte à d'autres contextes similaires", "La capacité du cheval à ignorer tous les stimuli environnants", "Un type d'entraînement collectif avec plusieurs chevaux", "La généralisation de l'aliment comme récompense universelle"], c: 0, e: "La généralisation est la capacité à transférer un apprentissage à des situations nouvelles mais similaires. Les chevaux généralisent moins spontanément que les humains : un cheval qui connaît un exercice en manège peut ne pas l'exécuter en extérieur. Il faut souvent réenseigner dans chaque nouveau contexte." },
+      { q: "Pourquoi l'équitation 'en force' ou coercitive peut-elle créer des problèmes comportementaux à long terme ?", opts: ["Elle rend les muscles trop développés", "Elle génère des états aversifs chroniques qui peuvent conduire à la résignation apprise, à l'évitement ou à l'agression défensive", "Elle est simplement moins esthétique", "Elle n'a aucun effet à long terme"], c: 1, e: "Les méthodes coercitives répétées activent chroniquement le système de stress du cheval. À terme, cela peut produire la résignation apprise (abandon de toute réaction), ou à l'opposé, une réactivité défensive (morsures, ruades). Ni l'un ni l'autre n'est compatible avec la sécurité et le bien-être." },
+      { q: "Que révèle la recherche récente sur les capacités émotionnelles du cheval dans sa relation avec l'humain ?", opts: ["Le cheval n'a pas d'émotions au sens propre, seulement des réflexes", "Le cheval reconnaît les émotions humaines, mémorise les individus et adapte son comportement en fonction des expériences positives ou négatives passées", "Le cheval réagit uniquement à la nourriture et non aux états émotionnels humains", "Les chevaux traités avec bienveillance deviennent inutilisables pour le sport"], c: 1, e: "Des recherches récentes (notamment de l'Université de Sussex et de l'INRAE) montrent que les chevaux reconnaissent les expressions faciales humaines, mémorisent les individus ayant eu des interactions positives ou négatives avec eux, et modulent leur comportement en conséquence. Leur vie émotionnelle est riche et complexe." }
+    ]
+  }
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let currentQuizId = null;
+let currentQ = 0;
+let score = 0;
+let answered = false;
+let userAnswers = [];
+const completed = {};
+const letters = ['A','B','C','D'];
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+  if (id === 'carnet') renderCarnet();
+  if (id === 'budget-temps') populateBtHorseSelect();
+  if (id === 'main') { renderObsDuJour(); renderStreak(); renderDefis(); renderDiscoveryBanner(); }
+  if (id === 'defis') renderDefis();
+  if (id === 'fiches') renderFiches();
+  if (id === 'observer') renderObserver();
+}
+
+function goHome() {
+  renderHome();
+  showScreen('quiz-home');
+}
+
+// ============================================================
+// HOME
+// ============================================================
+function renderHome() {
+  const grid = document.getElementById('quiz-grid');
+  grid.innerHTML = '';
+  quizzes.forEach(qz => {
+    const done = completed[qz.id];
+    const card = document.createElement('div');
+    card.className = 'quiz-card' + (done ? ' done' : '');
+    card.innerHTML = `
+      <span class="quiz-card-icon">${qz.icon}</span>
+      <div class="quiz-card-title">${qz.title}</div>
+      <div class="quiz-card-desc">${qz.desc}</div>
+      <div class="quiz-card-meta">${done ? `✓ Terminé — ${done}/10` : '10 questions · Tous niveaux'}</div>
+    `;
+    card.onclick = () => startQuiz(qz.id);
+    grid.appendChild(card);
+  });
+}
+
+// ============================================================
+// QUIZ
+// ============================================================
+function startQuiz(id) {
+  currentQuizId = id;
+  currentQ = 0;
+  score = 0;
+  answered = false;
+  userAnswers = [];
+  const qz = quizzes[id];
+  document.getElementById('quiz-top-title').textContent = qz.icon + ' ' + qz.title;
+  showScreen('quiz');
+  loadQuestion();
+}
+
+function retryQuiz() {
+  startQuiz(currentQuizId);
+  showScreen('quiz');
+}
+
+function loadQuestion() {
+  answered = false;
+  const qz = quizzes[currentQuizId];
+  const q = qz.questions[currentQ];
+  const total = qz.questions.length;
+
+  document.getElementById('q-num').textContent = `Question ${String(currentQ+1).padStart(2,'0')}`;
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('progress-left').textContent = `Question ${currentQ+1} / ${total}`;
+  document.getElementById('progress-score').textContent = `Score : ${score}`;
+  document.getElementById('progress-fill').style.width = `${(currentQ / total) * 100}%`;
+
+  const opts = document.getElementById('options');
+  opts.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span><span>${opt}</span>`;
+    btn.onclick = () => selectAnswer(i);
+    opts.appendChild(btn);
+  });
+
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').innerHTML = '';
+  const nb = document.getElementById('next-btn');
+  nb.className = 'next-btn';
+  nb.textContent = currentQ === total - 1 ? '🏁 Voir mes résultats' : 'Question suivante →';
+  nb.onclick = currentQ === total - 1 ? showScore : nextQuestion;
+
+  const card = document.querySelector('#screen-quiz .card');
+  card.style.animation = 'none'; void card.offsetWidth; card.style.animation = 'fadeUp 0.35s ease both';
+}
+
+function selectAnswer(idx) {
+  if (answered) return;
+  answered = true;
+  const q = quizzes[currentQuizId].questions[currentQ];
+  const isOk = idx === q.c;
+  if (isOk) score++;
+  userAnswers[currentQ] = { chosen: idx, correct: isOk };
+
+  document.querySelectorAll('.opt-btn').forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.c) btn.classList.add('correct');
+    else if (i === idx && !isOk) btn.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('feedback');
+  fb.className = `feedback ${isOk ? 'fb-ok' : 'fb-ko'} show`;
+  fb.innerHTML = `<span class="fb-head">${isOk ? '✓ Bonne réponse !' : `✗ Pas tout à fait — La bonne réponse : « ${q.opts[q.c]} »`}</span>${q.e}`;
+  document.getElementById('next-btn').classList.add('show');
+  document.getElementById('progress-score').textContent = `Score : ${score}`;
+}
+
+function nextQuestion() {
+  currentQ++;
+  loadQuestion();
+}
+
+// ============================================================
+// SCORE
+// ============================================================
+function showScore() {
+  const qz = quizzes[currentQuizId];
+  completed[currentQuizId] = score;
+
+  document.getElementById('progress-fill').style.width = '100%';
+
+  const configs = [
+    { max: 3, icon: '🌱', headline: 'Les premières pousses !', msg: 'Le cheval est un univers fascinant qui mérite d\'être exploré. Chaque question est une invitation à mieux comprendre cet animal extraordinaire. Retentez l\'expérience !' },
+    { max: 5, icon: '🐴', headline: 'Bonne intuition !', msg: 'Vous avez de solides bases et un bel intérêt pour l\'éthologie équine. Continuez à observer et à vous documenter, vous progressez bien !' },
+    { max: 7, icon: '🏇', headline: 'Très bon parcours !', msg: 'Votre connaissance du cheval est réelle et structurée. Vous faites partie de ceux qui comprennent vraiment ce que le cheval cherche à exprimer.' },
+    { max: 9, icon: '⭐', headline: 'Excellent score !', msg: 'Impressionnant ! Vous maîtrisez les grandes notions de l\'éthologie équine avec finesse. Les chevaux ont de la chance d\'être compris par des personnes comme vous.' },
+    { max: 10, icon: '🏆', headline: 'Score parfait !', msg: 'Extraordinaire ! Un sans-faute sur 10 questions d\'éthologie équine. Votre compréhension du cheval est profonde et nuancée — félicitations !' }
+  ];
+
+  const cfg = configs.find(c => score <= c.max);
+  document.getElementById('s-icon').textContent = cfg.icon;
+  document.getElementById('s-name').textContent = qz.icon + ' ' + qz.title;
+  document.getElementById('s-headline').textContent = cfg.headline;
+  document.getElementById('s-num').textContent = score;
+  document.getElementById('s-msg').textContent = cfg.msg;
+
+  const list = document.getElementById('review-list');
+  list.innerHTML = '';
+  qz.questions.forEach((q, i) => {
+    const a = userAnswers[i];
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    div.innerHTML = `
+      <div class="rv-q">${i+1}. ${q.q}</div>
+      <div class="rv-status ${a && a.correct ? 'ok' : 'ko'}">${a && a.correct ? '✓ Correct' : `✗ Votre réponse : ${a ? q.opts[a.chosen] : '—'}`}</div>
+      <div class="rv-expl">${q.e}</div>
+    `;
+    list.appendChild(div);
+  });
+
+  showScreen('score');
+  renderHome(); // Update home badges
+}
+
+// ============================================================
+// FICHES DATA
+// ============================================================
+const fiches = [
+  {
+    id: 0, icon: '👂', title: 'Lire les oreilles',
+    teaser: 'L\'indicateur émotionnel le plus visible du cheval.',
+    desc: 'Les oreilles révèlent en temps réel l\'attention, l\'humeur et l\'intention. Mobiles et expressives, elles pointent toujours vers ce qui capte l\'attention du cheval.',
+    points: [
+      'En avant → curiosité, vigilance, intérêt',
+      'En arrière → mécontentement, menace ou peur',
+      'Couchées contre la nuque → avertissement fort',
+      'Mobiles en permanence → attention partagée entre plusieurs stimuli',
+      'Une oreille vers vous → il vous écoute'
+    ],
+    pratique: 'Observez les oreilles avant d\'approcher. Oreilles couchées : ne pas insister. Oreilles orientées vers vous avec corps détendu : signal d\'accueil.'
+  },
+  {
+    id: 1, icon: '👃', title: 'Comprendre le flehmen',
+    teaser: 'Ce geste fascinant qui révèle une analyse olfactive profonde.',
+    desc: 'Le cheval retrousse la lèvre supérieure pour diriger des molécules vers l\'organe voméronasal, un organe sensoriel très spécialisé situé dans le palais.',
+    points: [
+      'Tête levée, lèvre supérieure retroussée vers le haut',
+      'Permet d\'analyser phéromones et odeurs complexes',
+      'Fréquent chez l\'étalon face à une jument en chaleur',
+      'Observable dans les deux sexes face à une odeur insolite',
+      'Dure quelques secondes, souvent répété plusieurs fois'
+    ],
+    pratique: 'Proposez une herbe aromatique ou un objet inconnu. Observez la séquence : arrêt, reniflage intense, élévation de tête, retroussement de la lèvre.'
+  },
+  {
+    id: 2, icon: '⚡', title: 'Les signaux de stress',
+    teaser: 'Reconnaître les signes précoces avant que la tension s\'installe.',
+    desc: 'Le stress se manifeste par une cascade de signaux physiques et comportementaux. Les détecter tôt permet d\'intervenir avant l\'escalade.',
+    points: [
+      'Naseaux dilatés, yeux grands ouverts',
+      'Blanc de l\'œil visible, regard fixe et dur',
+      'Sudation sans effort physique',
+      'Posture haute, muscles tendus, corps rigide',
+      'Agitation, trépignement, queue nerveuse'
+    ],
+    pratique: 'En situation nouvelle, comparez la respiration au repos. Une respiration accélérée sans exercice signale un stress actif. Donnez du temps et de l\'espace avant d\'aller plus loin.'
+  },
+  {
+    id: 3, icon: '🌊', title: 'Le langage de la queue',
+    teaser: 'Position, tonus et mouvement : la queue ne ment pas.',
+    desc: 'La queue exprime les états émotionnels avec précision. Son tonus, son mouvement et sa position varient selon l\'humeur et le niveau de tension interne du cheval.',
+    points: [
+      'Agitation latérale → irritation, mécontentement',
+      'Queue serrée contre les fesses → peur ou douleur',
+      'Queue relevée → excitation ou alerte vive',
+      'Mouvements doux et amples → détente',
+      'Queue bloquée en travail → tension ou douleur dorsale'
+    ],
+    pratique: 'Distinguez l\'agitation anti-insectes (verticale, rythmée) de l\'agitation d\'irritation (latérale, irrégulière, associée à d\'autres signaux de tension).'
+  },
+  {
+    id: 4, icon: '🐴', title: 'La posture générale',
+    teaser: 'La silhouette entière raconte l\'état intérieur du cheval.',
+    desc: 'La posture d\'ensemble révèle instantanément le niveau d\'activation du système nerveux. De la décontraction totale à la tension maximale, chaque position a un sens.',
+    points: [
+      'Corps bas, muscles relâchés → repos et confiance',
+      'Posture haute, encolure tendue → alerte ou stress',
+      'Poids sur trois membres → repos normal (alternant)',
+      'Corps orienté vers vous → engagement positif',
+      'Dos tourné, corps de biais → retrait ou avertissement'
+    ],
+    pratique: 'Observez la ligne du dessus : un dos tendu et une encolure haute indiquent une activation sympathique. Un dos souple et une encolure basse signalent le relâchement.'
+  },
+  {
+    id: 5, icon: '👁️', title: 'Le regard et le visage',
+    teaser: 'Œil, mâchoire, naseaux : le visage ne ment jamais.',
+    desc: 'Le visage du cheval forme un tableau expressif cohérent. L\'œil, les tensions musculaires faciales et la position des naseaux révèlent l\'état émotionnel avec précision.',
+    points: [
+      'Œil doux et arrondi → calme et confiance',
+      'Blanc de l\'œil visible → peur ou tension forte',
+      'Rides au-dessus de l\'œil (forme triangulaire) → inconfort',
+      'Mâchoire crispée, lèvres pincées → stress ou douleur',
+      'Naseaux souples et détendus → bien-être'
+    ],
+    pratique: 'Regardez la peau autour de l\'œil. Des rides ou une forme triangulaire au coin interne révèlent une tension subtile mais fiable — l\'un des meilleurs indicateurs de douleur chronique.'
+  },
+  {
+    id: 6, icon: '🔴', title: 'Les signes d\'inconfort',
+    teaser: 'L\'inconfort précède toujours la réaction défensive.',
+    desc: 'Le cheval signale son inconfort bien avant d\'exprimer une réaction franche. Lire ces signaux précoces évite les escalades et renforce la relation de confiance.',
+    points: [
+      'Recul ou détournement de tête à l\'approche',
+      'Pincement des lèvres, regard qui se durcit',
+      'Mouvements d\'évitement pendant le pansage',
+      'Changement soudain d\'attitude en cours de travail',
+      'Piétinement, dérobade, refus d\'avancer'
+    ],
+    pratique: 'Notez quand le cheval cherche à terminer l\'interaction (recul, tête tournée, pas en arrière). Ce sont des demandes d\'espace. Les respecter construit la confiance ; les ignorer l\'érode.'
+  },
+  {
+    id: 7, icon: '🌿', title: 'Les signes de détente',
+    teaser: 'Reconnaître le relâchement valide votre approche.',
+    desc: 'Un cheval détendu montre des signaux clairs et reproductibles. Les identifier permet de confirmer que votre présence ou votre travail est ressenti comme sécurisant.',
+    points: [
+      'Lèvre inférieure pendante, mâchoire souple',
+      'Yeux mi-clos, paupières lourdes',
+      'Bâillements (signe de décompression du système nerveux)',
+      'Souffles longs et lents par les naseaux',
+      'Tête qui s\'abaisse progressivement vers le sol'
+    ],
+    pratique: 'Un bâillement après une séance est un excellent indicateur de relâchement. Un cheval qui baisse la tête spontanément pendant votre présence exprime une confiance profonde.'
+  },
+  {
+    id: 8, icon: '🔵', title: 'Distance et espace personnel',
+    teaser: 'Respecter la bulle, attendre l\'invitation.',
+    desc: 'Chaque cheval possède une distance de fuite propre — le seuil spatial à partir duquel une présence devient menaçante. La respecter est la première étape de toute relation.',
+    points: [
+      'Distance de fuite variable selon l\'individu et le contexte',
+      'Un cheval qui recule → vous êtes trop proche',
+      'Un cheval qui s\'approche volontairement → confiance accordée',
+      'Forcer la distance génère de l\'anxiété durable',
+      'Le cheval doit toujours pouvoir choisir de s\'éloigner'
+    ],
+    pratique: 'Approchez lentement, sans fixer le cheval dans les yeux. Arrêtez-vous aux premiers signes de vigilance. Attendez. Si le cheval reprend sa respiration ou tourne vers vous, il vous invite à continuer.'
+  },
+  {
+    id: 9, icon: '⏳', title: 'Le Budget-Temps du cheval',
+    teaser: 'Comment le cheval répartit ses 24 heures — et ce que cela révèle.',
+    desc: 'Le budget-temps décrit la façon dont un cheval distribue ses activités sur une journée complète. Observer cette répartition permet d\'évaluer si ses besoins naturels sont satisfaits, et de détecter un déséquilibre avant qu\'il ne génère stress ou stéréotypies.',
+    points: [
+      'Alimentation — 14 à 16 h/jour : brouter est un besoin fondamental, pas seulement calorique',
+      'Repos — 4 à 6 h/jour : alternance de sommeils légers debout et de phases allongées (REM)',
+      'Déplacement — 10 à 20 km/jour : marcher est une nécessité physiologique et comportementale',
+      'Interactions sociales — variable : toilettage mutuel, jeu, proximité renforcent le bien-être',
+      'Vigilance — continu : même au repos, le cheval surveille son environnement',
+      'Exploration — quelques minutes à plusieurs heures : flairer, toucher, enquêter sur la nouveauté',
+      'Agitation / stress — à minimiser : trépignement, stéréotypies ou hypervigilance prolongée signalent un manque'
+    ],
+    pratique: 'Observez votre cheval sur une heure à différents moments de la journée. Notez ce qu\'il fait chaque fois. En quelques semaines, vous obtenez un portrait de son rythme de vie — et des indicateurs précieux sur son bien-être réel.'
+  },
+  {
+    id: 10, icon: '⚠️', title: 'Les premiers signes d\'agacement',
+    teaser: 'Désamorcer tôt pour éviter toute escalade.',
+    desc: 'L\'agacement précède toujours la réaction défensive. Ces signaux très précoces sont souvent ignorés — mais c\'est précisément à ce stade qu\'une pause change tout.',
+    points: [
+      'Peau qui tressaille localement sous la main',
+      'Coup de pied bref, comme pour chasser une mouche',
+      'Oreille tournée en arrière pendant la manipulation',
+      'Queue agitée lors du pansage ou du harnachement',
+      'Regard qui se durcit, corps qui se raidit légèrement'
+    ],
+    pratique: 'Lors du pansage, si la peau frémit sous la brosse, réduisez la pression immédiatement. C\'est le niveau 1 de l\'inconfort. Intervenir ici évite systématiquement d\'atteindre le niveau 3 (ruade, morsure).'
+  },
+  {
+    id: 11, icon: '🔄',
+    title: 'Les stéréotypies équines',
+    teaser: 'Ce que les comportements répétitifs révèlent du bien-être.',
+    desc: 'Une stéréotypie est un comportement répété, invariable, sans but apparent. Elle ne surgit pas de nulle part : c\'est le symptôme visible d\'un mal-être passé ou présent, souvent lié à l\'environnement, à l\'alimentation ou à l\'isolement.',
+    points: [
+      'Tic à l\'appui — agripper un objet avec les incisives et avaler de l\'air',
+      'Tic au vent — même comportement sans point d\'appui fixe',
+      'Tissage — balancement latéral répété de la tête et du corps, souvent à la porte du box',
+      'Déambulation compulsive — tourner en rond de manière stéréotypée',
+      'Mastication à vide — mâcher sans fourrage, liée à la frustration alimentaire',
+      'Une fois installée, une stéréotypie est rarement éliminable — seulement réduite par un enrichissement du milieu'
+    ],
+    pratique: 'Observez dans quel contexte la stéréotypie apparaît : avant les repas, en isolement, à une heure précise ? Le contexte est plus informatif que le comportement lui-même. Augmenter le fourrage disponible, le contact social et l\'espace sont les premières réponses à explorer.'
+  }
+];
+
+// ============================================================
+// FICHES ÉMERGENTES
+// ============================================================
+const fichesEmergentes = [
+  {
+    id: 20, icon: '🫂',
+    title: 'Micro-signaux de tension sociale',
+    teaser: 'Les signes subtils qui précèdent le conflit ouvert.',
+    unlockCondition: { type: 'category', value: 'interaction sociale', min: 1 },
+    unlockLabel: '✦ Basé sur vos observations sociales',
+    desc: 'Avant une confrontation ouverte, le cheval envoie une série de signaux discrets. L\'observateur attentif peut apprendre à les détecter pour anticiper les tensions avant qu\'elles n\'éclatent.',
+    points: [
+      'Corps légèrement tourné — épaule ou croupe orientée vers l\'autre',
+      'Oreille arrière maintenue — attention figée sur le congénère',
+      'Regard qui se durcit — muscles périorbitaux légèrement contractés',
+      'Chanfrein qui se tend — expression faciale moins souple',
+      'Pas qui ralentit ou s\'arrête — préparation à réagir',
+      'Naseaux légèrement dilatés — activation émotionnelle discrète'
+    ],
+    pratique: 'Lors d\'une observation sociale, suivez un seul cheval à la fois et notez tous les micro-changements corporels avant toute interaction manifeste. L\'objectif est d\'anticiper, pas seulement de constater.'
+  },
+  {
+    id: 21, icon: '🌊',
+    title: 'Lire le stress chronique',
+    teaser: 'Distinguer le stress aigu du stress installé dans la durée.',
+    unlockCondition: { type: 'category', value: 'stress', min: 1 },
+    unlockLabel: '✦ Basé sur vos observations de stress',
+    desc: 'Le stress aigu est visible et soudain. Le stress chronique, lui, s\'installe progressivement et se confond avec le "caractère" du cheval. Apprendre à le distinguer est une compétence éthologique fondamentale.',
+    points: [
+      'Vigilance permanente — le cheval ne "lâche" jamais vraiment',
+      'Appétit perturbé — mange vite, mange peu ou stéréotypies orales',
+      'Regard légèrement écarquillé en permanence',
+      'Absence de jeu spontané — l\'élan explorateur s\'est éteint',
+      'Réactivité exacerbée — surréaction à des stimuli anodins',
+      'Peu ou pas de bâillements de décompression'
+    ],
+    pratique: 'Observez votre cheval 10 minutes sans interagir. Compte-t-il des phases de vraie détente ? Pose-t-il sa tête, bâille-t-il, somnole-t-il ? L\'absence de ces fenêtres de calme est un signal fort.'
+  },
+  {
+    id: 23, icon: '🔬',
+    title: 'L\'expression faciale complète',
+    teaser: 'Lire les oreilles, les yeux et les naseaux ensemble.',
+    unlockCondition: { type: 'field', value: 'oreilles', min: 3 },
+    unlockLabel: '✦ Basé sur vos observations des oreilles',
+    desc: 'Les oreilles seules ne racontent qu\'une partie de l\'histoire. C\'est la combinaison des oreilles, du regard et des naseaux qui révèle l\'état émotionnel précis. Chaque zone confirme ou nuance ce que les autres expriment.',
+    points: [
+      'Oreilles + regard dirigés ensemble : attention focalisée, objet clairement identifié',
+      'Oreilles en arrière + yeux durs : colère ou peur concentrée',
+      'Oreilles mobiles + naseaux frémissants : curiosité active avec vigilance',
+      'Oreilles relâchées + yeux mi-clos + mâchoire souple : détente profonde',
+      'Asymétrie des oreilles + regard fixe : évaluation d\'une menace latérale',
+      'L\'expression complète peut changer en moins d\'une seconde'
+    ],
+    pratique: 'Lors de votre prochaine observation, décrivez simultanément les oreilles, le regard et les naseaux. Voyez si les trois zones racontent la même histoire — ou se contredisent.'
+  },
+  {
+    id: 24, icon: '📅',
+    title: 'Observer dans la durée',
+    teaser: 'Ce que seule la régularité permet de voir.',
+    unlockCondition: { type: 'distinctDays', min: 3 },
+    unlockLabel: '✦ Récompense de régularité',
+    desc: 'Observer un cheval une seule fois, c\'est voir une image. L\'observer sur plusieurs jours, c\'est voir un film. La répétition révèle des patterns que l\'observation unique ne peut jamais détecter.',
+    points: [
+      'Le comportement varie selon la météo, l\'heure, la saison',
+      'Les patterns réguliers révèlent la personnalité profonde',
+      'Les anomalies ne se voient qu\'en comparaison avec la norme',
+      'Un cheval différent d\'un jour sur l\'autre peut signaler une douleur',
+      'La confiance s\'évalue sur le long terme, pas à l\'instant T',
+      'Votre propre regard s\'affine avec la pratique régulière'
+    ],
+    pratique: 'Relisez vos observations des derniers jours et cherchez une variation inattendue. Qu\'est-ce qui a changé ? Y a-t-il une cause extérieure — météo, routine, présence différente ?'
+  },
+  {
+    id: 22, icon: '🗺️',
+    title: 'Construire un profil comportemental',
+    teaser: 'De l\'observation répétée naît la connaissance profonde.',
+    unlockCondition: { type: 'totalObs', min: 5 },
+    unlockLabel: '✦ Débloqué après 5 observations',
+    desc: 'Un profil comportemental n\'est pas un jugement — c\'est un portrait vivant, en perpétuel mouvement. Il se construit à partir d\'observations répétées, dans des contextes variés, avec un regard neutre et curieux.',
+    points: [
+      'Notez les contextes, pas seulement les comportements — quand, où, avec qui',
+      'Cherchez les patterns : qu\'est-ce qui revient systématiquement ?',
+      'Identifiez les zones de confort et d\'inconfort du cheval',
+      'Notez les transitions : comment passe-t-il de l\'alerte à la détente ?',
+      'Comparez les observations dans le temps — le cheval évolue',
+      'Distinguez toujours ce que vous observez de ce que vous interprétez'
+    ],
+    pratique: 'Après 5 observations, relisez vos notes en cherchant 3 patterns récurrents. Pas des conclusions définitives — des hypothèses de terrain à continuer d\'explorer.'
+  }
+];
+
+// ============================================================
+// PROGRESSION
+// ============================================================
+function getProgression() {
+  return JSON.parse(localStorage.getItem('progression') || '{"unlockedFiches":[],"seenDiscoveries":[]}');
+}
+function saveProgression(p) {
+  localStorage.setItem('progression', JSON.stringify(p));
+}
+
+function checkProgression() {
+  const prog = getProgression();
+  const newUnlocks = [];
+  fichesEmergentes.forEach(f => {
+    if (prog.unlockedFiches.includes(f.id)) return;
+    const c = f.unlockCondition;
+    let met = false;
+    if      (c.type === 'category')    met = carnetObs.filter(o => o.category === c.value).length >= c.min;
+    else if (c.type === 'totalObs')    met = carnetObs.length >= c.min;
+    else if (c.type === 'budget')      met = carnetBudgets.length >= c.min;
+    else if (c.type === 'field')       met = carnetObs.filter(o => o.observations && o.observations[c.value]).length >= c.min;
+    else if (c.type === 'distinctDays') met = new Set(carnetObs.map(o => o.date)).size >= c.min;
+    if (met) { prog.unlockedFiches.push(f.id); newUnlocks.push(f.id); }
+  });
+  if (newUnlocks.length > 0) saveProgression(prog);
+  return newUnlocks;
+}
+
+// ============================================================
+// SÉRIE D'OBSERVATION
+// ============================================================
+// ============================================================
+// OBSERVATION DU JOUR
+// ============================================================
+const observationsDuJour = [
+  "Prenez quelques minutes pour observer les transitions entre vigilance et détente.",
+  "Aujourd'hui, observez les oreilles dans un moment calme.",
+  "Regardez comment votre cheval utilise l'espace avec les autres.",
+  "Notez les bâillements et mastications à vide — signes discrets de décompression.",
+  "Observez les yeux : fermeté, douceur, blanc visible — que disent-ils aujourd'hui ?",
+  "Cherchez un moment de synchronisation comportementale dans le groupe.",
+  "Soyez attentif aux micro-signaux d'agacement lors du pansage.",
+  "Comment votre cheval réagit-il à votre approche ce matin ?",
+  "Observez la queue : détendue, agitée, serrée — chaque position raconte quelque chose.",
+  "Notez le premier comportement spontané de votre cheval quand il est seul.",
+  "Regardez comment votre cheval mange : vite, lentement, sereinement ?",
+  "Prenez le temps d'observer sans interagir. Juste regarder.",
+  "Cherchez un moment de détente profonde — tête basse, œil mi-clos, mâchoire souple.",
+  "Comment votre cheval accueille-t-il quelque chose d'inhabituel aujourd'hui ?",
+  "Notez la distance que votre cheval maintient naturellement avec ses congénères.",
+  "Observez comment il passe de l'alerte au calme — combien de temps cela prend-il ?",
+  "Cherchez ce qui déclenche un ébrouement — souvent un signe de relâchement.",
+  "Aujourd'hui, observez la posture générale : légère, lourde, équilibrée ?",
+  "Regardez les naseaux : frémissants, immobiles, dilatés — ils complètent le message des oreilles.",
+  "Le comportement est toujours une réponse à un contexte. Quel est ce contexte aujourd'hui ?"
+];
+
+// ============================================================
+// OBS IMMERSIVE — DONNÉES
+// ============================================================
+const scenesObs = [
+  {
+    scene_id: "negociation-proximite-01",
+    video: { type: "placeholder", description: "Deux chevaux en paddock. L'un s'approche lentement de l'autre qui mange. Négociation silencieuse de la proximité." },
+    lectures: [
+      { profondeur: 1, phrase: "Observez ce qui se passe quand deux chevaux se rapprochent.", seuil: "Installez-vous. Deux minutes pour voir ce que beaucoup ne voient pas.", zones: ["oreilles", "posture"], guidage: "Que fait le cheval qui reçoit l'approche ? Regardez maintenant les oreilles au moment où la distance change.", revelation: "Les oreilles portées légèrement en arrière et l'encolure basse signalent la déférence, pas la menace. C'est un langage de paix — le cheval négocie la proximité.", fiche_liee: { id: 0, label: "Lire la fiche sur les oreilles" }, question_ancrage: "Avez-vous observé votre cheval utiliser ce signal avec ses congénères ?", categorie_carnet: "interaction sociale" },
+      { profondeur: 3, phrase: "Vous connaissez peut-être cette scène. Regardez plus près.", seuil: null, zones: ["oreilles", "regard"], guidage: "Dans les 3 secondes qui précèdent le recul — que font les oreilles exactement ?", revelation: "L'oreille tourne avant l'œil. Le cheval a décidé de céder avant que son corps ne bouge. Le signal précède l'action.", fiche_liee: null, question_ancrage: "Avez-vous déjà anticipé un mouvement de votre cheval grâce à ses oreilles ?", categorie_carnet: "communication" }
+    ]
+  },
+  {
+    scene_id: "ebrouement-relachement-01",
+    video: { type: "placeholder", description: "Cheval seul, au pré. Moment calme. Un léger stimulus, puis retour au calme et ébrouement." },
+    lectures: [
+      { profondeur: 1, phrase: "Cherchez ce qui déclenche un ébrouement — souvent un signe de relâchement.", seuil: null, zones: ["regard", "tension"], guidage: "Observez ce qui précède immédiatement l'ébrouement. Le regard, l'encolure — que font-ils dans les 2 secondes avant ?", revelation: "L'ébrouement est une expiration forcée qui suit un moment de légère tension. Il n'est pas aléatoire : il marque le retour à un état de sécurité interne. Un cheval qui s'ébroue libère quelque chose.", fiche_liee: null, question_ancrage: "Dans quel contexte avez-vous entendu votre cheval s'ébrouer la dernière fois ?", categorie_carnet: "bien-être" }
+    ]
+  },
+  {
+    scene_id: "deplacement-poids-01",
+    video: { type: "placeholder", description: "Cheval à l'attache ou en box. Plan sur les antérieurs. Moment d'hésitation — très léger transfert de poids vers l'arrière." },
+    lectures: [
+      { profondeur: 2, phrase: "Observez le déplacement du poids — avant toute décision, le corps anticipe.", seuil: "Regardez d'abord les membres. Tout commence là.", zones: ["posture", "tension"], guidage: "Regardez maintenant les antérieurs. L'un est-il légèrement plus chargé que l'autre ? Y a-t-il un micro-recul ?", revelation: "Le déplacement de poids vers l'arrière est un prélude à la fuite — le cheval prépare son système moteur avant que la décision soit prise. Voir cela, c'est lire 2 secondes dans le futur.", fiche_liee: { id: 4, label: "La posture générale" }, question_ancrage: "Avez-vous déjà senti ce transfert de poids sous la selle, avant un écart ?", categorie_carnet: "comportement" }
+    ]
+  },
+  {
+    scene_id: "regard-detente-01",
+    video: { type: "placeholder", description: "Cheval au repos. Gros plan sur l'œil et la région temporale. Passage progressif d'un état alerte à un état de détente profonde." },
+    lectures: [
+      { profondeur: 2, phrase: "Observez les transitions du regard — entre vigilance et abandon.", seuil: null, zones: ["regard", "tension"], guidage: "Regardez la paupière inférieure. Que se passe-t-il précisément quand le cheval bascule vers la détente ?", revelation: "La paupière inférieure qui se relâche, le triangle sous-orbitaire qui se creuse légèrement : le système d'alerte se désactive. Le cheval ne surveille plus — il est présent autrement.", fiche_liee: { id: 5, label: "Le regard et le visage" }, question_ancrage: "Avez-vous observé cet état chez votre cheval ? Dans quel contexte ?", categorie_carnet: "bien-être" }
+    ]
+  },
+  {
+    scene_id: "repos-debout-01",
+    video: { type: "placeholder", description: "Cheval debout, postérieur relâché, tête basse, queue immobile. Ambiance calme de paddock ou de box." },
+    lectures: [
+      { profondeur: 1, phrase: "Aujourd'hui, observez ce que ressemble vraiment le repos.", seuil: "Cette observation demande de la patience. Laissez la scène s'installer.", zones: ["posture", "queue", "regard"], guidage: "Regardez le postérieur. Lequel repose ? Et regardez la queue — est-elle tenue ou abandonnée ?", revelation: "Le repos debout exige un abandon complet du tonus de garde. Un postérieur fléchi, une queue dont le port s'efface, une paupière mi-close : le cheval a désactivé sa surveillance. C'est un acte de confiance.", fiche_liee: { id: 7, label: "Les signes de détente" }, question_ancrage: "Votre cheval se repose-t-il ainsi ? Savez-vous à quelle heure de la journée ?", categorie_carnet: "bien-être" }
+    ]
+  }
+];
+
+const oiZoneLabels = { oreilles: '👂 Oreilles', regard: '👁 Regard', posture: '↕ Posture', queue: '〜 Queue', tension: '∿ Tension' };
+
+// ============================================================
+// OBS IMMERSIVE — PROFIL DU REGARD
+// ============================================================
+function getProfilRegard() {
+  return JSON.parse(localStorage.getItem('profil_regard') || '{"obs_completees":0,"scenes_vues":[]}');
+}
+function saveProfilRegard(p) { localStorage.setItem('profil_regard', JSON.stringify(p)); }
+
+function profondeurCourante(n) {
+  if (n < 6)  return 1;
+  if (n < 16) return 2;
+  if (n < 31) return 3;
+  if (n < 51) return 4;
+  return 5;
+}
+
+function selectObsDuJour() {
+  const profil = getProfilRegard();
+  const pMax = profondeurCourante(profil.obs_completees);
+  const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+  const scene = scenesObs[dayOfYear % scenesObs.length];
+  let lecture = scene.lectures[0];
+  for (const lec of scene.lectures) { if (lec.profondeur <= pMax) lecture = lec; }
+  return { scene, lecture };
+}
+
+// ============================================================
+// OBS IMMERSIVE — EXPÉRIENCE
+// ============================================================
+let _oiScene = null, _oiLecture = null, _oiTimerRef = null;
+
+function lancerObsImmersive() {
+  const { scene, lecture } = selectObsDuJour();
+  _oiScene = scene;
+  _oiLecture = lecture;
+  if (_oiTimerRef) { clearTimeout(_oiTimerRef); _oiTimerRef = null; }
+  showScreen('obs-immersive');
+  oiPhase1();
+}
+
+function oiSetProgress(pct) {
+  const bar = document.getElementById('oi-progress');
+  if (bar) bar.style.width = pct + '%';
+}
+
+function oiRender(html) {
+  const el = document.getElementById('oi-content');
+  if (el) el.innerHTML = html;
+}
+
+function oiVideoHtml(video) {
+  if (video.type === 'youtube') {
+    return `<div class="oi-video-box"><iframe src="https://www.youtube-nocookie.com/embed/${esc(video.src)}?autoplay=1&mute=1&controls=0&rel=0" allow="autoplay" allowfullscreen></iframe></div>`;
+  }
+  return `<div class="oi-video-box"><div class="oi-video-desc">${esc(video.description)}</div></div>`;
+}
+
+function oiPhase1() {
+  oiSetProgress(5);
+  const txt = _oiLecture.seuil || 'Installez-vous. Prenez un moment.';
+  oiRender(`<div class="oi-seuil-wrap"><div class="oi-seuil-text">${esc(txt)}</div></div>`);
+  _oiTimerRef = setTimeout(oiPhase2, 3200);
+}
+
+function oiPhase2() {
+  oiSetProgress(25);
+  const zonesHtml = (_oiLecture.zones || []).map(z =>
+    `<div class="oi-zone-chip" onclick="this.classList.toggle('active')">${esc(oiZoneLabels[z] || z)}</div>`
+  ).join('');
+  const dureeMs = 22000;
+  oiRender(`
+    <div class="oi-scene-wrap">
+      ${oiVideoHtml(_oiScene.video)}
+      <div class="oi-timer-wrap"><div class="oi-timer-bar" id="oi-timer"></div></div>
+      <div class="oi-question-block" id="oi-qblock">
+        <div class="oi-question-label">Qu'avez-vous remarqué ?</div>
+        <div class="oi-zones">${zonesHtml}</div>
+        <button class="oi-btn-continue" onclick="oiPhase3()">Continuer →</button>
+      </div>
+    </div>`);
+  const timerBar = document.getElementById('oi-timer');
+  if (timerBar) {
+    timerBar.style.transition = `width ${dureeMs}ms linear`;
+    requestAnimationFrame(() => { timerBar.style.width = '100%'; });
+  }
+  _oiTimerRef = setTimeout(() => {
+    const qblock = document.getElementById('oi-qblock');
+    if (qblock) qblock.classList.add('visible');
+  }, dureeMs);
+}
+
+function oiPhase3() {
+  if (_oiTimerRef) { clearTimeout(_oiTimerRef); _oiTimerRef = null; }
+  oiSetProgress(55);
+  oiRender(`
+    <div class="oi-miseaupoint-wrap">
+      ${oiVideoHtml(_oiScene.video)}
+      <div class="oi-guidage">${esc(_oiLecture.guidage)}</div>
+      <button class="oi-btn-continue" onclick="oiPhase4()">Continuer →</button>
+    </div>`);
+}
+
+function oiPhase4() {
+  oiSetProgress(80);
+  const ficheLien = _oiLecture.fiche_liee
+    ? `<button class="oi-fiche-lien" onclick="oiOuvrirFiche(${_oiLecture.fiche_liee.id})">→ ${esc(_oiLecture.fiche_liee.label)}</button><br>`
+    : '';
+  oiRender(`
+    <div class="oi-revelation-wrap">
+      <div class="oi-revelation-eyebrow">Ce que vous venez d'observer</div>
+      <div class="oi-revelation-text">${esc(_oiLecture.revelation)}</div>
+      ${ficheLien}
+      <button class="oi-btn-continue" onclick="oiPhase5()" style="margin-top:20px">Continuer →</button>
+    </div>`);
+}
+
+function oiPhase5() {
+  oiSetProgress(100);
+  localStorage.setItem('obs_done_' + todayStr(), '1');
+  const profil = getProfilRegard();
+  profil.obs_completees = (profil.obs_completees || 0) + 1;
+  if (!profil.scenes_vues.includes(_oiScene.scene_id)) profil.scenes_vues.push(_oiScene.scene_id);
+  saveProfilRegard(profil);
+  recordStreakDay();
+  oiRender(`
+    <div class="oi-ancrage-wrap">
+      <div class="oi-ancrage-question">${esc(_oiLecture.question_ancrage)}</div>
+      <div class="oi-ancrage-actions">
+        <button class="oi-btn-note" onclick="oiNoterCarnet()">Oui, je note</button>
+        <button class="oi-btn-retiens" onclick="oiQuitter()">Je retiens</button>
+      </div>
+    </div>`);
+}
+
+function oiOuvrirFiche(id) { openFiche(id); showScreen('fiche-detail'); }
+function oiNoterCarnet() { oiQuitter(); showScreen('carnet'); }
+function oiQuitter() {
+  if (_oiTimerRef) { clearTimeout(_oiTimerRef); _oiTimerRef = null; }
+  showScreen('main');
+}
+
+function renderObsDuJour() {
+  const el = document.getElementById('obs-du-jour');
+  if (!el) return;
+  const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+  const { lecture } = selectObsDuJour();
+  const doneToday = localStorage.getItem('obs_done_' + todayStr()) === '1';
+  el.innerHTML = `
+    <div class="hero-obs-card" onclick="lancerObsImmersive()">
+      <div class="hero-obs-halo"></div>
+      <div class="hero-obs-content">
+        <div class="hero-obs-eyebrow">Observation du jour</div>
+        <div class="hero-obs-phrase">${esc(lecture.phrase)}</div>
+        <button class="hero-obs-cta">${doneToday ? '✓ Observé aujourd\'hui' : '▶ Commencer l\'observation'}</button>
+      </div>
+      <div class="hero-obs-daynum">— ${dayOfYear}</div>
+      ${doneToday ? '<div class="hero-obs-done">✓ observé</div>' : ''}
+    </div>`;
+}
+
+function todayStr() { return new Date().toISOString().slice(0, 10); }
+function yesterdayStr() { return new Date(Date.now() - 86400000).toISOString().slice(0, 10); }
+function getStreak() { return JSON.parse(localStorage.getItem('obs_streak') || '{"lastDate":null,"count":0,"totalDays":0,"wasReset":false}'); }
+function saveStreak(s) { localStorage.setItem('obs_streak', JSON.stringify(s)); }
+
+function recordStreakDay() {
+  const today = todayStr();
+  const s = getStreak();
+  if (s.lastDate === today) return; // already counted today
+  const consecutive = s.lastDate === yesterdayStr();
+  s.wasReset = !consecutive && s.count > 0;
+  s.count    = consecutive ? s.count + 1 : 1;
+  s.lastDate = today;
+  s.totalDays = (s.totalDays || 0) + 1;
+  saveStreak(s);
+  renderStreak();
+}
+
+function renderStreak() {
+  const widget = document.getElementById('streak-widget');
+  if (!widget) return;
+  const s = getStreak();
+  const active = s.lastDate && (s.lastDate === todayStr() || s.lastDate === yesterdayStr());
+  let text;
+  if (!s.lastDate) {
+    text = '🌿 Notez votre première observation pour commencer';
+  } else if (!active) {
+    text = '🌿 Reprenez votre carnet quand vous le souhaitez';
+  } else if (s.wasReset && s.count === 1) {
+    text = '🌿 Votre rythme d\'observation reprend doucement';
+  } else if (s.count === 1) {
+    text = '🌿 Premier pas du jour';
+  } else if (s.count === 2) {
+    text = `🌿 <span class="streak-count">2</span> jours consécutifs d'observation`;
+  } else if (s.count < 7) {
+    text = `🌿 Série d'observation · <span class="streak-count">${s.count} jours</span>`;
+  } else {
+    text = `✨ <span class="streak-count">${s.count} jours</span> de continuité dans votre carnet`;
+  }
+  widget.innerHTML = `<div class="streak-inner">${text}</div>`;
+}
+
+function renderDiscoveryBanner() {
+  const banner = document.getElementById('discovery-banner');
+  if (!banner) return;
+  const prog = getProgression();
+  const unseen = prog.unlockedFiches.filter(id => !prog.seenDiscoveries.includes(id));
+  if (unseen.length === 0) { banner.innerHTML = ''; return; }
+  const fiche = fichesEmergentes.find(f => f.id === unseen[0]);
+  if (!fiche) return;
+  banner.innerHTML = `
+    <div class="discovery-banner" onclick="markDiscoverySeen(${fiche.id}); showScreen('fiches')">
+      <span class="discovery-icon">✦</span>
+      <div class="discovery-text">
+        <div class="discovery-label">Nouvelle fiche disponible</div>
+        <div class="discovery-title">${esc(fiche.title)}</div>
+      </div>
+      <span class="discovery-arrow">→</span>
+    </div>`;
+}
+
+function markDiscoverySeen(id) {
+  const prog = getProgression();
+  if (!prog.seenDiscoveries.includes(id)) { prog.seenDiscoveries.push(id); saveProgression(prog); }
+}
+
+// ============================================================
+// DÉFIS D'OBSERVATION
+// ============================================================
+const defis = [
+  {
+    id: 1, rewardFicheId: 20,
+    label: 'Observer une interaction sociale',
+    desc: 'Notez une observation dans la catégorie "interaction sociale"',
+    condition: { type: 'category', value: 'interaction sociale', min: 1 }
+  },
+  {
+    id: 2, rewardFicheId: 21,
+    label: 'Identifier un moment de stress',
+    desc: 'Notez une observation dans la catégorie "stress"',
+    condition: { type: 'category', value: 'stress', min: 1 }
+  },
+  {
+    id: 3, rewardFicheId: 22,
+    label: 'Remplir 5 observations au carnet',
+    desc: 'Accumulez 5 observations dans votre carnet',
+    condition: { type: 'totalObs', min: 5 }
+  },
+  {
+    id: 4, rewardFicheId: 23,
+    label: 'Observer les oreilles 3 fois',
+    desc: 'Remplissez le champ "oreilles" dans 3 observations',
+    condition: { type: 'field', value: 'oreilles', min: 3 }
+  },
+  {
+    id: 5, rewardFicheId: 24,
+    label: 'Observer sur 3 jours différents',
+    desc: 'Notez des observations à 3 dates distinctes',
+    condition: { type: 'distinctDays', min: 3 }
+  }
+];
+
+function isDefiDone(defi) {
+  const prog = getProgression();
+  return prog.unlockedFiches.includes(defi.rewardFicheId);
+}
+
+function renderDefis() {
+  // Always update the main-card pill
+  const pill = document.getElementById('defis-card-pill');
+  if (pill) {
+    const doneCount = defis.filter(d => isDefiDone(d)).length;
+    if (isExpertMode()) {
+      pill.className = 'defis-card-pill complete';
+      pill.textContent = '✦ Mode expert actif';
+    } else if (doneCount === 0) {
+      pill.className = 'defis-card-pill';
+      pill.textContent = '';
+    } else if (doneCount === defis.length) {
+      pill.className = 'defis-card-pill complete';
+      pill.textContent = 'Tous les défis accomplis ✓';
+    } else {
+      pill.className = 'defis-card-pill';
+      pill.textContent = `${doneCount} sur ${defis.length} accomplis`;
+    }
+  }
+
+  // Render the dedicated defis page
+  const content = document.getElementById('defis-page-content');
+  if (!content) return;
+
+  const expert = isExpertMode();
+  const doneCount = defis.filter(d => isDefiDone(d)).length;
+
+  const expertBanner = expert ? `
+    <div class="defis-expert-banner">
+      <strong>Mode expert actif.</strong> Toutes les fiches pratiques sont accessibles. Les défis restent visibles comme guide d'observation.
+    </div>` : '';
+
+  const cards = defis.map((d, i) => {
+    const done = isDefiDone(d);
+    const fiche = fichesEmergentes.find(f => f.id === d.rewardFicheId);
+    return `
+      <div class="defi-page-card${done ? ' done' : ''}">
+        <div class="defi-page-num${done ? ' done' : ''}">${done ? '✓' : i + 1}</div>
+        <div class="defi-page-body">
+          <div class="defi-page-label">${esc(d.label)}</div>
+          <div class="defi-page-subdesc">${esc(d.desc)}</div>
+          ${fiche ? `<div class="defi-page-reward ${done ? 'unlocked' : 'locked'}">
+            ${fiche.icon} ${done ? 'Fiche débloquée — ' : 'Débloque — '}${esc(fiche.title)}
+          </div>` : ''}
+        </div>
+      </div>`;
+  }).join('');
+
+  content.innerHTML = `
+    ${expertBanner}
+    <p class="defis-page-intro">Chaque défi correspond à un vrai moment d'observation. En les accomplissant, vous débloquez des fiches spécialisées qui émergent de votre pratique de terrain.</p>
+    <div class="defis-page-progress">
+      <div class="defis-page-bar-wrap">
+        <div class="defis-page-bar-fill" style="width:${(doneCount / defis.length * 100).toFixed(0)}%"></div>
+      </div>
+      <span class="defis-page-fraction">${doneCount} / ${defis.length}</span>
+    </div>
+    ${cards}
+    <div class="defis-expert-wrap">
+      <div class="defis-expert-lbl">Accès créateur</div>
+      <button class="defis-expert-toggle${expert ? ' active' : ''}" onclick="toggleExpertMode()">
+        ✦ ${expert ? 'Mode expert activé' : 'Débloquer tout le contenu'}
+      </button>
+    </div>`;
+}
+
+// ============================================================
+// MODE EXPERT
+// ============================================================
+function isExpertMode() {
+  return localStorage.getItem('expert_mode') === '1';
+}
+
+function toggleExpertMode() {
+  const expert = !isExpertMode();
+  localStorage.setItem('expert_mode', expert ? '1' : '0');
+  const toggle = document.getElementById('expert-toggle');
+  if (toggle) toggle.classList.toggle('active', expert);
+  if (expert) {
+    // Unlock all emergent fiches
+    const prog = getProgression();
+    fichesEmergentes.forEach(f => {
+      if (!prog.unlockedFiches.includes(f.id)) prog.unlockedFiches.push(f.id);
+    });
+    saveProgression(prog);
+  }
+  renderFiches();
+  renderDefis();
+  renderDiscoveryBanner();
+}
+
+function showObsDiscoveryToast(title) {
+  const toast = document.getElementById('obs-discovery-toast');
+  if (!toast) return;
+  toast.innerHTML = `
+    <div class="obs-discovery-toast-label">✦ Nouvelle fiche disponible</div>
+    <div class="obs-discovery-toast-text">${esc(title)} — consultez les Fiches Pratiques pour la découvrir.</div>`;
+  toast.style.display = 'block';
+  setTimeout(() => { toast.style.display = 'none'; }, 6000);
+}
+
+// ============================================================
+// OBSERVER & COMPRENDRE
+// ============================================================
+const observerVideos = [
+  {
+    id: 'v1',
+    title: 'Dynamique de troupeau au paddock',
+    context: 'Trois chevaux dans un paddock semi-ouvert. Les relations hiérarchiques sont établies depuis plusieurs mois. La caméra observe sans intervention extérieure.',
+    question: 'Que remarquez-vous dans les positions, les distances et les relations entre ces chevaux ?',
+    fields: [
+      { key: 'oreilles',     label: 'Oreilles' },
+      { key: 'posture',      label: 'Posture' },
+      { key: 'regard',       label: 'Regard' },
+      { key: 'queue',        label: 'Queue' },
+      { key: 'interactions', label: 'Interactions' },
+      { key: 'tension',      label: 'Tension / Détente' }
+    ],
+    analysis: [
+      'La distance maintenue entre congénères révèle la nature du lien — proximité choisie ou subie ?',
+      'Qui initie les déplacements ? Le cheval dominant déplace les autres avec un minimum de signaux visibles.',
+      'L\'orientation des oreilles vers un congénère signale une attention soutenue ; les oreilles plaquées, une intention défensive.',
+      'Les moments de synchronisation — brouter ensemble, se déplacer au même rythme — sont des indicateurs de cohésion du groupe.'
+    ]
+  },
+  {
+    id: 'v2',
+    title: 'Distribution du foin — une tension latente',
+    context: 'Deux chevaux en présence lors de la distribution du foin. L\'un arrive avant l\'autre. Contexte de légère compétition alimentaire.',
+    question: 'Quels signaux précèdent et accompagnent les échanges entre ces deux chevaux ?',
+    fields: [
+      { key: 'oreilles',     label: 'Oreilles' },
+      { key: 'posture',      label: 'Posture' },
+      { key: 'regard',       label: 'Regard' },
+      { key: 'queue',        label: 'Queue' },
+      { key: 'interactions', label: 'Interactions' },
+      { key: 'tension',      label: 'Tension / Détente' }
+    ],
+    analysis: [
+      'Les repas révèlent souvent la hiérarchie — observez qui mange en premier et qui s\'éloigne sans s\'opposer.',
+      'Les micro-signaux d\'agacement (queue, peau qui tressaille, oreille arrière) précèdent toujours le conflit ouvert.',
+      'Un cheval qui mange vite avec une vigilance permanente peut exprimer un stress alimentaire installé.',
+      'L\'espace accordé ou refusé autour du foin dit beaucoup sur la sécurité émotionnelle de chaque animal.'
+    ]
+  },
+  {
+    id: 'v3',
+    title: 'Retour au box après le travail',
+    context: 'Un cheval rentre dans son box après une séance d\'équitation d\'environ 45 minutes. Il est seul dans l\'espace. Pas d\'interaction humaine.',
+    question: 'Comment l\'état interne de ce cheval se manifeste-t-il dans les premières minutes ?',
+    fields: [
+      { key: 'oreilles',     label: 'Oreilles' },
+      { key: 'posture',      label: 'Posture' },
+      { key: 'regard',       label: 'Regard' },
+      { key: 'queue',        label: 'Queue' },
+      { key: 'interactions', label: 'Comportements spontanés' },
+      { key: 'tension',      label: 'Tension / Détente' }
+    ],
+    analysis: [
+      'Les bâillements, lèchements et mastications à vide sont des signaux de décompression — leur absence peut être aussi significative que leur présence.',
+      'Un ébrouement (souffle fort et sonore des naseaux) accompagne souvent un relâchement de tension émotionnelle.',
+      'La posture de repos — poids sur trois membres, tête basse, œil mi-clos — indique une sécurité retrouvée.',
+      'Un cheval qui tourne, qui vocalise ou qui se roule immédiatement exprime quelque chose de différent : cherchez le contexte.'
+    ]
+  },
+  {
+    id: 'v4',
+    title: 'Face à l\'inconnu — curiosité ou méfiance ?',
+    context: 'Un cheval rencontre pour la première fois un objet inhabituel dans son environnement familier. Aucune intervention humaine pendant l\'observation.',
+    question: 'Comment ce cheval explore-t-il l\'inconnu ? Où situez-vous son seuil de curiosité ?',
+    fields: [
+      { key: 'oreilles',     label: 'Oreilles' },
+      { key: 'posture',      label: 'Posture' },
+      { key: 'regard',       label: 'Regard' },
+      { key: 'queue',        label: 'Queue' },
+      { key: 'interactions', label: 'Approche / Évitement' },
+      { key: 'tension',      label: 'Tension / Détente' }
+    ],
+    analysis: [
+      'Le cheval alterne approche et recul — chaque pas en avant est une décision active, pas un automatisme.',
+      'Les naseaux frémissants et l\'encolure tendue vers l\'objet signalent une curiosité active mêlée de vigilance.',
+      'La distance d\'arrêt avant l\'objet révèle le seuil de tolérance individuel — il est propre à chaque cheval et à chaque journée.',
+      'Un ébrouement après l\'examen de l\'objet exprime souvent un relâchement — l\'objet vient d\'être évalué comme non dangereux.'
+    ]
+  }
+];
+
+function getVideoNotes() {
+  return JSON.parse(localStorage.getItem('observer_notes') || '{}');
+}
+function saveVideoField(videoId, fieldKey, value) {
+  const notes = getVideoNotes();
+  if (!notes[videoId]) notes[videoId] = {};
+  notes[videoId][fieldKey] = value;
+  localStorage.setItem('observer_notes', JSON.stringify(notes));
+}
+function toggleAnalysis(videoId) {
+  const el  = document.getElementById('obs-analysis-' + videoId);
+  const btn = document.getElementById('obs-btn-' + videoId);
+  if (!el) return;
+  el.classList.toggle('shown');
+  btn.textContent = el.classList.contains('shown') ? '↑ Masquer les pistes' : 'Quelques pistes d\'analyse →';
+}
+
+function renderObserver() {
+  const list = document.getElementById('observer-list');
+  if (!list) return;
+  const notes = getVideoNotes();
+  list.innerHTML = '';
+  observerVideos.forEach(v => {
+    const saved = notes[v.id] || {};
+    const fieldsHtml = v.fields.map(f => `
+      <div class="obs-vid-field">
+        <label>${esc(f.label)}</label>
+        <input type="text" placeholder="…" value="${esc(saved[f.key] || '')}"
+          oninput="saveVideoField('${v.id}','${f.key}',this.value)" />
+      </div>`).join('');
+    const analysisHtml = v.analysis.map(a => `<li>${esc(a)}</li>`).join('');
+    const card = document.createElement('div');
+    card.className = 'obs-vid-card';
+    card.innerHTML = `
+      <div class="obs-vid-thumb">
+        <div class="obs-vid-play">▶</div>
+        <div class="obs-vid-thumb-label">${esc(v.title)}</div>
+        <div class="obs-vid-placeholder-note">Vidéo à venir</div>
+      </div>
+      <div class="obs-vid-body">
+        <div class="obs-vid-title">${esc(v.title)}</div>
+        <div class="obs-vid-context">${esc(v.context)}</div>
+        <div class="obs-vid-question">${esc(v.question)}</div>
+        <div class="obs-vid-fields-label">Que remarquez-vous ?</div>
+        <div class="obs-vid-fields">${fieldsHtml}</div>
+        <button class="obs-vid-reveal-btn" id="obs-btn-${v.id}" onclick="toggleAnalysis('${v.id}')">Quelques pistes d'analyse →</button>
+        <div class="obs-vid-analysis" id="obs-analysis-${v.id}">
+          <div class="obs-vid-analysis-label">Pistes d'observation</div>
+          <ul>${analysisHtml}</ul>
+        </div>
+      </div>`;
+    list.appendChild(card);
+  });
+}
+
+// ============================================================
+// FICHES FUNCTIONS
+// ============================================================
+function renderFiches() {
+  const grid = document.getElementById('fiche-grid');
+  grid.innerHTML = '';
+  fiches.forEach(f => {
+    const card = document.createElement('div');
+    card.className = 'fiche-card';
+    card.innerHTML = `
+      <span class="fiche-card-icon">${f.icon}</span>
+      <div class="fiche-card-body">
+        <div class="fiche-card-title">${f.title}</div>
+        <div class="fiche-card-teaser">${f.teaser}</div>
+      </div>
+      <span class="fiche-card-arrow">→</span>
+    `;
+    card.onclick = () => openFiche(f.id);
+    grid.appendChild(card);
+  });
+
+  // Fiches émergentes
+  const prog = getProgression();
+  const sep = document.createElement('div');
+  sep.className = 'fiche-emergentes-sep';
+  sep.innerHTML = '<div class="fiche-emergentes-sep-label">Découvertes — basé sur vos observations</div>';
+  grid.appendChild(sep);
+
+  const expert = isExpertMode();
+  fichesEmergentes.forEach(f => {
+    const unlocked = expert || prog.unlockedFiches.includes(f.id);
+    const linkedDefi = !unlocked ? defis.find(d => d.rewardFicheId === f.id) : null;
+    const card = document.createElement('div');
+    card.className = 'fiche-card' + (unlocked ? '' : ' fiche-locked');
+    card.innerHTML = `
+      <span class="fiche-card-icon">${f.icon}</span>
+      <div class="fiche-card-body">
+        <div class="fiche-card-badge ${unlocked ? 'badge-unlocked' : 'badge-locked'}">${unlocked ? f.unlockLabel : 'Non débloquée'}</div>
+        <div class="fiche-card-title">${f.title}</div>
+        <div class="fiche-card-teaser">${unlocked ? f.teaser : 'Cette fiche se dévoilera au fil de vos observations…'}</div>
+        ${linkedDefi ? `<div class="fiche-locked-hint">🔒 Défi requis — ${esc(linkedDefi.label)}</div>` : ''}
+      </div>
+      ${unlocked ? '<span class="fiche-card-arrow">→</span>' : ''}
+    `;
+    if (unlocked) card.onclick = () => { markDiscoverySeen(f.id); openFiche(f.id); };
+    grid.appendChild(card);
+  });
+}
+
+function openFiche(id) {
+  const f = fiches[id] || fichesEmergentes.find(fe => fe.id === id);
+  document.getElementById('fd-icon').textContent = f.icon;
+  document.getElementById('fd-title').textContent = f.title;
+  document.getElementById('fd-desc').textContent = f.desc;
+
+  const list = document.getElementById('fd-points');
+  list.innerHTML = '';
+  f.points.forEach(p => {
+    const li = document.createElement('li');
+    li.textContent = p;
+    list.appendChild(li);
+  });
+
+  document.getElementById('fd-pratique').textContent = f.pratique;
+  showScreen('fiche-detail');
+}
+
+// ============================================================
+// CARNET — STATE
+// ============================================================
+let carnetHorses   = JSON.parse(localStorage.getItem('carnet_horses') || '[]');
+let carnetObs      = JSON.parse(localStorage.getItem('carnet_obs')    || '[]');
+let currentHorseId = null;
+let pendingHorsePhoto = null;
+let pendingObsPhoto   = null;
+let currentCategory   = null;
+
+function saveCarnetData() {
+  localStorage.setItem('carnet_horses', JSON.stringify(carnetHorses));
+  localStorage.setItem('carnet_obs',    JSON.stringify(carnetObs));
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ============================================================
+// CARNET — LISTE DES CHEVAUX
+// ============================================================
+function renderCarnet() {
+  const body = document.getElementById('carnet-body');
+  if (carnetHorses.length === 0) {
+    body.innerHTML = `
+      <div class="empty-state">
+        <span class="empty-state-icon">📔</span>
+        <div class="empty-state-title">Votre carnet est vide</div>
+        <div class="empty-state-desc">Créez une fiche pour votre cheval et commencez à noter vos observations au fil des jours.</div>
+      </div>
+      <button class="btn-create" onclick="showCreateHorseForm()">+ Créer mon premier cheval</button>
+    `;
+  } else {
+    const listHtml = carnetHorses.map(h => {
+      const count = carnetObs.filter(o => o.horseId === h.id).length;
+      const avatar = h.photo
+        ? `<div class="horse-avatar"><img src="${h.photo}" alt="${esc(h.name)}"></div>`
+        : `<div class="horse-avatar">🐴</div>`;
+      return `
+        <div class="horse-card" onclick="openHorse('${h.id}')">
+          ${avatar}
+          <div>
+            <div class="horse-card-name">${esc(h.name)}</div>
+            <div class="horse-card-count">${count === 0 ? 'Aucune observation' : count + ' observation' + (count > 1 ? 's' : '')}</div>
+          </div>
+          <span class="horse-card-arrow">→</span>
+        </div>`;
+    }).join('');
+    body.innerHTML = `
+      <div class="horse-list">${listHtml}</div>
+      <button class="btn-outline" onclick="showCreateHorseForm()">+ Ajouter un cheval</button>
+    `;
+  }
+}
+
+// ============================================================
+// CARNET — PROFIL CHEVAL
+// ============================================================
+function openHorse(id) {
+  currentHorseId = id;
+  const h = carnetHorses.find(h => h.id === id);
+  if (!h) return;
+
+  const heroPhoto = document.getElementById('hp-hero-photo');
+  const heroEmoji = document.getElementById('hp-hero-emoji');
+  const heroHint  = document.getElementById('hp-hero-hint');
+  if (h.photo) {
+    heroPhoto.src = h.photo;
+    heroPhoto.style.display = 'block';
+    heroEmoji.style.display = 'none';
+    heroHint.style.display  = 'none';
+  } else {
+    heroPhoto.style.display = 'none';
+    heroEmoji.style.display = '';
+    heroHint.style.display  = '';
+  }
+  document.getElementById('hp-name').textContent = h.name;
+
+  const horseObs = carnetObs
+    .filter(o => o.horseId === id)
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  const count = horseObs.length;
+  document.getElementById('hp-meta').textContent =
+    count === 0 ? 'Aucune observation' : count + ' observation' + (count > 1 ? 's' : '');
+
+  renderHorseOverview(h);
+  renderObsList(horseObs);
+  renderBudgetCards(id);
+  showScreen('carnet-horse');
+}
+
+function renderObsList(obsList) {
+  const container = document.getElementById('obs-list');
+  if (obsList.length === 0) {
+    container.innerHTML = `
+      <div class="obs-empty">
+        <span class="obs-empty-icon">✍️</span>
+        <div class="obs-empty-text">Aucune observation pour l'instant.<br>Commencez à noter ce que vous voyez.</div>
+      </div>`;
+    return;
+  }
+
+  const catClasses = {
+    'détente':'cat-detente','curiosité':'cat-curiosite','vigilance':'cat-vigilance',
+    'interaction sociale':'cat-interaction','stress':'cat-stress',
+    'inconfort':'cat-inconfort','agacement':'cat-agacement','autre':'cat-autre'
+  };
+  const fieldLabels = {
+    oreilles:'Oreilles', regard:'Regard', posture:'Posture',
+    queue:'Queue', tensionGenerale:'Tension générale'
+  };
+
+  const cards = obsList.map(o => {
+    const d = new Date(o.date + 'T12:00:00');
+    const weekday  = d.toLocaleDateString('fr-FR', { weekday: 'long' });
+    const dayMonth = d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+    const photoHtml = o.photo ? `<img class="obs-card-photo" src="${o.photo}" alt="">` : '';
+    const catCls = catClasses[o.category] || 'cat-autre';
+    const badge = o.category ? `<span class="obs-cat-badge ${catCls}">${esc(o.category)}</span>` : '';
+
+    const obs = o.observations || {};
+    const fields = Object.keys(fieldLabels)
+      .filter(k => obs[k] && obs[k].trim())
+      .map(k => `<div class="obs-field">
+        <div class="obs-field-label">${fieldLabels[k]}</div>
+        <div class="obs-field-value">${esc(obs[k]).replace(/\n/g,'<br>')}</div>
+      </div>`).join('');
+
+    const interp = o.interpretation
+      ? `<hr class="obs-divider"><div class="obs-section-label">Mon interprétation</div>
+         <div class="obs-interpretation">${esc(o.interpretation).replace(/\n/g,'<br>')}</div>` : '';
+    const verif = o.aVerifier
+      ? `<hr class="obs-divider"><div class="obs-section-label">À vérifier</div>
+         <div class="obs-a-verifier">${esc(o.aVerifier).replace(/\n/g,'<br>')}</div>` : '';
+
+    return `<div class="obs-card">
+      ${photoHtml}
+      <div class="obs-card-head">
+        <div>
+          <div class="obs-date-weekday">${weekday}</div>
+          <div class="obs-date-main">${dayMonth}</div>
+        </div>
+        ${badge}
+      </div>
+      ${fields ? `<div class="obs-fields">${fields}</div>` : ''}
+      ${interp}${verif}
+    </div>`;
+  }).join('');
+  container.innerHTML = `<div class="obs-list">${cards}</div>`;
+}
+
+// ============================================================
+// CARNET — APERÇU DU CHEVAL
+// ============================================================
+const HP_FIELDS = [
+  { key: 'age',           label: 'Âge',                    wide: false },
+  { key: 'sexe',          label: 'Sexe',                   wide: false },
+  { key: 'race',          label: 'Race',                   wide: false },
+  { key: 'robe',          label: 'Robe',                   wide: false },
+  { key: 'conditionsVie', label: 'Conditions de vie',      wide: true  },
+  { key: 'alimentation',  label: 'Alimentation',           wide: true  },
+  { key: 'travail',       label: 'Travail / activité',     wide: true  },
+  { key: 'particularites',label: 'Particularités',         wide: true  },
+  { key: 'notes',         label: 'Notes générales',        wide: true  },
+];
+
+function renderHorseOverview(horse) {
+  const p = horse.profile || {};
+  const filled = HP_FIELDS.filter(f => p[f.key] && p[f.key].trim());
+  const displayEl = document.getElementById('hp-profile-display');
+
+  if (filled.length === 0) {
+    displayEl.innerHTML = '<div class="hp-pf-empty">Aucune information renseignée pour l\'instant.<br>Appuyez sur <em>Modifier</em> pour compléter la fiche.</div>';
+  } else {
+    displayEl.innerHTML = `<div class="hp-pf-grid">${
+      filled.map(f => `<div class="hp-pf${f.wide ? ' hp-pf--wide' : ''}">
+        <div class="hp-pf-label">${f.label}</div>
+        <div class="hp-pf-value">${esc(p[f.key]).replace(/\n/g,'<br>')}</div>
+      </div>`).join('')
+    }</div>`;
+  }
+  // Pré-remplir le formulaire
+  HP_FIELDS.forEach(f => {
+    const el = document.getElementById('hpf-' + f.key);
+    if (el) el.value = p[f.key] || '';
+  });
+  // Refermer le formulaire si ouvert
+  document.getElementById('hp-profile-form').style.display = 'none';
+  displayEl.style.display = '';
+  document.getElementById('hp-overview-edit-btn').textContent = '✎ Modifier';
+}
+
+function toggleHorseProfile() {
+  const display = document.getElementById('hp-profile-display');
+  const form    = document.getElementById('hp-profile-form');
+  const btn     = document.getElementById('hp-overview-edit-btn');
+  if (form.style.display === 'none') {
+    display.style.display = 'none';
+    form.style.display    = 'block';
+    btn.textContent       = '✓ Enregistrer';
+    form.querySelector('input, textarea').focus();
+  } else {
+    saveHorseProfile();
+  }
+}
+
+function saveHorseProfile() {
+  const horse = carnetHorses.find(h => h.id === currentHorseId);
+  if (!horse) return;
+  horse.profile = {};
+  HP_FIELDS.forEach(f => {
+    const el = document.getElementById('hpf-' + f.key);
+    horse.profile[f.key] = el ? el.value.trim() : '';
+  });
+  saveCarnetData();
+  renderHorseOverview(horse);
+}
+
+// ============================================================
+// CARNET — PHOTO PROFIL CHEVAL
+// ============================================================
+function triggerHorsePhotoChange() {
+  document.getElementById('hp-photo-input').value = '';
+  document.getElementById('hp-photo-input').click();
+}
+
+function applyHorsePhoto(input) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const photo = e.target.result;
+    const horse = carnetHorses.find(h => h.id === currentHorseId);
+    if (!horse) return;
+    horse.photo = photo;
+    saveCarnetData();
+    const heroPhoto = document.getElementById('hp-hero-photo');
+    const heroEmoji = document.getElementById('hp-hero-emoji');
+    const heroHint  = document.getElementById('hp-hero-hint');
+    heroPhoto.src = photo;
+    heroPhoto.style.display = 'block';
+    if (heroEmoji) heroEmoji.style.display = 'none';
+    if (heroHint)  heroHint.style.display  = 'none';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+// ============================================================
+// CARNET — FORMULAIRE CHEVAL
+// ============================================================
+function showCreateHorseForm() {
+  document.getElementById('horse-name-input').value = '';
+  document.getElementById('horse-photo-input').value = '';
+  document.getElementById('photo-preview-img').style.display = 'none';
+  document.getElementById('photo-zone-placeholder').style.display = '';
+  document.getElementById('btn-horse-name').textContent = 'ce cheval';
+  pendingHorsePhoto = null;
+  showScreen('carnet-form-horse');
+}
+
+function previewPhoto(input) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    pendingHorsePhoto = e.target.result;
+    const img = document.getElementById('photo-preview-img');
+    img.src = pendingHorsePhoto;
+    img.style.display = 'block';
+    document.getElementById('photo-zone-placeholder').style.display = 'none';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+function saveHorse() {
+  const name = document.getElementById('horse-name-input').value.trim();
+  if (!name) { document.getElementById('horse-name-input').focus(); return; }
+  const horse = { id: Date.now().toString(), name, photo: pendingHorsePhoto || null, createdAt: new Date().toISOString() };
+  carnetHorses.push(horse);
+  saveCarnetData();
+  openHorse(horse.id);
+}
+
+// ============================================================
+// CARNET — FORMULAIRE OBSERVATION
+// ============================================================
+function showAddObs() {
+  document.getElementById('obs-date-input').value = new Date().toISOString().slice(0, 10);
+  ['obs-oreilles','obs-regard','obs-posture','obs-queue','obs-tension','obs-interpretation','obs-a-verifier']
+    .forEach(id => { document.getElementById(id).value = ''; });
+  document.getElementById('obs-photo-preview').style.display = 'none';
+  document.getElementById('obs-photo-placeholder').style.display = '';
+  document.getElementById('obs-photo-input').value = '';
+  document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('selected'));
+  pendingObsPhoto = null;
+  currentCategory = null;
+  showScreen('carnet-form-obs');
+}
+
+function selectCategory(el) {
+  document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  currentCategory = el.dataset.cat;
+}
+
+function previewObsPhoto(input) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    pendingObsPhoto = e.target.result;
+    const img = document.getElementById('obs-photo-preview');
+    img.src = pendingObsPhoto;
+    img.style.display = 'block';
+    document.getElementById('obs-photo-placeholder').style.display = 'none';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+function saveObs() {
+  const date = document.getElementById('obs-date-input').value;
+  if (!date) { document.getElementById('obs-date-input').focus(); return; }
+
+  const observations = {
+    oreilles:        document.getElementById('obs-oreilles').value.trim(),
+    regard:          document.getElementById('obs-regard').value.trim(),
+    posture:         document.getElementById('obs-posture').value.trim(),
+    queue:           document.getElementById('obs-queue').value.trim(),
+    tensionGenerale: document.getElementById('obs-tension').value.trim()
+  };
+  const interpretation = document.getElementById('obs-interpretation').value.trim();
+  const aVerifier      = document.getElementById('obs-a-verifier').value.trim();
+
+  const hasContent = Object.values(observations).some(v => v) || interpretation || aVerifier || pendingObsPhoto;
+  if (!hasContent) return;
+
+  carnetObs.push({
+    id: Date.now().toString(),
+    horseId: currentHorseId,
+    date,
+    photo:        pendingObsPhoto || null,
+    category:     currentCategory || null,
+    observations,
+    interpretation,
+    aVerifier,
+    createdAt: new Date().toISOString()
+  });
+  saveCarnetData();
+  recordStreakDay();
+  const newUnlocks = checkProgression();
+  openHorse(currentHorseId);
+  if (newUnlocks.length > 0) {
+    const fiche = fichesEmergentes.find(f => f.id === newUnlocks[0]);
+    if (fiche) setTimeout(() => showObsDiscoveryToast(fiche.title), 400);
+  }
+}
+
+// ============================================================
+// BUDGET-TEMPS
+// ============================================================
+const BT_ROWS = 8;
+const BT_LABELS = ['🌿 Alimentation','🌙 Repos','🚶 Déplacement','🤝 Interactions sociales','👁️ Vigilance','🔍 Exploration','⚡ Agitation / stress','✦ Autre'];
+let carnetBudgets = JSON.parse(localStorage.getItem('carnet_budgets') || '[]');
+
+function saveBudget() {
+  const data = [];
+  for (let i = 0; i < BT_ROWS; i++) {
+    data.push({
+      dur:  document.getElementById('bt-dur-'  + i).value,
+      note: document.getElementById('bt-note-' + i).value
+    });
+  }
+  localStorage.setItem('budget_temps', JSON.stringify(data));
+  recordStreakDay();
+  const confirm = document.getElementById('bt-save-confirm');
+  confirm.style.display = 'block';
+  setTimeout(() => { confirm.style.display = 'none'; }, 2200);
+}
+
+function loadBudget() {
+  const data = JSON.parse(localStorage.getItem('budget_temps') || '[]');
+  data.forEach((row, i) => {
+    const durEl  = document.getElementById('bt-dur-'  + i);
+    const noteEl = document.getElementById('bt-note-' + i);
+    if (durEl)  durEl.value  = row.dur  || '';
+    if (noteEl) noteEl.value = row.note || '';
+  });
+}
+
+function resetBudget() {
+  for (let i = 0; i < BT_ROWS; i++) {
+    document.getElementById('bt-dur-'  + i).value = '';
+    document.getElementById('bt-note-' + i).value = '';
+  }
+  localStorage.removeItem('budget_temps');
+}
+
+function populateBtHorseSelect() {
+  const sel = document.getElementById('bt-horse-select');
+  sel.innerHTML = '<option value="">— Choisir un cheval —</option>';
+  carnetHorses.forEach(h => {
+    const opt = document.createElement('option');
+    opt.value = h.id;
+    opt.textContent = h.name;
+    sel.appendChild(opt);
+  });
+}
+
+function saveBudgetToHorse() {
+  const horseId = document.getElementById('bt-horse-select').value;
+  if (!horseId) { document.getElementById('bt-horse-select').focus(); return; }
+  const rows = [];
+  for (let i = 0; i < BT_ROWS; i++) {
+    rows.push({
+      label: BT_LABELS[i],
+      dur:   document.getElementById('bt-dur-'  + i).value.trim(),
+      note:  document.getElementById('bt-note-' + i).value.trim()
+    });
+  }
+  const hasContent = rows.some(r => r.dur || r.note);
+  if (!hasContent) return;
+  carnetBudgets.push({ id: Date.now().toString(), horseId, date: new Date().toISOString().slice(0,10), rows, createdAt: new Date().toISOString() });
+  localStorage.setItem('carnet_budgets', JSON.stringify(carnetBudgets));
+  const confirm = document.getElementById('bt-horse-confirm');
+  confirm.style.display = 'block';
+  setTimeout(() => { confirm.style.display = 'none'; }, 2200);
+}
+
+function renderBudgetCards(horseId) {
+  const container = document.getElementById('bt-cards-list');
+  const list = carnetBudgets.filter(b => b.horseId === horseId).sort((a,b) => new Date(b.date) - new Date(a.date));
+  if (list.length === 0) {
+    container.innerHTML = '<div class="bt-empty">Aucun budget-temps enregistré pour l\'instant.<br>Vous pourrez suivre la répartition des comportements de ce cheval depuis la section ⏳ Budget-Temps.</div>';
+    return;
+  }
+  container.innerHTML = list.map(b => {
+    const d = new Date(b.date + 'T12:00:00');
+    const dateStr = d.toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+    const filledRows = b.rows.filter(r => r.dur || r.note);
+    const rowsHtml = filledRows.map(r => `
+      <div class="bt-card-row">
+        <span class="bt-card-row-label">${esc(r.label)}</span>
+        <span class="bt-card-row-dur">${esc(r.dur) || '—'}</span>
+        <span class="bt-card-row-note">${esc(r.note)}</span>
+      </div>`).join('');
+    return `<div class="bt-card">
+      <div class="bt-card-date">${dateStr}</div>
+      <div class="bt-card-rows">${rowsHtml}</div>
+    </div>`;
+  }).join('');
+}
+
+// ============================================================
+// INIT
+// ============================================================
+renderHome();
+renderFiches();
+loadBudget();
+checkProgression();
+// Migration IDs fichesEmergentes 11-15 → 20-24 (une seule fois)
+(function() {
+  const map = {11:20, 12:21, 13:22, 14:23, 15:24};
+  const p = getProgression(); let changed = false;
+  p.unlockedFiches  = p.unlockedFiches.map(id  => { if (map[id]) { changed=true; return map[id]; } return id; });
+  p.seenDiscoveries = p.seenDiscoveries.map(id => { if (map[id]) { changed=true; return map[id]; } return id; });
+  if (changed) saveProgression(p);
+})();
+
+// Initialise la série à partir des données existantes (une seule fois)
+if (!localStorage.getItem('obs_streak')) {
+  const allDates = carnetObs.map(o => o.date).filter(Boolean).sort();
+  if (allDates.length > 0) {
+    // Calcule la série consécutive en remontant depuis la date la plus récente
+    const unique = [...new Set(allDates)].sort();
+    let count = 1;
+    for (let i = unique.length - 1; i > 0; i--) {
+      const cur  = unique[i];
+      const prev = unique[i - 1];
+      const diff = (new Date(cur) - new Date(prev)) / 86400000;
+      if (diff === 1) count++;
+      else break;
+    }
+    const lastDate = unique[unique.length - 1];
+    const today     = todayStr();
+    const yesterday = yesterdayStr();
+    // Série active seulement si la dernière obs est aujourd'hui ou hier
+    if (lastDate === today || lastDate === yesterday) {
+      saveStreak({ lastDate, count, totalDays: unique.length, wasReset: false });
+    }
+  }
+}
+renderObsDuJour();
+renderStreak();
+renderDefis();
+renderDiscoveryBanner();
+// Expert toggle init
+(function() {
+  const toggle = document.getElementById('expert-toggle');
+  if (toggle) {
+    toggle.classList.toggle('active', isExpertMode());
+    toggle.onclick = toggleExpertMode;
+  }
+})();
+</script>
+</body>
+</html>

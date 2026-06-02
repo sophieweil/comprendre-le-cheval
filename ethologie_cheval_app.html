@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Éthologie du Cheval</title>
+<title>L'Académie des Enquêteurs du Cheval</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -581,7 +581,26 @@ body {
 
 .hero-obs-content { position: relative; z-index: 1; max-width: 580px; }
 
-.hero-obs-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); opacity: 0.55; margin-bottom: 20px; }
+.hero-obs-meta { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 20px; }
+.hero-obs-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); opacity: 0.55; }
+.hero-obs-dossier { font-size: 9px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(201,150,62,0.28); }
+.hero-obs-separator { width: 1px; height: 10px; background: rgba(201,150,62,0.2); }
+
+/* ===== MÉTHODE ===== */
+/* ===== MÉTHODE CARDS ===== */
+.methode-section { max-width: 900px; margin: 0 auto 36px; }
+.methode-section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.methode-section-title { font-size: 9px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--earth); opacity: 0.38; white-space: nowrap; }
+.methode-section-rule { flex: 1; height: 1px; background: rgba(139,94,60,0.08); }
+.methode-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.methode-card { background: var(--cream); border: 1px solid rgba(139,94,60,0.09); border-radius: 20px; padding: 26px 24px; transition: box-shadow 0.22s ease, transform 0.22s ease; }
+.methode-card:hover { box-shadow: 0 8px 32px rgba(44,26,14,0.09); transform: translateY(-2px); }
+.methode-card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 11px; }
+.methode-card-icon { font-size: 19px; line-height: 1; }
+.methode-card-num { font-size: 9px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); opacity: 0.55; margin-left: auto; }
+.methode-card-title { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; color: var(--dark); margin-bottom: 8px; line-height: 1.3; }
+.methode-card-desc { font-size: 13px; color: var(--earth); opacity: 0.6; line-height: 1.65; font-weight: 300; }
+@media (max-width: 560px) { .methode-cards { grid-template-columns: 1fr; } }
 
 .hero-obs-phrase {
   font-family: 'Playfair Display', serif;
@@ -589,9 +608,11 @@ body {
   font-style: italic;
   color: var(--cream);
   line-height: 1.55;
-  margin-bottom: 34px;
+  margin-bottom: 14px;
   opacity: 0.88;
 }
+.hero-obs-divider { width: 28px; height: 1px; background: rgba(201,150,62,0.22); margin: 0 auto 14px; }
+.hero-obs-indice { font-size: 12.5px; font-style: italic; color: rgba(201,150,62,0.5); line-height: 1.6; margin-bottom: 28px; }
 
 .hero-obs-cta {
   display: inline-flex;
@@ -632,6 +653,7 @@ body {
 
 .oi-scene-wrap { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 24px; }
 .oi-video-box { width: 100%; max-width: 640px; aspect-ratio: 16/9; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 18px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+.oi-video-box.vertical { aspect-ratio: 9/16; max-width: 320px; }
 .oi-video-box iframe { width: 100%; height: 100%; border: none; }
 .oi-video-desc { font-family: 'Playfair Display', serif; font-size: 13.5px; font-style: italic; color: rgba(255,255,255,0.25); text-align: center; padding: 28px 36px; line-height: 1.7; }
 .oi-timer-wrap { width: 100%; max-width: 640px; height: 1px; background: rgba(255,255,255,0.06); }
@@ -659,6 +681,9 @@ body {
 .oi-btn-note:hover { background: rgba(201,150,62,0.18); border-color: var(--gold); color: var(--gold); }
 .oi-btn-retiens { background: none; border: none; color: rgba(255,255,255,0.22); font-family: 'DM Sans', sans-serif; font-size: 13px; cursor: pointer; padding: 8px 16px; transition: color 0.2s; }
 .oi-btn-retiens:hover { color: rgba(255,255,255,0.48); }
+.oi-demain { margin-top: 36px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.06); opacity: 0; animation: oiFadeIn 0.8s ease 1.6s forwards; }
+.oi-demain-label { font-size: 8px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: rgba(201,150,62,0.3); margin-bottom: 10px; }
+.oi-demain-text { font-family: 'Playfair Display', serif; font-size: 13.5px; font-style: italic; color: rgba(253,248,242,0.22); line-height: 1.7; }
 .oi-btn-continue { background: none; border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; padding: 11px 32px; color: rgba(255,255,255,0.3); font-family: 'DM Sans', sans-serif; font-size: 13px; cursor: pointer; transition: all 0.2s; }
 .oi-btn-continue:hover { border-color: rgba(255,255,255,0.28); color: rgba(255,255,255,0.62); }
 
@@ -672,6 +697,11 @@ body {
 .page-citation { text-align: center; font-family: 'Playfair Display', serif; font-size: 12.5px; font-style: italic; color: var(--earth); opacity: 0.3; margin-bottom: 28px; line-height: 1.6; }
 
 /* ===== SÉRIE D'OBSERVATION ===== */
+.grade-widget { max-width: 900px; margin: 0 auto; text-align: center; }
+.grade-inner { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; color: var(--earth); opacity: 0.5; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; }
+.grade-label { font-family: 'Playfair Display', serif; font-size: 14px; font-style: italic; font-weight: 400; color: var(--dark); opacity: 0.75; text-transform: none; letter-spacing: 0; }
+.grade-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gold); opacity: 0.5; }
+
 .streak-widget { max-width: 900px; margin: 0 auto 32px; text-align: center; }
 .streak-inner { display: inline-flex; align-items: center; gap: 9px; font-size: 14px; color: var(--earth); opacity: 0.6; font-weight: 400; letter-spacing: 0.2px; line-height: 1; transition: opacity 0.3s ease; }
 .streak-inner:hover { opacity: 0.85; }
@@ -728,58 +758,101 @@ body {
 <!-- ===== MAIN HOME ===== -->
 <div class="screen active" id="screen-main">
   <div class="home-header">
-    <div class="home-badge">Éthologie équine</div>
-    <h1>Comprendre<br>le <em>Cheval</em></h1>
-    <p>Explorez le comportement, les émotions et les besoins naturels du cheval.</p>
+    <div class="home-badge">Ride With So</div>
+    <h1>L'Académie des<br><em>Enquêteurs du Cheval</em></h1>
+    <p>Apprenez à voir ce que les autres cavaliers ne remarquent pas.</p>
   </div>
   <div id="obs-du-jour" class="obs-du-jour"></div>
-  <div class="modules-label">Explorer</div>
+
+  <div class="methode-section">
+    <div class="methode-section-header">
+      <div class="methode-section-title">La méthode des enquêteurs</div>
+      <div class="methode-section-rule"></div>
+    </div>
+    <div class="methode-cards">
+      <div class="methode-card">
+        <div class="methode-card-top">
+          <span class="methode-card-icon">🔍</span>
+          <span class="methode-card-num">I</span>
+        </div>
+        <div class="methode-card-title">Repérer les indices</div>
+        <div class="methode-card-desc">Observer sans interpréter. Apprendre à voir les détails que la plupart des cavaliers ne remarquent pas.</div>
+      </div>
+      <div class="methode-card">
+        <div class="methode-card-top">
+          <span class="methode-card-icon">🧩</span>
+          <span class="methode-card-num">II</span>
+        </div>
+        <div class="methode-card-title">Relier les indices</div>
+        <div class="methode-card-desc">Mettre les observations en contexte : environnement, émotions, apprentissages, santé, interactions.</div>
+      </div>
+      <div class="methode-card">
+        <div class="methode-card-top">
+          <span class="methode-card-icon">💡</span>
+          <span class="methode-card-num">III</span>
+        </div>
+        <div class="methode-card-title">Formuler des hypothèses</div>
+        <div class="methode-card-desc">Imaginer plusieurs explications possibles avant de tirer une conclusion.</div>
+      </div>
+      <div class="methode-card">
+        <div class="methode-card-top">
+          <span class="methode-card-icon">✅</span>
+          <span class="methode-card-num">IV</span>
+        </div>
+        <div class="methode-card-title">Vérifier sur le terrain</div>
+        <div class="methode-card-desc">Tester ses hypothèses et observer les résultats avant de prendre une décision.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modules-label">Vos enquêtes</div>
   <div class="main-grid">
     <div class="main-card" onclick="showScreen('quiz-home')">
-      <span class="main-card-icon">🎯</span>
-      <div class="main-card-title">Les Quiz</div>
-      <div class="main-card-desc">Testez vos connaissances à travers cinq parcours thématiques sur l'éthologie équine.</div>
+      <span class="main-card-icon">🔍</span>
+      <div class="main-card-title">Enquêtes Interactives</div>
+      <div class="main-card-desc">Testez votre lecture du comportement équin à travers des cas concrets.</div>
     </div>
     <div class="main-card" onclick="showScreen('fiches')">
-      <span class="main-card-icon">📚</span>
-      <div class="main-card-title">Les Fiches Pratiques</div>
-      <div class="main-card-desc">Des fiches de référence pour mieux comprendre et observer le cheval au quotidien.</div>
+      <span class="main-card-icon">📂</span>
+      <div class="main-card-title">Dossiers d'Enquête</div>
+      <div class="main-card-desc">Les connaissances essentielles pour identifier et interpréter les indices comportementaux.</div>
     </div>
     <div class="main-card" onclick="showScreen('carnet')">
-      <span class="main-card-icon">📔</span>
-      <div class="main-card-title">Mon Carnet d'Observation</div>
-      <div class="main-card-desc">Notez et suivez vos observations comportementales pour progresser en éthologie.</div>
+      <span class="main-card-icon">📓</span>
+      <div class="main-card-title">Mon Carnet de Terrain</div>
+      <div class="main-card-desc">Documentez vos observations et constituez le dossier de votre cheval.</div>
     </div>
     <div class="main-card" onclick="showScreen('budget-temps')">
-      <span class="main-card-icon">⏳</span>
+      <span class="main-card-icon">⏱</span>
       <div class="main-card-title">Budget-Temps</div>
       <div class="main-card-desc">Analysez comment votre cheval répartit ses activités sur 24 heures pour évaluer son bien-être.</div>
     </div>
     <div class="main-card" onclick="showScreen('defis')">
-      <span class="main-card-icon">🗝️</span>
-      <div class="main-card-title">Défis d'observation</div>
-      <div class="main-card-desc">Afin de débloquer progressivement les fiches pratiques.</div>
+      <span class="main-card-icon">🎯</span>
+      <div class="main-card-title">Missions Terrain</div>
+      <div class="main-card-desc">Des missions concrètes pour affûter votre regard d'enquêteur.</div>
       <div id="defis-card-pill" class="defis-card-pill"></div>
     </div>
     <div class="main-card" onclick="showScreen('observer')">
-      <span class="main-card-icon">🎥</span>
-      <div class="main-card-title">Observer & Comprendre</div>
-      <div class="main-card-desc">Observer des situations réelles et entraîner son regard éthologique.</div>
+      <span class="main-card-icon">🎬</span>
+      <div class="main-card-title">Cas Terrain</div>
+      <div class="main-card-desc">Observez des situations réelles et entraînez votre lecture du comportement.</div>
     </div>
   </div>
-  <div id="streak-widget" class="streak-widget" style="margin-top:28px;"></div>
+  <div id="grade-widget" class="grade-widget" style="margin-top:20px;"></div>
+  <div id="streak-widget" class="streak-widget" style="margin-top:12px;"></div>
   <div id="discovery-banner" class="discovery-banner-wrap" style="margin-top:16px;"></div>
-  <div class="home-footer">Basé sur les connaissances en éthologie équine contemporaine <em id="expert-toggle" title="">✦</em></div>
+  <div class="home-footer">L'Académie des Enquêteurs du Cheval · by Ride With So <em id="expert-toggle" title="">✦</em></div>
 </div>
 
 <!-- ===== QUIZ HOME SUB-SECTION ===== -->
 <div class="screen" id="screen-quiz-home">
   <div class="sub-header">
     <button class="back-btn" onclick="showScreen('main')">← Accueil</button>
-    <div class="sub-header-title">🎯 Les Quiz</div>
+    <div class="sub-header-title">🔍 Enquêtes Interactives</div>
   </div>
   <div class="quiz-grid" id="quiz-grid"></div>
-  <div class="home-footer">Basé sur les connaissances en éthologie équine contemporaine</div>
+  <div class="home-footer">Les indices étaient là depuis le début.</div>
 </div>
 
 <!-- ===== QUIZ SCREEN ===== -->
@@ -810,9 +883,9 @@ body {
   <div class="fiches-container">
     <div class="sub-header">
       <button class="back-btn" onclick="showScreen('main')">← Accueil</button>
-      <div class="sub-header-title">📚 Les Fiches Pratiques</div>
+      <div class="sub-header-title">📂 Dossiers d'Enquête</div>
     </div>
-    <p class="page-citation">"Observer, c'est déjà commencer à comprendre."</p>
+    <p class="page-citation">"L'œil, comme tout le reste, s'apprend."</p>
     <div class="fiche-grid" id="fiche-grid"></div>
   </div>
 </div>
@@ -821,7 +894,7 @@ body {
 <div class="screen" id="screen-fiche-detail">
   <div class="fiche-detail-container">
     <div class="sub-header">
-      <button class="back-btn" onclick="showScreen('fiches')">← Les Fiches</button>
+      <button class="back-btn" onclick="showScreen('fiches')">← Dossiers</button>
     </div>
     <div class="fiche-detail-hero">
       <span class="fiche-detail-icon" id="fd-icon"></span>
@@ -851,9 +924,9 @@ body {
   <div class="carnet-container">
     <div class="sub-header">
       <button class="back-btn" onclick="showScreen('main')">← Accueil</button>
-      <div class="sub-header-title">📔 Mon Carnet</div>
+      <div class="sub-header-title">📓 Mon Carnet de Terrain</div>
     </div>
-    <p class="page-citation">"Avant d'interpréter, prendre le temps de regarder."</p>
+    <p class="page-citation">"Décrire avant de conclure. Nommer avant de comprendre."</p>
     <div id="carnet-body"></div>
   </div>
 </div>
@@ -1217,10 +1290,10 @@ body {
 <div class="screen" id="screen-observer">
   <div class="sub-header">
     <button class="back-btn" onclick="showScreen('main')">← Accueil</button>
-    <div class="sub-header-title">🎥 Observer & Comprendre</div>
+    <div class="sub-header-title">🎬 Cas Terrain</div>
   </div>
   <div class="observer-container">
-    <p class="observer-intro">Chaque situation est une invitation à regarder autrement. Prenez le temps d'observer, notez ce qui attire votre attention — sans chercher la bonne réponse. L'analyse vient après.</p>
+    <p class="observer-intro">Ces situations se produisent tous les jours. Les indices sont là. L'exercice : les décrire avant de les interpréter — regardez d'abord, concluez ensuite.</p>
     <div id="observer-list"></div>
   </div>
 </div>
@@ -1229,7 +1302,7 @@ body {
 <div class="screen" id="screen-defis">
   <div class="sub-header">
     <button class="back-btn" onclick="showScreen('main')">← Accueil</button>
-    <div class="sub-header-title">🗝️ Défis d'observation</div>
+    <div class="sub-header-title">🎯 Missions Terrain</div>
   </div>
   <div id="defis-page-content" class="defis-page-container"></div>
 </div>
@@ -1390,7 +1463,7 @@ function showScreen(id) {
   window.scrollTo(0, 0);
   if (id === 'carnet') renderCarnet();
   if (id === 'budget-temps') populateBtHorseSelect();
-  if (id === 'main') { renderObsDuJour(); renderStreak(); renderDefis(); renderDiscoveryBanner(); }
+  if (id === 'main') { renderObsDuJour(); renderGrade(); renderStreak(); renderDefis(); renderDiscoveryBanner(); }
   if (id === 'defis') renderDefis();
   if (id === 'fiches') renderFiches();
   if (id === 'observer') renderObserver();
@@ -1613,9 +1686,9 @@ const fiches = [
     pratique: 'Observez la ligne du dessus : un dos tendu et une encolure haute indiquent une activation sympathique. Un dos souple et une encolure basse signalent le relâchement.'
   },
   {
-    id: 5, icon: '👁️', title: 'Le regard et le visage',
-    teaser: 'Œil, mâchoire, naseaux : le visage ne ment jamais.',
-    desc: 'Le visage du cheval forme un tableau expressif cohérent. L\'œil, les tensions musculaires faciales et la position des naseaux révèlent l\'état émotionnel avec précision.',
+    id: 5, icon: '👁️', title: 'Le regard et la tête',
+    teaser: 'Œil, mâchoire, naseaux : la tête ne ment jamais.',
+    desc: 'La tête du cheval forme un tableau expressif cohérent. L\'œil, les tensions musculaires et la position des naseaux révèlent l\'état émotionnel avec précision.',
     points: [
       'Œil doux et arrondi → calme et confiance',
       'Blanc de l\'œil visible → peur ou tension forte',
@@ -1865,36 +1938,120 @@ const scenesObs = [
     scene_id: "negociation-proximite-01",
     video: { type: "placeholder", description: "Deux chevaux en paddock. L'un s'approche lentement de l'autre qui mange. Négociation silencieuse de la proximité." },
     lectures: [
-      { profondeur: 1, phrase: "Observez ce qui se passe quand deux chevaux se rapprochent.", seuil: "Installez-vous. Deux minutes pour voir ce que beaucoup ne voient pas.", zones: ["oreilles", "posture"], guidage: "Que fait le cheval qui reçoit l'approche ? Regardez maintenant les oreilles au moment où la distance change.", revelation: "Les oreilles portées légèrement en arrière et l'encolure basse signalent la déférence, pas la menace. C'est un langage de paix — le cheval négocie la proximité.", fiche_liee: { id: 0, label: "Lire la fiche sur les oreilles" }, question_ancrage: "Avez-vous observé votre cheval utiliser ce signal avec ses congénères ?", categorie_carnet: "interaction sociale" },
-      { profondeur: 3, phrase: "Vous connaissez peut-être cette scène. Regardez plus près.", seuil: null, zones: ["oreilles", "regard"], guidage: "Dans les 3 secondes qui précèdent le recul — que font les oreilles exactement ?", revelation: "L'oreille tourne avant l'œil. Le cheval a décidé de céder avant que son corps ne bouge. Le signal précède l'action.", fiche_liee: null, question_ancrage: "Avez-vous déjà anticipé un mouvement de votre cheval grâce à ses oreilles ?", categorie_carnet: "communication" }
+      {
+        profondeur: 1,
+        phrase: "Regardez les oreilles du cheval qui reçoit l'approche.",
+        seuil: "Regardez les oreilles du cheval du fond. Tout part de là.",
+        question_scene: "L'oreille du cheval récepteur — dans quelle direction a-t-elle tourné ?",
+        zones: ["oreilles", "posture"],
+        guidage: "Au moment où l'autre s'approche à moins d'un mètre : les oreilles du cheval récepteur reculent-elles, ou restent-elles droites ? L'encolure descend-elle légèrement ?",
+        revelation: "Les oreilles orientées légèrement vers l'arrière, l'encolure basse : c'est de la déférence, pas de la menace. Le cheval dit 'je cède' avant que son corps ne bouge. C'est un langage de paix.",
+        fiche_liee: { id: 0, label: "Lire la fiche sur les oreilles" },
+        question_ancrage: "Avez-vous déjà vu votre cheval utiliser ce signal avec ses congénères ?",
+        categorie_carnet: "interaction sociale"
+      },
+      {
+        profondeur: 3,
+        phrase: "Cette scène, vous la connaissez peut-être. Regardez plus tôt.",
+        seuil: "Cette fois : regardez 3 secondes avant le recul. L'information est déjà là.",
+        question_scene: "Quelle partie du corps a bougé en premier — avant le recul du corps entier ?",
+        zones: ["oreilles", "regard"],
+        guidage: "Dans les 3 secondes qui précèdent le recul — l'oreille tourne-t-elle avant l'œil ? Ou en même temps ?",
+        revelation: "L'oreille tourne avant l'œil. Le cheval a décidé de céder avant que son corps entier ne réagisse. Le signal précède l'action d'au moins une seconde.",
+        fiche_liee: null,
+        question_ancrage: "Avez-vous déjà anticipé un mouvement de votre cheval grâce à ses oreilles seules ?",
+        categorie_carnet: "communication"
+      }
     ]
   },
   {
     scene_id: "ebrouement-relachement-01",
     video: { type: "placeholder", description: "Cheval seul, au pré. Moment calme. Un léger stimulus, puis retour au calme et ébrouement." },
     lectures: [
-      { profondeur: 1, phrase: "Cherchez ce qui déclenche un ébrouement — souvent un signe de relâchement.", seuil: null, zones: ["regard", "tension"], guidage: "Observez ce qui précède immédiatement l'ébrouement. Le regard, l'encolure — que font-ils dans les 2 secondes avant ?", revelation: "L'ébrouement est une expiration forcée qui suit un moment de légère tension. Il n'est pas aléatoire : il marque le retour à un état de sécurité interne. Un cheval qui s'ébroue libère quelque chose.", fiche_liee: null, question_ancrage: "Dans quel contexte avez-vous entendu votre cheval s'ébrouer la dernière fois ?", categorie_carnet: "bien-être" }
+      {
+        profondeur: 1,
+        phrase: "Cherchez ce qui précède l'ébrouement — dans les 3 secondes avant.",
+        seuil: "Regardez l'encolure. La tension apparaît là en premier.",
+        question_scene: "Qu'avez-vous vu dans les 2–3 secondes qui précédaient l'ébrouement ?",
+        zones: ["regard", "tension"],
+        guidage: "L'encolure était-elle légèrement tendue avant l'ébrouement, ou déjà relâchée ? Le regard était-il fixé quelque part ou mobile ?",
+        revelation: "L'ébrouement suit toujours un moment de légère tension. L'encolure se redresse brièvement, le regard se fixe — puis l'air sort. Ce n'est pas aléatoire : c'est le signal que la vigilance vient de céder.",
+        fiche_liee: null,
+        question_ancrage: "La prochaine fois que votre cheval s'ébroue, regardez ce qui précède. Dans quel contexte était-il ?",
+        categorie_carnet: "bien-être"
+      }
     ]
   },
   {
     scene_id: "deplacement-poids-01",
     video: { type: "placeholder", description: "Cheval à l'attache ou en box. Plan sur les antérieurs. Moment d'hésitation — très léger transfert de poids vers l'arrière." },
     lectures: [
-      { profondeur: 2, phrase: "Observez le déplacement du poids — avant toute décision, le corps anticipe.", seuil: "Regardez d'abord les membres. Tout commence là.", zones: ["posture", "tension"], guidage: "Regardez maintenant les antérieurs. L'un est-il légèrement plus chargé que l'autre ? Y a-t-il un micro-recul ?", revelation: "Le déplacement de poids vers l'arrière est un prélude à la fuite — le cheval prépare son système moteur avant que la décision soit prise. Voir cela, c'est lire 2 secondes dans le futur.", fiche_liee: { id: 4, label: "La posture générale" }, question_ancrage: "Avez-vous déjà senti ce transfert de poids sous la selle, avant un écart ?", categorie_carnet: "comportement" }
+      {
+        profondeur: 2,
+        phrase: "Regardez les antérieurs. Lequel bougera en premier ?",
+        seuil: "Regardez uniquement les antérieurs. Le reste peut attendre.",
+        question_scene: "L'antérieur droit ou le gauche — lequel s'est légèrement délesté en premier ?",
+        zones: ["posture", "tension"],
+        guidage: "L'un des antérieurs est-il légèrement en retrait par rapport à l'autre ? Y a-t-il un micro-déplacement vers l'arrière avant le mouvement ?",
+        revelation: "Le déplacement de poids vers l'arrière est un prélude au mouvement — le cheval prépare son système locomoteur avant de décider consciemment. Le voir, c'est lire le mouvement 1 à 2 secondes avant qu'il arrive.",
+        fiche_liee: { id: 4, label: "La posture générale" },
+        question_ancrage: "Avez-vous déjà senti ce transfert de poids sous la selle, juste avant un écart ou un arrêt ?",
+        categorie_carnet: "comportement"
+      }
+    ]
+  },
+  {
+    scene_id: "excitation-carriere-01",
+    video: { type: "youtube", src: "BMBtUWMsV6w", vertical: true, description: "Cheval en carrière en état de haute excitation. Trot suspendu, renâclement fort, oreilles asymétriques, naseaux dilatés — puis mâchouillage au relâchement." },
+    lectures: [
+      {
+        profondeur: 1,
+        phrase: "Regardez les naseaux. Que font-ils juste avant le renâclement ?",
+        seuil: "Regardez les naseaux. Sont-ils déjà dilatés avant le souffle, ou seulement au moment où il sort ?",
+        question_scene: "Le renâclement arrive-t-il pendant le mouvement ou quand le cheval s'arrête ?",
+        zones: ["regard", "tension"],
+        guidage: "Regardez les naseaux pendant le renâclement — s'élargissent-ils avant le souffle ou en même temps ? Et à la fin de la vidéo, quand il se calme : que fait la mâchoire ?",
+        revelation: "Les naseaux qui s'élargissent : le système nerveux sympathique en action — le corps se prépare à une réponse intense. Le mâchouillage qui suit à la fin : la mâchoire se relâche, la descente commence. Ces deux signaux sont opposés. Ils apparaissent dans le même cheval, dans les mêmes 25 secondes.",
+        fiche_liee: null,
+        question_ancrage: "La prochaine fois que votre cheval renâcle, regardez ce qui arrive quelques secondes après.",
+        categorie_carnet: "comportement"
+      }
     ]
   },
   {
     scene_id: "regard-detente-01",
     video: { type: "placeholder", description: "Cheval au repos. Gros plan sur l'œil et la région temporale. Passage progressif d'un état alerte à un état de détente profonde." },
     lectures: [
-      { profondeur: 2, phrase: "Observez les transitions du regard — entre vigilance et abandon.", seuil: null, zones: ["regard", "tension"], guidage: "Regardez la paupière inférieure. Que se passe-t-il précisément quand le cheval bascule vers la détente ?", revelation: "La paupière inférieure qui se relâche, le triangle sous-orbitaire qui se creuse légèrement : le système d'alerte se désactive. Le cheval ne surveille plus — il est présent autrement.", fiche_liee: { id: 5, label: "Le regard et le visage" }, question_ancrage: "Avez-vous observé cet état chez votre cheval ? Dans quel contexte ?", categorie_carnet: "bien-être" }
+      {
+        profondeur: 2,
+        phrase: "Regardez la paupière inférieure. Elle vous dira tout.",
+        seuil: "Gardez les yeux sur l'œil gauche. Ne décrochez pas.",
+        question_scene: "Avez-vous vu le moment exact où la paupière inférieure s'est relâchée ?",
+        zones: ["regard", "tension"],
+        guidage: "La paupière inférieure descend-elle légèrement ? Le muscle temporal — légèrement en avant de l'oreille — est-il tendu ou lisse ?",
+        revelation: "La paupière inférieure qui se relâche, le muscle temporal qui s'efface : le système d'alerte se désactive. Ce n'est pas le calme apparent — c'est le calme réel. Le cheval n'est plus en surveillance.",
+        fiche_liee: { id: 5, label: "Le regard et la tête" },
+        question_ancrage: "Avez-vous déjà vu la paupière inférieure de votre cheval se relâcher pendant le pansage ?",
+        categorie_carnet: "bien-être"
+      }
     ]
   },
   {
     scene_id: "repos-debout-01",
     video: { type: "placeholder", description: "Cheval debout, postérieur relâché, tête basse, queue immobile. Ambiance calme de paddock ou de box." },
     lectures: [
-      { profondeur: 1, phrase: "Aujourd'hui, observez ce que ressemble vraiment le repos.", seuil: "Cette observation demande de la patience. Laissez la scène s'installer.", zones: ["posture", "queue", "regard"], guidage: "Regardez le postérieur. Lequel repose ? Et regardez la queue — est-elle tenue ou abandonnée ?", revelation: "Le repos debout exige un abandon complet du tonus de garde. Un postérieur fléchi, une queue dont le port s'efface, une paupière mi-close : le cheval a désactivé sa surveillance. C'est un acte de confiance.", fiche_liee: { id: 7, label: "Les signes de détente" }, question_ancrage: "Votre cheval se repose-t-il ainsi ? Savez-vous à quelle heure de la journée ?", categorie_carnet: "bien-être" }
+      {
+        profondeur: 1,
+        phrase: "Ce cheval est-il vraiment au repos ? Cherchez 3 signes.",
+        seuil: "Regardez le postérieur d'abord, puis la queue, puis la paupière.",
+        question_scene: "Lequel des postérieurs était relâché ? Et la queue — tenue ou abandonnée ?",
+        zones: ["posture", "queue", "regard"],
+        guidage: "Lequel des deux postérieurs est fléchi et délesté ? La queue pend-elle librement ou est-elle légèrement contractée ? La paupière est-elle mi-close ?",
+        revelation: "Un seul postérieur fléchi, une queue qui pend sans tension, une paupière mi-close : trois signaux indépendants, même message. Le système de garde est désactivé. Ce n'est pas de la fatigue — c'est de la confiance.",
+        fiche_liee: { id: 7, label: "Les signes de détente" },
+        question_ancrage: "Votre cheval prend-il ce type de repos ? Savez-vous à quelle heure de la journée ?",
+        categorie_carnet: "bien-être"
+      }
     ]
   }
 ];
@@ -1952,10 +2109,11 @@ function oiRender(html) {
 }
 
 function oiVideoHtml(video) {
+  const cls = video.vertical ? 'oi-video-box vertical' : 'oi-video-box';
   if (video.type === 'youtube') {
-    return `<div class="oi-video-box"><iframe src="https://www.youtube-nocookie.com/embed/${esc(video.src)}?autoplay=1&mute=1&controls=0&rel=0" allow="autoplay" allowfullscreen></iframe></div>`;
+    return `<div class="${cls}"><iframe src="https://www.youtube-nocookie.com/embed/${esc(video.src)}?rel=0&playsinline=1" allow="fullscreen" allowfullscreen></iframe></div>`;
   }
-  return `<div class="oi-video-box"><div class="oi-video-desc">${esc(video.description)}</div></div>`;
+  return `<div class="${cls}"><div class="oi-video-desc">${esc(video.description)}</div></div>`;
 }
 
 function oiPhase1() {
@@ -1967,17 +2125,13 @@ function oiPhase1() {
 
 function oiPhase2() {
   oiSetProgress(25);
-  const zonesHtml = (_oiLecture.zones || []).map(z =>
-    `<div class="oi-zone-chip" onclick="this.classList.toggle('active')">${esc(oiZoneLabels[z] || z)}</div>`
-  ).join('');
   const dureeMs = 22000;
   oiRender(`
     <div class="oi-scene-wrap">
       ${oiVideoHtml(_oiScene.video)}
       <div class="oi-timer-wrap"><div class="oi-timer-bar" id="oi-timer"></div></div>
       <div class="oi-question-block" id="oi-qblock">
-        <div class="oi-question-label">Qu'avez-vous remarqué ?</div>
-        <div class="oi-zones">${zonesHtml}</div>
+        <div class="oi-question-label">${esc(_oiLecture.question_scene || 'Qu\'avez-vous remarqué ?')}</div>
         <button class="oi-btn-continue" onclick="oiPhase3()">Continuer →</button>
       </div>
     </div>`);
@@ -2010,7 +2164,7 @@ function oiPhase4() {
     : '';
   oiRender(`
     <div class="oi-revelation-wrap">
-      <div class="oi-revelation-eyebrow">Ce que vous venez d'observer</div>
+      <div class="oi-revelation-eyebrow">Ce qui était déjà là</div>
       <div class="oi-revelation-text">${esc(_oiLecture.revelation)}</div>
       ${ficheLien}
       <button class="oi-btn-continue" onclick="oiPhase5()" style="margin-top:20px">Continuer →</button>
@@ -2025,6 +2179,12 @@ function oiPhase5() {
   if (!profil.scenes_vues.includes(_oiScene.scene_id)) profil.scenes_vues.push(_oiScene.scene_id);
   saveProfilRegard(profil);
   recordStreakDay();
+  const demain = getDemainMystere();
+  const demainHtml = demain ? `
+    <div class="oi-demain">
+      <div class="oi-demain-label">Demain</div>
+      <div class="oi-demain-text">${esc(demain)}</div>
+    </div>` : '';
   oiRender(`
     <div class="oi-ancrage-wrap">
       <div class="oi-ancrage-question">${esc(_oiLecture.question_ancrage)}</div>
@@ -2032,6 +2192,7 @@ function oiPhase5() {
         <button class="oi-btn-note" onclick="oiNoterCarnet()">Oui, je note</button>
         <button class="oi-btn-retiens" onclick="oiQuitter()">Je retiens</button>
       </div>
+      ${demainHtml}
     </div>`);
 }
 
@@ -2042,22 +2203,68 @@ function oiQuitter() {
   showScreen('main');
 }
 
+const grades = [
+  { min: 0,  label: 'Observateur novice',       seuil: 0  },
+  { min: 5,  label: 'Observateur confirmé',      seuil: 5  },
+  { min: 15, label: 'Enquêteur de terrain',      seuil: 15 },
+  { min: 30, label: 'Analyste comportemental',   seuil: 30 },
+  { min: 50, label: 'Naturaliste expert',        seuil: 50 },
+];
+
+function getGrade() {
+  const profil = getProfilRegard();
+  const n = profil.obs_completees || 0;
+  let grade = grades[0];
+  for (const g of grades) { if (n >= g.min) grade = g; }
+  return grade;
+}
+
+function renderGrade() {
+  const el = document.getElementById('grade-widget');
+  if (!el) return;
+  const grade = getGrade();
+  el.innerHTML = `<div class="grade-inner"><span>Grade</span><span class="grade-dot"></span><span class="grade-label">${grade.label}</span></div>`;
+}
+
+const mysteres = {
+  "negociation-proximite-01": { mystere: "Deux chevaux. L'un va céder l'espace. Avant qu'il recule — quelle partie de son corps l'annonçait ?", indice: "Regardez les oreilles du cheval récepteur. Les 3 secondes avant le recul." },
+  "ebrouement-relachement-01": { mystere: "Un cheval s'ébroue. Ce n'est pas aléatoire. Qu'est-ce qui l'annonçait dans les 3 secondes précédentes ?", indice: "Regardez l'encolure juste avant. La tension y apparaît en premier." },
+  "deplacement-poids-01": { mystere: "Ce cheval va avancer. Regardez les antérieurs — lequel bougera en premier ?", indice: "Le poids se déplace avant le mouvement. Un antérieur se déleste légèrement." },
+  "regard-detente-01": { mystere: "Ce cheval bascule vers la détente. Quel est le premier signe visible sur sa tête ?", indice: "Un seul détail suffit. Regardez la paupière inférieure." },
+  "excitation-carriere-01": { mystere: "Ce cheval renâcle fort. Regardez les naseaux — et regardez ce qui se passe à la fin.", indice: "Deux comportements opposés dans 25 secondes. Cherchez les deux." },
+  "repos-debout-01": { mystere: "Ce cheval semble se reposer. Cherchez 3 signes qui le confirment — ou l'infirment.", indice: "Regardez dans cet ordre : postérieur, queue, paupière." }
+};
+
+function getDemainMystere() {
+  const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+  const nextScene = scenesObs[(dayOfYear + 1) % scenesObs.length];
+  return mysteres[nextScene.scene_id]?.mystere || null;
+}
+
 function renderObsDuJour() {
   const el = document.getElementById('obs-du-jour');
   if (!el) return;
   const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
   const { lecture } = selectObsDuJour();
   const doneToday = localStorage.getItem('obs_done_' + todayStr()) === '1';
+  const { scene } = selectObsDuJour();
+  const m = mysteres[scene.scene_id] || { mystere: lecture.phrase, indice: null };
+  const affaireNum = String(dayOfYear).padStart(3, '0');
   el.innerHTML = `
     <div class="hero-obs-card" onclick="lancerObsImmersive()">
       <div class="hero-obs-halo"></div>
       <div class="hero-obs-content">
-        <div class="hero-obs-eyebrow">Observation du jour</div>
-        <div class="hero-obs-phrase">${esc(lecture.phrase)}</div>
-        <button class="hero-obs-cta">${doneToday ? '✓ Observé aujourd\'hui' : '▶ Commencer l\'observation'}</button>
+        <div class="hero-obs-meta">
+          <span class="hero-obs-eyebrow">Enquête du jour</span>
+          <span class="hero-obs-separator"></span>
+          <span class="hero-obs-dossier">Affaire n°${affaireNum}</span>
+        </div>
+        <div class="hero-obs-phrase">${esc(m.mystere)}</div>
+        ${m.indice ? `<div class="hero-obs-divider"></div><div class="hero-obs-indice">${esc(m.indice)}</div>` : ''}
+        <button class="hero-obs-cta" onclick="event.stopPropagation(); lancerObsImmersive()">${doneToday ? '✓ Dossier consulté' : '▶ Ouvrir l\'enquête'}</button>
       </div>
       <div class="hero-obs-daynum">— ${dayOfYear}</div>
-      ${doneToday ? '<div class="hero-obs-done">✓ observé</div>' : ''}
+      ${doneToday ? '<div class="hero-obs-done">✓ consulté</div>' : ''}
     </div>`;
 }
 
@@ -2086,19 +2293,19 @@ function renderStreak() {
   const active = s.lastDate && (s.lastDate === todayStr() || s.lastDate === yesterdayStr());
   let text;
   if (!s.lastDate) {
-    text = '🌿 Notez votre première observation pour commencer';
+    text = '🌿 Le cheval attend déjà votre regard.';
   } else if (!active) {
-    text = '🌿 Reprenez votre carnet quand vous le souhaitez';
+    text = '🌿 Chaque observation compte, à votre rythme.';
   } else if (s.wasReset && s.count === 1) {
-    text = '🌿 Votre rythme d\'observation reprend doucement';
+    text = '🌿 Vous avez recommencé à regarder.';
   } else if (s.count === 1) {
-    text = '🌿 Premier pas du jour';
+    text = '🌿 Vous avez regardé aujourd\'hui.';
   } else if (s.count === 2) {
-    text = `🌿 <span class="streak-count">2</span> jours consécutifs d'observation`;
+    text = `🌿 <span class="streak-count">2</span> jours de regard actif`;
   } else if (s.count < 7) {
-    text = `🌿 Série d'observation · <span class="streak-count">${s.count} jours</span>`;
+    text = `🌿 Continuité d'enquête · <span class="streak-count">${s.count} jours</span>`;
   } else {
-    text = `✨ <span class="streak-count">${s.count} jours</span> de continuité dans votre carnet`;
+    text = `✨ <span class="streak-count">${s.count} jours</span> de regard — vous voyez différemment.`;
   }
   widget.innerHTML = `<div class="streak-inner">${text}</div>`;
 }
@@ -2115,7 +2322,7 @@ function renderDiscoveryBanner() {
     <div class="discovery-banner" onclick="markDiscoverySeen(${fiche.id}); showScreen('fiches')">
       <span class="discovery-icon">✦</span>
       <div class="discovery-text">
-        <div class="discovery-label">Nouvelle fiche disponible</div>
+        <div class="discovery-label">Nouveau dossier débloqué</div>
         <div class="discovery-title">${esc(fiche.title)}</div>
       </div>
       <span class="discovery-arrow">→</span>
@@ -2263,8 +2470,8 @@ function showObsDiscoveryToast(title) {
   const toast = document.getElementById('obs-discovery-toast');
   if (!toast) return;
   toast.innerHTML = `
-    <div class="obs-discovery-toast-label">✦ Nouvelle fiche disponible</div>
-    <div class="obs-discovery-toast-text">${esc(title)} — consultez les Fiches Pratiques pour la découvrir.</div>`;
+    <div class="obs-discovery-toast-label">✦ Nouveau dossier débloqué</div>
+    <div class="obs-discovery-toast-text">${esc(title)} — consultez les Dossiers d'Enquête pour l'ouvrir.</div>`;
   toast.style.display = 'block';
   setTimeout(() => { toast.style.display = 'none'; }, 6000);
 }
@@ -2968,6 +3175,7 @@ if (!localStorage.getItem('obs_streak')) {
   }
 }
 renderObsDuJour();
+renderGrade();
 renderStreak();
 renderDefis();
 renderDiscoveryBanner();

@@ -2002,7 +2002,7 @@ const scenesObs = [
   },
   {
     scene_id: "excitation-carriere-01",
-    video: { type: "youtube", src: "BMBtUWMsV6w", vertical: true, description: "Cheval en carrière en état de haute excitation. Trot suspendu, renâclement fort, oreilles asymétriques, naseaux dilatés — puis mâchouillage au relâchement." },
+    video: { type: "local", src: "renaclement.mov", vertical: true, description: "Cheval en carrière en état de haute excitation. Trot suspendu, renâclement fort, oreilles asymétriques, naseaux dilatés — puis mâchouillage au relâchement." },
     lectures: [
       {
         profondeur: 1,
@@ -2112,6 +2112,9 @@ function oiVideoHtml(video) {
   const cls = video.vertical ? 'oi-video-box vertical' : 'oi-video-box';
   if (video.type === 'youtube') {
     return `<div class="${cls}"><iframe src="https://www.youtube-nocookie.com/embed/${esc(video.src)}?rel=0&playsinline=1" allow="fullscreen" allowfullscreen></iframe></div>`;
+  }
+  if (video.type === 'local') {
+    return `<div class="${cls}"><video src="${esc(video.src)}" controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:contain;"></video></div>`;
   }
   return `<div class="${cls}"><div class="oi-video-desc">${esc(video.description)}</div></div>`;
 }

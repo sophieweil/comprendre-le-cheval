@@ -687,6 +687,31 @@ body {
 .oi-btn-continue { background: none; border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; padding: 11px 32px; color: rgba(255,255,255,0.3); font-family: 'DM Sans', sans-serif; font-size: 13px; cursor: pointer; transition: all 0.2s; }
 .oi-btn-continue:hover { border-color: rgba(255,255,255,0.28); color: rgba(255,255,255,0.62); }
 
+/* ===== CHOIX D'OBSERVATION ===== */
+.oi-choix-label { font-size: 9px; font-weight: 600; letter-spacing: 3.5px; text-transform: uppercase; color: rgba(201,150,62,0.38); margin-bottom: 24px; text-align: center; opacity: 0; animation: oiFadeIn 0.7s ease 0.2s forwards; }
+.oi-choix-list { width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 12px; opacity: 0; animation: oiFadeIn 0.8s ease 0.5s forwards; }
+.oi-choix-btn { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: 16px; padding: 18px 24px; color: rgba(255,255,255,0.55); font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; transition: all 0.22s; text-align: left; line-height: 1.45; }
+.oi-choix-btn:hover { background: rgba(201,150,62,0.08); border-color: rgba(201,150,62,0.28); color: rgba(255,255,255,0.82); transform: translateX(4px); }
+.oi-choix-btn.selected { background: rgba(201,150,62,0.13); border-color: rgba(201,150,62,0.45); color: var(--gold); }
+
+/* ===== BONUS RÉVÉLATION ===== */
+.oi-bonus-text { background: rgba(201,150,62,0.07); border: 1px solid rgba(201,150,62,0.15); border-radius: 14px; padding: 18px 22px; font-family: 'Playfair Display', serif; font-size: 15px; font-style: italic; color: rgba(201,150,62,0.85); line-height: 1.65; margin-bottom: 20px; opacity: 0; animation: oiFadeIn 0.8s ease 1.9s forwards; }
+
+/* ===== DÉFI DE TERRAIN ===== */
+.oi-defi-card { width: 100%; max-width: 420px; background: rgba(192,82,42,0.05); border: 1px solid rgba(192,82,42,0.18); border-radius: 20px; padding: 26px 28px; margin-top: 24px; opacity: 0; animation: oiFadeIn 0.8s ease 1.7s forwards; }
+.oi-defi-label { font-size: 8px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: rgba(192,82,42,0.5); margin-bottom: 12px; }
+.oi-defi-text { font-family: 'Playfair Display', serif; font-size: 14px; font-style: italic; color: rgba(253,248,242,0.65); line-height: 1.7; margin-bottom: 18px; }
+.oi-btn-defi { background: rgba(192,82,42,0.1); border: 1px solid rgba(192,82,42,0.28); border-radius: 100px; padding: 11px 26px; color: rgba(192,82,42,0.85); font-family: 'DM Sans', sans-serif; font-size: 13px; cursor: pointer; transition: all 0.22s; }
+.oi-btn-defi:hover { background: rgba(192,82,42,0.2); border-color: var(--rust); color: var(--rust); }
+
+/* ===== PHASE 6 DÉFI ===== */
+.oi-defi-terrain-wrap { max-width: 480px; text-align: center; }
+.oi-defi-terrain-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: 3.5px; text-transform: uppercase; color: rgba(192,82,42,0.5); margin-bottom: 32px; opacity: 0; animation: oiFadeIn 0.6s ease 0.2s forwards; }
+.oi-defi-terrain-text { font-family: 'Playfair Display', serif; font-size: clamp(19px,3vw,25px); font-style: italic; color: var(--cream); line-height: 1.65; margin-bottom: 44px; opacity: 0; animation: oiFadeIn 1s ease 0.6s forwards; }
+.oi-defi-terrain-actions { display: flex; flex-direction: column; gap: 12px; align-items: center; opacity: 0; animation: oiFadeIn 0.7s ease 1.2s forwards; }
+.oi-btn-defi-done { background: rgba(201,150,62,0.1); border: 1px solid rgba(201,150,62,0.28); border-radius: 100px; padding: 13px 40px; color: rgba(201,150,62,0.8); font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; transition: all 0.22s; }
+.oi-btn-defi-done:hover { background: rgba(201,150,62,0.18); color: var(--gold); }
+
 @keyframes oiFadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -2012,6 +2037,12 @@ const scenesObs = [
         zones: ["regard", "tension"],
         guidage: "Regardez les naseaux pendant le renâclement — s'élargissent-ils avant le souffle ou en même temps ? Et à la fin de la vidéo, quand il se calme : que fait la mâchoire ?",
         revelation: "Les naseaux qui s'élargissent : le système nerveux sympathique en action — le corps se prépare à une réponse intense. Le mâchouillage qui suit à la fin : la mâchoire se relâche, la descente commence. Ces deux signaux sont opposés. Ils apparaissent sur le même cheval, dans les mêmes 25 secondes.",
+        choix_observation: [
+          { id: "naseaux", texte: "Les naseaux se sont dilatés avant le renâclement", bonus: "Oui — la dilatation précède le son de quelques dixièmes de seconde. Le corps active le signal avant de le produire. Vous avez vu le système nerveux à l'œuvre." },
+          { id: "machoire", texte: "Il mâchouillait à la fin, quand il se calmait", bonus: "Exactement. La mâchoire qui se desserre, c'est la descente du système nerveux — visible avant même que le mouvement s'arrête complètement." },
+          { id: "pasvu", texte: "Je n'ai pas bien vu", bonus: null }
+        ],
+        defi_terrain: "La prochaine fois que votre cheval renâcle, restez immobile et regardez sa mâchoire. Comptez mentalement — combien de secondes avant le premier mâchouillage ?",
         fiche_liee: null,
         question_ancrage: "La prochaine fois que votre cheval renâcle, regardez ce qui arrive quelques secondes après.",
         categorie_carnet: "comportement"
@@ -2078,7 +2109,7 @@ function selectObsDuJour() {
   const profil = getProfilRegard();
   const pMax = profondeurCourante(profil.obs_completees);
   const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
-  const scene = scenesObs[dayOfYear % scenesObs.length];
+  const scene = scenesObs[(dayOfYear + 3) % scenesObs.length];
   let lecture = scene.lectures[0];
   for (const lec of scene.lectures) { if (lec.profondeur <= pMax) lecture = lec; }
   return { scene, lecture };
@@ -2087,12 +2118,13 @@ function selectObsDuJour() {
 // ============================================================
 // OBS IMMERSIVE — EXPÉRIENCE
 // ============================================================
-let _oiScene = null, _oiLecture = null, _oiTimerRef = null;
+let _oiScene = null, _oiLecture = null, _oiTimerRef = null, _oiChoix = null;
 
 function lancerObsImmersive() {
   const { scene, lecture } = selectObsDuJour();
   _oiScene = scene;
   _oiLecture = lecture;
+  _oiChoix = null;
   if (_oiTimerRef) { clearTimeout(_oiTimerRef); _oiTimerRef = null; }
   showScreen('obs-immersive');
   oiPhase1();
@@ -2152,12 +2184,30 @@ function oiPhase2() {
 function oiPhase3() {
   if (_oiTimerRef) { clearTimeout(_oiTimerRef); _oiTimerRef = null; }
   oiSetProgress(55);
-  oiRender(`
-    <div class="oi-miseaupoint-wrap">
-      ${oiVideoHtml(_oiScene.video)}
-      <div class="oi-guidage">${esc(_oiLecture.guidage)}</div>
-      <button class="oi-btn-continue" onclick="oiPhase4()">Continuer →</button>
-    </div>`);
+  if (_oiLecture.choix_observation && _oiLecture.choix_observation.length) {
+    const choixHtml = _oiLecture.choix_observation.map(c =>
+      `<button class="oi-choix-btn" onclick="oiSelectChoix('${c.id}', this)">${esc(c.texte)}</button>`
+    ).join('');
+    oiRender(`
+      <div class="oi-miseaupoint-wrap">
+        <div class="oi-choix-label">Qu'avez-vous observé ?</div>
+        <div class="oi-choix-list">${choixHtml}</div>
+      </div>`);
+  } else {
+    oiRender(`
+      <div class="oi-miseaupoint-wrap">
+        ${oiVideoHtml(_oiScene.video)}
+        <div class="oi-guidage">${esc(_oiLecture.guidage)}</div>
+        <button class="oi-btn-continue" onclick="oiPhase4()">Continuer →</button>
+      </div>`);
+  }
+}
+
+function oiSelectChoix(id, btn) {
+  _oiChoix = (_oiLecture.choix_observation || []).find(c => c.id === id) || null;
+  document.querySelectorAll('.oi-choix-btn').forEach(b => b.classList.remove('selected'));
+  if (btn) btn.classList.add('selected');
+  setTimeout(oiPhase4, 520);
 }
 
 function oiPhase4() {
@@ -2165,10 +2215,14 @@ function oiPhase4() {
   const ficheLien = _oiLecture.fiche_liee
     ? `<button class="oi-fiche-lien" onclick="oiOuvrirFiche(${_oiLecture.fiche_liee.id})">→ ${esc(_oiLecture.fiche_liee.label)}</button><br>`
     : '';
+  const bonusHtml = (_oiChoix && _oiChoix.bonus)
+    ? `<div class="oi-bonus-text">${esc(_oiChoix.bonus)}</div>`
+    : '';
   oiRender(`
     <div class="oi-revelation-wrap">
       <div class="oi-revelation-eyebrow">Ce qui était déjà là</div>
       <div class="oi-revelation-text">${esc(_oiLecture.revelation)}</div>
+      ${bonusHtml}
       ${ficheLien}
       <button class="oi-btn-continue" onclick="oiPhase5()" style="margin-top:20px">Continuer →</button>
     </div>`);
@@ -2188,6 +2242,12 @@ function oiPhase5() {
       <div class="oi-demain-label">Demain</div>
       <div class="oi-demain-text">${esc(demain)}</div>
     </div>` : '';
+  const defiHtml = _oiLecture.defi_terrain ? `
+    <div class="oi-defi-card">
+      <div class="oi-defi-label">Défi de terrain</div>
+      <div class="oi-defi-text">${esc(_oiLecture.defi_terrain)}</div>
+      <button class="oi-btn-defi" onclick="oiPhase6Defi()">Je relève ce défi →</button>
+    </div>` : '';
   oiRender(`
     <div class="oi-ancrage-wrap">
       <div class="oi-ancrage-question">${esc(_oiLecture.question_ancrage)}</div>
@@ -2195,7 +2255,20 @@ function oiPhase5() {
         <button class="oi-btn-note" onclick="oiNoterCarnet()">Oui, je note</button>
         <button class="oi-btn-retiens" onclick="oiQuitter()">Je retiens</button>
       </div>
+      ${defiHtml}
       ${demainHtml}
+    </div>`);
+}
+
+function oiPhase6Defi() {
+  oiRender(`
+    <div class="oi-defi-terrain-wrap">
+      <div class="oi-defi-terrain-eyebrow">Défi de terrain</div>
+      <div class="oi-defi-terrain-text">${esc(_oiLecture.defi_terrain)}</div>
+      <div class="oi-defi-terrain-actions">
+        <button class="oi-btn-defi-done" onclick="oiQuitter()">J'ai relevé ce défi ✓</button>
+        <button class="oi-btn-retiens" onclick="oiQuitter()">Plus tard</button>
+      </div>
     </div>`);
 }
 
@@ -2240,7 +2313,7 @@ const mysteres = {
 
 function getDemainMystere() {
   const dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
-  const nextScene = scenesObs[(dayOfYear + 1) % scenesObs.length];
+  const nextScene = scenesObs[(dayOfYear + 4) % scenesObs.length];
   return mysteres[nextScene.scene_id]?.mystere || null;
 }
 

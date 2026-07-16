@@ -6996,11 +6996,14 @@ function _renderFlashResultat(el, qz) {
   }
   // Score Flash — stocké séparément des scores quiz complet (quiz_completed)
   // Format : flash_quiz_scores = { "0": { bestScore, total, lastDate }, … }
-  var flashScores = getFlashQuizScores();
-  var prev = flashScores[qz.id] || {};
-  if (prev.bestScore === undefined || _fqScore > prev.bestScore) {
-    flashScores[qz.id] = { bestScore: _fqScore, total: qz.flash.length, lastDate: todayStr() };
-    localStorage.setItem('flash_quiz_scores', JSON.stringify(flashScores));
+  // Ignoré en mode test (aucun effet sur le meilleur score réel)
+  if (_fqContext !== 'test') {
+    var flashScores = getFlashQuizScores();
+    var prev = flashScores[qz.id] || {};
+    if (prev.bestScore === undefined || _fqScore > prev.bestScore) {
+      flashScores[qz.id] = { bestScore: _fqScore, total: qz.flash.length, lastDate: todayStr() };
+      localStorage.setItem('flash_quiz_scores', JSON.stringify(flashScores));
+    }
   }
   var total   = qz.flash.length;
   var icons   = ['🌱','🐴','⭐'];

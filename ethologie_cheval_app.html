@@ -4642,6 +4642,86 @@ body {
   border-radius: 0 12px 12px 0;
 }
 
+/* ── DS — Prototype "Ce que le Cheval Retient" ────────────────────────
+   Lecture augmentée : périmètre strictement limité à ce dossier.
+   Vert forêt officiel (#2F4A3D) légèrement plus présent sur les titres
+   de section, les séparateurs et la bordure de l'encadré terrain —
+   le fond général et les autres dossiers restent inchangés.        ── */
+.dsm-intro {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: #3A5A4A;
+  line-height: 1.6;
+  margin: 4px 0 4px;
+}
+.dsm-divider {
+  height: 1px;
+  background: rgba(47,74,61,0.16);
+  margin: 22px 0;
+}
+.dsm-section-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #2F4A3D;
+  margin: 0 0 14px;
+}
+.dsm-enclair {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin-bottom: 4px;
+}
+.dsm-enclair-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  color: #2F4A3D;
+  line-height: 1.6;
+}
+.dsm-enclair-emoji { flex-shrink: 0; font-size: 16px; line-height: 1.6; }
+.dsm-retenir {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 24px;
+}
+.dsm-retenir-item {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  color: #2F4A3D;
+  line-height: 1.65;
+}
+.dsm-retenir-bold { font-weight: 700; color: #2F4A3D; }
+.dsm-terrain {
+  background: var(--mission-soft);
+  border-left: 3px solid #2F4A3D;
+  padding: 16px 18px;
+  border-radius: 0 14px 14px 0;
+  margin-bottom: 4px;
+}
+.dsm-terrain-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #2F4A3D;
+  margin-bottom: 9px;
+}
+.dsm-terrain-text {
+  font-family: 'Lato', sans-serif;
+  font-size: 13.5px;
+  color: #2F4A3D;
+  line-height: 1.7;
+}
+
 /* Phase quiz */
 .ds-quiz {}
 .ds-quiz-sous {
@@ -10407,19 +10487,23 @@ var DOSSIERS_SO = {
 
   'memoire-cheval': {
     // Contenu inline — "Ce que le Cheval Retient" n'existe pas dans les fiches
+    // Prototype de lecture augmentée (voir _renderDossierLectureMemoire) — périmètre limité à ce dossier
     titre:   'Ce que le Cheval Retient',
-    teaser:  'La mémoire associative du cheval est l\'une des plus puissantes et des plus durables du règne animal.',
-    desc:    'Le cheval ne mémorise pas des concepts abstraits mais des associations concrètes : une sensation, un contexte, une conséquence. Ces associations se forment rapidement, peuvent persister des années et orientent en profondeur ses comportements futurs — même dans des situations très éloignées de l\'expérience initiale.',
-    points: [
-      'La mémoire associative lie un stimulus neutre à une conséquence vécue (positive ou négative)',
-      'Une seule expérience forte suffit parfois à créer une empreinte mémorielle durable',
-      'Le contexte est déterminant : le cheval peut réagir différemment selon le lieu, la personne ou le moment',
-      'La généralisation est partielle : une réponse apprise à pied ne se transfère pas automatiquement monté',
-      'Le cheval ne retient pas les intentions — il retient les conséquences concrètes qu\'il a vécues',
-      'Une séance difficile bien terminée s\'ancre comme une expérience positive',
-      'La répétition positive consolide l\'association et installe une réponse fiable'
+    intro:   'Ce que le cheval retient, ce n\'est pas seulement ce qu\'on lui demande… c\'est surtout ce qu\'il vit avec nous.',
+    enClair: [
+      { emoji: '🧠', text: 'Le cheval apprend en faisant des associations.' },
+      { emoji: '📍', text: 'Le lieu, la personne et le moment peuvent changer ce qu\'il comprend.' },
+      { emoji: '💭', text: 'Une expérience forte peut laisser une trace durable.' }
     ],
-    pratique: 'Finissez toujours vos séances sur un moment calme et positif. Le cheval retient prioritairement la fin d\'une interaction. Ce principe simple, appliqué avec cohérence, construit une mémoire de confiance — plus durable que n\'importe quelle technique.',
+    retenir: [
+      { bold: 'Association',          text: 'le cheval relie une situation à ce qui se passe ensuite.' },
+      { bold: 'Contexte',             text: 'il peut réagir différemment selon le lieu, la personne ou le moment.' },
+      { bold: 'Mémoire',              text: 'une expérience forte peut laisser une empreinte durable.' },
+      { bold: 'Généralisation',       text: 'ce qui est appris à pied ne se transfère pas toujours automatiquement monté.' },
+      { bold: 'Conséquences vécues',  text: 'le cheval ne connaît pas nos intentions ; il retient surtout ce qu\'il a réellement vécu.' },
+      { bold: 'Répétition',           text: 'des expériences calmes et cohérentes aident à construire une réponse fiable.' }
+    ],
+    terrain: 'Essaie de terminer la séance sur quelque chose de simple, calme et compris. Le cheval retient particulièrement la sensation associée à la fin de l\'interaction. Répétées avec cohérence, les expériences positives peuvent construire une mémoire de confiance plus durable.',
     questions: [
       { type:'qcm',
         enonce: 'Le cheval mémorise principalement :',
@@ -10601,6 +10685,9 @@ function renderDossierSo() {
 function _renderDossierLecture(el) {
   var data = DOSSIERS_SO[_dossierRef];
 
+  // Prototype de lecture augmentée — périmètre limité à ce seul dossier (voir chantier pédagogique)
+  if (_dossierRef === 'memoire-cheval') { _renderDossierLectureMemoire(el, data); return; }
+
   // Source du contenu : fiche existante (ficheId) ou contenu inline dans data
   var src;
   if (data.ficheId !== undefined) {
@@ -10626,6 +10713,45 @@ function _renderDossierLecture(el) {
     + '<ul class="ds-points">' + pointsHtml + '</ul>'
     + '<div class="ds-pratique-label">🌿 Sur le terrain</div>'
     + '<div class="ds-pratique">' + esc(src.pratique) + '</div>'
+    + (_dossierRevue
+        ? '<button class="ds-cta" onclick="showScreen(\'bibliotheque-so\')">← Retour à la bibliothèque</button>'
+        : '<button class="ds-cta" onclick="terminerLectureDossier()">J\'ai tout lu — à moi les questions →</button>')
+    + '</div>';
+}
+
+// Rendu dédié au dossier "Ce que le Cheval Retient" — prototype de lecture
+// progressive et aérée. N'affecte aucun autre dossier ni la logique de
+// validation (questions inchangées, gérées par _renderDossierQuiz).
+function _renderDossierLectureMemoire(el, data) {
+  var enClairHtml = (data.enClair || []).map(function(item) {
+    return '<div class="dsm-enclair-item">'
+      + '<span class="dsm-enclair-emoji">' + item.emoji + '</span>'
+      + '<span>' + esc(item.text) + '</span>'
+      + '</div>';
+  }).join('');
+
+  var retenirHtml = (data.retenir || []).map(function(item) {
+    return '<li class="dsm-retenir-item">'
+      + '<span class="dsm-retenir-bold">' + esc(item.bold) + ' :</span> '
+      + esc(item.text)
+      + '</li>';
+  }).join('');
+
+  el.innerHTML = (_dossierTestMode ? _testBannerHtml() : '')
+    + '<div class="ds-lecture">'
+    + '<div class="ds-eyebrow">📚 Dossier de So</div>'
+    + '<div class="ds-titre">' + esc(data.titre) + '</div>'
+    + '<div class="dsm-intro">' + esc(data.intro) + '</div>'
+    + '<div class="dsm-divider"></div>'
+    + '<div class="dsm-section-label">En clair</div>'
+    + '<div class="dsm-enclair">' + enClairHtml + '</div>'
+    + '<div class="dsm-divider"></div>'
+    + '<div class="dsm-section-label">Ce qu\'il faut retenir</div>'
+    + '<ul class="dsm-retenir">' + retenirHtml + '</ul>'
+    + '<div class="dsm-terrain">'
+    +   '<div class="dsm-terrain-label">🐴 Sur le terrain</div>'
+    +   '<div class="dsm-terrain-text">' + esc(data.terrain) + '</div>'
+    + '</div>'
     + (_dossierRevue
         ? '<button class="ds-cta" onclick="showScreen(\'bibliotheque-so\')">← Retour à la bibliothèque</button>'
         : '<button class="ds-cta" onclick="terminerLectureDossier()">J\'ai tout lu — à moi les questions →</button>')

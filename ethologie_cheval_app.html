@@ -34,10 +34,10 @@
    --type-*    = aliases documentés (pour les nouvelles règles)
    ══════════════════════════════════════════════════════════════ */
 
-/* ⚡ Interrogatoire Flash — rose terracotta soutenu (test visuel) */
+/* ⚡ Interrogatoire Flash — corail pêche lumineux (test visuel v2) */
 .mt-quiz {
-  --mission-accent: #C1585F; --mission-soft: #F8E6E4; --mission-dark: #7A2E35;
-  --type-accent:    #C1585F; --type-soft:    #F8E6E4; --type-dark:    #7A2E35;
+  --mission-accent: #E8834F; --mission-soft: #FBE8D6; --mission-dark: #8A3E22;
+  --type-accent:    #E8834F; --type-soft:    #FBE8D6; --type-dark:    #8A3E22;
   --type-icon: "🧠";
 }
 /* 📚 Dossier de So — vert sauge */
@@ -4474,8 +4474,19 @@ body {
 .mission-hero-card.mission-hero-done {
   border-left-color: #C9963E; opacity: 0.85;
 }
-/* Interrogatoire Flash — bordure plus marquée pour une identité plus visible (test) */
-.mission-hero-card.mt-quiz { border-left-width: 8px; }
+/* Interrogatoire Flash — carte plus lumineuse et plus chaleureuse (test v2) */
+.mission-hero-card.mt-quiz {
+  border-left-width: 8px;
+  background: linear-gradient(160deg, #FDF3E6 0%, #FBE2C9 100%);
+}
+.mission-hero-card.mt-quiz .mission-hero-format-pill {
+  background: rgba(255,255,255,0.88);
+  box-shadow: 0 2px 9px rgba(138,62,34,0.20);
+}
+.mission-hero-card.mt-quiz .mission-hero-xp {
+  background: rgba(255,255,255,0.85);
+  border-color: rgba(138,62,34,0.16);
+}
 .mission-hero-eyebrow {
   display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
 }

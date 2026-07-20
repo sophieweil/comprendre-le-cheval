@@ -4527,6 +4527,126 @@ body {
   color: #C9963E; letter-spacing: 0.04em; padding: 10px 0;
 }
 
+/* ===== CONTINUER L'ENQUÊTE — après Mission du jour accomplie ===== */
+.enquete-suite {
+  margin-top: 18px; padding: 20px 18px 18px;
+  background: var(--soft);
+  border: 1px solid rgba(139,94,60,0.14);
+  border-radius: 16px;
+}
+.enquete-suite-header {
+  font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 600;
+  color: var(--dark); margin-bottom: 6px;
+}
+.enquete-suite-intro {
+  font-family: 'DM Sans', sans-serif; font-size: 13px; font-style: italic;
+  color: var(--earth); opacity: 0.85; line-height: 1.55; margin-bottom: 16px;
+}
+.enquete-suite-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+}
+@media (max-width: 640px) {
+  .enquete-suite-grid { grid-template-columns: 1fr; }
+}
+.enquete-suite-card {
+  background: var(--cream); border: 1px solid rgba(139,94,60,0.16);
+  border-radius: 13px; padding: 14px 14px 13px; cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+.enquete-suite-card:hover {
+  transform: translateY(-2px); box-shadow: 0 6px 18px rgba(139,94,60,0.14);
+  border-color: rgba(201,150,62,0.45);
+}
+.enquete-suite-card-empty { cursor: default; opacity: 0.65; }
+.enquete-suite-card-empty:hover { transform: none; box-shadow: none; border-color: rgba(139,94,60,0.16); }
+.enquete-suite-card-head {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+}
+.enquete-suite-icon { font-size: 18px; line-height: 1; }
+.enquete-suite-title {
+  font-family: 'Lato', sans-serif; font-size: 13px; font-weight: 700;
+  color: var(--dark); letter-spacing: 0.02em;
+}
+.enquete-suite-sub {
+  font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--earth);
+  opacity: 0.85; line-height: 1.5; margin-bottom: 8px;
+}
+.enquete-suite-duree {
+  display: inline-block; font-family: 'Lato', sans-serif; font-size: 10.5px;
+  font-weight: 700; letter-spacing: 0.06em; color: var(--gold);
+  background: rgba(201,150,62,0.12); border-radius: 100px; padding: 3px 10px;
+}
+.enquete-suite-footnote {
+  font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--earth);
+  opacity: 0.65; text-align: center; margin-top: 14px;
+}
+
+/* ===== QUÊTE TERRAIN — écran prototype ===== */
+.qt-prompt-card {
+  background: var(--soft); border-left: 3px solid var(--gold);
+  border-radius: 0 14px 14px 0; padding: 18px 18px 16px; margin-bottom: 16px;
+}
+.qt-prompt-eyebrow {
+  font-family: 'Lato', sans-serif; font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 9px;
+}
+.qt-prompt-question {
+  font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500;
+  color: var(--dark); line-height: 1.45;
+}
+.qt-textarea {
+  width: 100%; min-height: 130px; box-sizing: border-box;
+  font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--dark);
+  background: var(--cream); border: 1px solid rgba(139,94,60,0.22);
+  border-radius: 12px; padding: 14px; line-height: 1.6; resize: vertical;
+  margin-bottom: 14px;
+}
+.qt-label {
+  display: block; font-family: 'Lato', sans-serif; font-size: 11px;
+  font-weight: 700; letter-spacing: 0.06em; color: var(--earth);
+  margin-bottom: 6px;
+}
+.qt-select {
+  width: 100%; box-sizing: border-box; font-family: 'DM Sans', sans-serif;
+  font-size: 14px; color: var(--dark); background: var(--cream);
+  border: 1px solid rgba(139,94,60,0.22); border-radius: 10px;
+  padding: 10px 12px; margin-bottom: 14px;
+}
+.qt-no-horse {
+  font-family: 'DM Sans', sans-serif; font-size: 12.5px; color: var(--earth);
+  background: var(--soft); border-radius: 12px; padding: 14px 16px;
+  line-height: 1.6; margin-bottom: 14px;
+}
+.qt-create-horse-btn {
+  display: block; margin-top: 10px; background: var(--dark); color: var(--cream);
+  border: none; border-radius: 9px; font-family: 'Lato', sans-serif;
+  font-size: 12.5px; font-weight: 700; padding: 10px 16px; cursor: pointer;
+}
+.qt-save-btn {
+  display: block; width: 100%; box-sizing: border-box;
+  background: var(--dark); color: var(--cream); border: none; border-radius: 12px;
+  font-family: 'Lato', sans-serif; font-size: 14px; font-weight: 700;
+  letter-spacing: 0.04em; padding: 14px 20px; cursor: pointer;
+  margin-bottom: 10px; transition: background 0.18s;
+}
+.qt-save-btn:hover { background: var(--earth); }
+.qt-save-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.qt-skip-btn {
+  display: block; width: 100%; box-sizing: border-box;
+  background: none; border: none; color: var(--earth); opacity: 0.75;
+  font-family: 'DM Sans', sans-serif; font-size: 12.5px; text-align: center;
+  padding: 8px; cursor: pointer; text-decoration: underline;
+}
+.qt-confirm { text-align: center; padding: 40px 10px; }
+.qt-confirm-icon {
+  font-size: 40px; color: var(--sage); margin-bottom: 14px;
+}
+.qt-confirm-text {
+  font-family: 'Cormorant Garamond', serif; font-size: 19px; color: var(--dark);
+  margin-bottom: 22px;
+}
+
 /* ===== BOUTON COMPLÉTION MISSION (écrans cibles) ===== */
 .mission-complete-btn {
   display: block; width: 100%; max-width: 480px; margin: 24px auto 0;
@@ -6668,6 +6788,22 @@ body {
 </div>
 </div>
 
+<!-- ═══════════════════════════════════════════
+     QUÊTE TERRAIN — prototype "Continuer l'enquête"
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-quete-terrain">
+<div class="acad-page-wrap">
+  <div class="home-logo-zone">
+    <img src="logo-ride-with-so.png" alt="Ride With So — Sophie Weil" class="logo-ride-with-so">
+  </div>
+  <div class="acad-header-row">
+    <div class="acad-back-home" onclick="showScreen('academie')">← Académie</div>
+    <div class="sub-header-title">🐴 Quête terrain</div>
+  </div>
+  <div id="quete-terrain-content"></div>
+</div>
+</div>
+
 <!-- ===== BIBLIOTHÈQUE DES DOSSIERS DE SO ===== -->
 <div class="screen" id="screen-bibliotheque-so">
 <div class="acad-page-wrap">
@@ -7157,6 +7293,7 @@ function showScreen(id) {
   if (id === 'dossier-enqueteur') renderDossierEnqueteur();
   if (id === 'mission-cheval') { _mcPhase = 'steps'; _mcStep = 0; _mcFormData = {}; renderScreenMissionCheval(); }
   if (id === 'dossier-so') renderDossierSo();
+  if (id === 'quete-terrain') renderQueteTerrain();
   if (id === 'bibliotheque-so') renderBibliothequeSo();
   if (id === 'kiro-erreur') {
     _kePhase = 'playing'; _keCasIndex = 0; _keAnswered = false; _keSelectedIdx = -1; _keScore = 0;
@@ -8222,7 +8359,8 @@ function renderRituelDuJour() {
     + (ambiance ? '<div class="mission-hero-ambiance">' + esc(ambiance) + '</div>' : '')
     + '<div class="mission-hero-title">' + esc(mission.titre) + '</div>'
     + ctaHtml
-    + '</div>';
+    + '</div>'
+    + (doneToday ? renderContinuerEnqueteHtml(mission) : '');
 
   // Numéro sur le dossier empilé (compatibilité ancienne UI)
   var stackNum = document.getElementById('dossier-stack-num');
@@ -8230,6 +8368,218 @@ function renderRituelDuJour() {
     var dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
     stackNum.textContent = 'N°' + String(dayOfYear).padStart(3, '0');
   }
+}
+
+// ============================================================
+// CONTINUER L'ENQUÊTE — prototype de continuité après la Mission du jour
+// Réutilise exclusivement des contenus et fonctions déjà existants
+// (Interrogatoire Flash, Dossier de So, Carnet). N'attribue aucun XP
+// bonus : les entrées "mission" réelles restent protégées par la garde
+// anti-doublon déjà présente dans completeMission().
+// ============================================================
+
+// Choisit un quiz Flash pour l'Indice bonus — différent de la Mission du
+// jour si elle est elle-même un quiz, en priorisant celui joué le moins
+// récemment (flash_quiz_scores). Repli sur getTodayQuizIndex() si aucun
+// score n'existe encore.
+function pickBonusQuizId(todayMission) {
+  var excludeId = (todayMission && todayMission.type === 'quiz') ? todayMission.quizId : -1;
+  var scores = getFlashQuizScores();
+  var candidates = quizzes.map(function(q) { return q.id; }).filter(function(id) { return id !== excludeId; });
+  if (!candidates.length) candidates = quizzes.map(function(q) { return q.id; });
+  candidates.sort(function(a, b) {
+    var da = (scores[a] && scores[a].lastDate) || '';
+    var db = (scores[b] && scores[b].lastDate) || '';
+    if (da === db) return a - b;
+    return da < db ? -1 : 1; // jamais joué (chaîne vide) en premier, puis le plus ancien
+  });
+  return candidates.length ? candidates[0] : getTodayQuizIndex();
+}
+
+// Sélectionne un contenu "Approfondir" : READY, non DORMANT, différent de
+// la Mission du jour, en priorisant ce qui n'a jamais été fait ou le plus
+// ancien. Limité aux Dossiers de So et aux Interrogatoires Flash pour ce
+// prototype — voir limitation Mission Cheval signalée à l'équipe.
+function pickApprofondirContent(todayMission) {
+  var scores = getFlashQuizScores();
+  var candidates = [];
+
+  MISSION_POOL.dossier.forEach(function(m) {
+    if (m.status !== 'ready' || m.supportReady === false) return;
+    if (m.ref === todayMission.ref) return;
+    candidates.push({ mission: m, lastDate: '' }); // pas de date de dernière lecture disponible pour les dossiers
+  });
+
+  MISSION_POOL.quiz.forEach(function(m) {
+    if (m.status !== 'ready' || m.supportReady === false) return;
+    if (m.ref === todayMission.ref) return;
+    if (m.ref === 'Q-06') return; // révision aléatoire — écartée du choix auto pour rester prévisible
+    var lastDate = (scores[m.quizId] && scores[m.quizId].lastDate) || '';
+    candidates.push({ mission: m, lastDate: lastDate });
+  });
+
+  if (!candidates.length) return null;
+
+  candidates.sort(function(a, b) {
+    if (a.lastDate === b.lastDate) return a.mission.ref < b.mission.ref ? -1 : 1;
+    return a.lastDate < b.lastDate ? -1 : 1; // jamais fait en premier, puis le plus ancien
+  });
+
+  return candidates[0].mission;
+}
+
+// Rendu du bloc "Continuer l'enquête" — affiché uniquement quand la
+// Mission du jour est déjà accomplie.
+function renderContinuerEnqueteHtml(todayMission) {
+  var approfondir = pickApprofondirContent(todayMission);
+
+  var approfondirCard = approfondir
+    ? '<div class="enquete-suite-card" onclick="lancerApprofondir()" role="button" tabindex="0">'
+      + '<div class="enquete-suite-card-head">'
+      +   '<span class="enquete-suite-icon">📚</span>'
+      +   '<span class="enquete-suite-title">Approfondir</span>'
+      + '</div>'
+      + '<div class="enquete-suite-sub">Poursuis avec un dossier, un quiz ou une Mission Cheval déjà disponible.</div>'
+      + '<span class="enquete-suite-duree">Environ 5 minutes</span>'
+      + '</div>'
+    : '<div class="enquete-suite-card enquete-suite-card-empty">'
+      + '<div class="enquete-suite-card-head">'
+      +   '<span class="enquete-suite-icon">📚</span>'
+      +   '<span class="enquete-suite-title">Approfondir</span>'
+      + '</div>'
+      + '<div class="enquete-suite-sub">Rien de nouveau à explorer pour l\'instant — reviens bientôt.</div>'
+      + '</div>';
+
+  return '<div class="enquete-suite">'
+    + '<div class="enquete-suite-header">🔎 Continuer l\'enquête</div>'
+    + '<div class="enquete-suite-intro">Ta Mission du jour est terminée. Tu peux t\'arrêter ici… ou suivre une nouvelle piste.</div>'
+    + '<div class="enquete-suite-grid">'
+    +   '<div class="enquete-suite-card" onclick="lancerIndiceBonus()" role="button" tabindex="0">'
+    +     '<div class="enquete-suite-card-head">'
+    +       '<span class="enquete-suite-icon">⚡</span>'
+    +       '<span class="enquete-suite-title">Indice bonus</span>'
+    +     '</div>'
+    +     '<div class="enquete-suite-sub">Une question rapide pour garder l\'œil en alerte.</div>'
+    +     '<span class="enquete-suite-duree">Environ 1 minute</span>'
+    +   '</div>'
+    +   '<div class="enquete-suite-card" onclick="ouvrirQueteTerrain()" role="button" tabindex="0">'
+    +     '<div class="enquete-suite-card-head">'
+    +       '<span class="enquete-suite-icon">🐴</span>'
+    +       '<span class="enquete-suite-title">Quête terrain</span>'
+    +     '</div>'
+    +     '<div class="enquete-suite-sub">Une petite observation à réaliser avec ton cheval ou à partir de ta dernière séance.</div>'
+    +     '<span class="enquete-suite-duree">Environ 3 à 5 minutes</span>'
+    +   '</div>'
+    +   approfondirCard
+    + '</div>'
+    + '<div class="enquete-suite-footnote">Facultatif — ta Mission du jour reste acquise, quel que soit ton choix.</div>'
+    + '</div>';
+}
+
+// ── Indice bonus — Interrogatoire Flash sans XP (contexte 'library' déjà
+// existant : ni XP, ni validation de la Mission du jour, mais déblocage
+// et meilleur score enregistrés normalement, comme depuis la Bibliothèque) ──
+function lancerIndiceBonus() {
+  var today = getMissionDuJour();
+  var qid = pickBonusQuizId(today);
+  startFlashQuiz(qid, 'library');
+}
+
+// ── Approfondir — ouvre un Dossier de So ou un Interrogatoire Flash via
+// leurs points d'entrée normaux. isMissionV1DoneToday() étant déjà vrai
+// à ce stade, completeMission() ne peut pas attribuer d'XP supplémentaire
+// (garde anti-doublon déjà existante) ──
+function lancerApprofondir() {
+  var today = getMissionDuJour();
+  var m = pickApprofondirContent(today);
+  if (!m) return; // sécurité — la carte est déjà affichée comme indisponible dans ce cas
+  if (m.type === 'dossier') {
+    ouvrirDossierSo(m.dossierId || m.ref, m.xp);
+  } else if (m.type === 'quiz') {
+    startFlashQuiz(m.quizId, 'mission');
+  }
+}
+
+// ── Quête terrain — prototype d'interface uniquement ──
+// Réutilise le stockage Carnet existant (carnetObs / saveCarnetData) sans
+// modifier son schéma : une entrée minimale n'utilisant que le champ
+// "interpretation" est déjà une forme valide et déjà gérée par
+// renderObsList(). Limitation : nécessite qu'une fiche cheval existe déjà
+// (contrainte déjà présente dans l'architecture du Carnet, non créée par
+// ce chantier) — sans fiche, l'interface reste utilisable mais
+// l'enregistrement est expliqué comme indisponible.
+var _queteTerrainText = '';
+
+function ouvrirQueteTerrain() {
+  _queteTerrainText = '';
+  showScreen('quete-terrain');
+}
+
+function renderQueteTerrain() {
+  var el = document.getElementById('quete-terrain-content');
+  if (!el) return;
+
+  var selectHtml = '';
+  if (carnetHorses.length > 1) {
+    selectHtml = '<label class="qt-label" for="qt-horse-select">Pour quel cheval ?</label>'
+      + '<select id="qt-horse-select" class="qt-select">'
+      + carnetHorses.map(function(h) { return '<option value="' + esc(h.id) + '">' + esc(h.name) + '</option>'; }).join('')
+      + '</select>';
+  }
+
+  var noHorseNotice = carnetHorses.length === 0
+    ? '<div class="qt-no-horse">Pour enregistrer cette observation dans ton Carnet, crée d\'abord une fiche pour ton cheval.'
+      + '<button class="qt-create-horse-btn" onclick="showCreateHorseForm()">+ Créer ma fiche cheval</button>'
+      + '</div>'
+    : '';
+
+  el.innerHTML = ''
+    + '<div class="qt-prompt-card">'
+    +   '<div class="qt-prompt-eyebrow">🐴 Quête terrain</div>'
+    +   '<div class="qt-prompt-question">Repense à ta dernière séance. À quel moment ton cheval t\'a-t-il semblé le plus disponible ? Note un indice concret que tu as observé.</div>'
+    + '</div>'
+    + '<textarea id="qt-textarea" class="qt-textarea" placeholder="Ce que j\'ai observé…" oninput="_queteTerrainText = this.value">' + esc(_queteTerrainText) + '</textarea>'
+    + selectHtml
+    + noHorseNotice
+    + '<button class="qt-save-btn" onclick="saveQueteTerrainNote()"' + (carnetHorses.length === 0 ? ' disabled' : '') + '>✓ Enregistrer dans mon Carnet</button>'
+    + '<button class="qt-skip-btn" onclick="showScreen(\'academie\')">Continuer sans enregistrer</button>';
+}
+
+function saveQueteTerrainNote() {
+  var textarea = document.getElementById('qt-textarea');
+  var text = (textarea ? textarea.value : '').trim();
+  if (!text) { if (textarea) textarea.focus(); return; }
+  if (!carnetHorses.length) return; // sécurité — le bouton est désactivé dans ce cas
+
+  var select = document.getElementById('qt-horse-select');
+  var horseId = carnetHorses.length === 1
+    ? carnetHorses[0].id
+    : (select ? select.value : carnetHorses[carnetHorses.length - 1].id);
+
+  carnetObs.push({
+    id: Date.now().toString(),
+    horseId: horseId,
+    date: todayStr(),
+    photo: null,
+    category: null,
+    observations: { oreilles: '', regard: '', posture: '', queue: '', tensionGenerale: '' },
+    interpretation: text,
+    aVerifier: '',
+    createdAt: new Date().toISOString()
+  });
+  saveCarnetData();
+  _queteTerrainText = '';
+  showQueteTerrainConfirmation();
+}
+
+function showQueteTerrainConfirmation() {
+  var el = document.getElementById('quete-terrain-content');
+  if (!el) return;
+  el.innerHTML = '<div class="qt-confirm">'
+    + '<div class="qt-confirm-icon">✓</div>'
+    + '<div class="qt-confirm-text">Ton observation a été ajoutée au Carnet.</div>'
+    + '<button class="qt-save-btn" onclick="showScreen(\'academie\')">← Retour à l\'Académie</button>'
+    + '</div>';
 }
 
 function lancerFlash() {
@@ -10896,7 +11246,13 @@ function validerMissionDossier(xp) {
     showScreen('academie');
     return;
   }
+  // Si la Mission du jour est déjà accomplie (ex. dossier ouvert depuis
+  // "Approfondir"), completeMission() ne fait rien (garde anti-doublon) —
+  // on assure quand même le retour à l'Académie pour éviter un bouton
+  // sans effet visible.
+  var alreadyDoneToday = isMissionV1DoneToday();
   completeMission(xp, 'dossier');
+  if (alreadyDoneToday) { showScreen('academie'); }
 }
 
 // ============================================================

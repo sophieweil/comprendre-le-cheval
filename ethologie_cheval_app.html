@@ -8402,12 +8402,15 @@ function pickBonusQuizId(todayMission) {
 // prototype — voir limitation Mission Cheval signalée à l'équipe.
 function pickApprofondirContent(todayMission) {
   var scores = getFlashQuizScores();
+  var dossierLastRead = getDossierLastRead();
   var candidates = [];
 
   MISSION_POOL.dossier.forEach(function(m) {
     if (m.status !== 'ready' || m.supportReady === false) return;
     if (m.ref === todayMission.ref) return;
-    candidates.push({ mission: m, lastDate: '' }); // pas de date de dernière lecture disponible pour les dossiers
+    var key = m.dossierId || m.ref;
+    var lastDate = dossierLastRead[key] || '';
+    candidates.push({ mission: m, lastDate: lastDate });
   });
 
   MISSION_POOL.quiz.forEach(function(m) {
@@ -11013,13 +11016,28 @@ var _dossierRep   = [];        // réponses utilisateur [null|index|bool, ...]
 var _dossierXp    = 60;        // XP de la mission courante
 var _dossierRevue = false;     // true = lecture seule depuis la bibliothèque (pas de XP)
 
-// Ouverture depuis la Mission du jour (flux complet : lecture → quiz → XP)
+// ── Suivi de dernière lecture des Dossiers de So ─────────────────────────
+// Miroir minimal de flash_quiz_scores.lastDate : uniquement une date de
+// dernière ouverture par dossier, aucune récompense associée. Sert à faire
+// tourner "À approfondir" au lieu de toujours retomber sur le même dossier.
+function getDossierLastRead() {
+  try { return JSON.parse(localStorage.getItem('dossier_last_read') || '{}'); }
+  catch(e) { return {}; }
+}
+function recordDossierLastRead(dossierId) {
+  var data = getDossierLastRead();
+  data[dossierId] = todayStr();
+  localStorage.setItem('dossier_last_read', JSON.stringify(data));
+}
+
+// Ouverture depuis la Mission du jour ou "À approfondir" (flux complet : lecture → quiz → XP)
 function ouvrirDossierSo(dossierId, xp) {
   _dossierRef   = dossierId;
   _dossierXp    = xp || 60;
   _dossierPhase = 'lecture';
   _dossierRep   = [null, null, null];
   _dossierRevue = false;
+  if (!_dossierTestMode) { recordDossierLastRead(dossierId); }
   showScreen('dossier-so');
 }
 
@@ -11030,6 +11048,7 @@ function ouvrirBiblioDossier(dossierId) {
   _dossierPhase = 'lecture';
   _dossierRep   = [null, null, null];
   _dossierRevue = true;
+  recordDossierLastRead(dossierId);
   showScreen('dossier-so');
 }
 

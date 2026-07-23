@@ -4855,6 +4855,156 @@ body {
   line-height: 1.7;
 }
 
+/* ── DS — Prototype ludique "La Vie en Groupe" (D-02) ─────────────────
+   Parcours en 4 étapes, périmètre strictement limité à ce dossier.
+   Classes entièrement dédiées (.vg-*), aucune classe partagée modifiée. ── */
+.vg-progress {
+  margin: 4px 0 22px;
+}
+.vg-progress-bar {
+  height: 5px;
+  background: rgba(47,74,61,0.12);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.vg-progress-fill {
+  height: 100%;
+  background: #2F4A3D;
+  border-radius: 100px;
+  transition: width 0.25s ease;
+}
+.vg-progress-text {
+  font-family: 'Lato', sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #5A7A6A;
+}
+.vg-card {
+  background: var(--soft);
+  border: 1px solid rgba(47,74,61,0.10);
+  border-radius: 16px;
+  padding: 20px 20px 18px;
+  margin-bottom: 18px;
+}
+.vg-eyebrow {
+  font-family: 'Lato', sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #2F4A3D;
+  margin-bottom: 10px;
+}
+.vg-text {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  color: #2F4A3D;
+  line-height: 1.7;
+  margin-bottom: 6px;
+}
+.vg-mini-question {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(47,74,61,0.12);
+}
+.vg-mini-q-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #1E2A24;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+.vg-mini-opts {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.vg-mini-opts-row {
+  flex-direction: row;
+}
+.vg-mini-opt {
+  flex: 1;
+  background: var(--cream);
+  border: 1.5px solid rgba(47,74,61,0.16);
+  border-radius: 11px;
+  font-family: 'Lato', sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #2F4A3D;
+  padding: 12px 14px;
+  text-align: left;
+  cursor: pointer;
+  line-height: 1.4;
+  transition: border-color 0.15s, background 0.15s, opacity 0.15s;
+}
+.vg-mini-opts-row .vg-mini-opt { text-align: center; }
+.vg-mini-opt:hover:not(:disabled) { border-color: rgba(47,74,61,0.35); }
+.vg-mini-opt:disabled { cursor: default; }
+.vg-mini-opt-correct {
+  border-color: #4A7C59;
+  background: rgba(74,124,89,0.12);
+  font-weight: 700;
+}
+.vg-mini-opt-wrong {
+  opacity: 0.5;
+}
+.vg-feedback {
+  margin-top: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: #2F4A3D;
+  line-height: 1.6;
+  background: rgba(74,124,89,0.08);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.vg-kiro-bubble {
+  font-family: 'DM Sans', sans-serif;
+  font-style: italic;
+  font-size: 13px;
+  color: #4B3828;
+  line-height: 1.55;
+  background: rgba(140,106,74,0.10);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 4px;
+}
+.vg-terrain-card {
+  background: var(--soft);
+  border-left: 3px solid #2F4A3D;
+  border-radius: 0 14px 14px 0;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+}
+.vg-indice-box {
+  background: rgba(201,150,62,0.10);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+.vg-btn-back {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #5A7A6A;
+  opacity: 0.8;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  text-align: center;
+  padding: 10px;
+  margin-top: 4px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+@media (max-width: 480px) {
+  .vg-mini-opts-row { flex-direction: row; }
+}
+
 /* Phase quiz */
 .ds-quiz {}
 .ds-quiz-sous {
@@ -11037,6 +11187,7 @@ function ouvrirDossierSo(dossierId, xp) {
   _dossierPhase = 'lecture';
   _dossierRep   = [null, null, null];
   _dossierRevue = false;
+  _vgStep = 1; _vgQ2Answer = null; _vgQ3Answer = null;
   if (!_dossierTestMode) { recordDossierLastRead(dossierId); }
   showScreen('dossier-so');
 }
@@ -11048,6 +11199,7 @@ function ouvrirBiblioDossier(dossierId) {
   _dossierPhase = 'lecture';
   _dossierRep   = [null, null, null];
   _dossierRevue = true;
+  _vgStep = 1; _vgQ2Answer = null; _vgQ3Answer = null;
   recordDossierLastRead(dossierId);
   showScreen('dossier-so');
 }
@@ -11069,6 +11221,8 @@ function _renderDossierLecture(el) {
 
   // Prototype de lecture augmentée — périmètre limité à ce seul dossier (voir chantier pédagogique)
   if (_dossierRef === 'memoire-cheval') { _renderDossierLectureMemoire(el, data); return; }
+  // Prototype de parcours ludique en 4 étapes — périmètre limité à ce seul dossier
+  if (_dossierRef === 'vie-en-groupe') { _renderDossierLectureVieGroupe(el, data); return; }
 
   // Source du contenu : fiche existante (ficheId) ou contenu inline dans data
   var src;
@@ -11138,6 +11292,171 @@ function _renderDossierLectureMemoire(el, data) {
         ? '<button class="ds-cta" onclick="showScreen(\'bibliotheque-so\')">← Retour à la bibliothèque</button>'
         : '<button class="ds-cta" onclick="terminerLectureDossier()">J\'ai tout lu — à moi les questions →</button>')
     + '</div>';
+}
+
+// ============================================================
+// PROTOTYPE LUDIQUE — Dossier D-02 "La Vie en Groupe"
+// Parcours en 4 étapes, périmètre strictement limité à ce dossier.
+// N'affecte aucun autre Dossier ni la logique de validation finale
+// (questions inchangées, gérées par _renderDossierQuiz / terminerLectureDossier).
+// Aucun XP, déblocage ou compteur n'est attribué par les mini-questions :
+// elles servent uniquement à rendre la lecture active.
+// ============================================================
+var _vgStep     = 1;    // 1 à 4
+var _vgQ2Answer = null; // 'A' | 'B' | 'C'
+var _vgQ3Answer = null; // 'oui' | 'non'
+
+function vgAvancerEtape() {
+  if (_vgStep < 4) _vgStep++;
+  renderDossierSo();
+  var wrap = document.querySelector('#screen-dossier-so .acad-page-wrap');
+  if (wrap) wrap.scrollTop = 0;
+}
+
+function vgEtapePrecedente() {
+  if (_vgStep > 1) _vgStep--;
+  renderDossierSo();
+  var wrap = document.querySelector('#screen-dossier-so .acad-page-wrap');
+  if (wrap) wrap.scrollTop = 0;
+}
+
+function vgSelectQ2(choice) {
+  if (_vgQ2Answer !== null) return; // déjà répondu — pas de changement de choix
+  _vgQ2Answer = choice;
+  renderDossierSo();
+}
+
+function vgSelectQ3(choice) {
+  if (_vgQ3Answer !== null) return;
+  _vgQ3Answer = choice;
+  renderDossierSo();
+}
+
+function _renderDossierLectureVieGroupe(el, data) {
+  var progressHtml = '<div class="vg-progress">'
+    + '<div class="vg-progress-bar"><div class="vg-progress-fill" style="width:' + (_vgStep / 4 * 100) + '%"></div></div>'
+    + '<div class="vg-progress-text">Étape ' + _vgStep + ' sur 4</div>'
+    + '</div>';
+
+  var stepHtml;
+  if (_vgStep === 1)      stepHtml = _renderVgEtape1();
+  else if (_vgStep === 2) stepHtml = _renderVgEtape2();
+  else if (_vgStep === 3) stepHtml = _renderVgEtape3();
+  else                    stepHtml = _renderVgEtape4();
+
+  var backHtml = (_vgStep > 1)
+    ? '<button class="vg-btn-back" onclick="vgEtapePrecedente()">← Étape précédente</button>'
+    : '';
+
+  el.innerHTML = (_dossierTestMode ? _testBannerHtml() : '')
+    + '<div class="ds-lecture">'
+    + '<div class="ds-eyebrow">📚 Dossier de So</div>'
+    + '<div class="ds-titre">' + esc(data.titre) + '</div>'
+    + progressHtml
+    + stepHtml
+    + backHtml
+    + '</div>';
+}
+
+function _renderVgEtape1() {
+  return '<div class="vg-card">'
+    + '<div class="vg-eyebrow">🕵️ Ton défi</div>'
+    + '<div class="vg-text">Aujourd\'hui, tu vas apprendre à reconnaître quand un cheval t\'autorise à entrer dans sa bulle.</div>'
+    + '</div>'
+    + '<button class="ds-cta" onclick="vgAvancerEtape()">Découvrir le premier indice →</button>';
+}
+
+function _renderVgEtape2() {
+  var options = [
+    { key: 'A', label: 'Il cherche forcément à dominer.' },
+    { key: 'B', label: 'Tu es probablement entré trop vite ou trop près dans sa zone de confort.' },
+    { key: 'C', label: 'Il veut nécessairement que tu le poursuives.' }
+  ];
+  var answered = _vgQ2Answer !== null;
+  var optsHtml = options.map(function(o) {
+    var cls = 'vg-mini-opt';
+    if (answered) {
+      if (o.key === 'B') cls += ' vg-mini-opt-correct';
+      else if (o.key === _vgQ2Answer) cls += ' vg-mini-opt-wrong';
+    }
+    return '<button class="' + cls + '" onclick="vgSelectQ2(\'' + o.key + '\')"' + (answered ? ' disabled' : '') + '>'
+      + esc(o.label) + '</button>';
+  }).join('');
+
+  var feedbackHtml = answered
+    ? '<div class="vg-feedback">Bien observé. Le recul ne donne pas une explication certaine, mais il peut indiquer que la distance ou la manière d\'approcher ne lui convient pas encore.</div>'
+    : '';
+
+  var nextBtn = answered
+    ? '<button class="ds-cta" onclick="vgAvancerEtape()">Indice suivant →</button>'
+    : '';
+
+  return '<div class="vg-card">'
+    + '<div class="vg-eyebrow">La bulle du cheval</div>'
+    + '<div class="vg-text">Chaque cheval possède une distance à partir de laquelle une présence peut devenir inconfortable ou menaçante. Cette distance varie selon l\'individu et le contexte.</div>'
+    + '<div class="vg-mini-question">'
+    +   '<div class="vg-mini-q-label">Tu avances vers un cheval et il recule. Quelle hypothèse est la plus prudente ?</div>'
+    +   '<div class="vg-mini-opts">' + optsHtml + '</div>'
+    +   feedbackHtml
+    + '</div>'
+    + '</div>'
+    + nextBtn;
+}
+
+function _renderVgEtape3() {
+  var answered = _vgQ3Answer !== null;
+  var opts = [
+    { key: 'oui', label: 'Oui' },
+    { key: 'non', label: 'Non' }
+  ];
+  var optsHtml = opts.map(function(o) {
+    var cls = 'vg-mini-opt';
+    if (answered) {
+      if (o.key === 'non') cls += ' vg-mini-opt-correct';
+      else if (o.key === _vgQ3Answer) cls += ' vg-mini-opt-wrong';
+    }
+    return '<button class="' + cls + '" onclick="vgSelectQ3(\'' + o.key + '\')"' + (answered ? ' disabled' : '') + '>'
+      + o.label + '</button>';
+  }).join('');
+
+  var feedbackHtml = answered
+    ? '<div class="vg-feedback">Exact. Forcer la distance peut augmenter l\'inquiétude. Mieux vaut ralentir, observer et vérifier si le cheval choisit ensuite de revenir ou de rester.</div>'
+    : '';
+
+  var nextBtn = answered
+    ? '<button class="ds-cta" onclick="vgAvancerEtape()">Préparer ma mission terrain →</button>'
+    : '';
+
+  return '<div class="vg-card">'
+    + '<div class="vg-eyebrow">Attendre l\'invitation</div>'
+    + '<div class="vg-text">Un cheval qui s\'approche volontairement ne donne pas la même information qu\'un cheval obligé de rester près de nous. La confiance se construit aussi en lui laissant la possibilité de s\'éloigner.</div>'
+    + '<div class="vg-kiro-bubble">🦅 Kiro pense : « S\'il s\'éloigne, je dois avancer plus vite pour lui montrer que je décide. »</div>'
+    + '<div class="vg-mini-question">'
+    +   '<div class="vg-mini-q-label">Kiro a-t-il raison ?</div>'
+    +   '<div class="vg-mini-opts vg-mini-opts-row">' + optsHtml + '</div>'
+    +   feedbackHtml
+    + '</div>'
+    + '</div>'
+    + nextBtn;
+}
+
+function _renderVgEtape4() {
+  var finalBtn = _dossierRevue
+    ? '<button class="ds-cta" onclick="showScreen(\'bibliotheque-so\')">← Retour à la bibliothèque</button>'
+    : '<button class="ds-cta" onclick="terminerLectureDossier()">🔓 Dossier exploré — à moi les questions →</button>';
+
+  return '<div class="vg-terrain-card">'
+    + '<div class="vg-eyebrow">🐴 À tester sur le terrain</div>'
+    + '<div class="vg-text">Approche lentement, sans fixer le cheval dans les yeux.<br>'
+    +   'Arrête-toi au premier changement observable :<br>'
+    +   'regard, respiration, orientation de la tête, posture ou déplacement.</div>'
+    + '<div class="vg-text" style="margin-bottom:0;">Attends quelques secondes et observe ce qui se passe ensuite.</div>'
+    + '</div>'
+    + '<div class="vg-indice-box">'
+    +   '<div class="vg-eyebrow">🔎 Ton indice à retenir</div>'
+    +   '<div class="vg-text" style="margin-bottom:0;">Le cheval doit toujours pouvoir choisir de s\'éloigner.</div>'
+    + '</div>'
+    + finalBtn;
 }
 
 function terminerLectureDossier() {

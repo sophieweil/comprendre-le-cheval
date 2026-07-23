@@ -5152,6 +5152,56 @@ body {
   text-decoration: underline;
 }
 
+/* ── DS — Défi final de "La Vie en Groupe" (D-02) — mini-écrans ────────
+   Réutilise les classes .vg-card/.vg-title/.vg-text/.vg-mini-*/.vg-cta/
+   .vg-feedback*/.vg-progress*/.vg-celebration/.vg-spark déjà définies
+   ci-dessus, sans les modifier. Seuls les éléments propres à l'écran de
+   résultat (récapitulatif, badge XP) sont ajoutés ici. ── */
+.vg-result-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #1E2A24;
+  margin-bottom: 8px;
+}
+.vg-recap-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 4px 0 18px;
+}
+.vg-recap-card {
+  background: rgba(44,140,134,0.10);
+  color: #1E2A24;
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+}
+.vg-xp-badge {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #2F4A3D;
+  background: rgba(217,164,65,0.16);
+  border-radius: 100px;
+  padding: 10px 0;
+  margin: 4px 0 14px;
+}
+.vg-xp-badge-test {
+  text-align: center;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #8A5A3A;
+  background: rgba(192,90,42,0.08);
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin: 4px 0 14px;
+}
+
 /* Phase quiz */
 .ds-quiz {}
 .ds-quiz-sous {
@@ -11335,6 +11385,7 @@ function ouvrirDossierSo(dossierId, xp) {
   _dossierRep   = [null, null, null];
   _dossierRevue = false;
   _vgStep = 1; _vgQ2Answer = null; _vgQ2Verified = false; _vgQ3Answer = null; _vgQ3Verified = false;
+  _vgQuizStep = 0; _vgQuizVerified = false;
   if (!_dossierTestMode) { recordDossierLastRead(dossierId); }
   showScreen('dossier-so');
 }
@@ -11347,6 +11398,7 @@ function ouvrirBiblioDossier(dossierId) {
   _dossierRep   = [null, null, null];
   _dossierRevue = true;
   _vgStep = 1; _vgQ2Answer = null; _vgQ2Verified = false; _vgQ3Answer = null; _vgQ3Verified = false;
+  _vgQuizStep = 0; _vgQuizVerified = false;
   recordDossierLastRead(dossierId);
   showScreen('dossier-so');
 }
@@ -11358,6 +11410,10 @@ function renderDossierSo() {
     el.innerHTML = '<div class="ds-error">Dossier introuvable.</div>';
     return;
   }
+  // Prototype de défi final en mini-écrans — périmètre limité à ce seul dossier
+  if (_dossierRef === 'vie-en-groupe' && _dossierPhase === 'quiz')      { _renderVgQuiz(el); return; }
+  if (_dossierRef === 'vie-en-groupe' && _dossierPhase === 'resultats') { _renderVgResultats(el); return; }
+
   if (_dossierPhase === 'lecture')    _renderDossierLecture(el);
   else if (_dossierPhase === 'quiz')  _renderDossierQuiz(el);
   else                                _renderDossierResultats(el);
@@ -11651,6 +11707,183 @@ function _renderVgEtape4() {
     +   '<div class="vg-text" style="margin-bottom:0;">Le cheval doit pouvoir choisir de rester ou de s\'éloigner.</div>'
     + '</div>'
     + '<button class="vg-cta" onclick="' + finalClick + '">' + finalLabel + '</button>';
+}
+
+// ============================================================
+// DÉFI FINAL EN MINI-ÉCRANS — Dossier D-02 "La Vie en Groupe" — V3
+// Périmètre strictement limité à ce dossier. Réutilise sans les modifier
+// terminerLectureDossier(), validerQuizDossier() (calcul du score sur
+// _dossierRep, inchangé) et validerMissionDossier() (XP/déblocage,
+// inchangé, y compris sa gestion du mode test QG). Seule la présentation
+// — une question à la fois au lieu des trois simultanément — change.
+// ============================================================
+var _vgQuizStep     = 0;     // 0 = écran de lancement, 1/2/3 = question courante
+var _vgQuizVerified = false; // true une fois "Vérifier" cliqué pour la question courante
+
+var VG_QUIZ_FEEDBACK = {
+  1: {
+    ok: { title: '✅ Bien observé', text: 'Le cheval augmente la distance. Cela peut indiquer que tu es trop proche ou que ton approche ne lui convient pas encore.' },
+    ko: { title: '🔎 Reviens à ce qui est visible', text: 'Le recul ne permet pas de conclure qu\'il joue ou qu\'il est simplement curieux. L\'indice observable est qu\'il augmente la distance.' }
+  },
+  2: {
+    ok: { title: '✅ Exact', text: 'Forcer la proximité peut augmenter l\'inquiétude. La confiance se construit aussi en laissant au cheval la possibilité de s\'éloigner.' },
+    ko: { title: '🔎 Pas tout à fait', text: 'La contrainte peut empêcher le cheval de s\'éloigner, mais elle ne garantit pas qu\'il se sente en confiance.' }
+  },
+  3: {
+    ok: { title: '✅ Enquête résolue', text: 'Une approche volontaire peut être un indice de confiance ou de disponibilité, à interpréter avec l\'ensemble du contexte.' },
+    ko: { title: '🔎 Observe encore', text: 'Une approche volontaire ne correspond pas automatiquement à de la peur ou de l\'indifférence. Il faut relier cet indice au reste de la situation.' }
+  }
+};
+
+function vgLancerDefiFinal() {
+  _vgQuizStep = 1;
+  renderDossierSo();
+  var wrap = document.querySelector('#screen-dossier-so .acad-page-wrap');
+  if (wrap) wrap.scrollTop = 0;
+}
+
+function vgSelectQuizReponse(valeur) {
+  if (_vgQuizVerified) return;
+  _dossierRep[_vgQuizStep - 1] = valeur;
+  renderDossierSo();
+}
+
+function vgVerifierQuiz() {
+  if (_dossierRep[_vgQuizStep - 1] === null || _vgQuizVerified) return;
+  _vgQuizVerified = true;
+  renderDossierSo();
+}
+
+// Question suivante, ou calcul du résultat (via validerQuizDossier(),
+// inchangée) après la 3e question.
+function vgQuestionSuivante() {
+  if (_vgQuizStep < 3) {
+    _vgQuizStep++;
+    _vgQuizVerified = false;
+    renderDossierSo();
+    var wrap = document.querySelector('#screen-dossier-so .acad-page-wrap');
+    if (wrap) wrap.scrollTop = 0;
+  } else {
+    validerQuizDossier();
+  }
+}
+
+function _vgDefiDots(current) {
+  var html = '';
+  for (var i = 1; i <= 3; i++) {
+    var cls = 'vg-progress-dot' + (i < current ? ' vg-progress-dot-done' : i === current ? ' vg-progress-dot-active' : '');
+    html += '<div class="' + cls + '"></div>';
+    if (i < 3) html += '<div class="vg-progress-line' + (i < current ? ' vg-progress-line-done' : '') + '"></div>';
+  }
+  return html;
+}
+
+function _renderVgQuiz(el) {
+  var stepHtml = (_vgQuizStep === 0) ? _renderVgQuizIntro() : _renderVgQuizQuestion(_vgQuizStep);
+  el.innerHTML = (_dossierTestMode ? _testBannerHtml() : '') + stepHtml;
+}
+
+function _renderVgQuizIntro() {
+  return '<div class="vg-progress">'
+    + '<div class="vg-progress-steps">' + _vgDefiDots(1) + '</div>'
+    + '<div class="vg-progress-text">Défi 1 sur 3</div>'
+    + '</div>'
+    + '<div class="vg-card">'
+    +   '<div class="vg-title">🔓 Dernière étape : résous l\'enquête</div>'
+    +   '<div class="vg-text" style="margin-bottom:0;">Trois décisions rapides pour vérifier ton regard.</div>'
+    + '</div>'
+    + '<button class="vg-cta" onclick="vgLancerDefiFinal()">Commencer le défi final →</button>';
+}
+
+function _renderVgQuizQuestion(n) {
+  var data    = DOSSIERS_SO[_dossierRef];
+  var q       = data.questions[n - 1];
+  var current = _dossierRep[n - 1];
+  var verified = _vgQuizVerified;
+
+  var choix = (q.type === 'vf')
+    ? [{ val: true, label: 'Vrai' }, { val: false, label: 'Faux' }]
+    : q.options.map(function(opt, idx) { return { val: idx, label: opt }; });
+
+  var optsHtml = choix.map(function(c) {
+    var cls = 'vg-mini-opt';
+    var estCorrecte = c.val === q.bonne;
+    var estChoisie  = current === c.val;
+    if (verified) {
+      if (estCorrecte) cls += ' vg-mini-opt-correct';
+      else if (estChoisie) cls += ' vg-mini-opt-wrong';
+    } else if (estChoisie) {
+      cls += ' vg-mini-opt-selected';
+    }
+    return '<button class="' + cls + '" onclick="vgSelectQuizReponse(' + JSON.stringify(c.val) + ')"' + (verified ? ' disabled' : '') + '>'
+      + esc(String(c.label)) + '</button>';
+  }).join('');
+
+  var actionHtml;
+  if (!verified) {
+    actionHtml = '<button class="vg-cta" onclick="vgVerifierQuiz()"' + (current === null ? ' disabled' : '') + '>Vérifier</button>';
+  } else {
+    var isCorrect = current === q.bonne;
+    var fb = isCorrect ? VG_QUIZ_FEEDBACK[n].ok : VG_QUIZ_FEEDBACK[n].ko;
+    var nextLabel = (n < 3) ? 'Question suivante →' : 'Voir le résultat de mon enquête →';
+    actionHtml = '<div class="vg-feedback ' + (isCorrect ? 'vg-feedback-ok' : 'vg-feedback-ko') + '">'
+      +   '<div class="vg-feedback-title">' + fb.title + '</div>'
+      +   '<div class="vg-feedback-text">' + fb.text + '</div>'
+      + '</div>'
+      + '<button class="vg-cta" onclick="vgQuestionSuivante()">' + nextLabel + '</button>';
+  }
+
+  return '<div class="vg-progress">'
+    + '<div class="vg-progress-steps">' + _vgDefiDots(n) + '</div>'
+    + '<div class="vg-progress-text">Défi ' + n + ' sur 3</div>'
+    + '</div>'
+    + '<div class="vg-card">'
+    +   '<div class="vg-mini-q-label">' + esc(q.enonce) + '</div>'
+    +   '<div class="vg-mini-opts">' + optsHtml + '</div>'
+    + '</div>'
+    + actionHtml;
+}
+
+function _renderVgResultats(el) {
+  // Débloque le dossier dans la bibliothèque personnelle (idempotent) — ignoré en mode test
+  // (même règle que _renderDossierResultats, la fonction partagée équivalente)
+  if (!_dossierTestMode) { debloqueDossierSo(_dossierRef); }
+
+  var xp    = _dossierXp;
+  var score = _dossierScore;
+
+  var msg;
+  if (score === 3) {
+    msg = { title: '🌟 Regard affûté !', text: 'Tu as relié les indices sans aller trop vite dans tes conclusions.' };
+  } else if (score === 2) {
+    msg = { title: '🔎 Belle enquête !', text: 'Ton regard progresse. Continue à décrire avant d\'interpréter.' };
+  } else {
+    msg = { title: '🧭 Une nouvelle piste à explorer', text: 'Les erreurs font partie de l\'enquête. Reprends les indices tranquillement.' };
+  }
+
+  var recapHtml = ['Observer la distance', 'Attendre la réaction', 'Vérifier avec plusieurs indices'].map(function(t) {
+    return '<div class="vg-recap-card">' + t + '</div>';
+  }).join('');
+
+  var xpHtml = _dossierTestMode
+    ? '<div class="vg-xp-badge-test">🧪 Mode test — XP non comptabilisé</div>'
+    : '<div class="vg-xp-badge">🎯 +' + xp + ' XP</div>';
+
+  var btnLabel = _dossierTestMode ? '🧪 Mode test — retour sans enregistrement' : 'Retourner à l\'Académie →';
+
+  el.innerHTML = (_dossierTestMode ? _testBannerHtml() : '')
+    + '<div class="vg-celebration">'
+    +   '<span class="vg-spark">✦</span><span class="vg-spark">✧</span><span class="vg-spark">✦</span>'
+    +   '<span class="vg-spark">✧</span><span class="vg-spark">✦</span>'
+    + '</div>'
+    + '<div class="vg-card" style="text-align:center;">'
+    +   '<div class="vg-title">Enquête terminée !</div>'
+    +   '<div class="vg-result-subtitle">' + msg.title + '</div>'
+    +   '<div class="vg-text" style="margin-bottom:0;">' + msg.text + '</div>'
+    + '</div>'
+    + '<div class="vg-recap-grid">' + recapHtml + '</div>'
+    + xpHtml
+    + '<button class="vg-cta" onclick="validerMissionDossier(' + xp + ')">' + btnLabel + '</button>';
 }
 
 function terminerLectureDossier() {

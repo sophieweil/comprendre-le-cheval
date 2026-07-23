@@ -4855,351 +4855,238 @@ body {
   line-height: 1.7;
 }
 
-/* ── DS — Prototype ludique "La Vie en Groupe" (D-02) — v2 ────────────
-   Parcours en 4 étapes façon petite enquête, une action principale par
-   écran. Périmètre strictement limité à ce dossier. Classes entièrement
-   dédiées (.vg-*), aucune classe partagée modifiée.
-   Accents secondaires propres à ce prototype : miel (#D9A441, progression),
-   bleu-canard (#2C8C86, indices), corail (#E4694B, actions/feedback). ── */
-@keyframes vgFadeIn {
+/* ══════════════════════════════════════════════════════════════════
+   RWS-* — composants de ludification réutilisables (prototype D-02)
+   Préfixe générique pensé pour être repris plus tard par d'autres
+   contenus (Flash, Dossiers, Missions Cheval, Quêtes terrain), mais
+   utilisé pour l'instant uniquement par "La Vie en Groupe". Ne modifie
+   aucune classe .ds-*/.dsm-*/.vg-* existante.
+   Accents : miel #D9A441 (progression), bleu-canard #2C8C86 (indices),
+   vert soutenu #3F9142 (juste), corail #E4694B (à revoir).        ── */
+@keyframes rwsFadeIn {
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-@keyframes vgSpark {
+@keyframes rwsSpark {
   0%   { opacity: 0; transform: scale(0.4) translateY(4px); }
   35%  { opacity: 1; transform: scale(1.15) translateY(-3px); }
   100% { opacity: 0; transform: scale(0.9) translateY(-9px); }
 }
-.vg-progress {
-  margin: 4px 0 24px;
-}
-.vg-progress-steps {
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
-}
-.vg-progress-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(47,74,61,0.15);
-  flex-shrink: 0;
-  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-}
-.vg-progress-dot-done { background: #2F4A3D; }
-.vg-progress-dot-active {
-  background: #D9A441;
-  transform: scale(1.35);
-  box-shadow: 0 0 0 4px rgba(217,164,65,0.22);
-}
-.vg-progress-line {
-  flex: 1;
-  height: 3px;
-  background: rgba(47,74,61,0.12);
-  margin: 0 5px;
-  border-radius: 100px;
-  transition: background 0.3s ease;
-}
-.vg-progress-line-done { background: #2F4A3D; }
-.vg-progress-text {
-  font-family: 'Lato', sans-serif;
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #5A7A6A;
-}
-.vg-card {
-  background: var(--soft);
-  border: 1px solid rgba(47,74,61,0.10);
-  border-radius: 20px;
-  padding: 26px 24px 24px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 20px rgba(47,74,61,0.06);
-  animation: vgFadeIn 0.3s ease both;
-}
-.vg-eyebrow {
-  font-family: 'Lato', sans-serif;
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #2C8C86;
-  margin-bottom: 10px;
-}
-.vg-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 23px;
-  font-weight: 700;
-  color: #1E2A24;
-  line-height: 1.25;
-  margin-bottom: 12px;
-}
-.vg-text {
-  font-family: 'Lato', sans-serif;
-  font-size: 15px;
-  color: #2F4A3D;
-  line-height: 1.65;
-  margin-bottom: 8px;
-}
-.vg-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: rgba(44,140,134,0.07);
-  border: 1.5px dashed rgba(44,140,134,0.35);
-  border-radius: 18px;
-  padding: 34px 20px;
-  margin: 14px 0 18px;
-}
-.vg-placeholder-icon { font-size: 40px; opacity: 0.85; line-height: 1; }
-.vg-placeholder-label {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
-  font-style: italic;
-  color: #2C8C86;
-  opacity: 0.85;
-}
-.vg-mini-question {
-  margin-top: 18px;
-  padding-top: 18px;
-  border-top: 1px solid rgba(47,74,61,0.12);
-}
-.vg-mini-q-label {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
-  font-weight: 600;
-  color: #1E2A24;
-  line-height: 1.4;
-  margin-bottom: 14px;
-}
-.vg-mini-opts {
-  display: flex;
-  flex-direction: column;
-  gap: 11px;
-}
-.vg-mini-opt {
-  flex: 1;
-  background: var(--cream);
-  border: 2px solid rgba(47,74,61,0.14);
-  border-radius: 14px;
-  font-family: 'Lato', sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  color: #2F4A3D;
-  padding: 16px 18px;
-  text-align: left;
-  cursor: pointer;
-  line-height: 1.45;
-  box-shadow: 0 2px 6px rgba(47,74,61,0.05);
-  transition: border-color 0.15s, background 0.15s, transform 0.15s, box-shadow 0.15s, opacity 0.15s;
-}
-.vg-mini-opt:hover:not(:disabled) {
-  border-color: rgba(228,105,75,0.45);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(47,74,61,0.10);
-}
-.vg-mini-opt:disabled { cursor: default; }
-.vg-mini-opt-selected {
-  border-color: #E4694B;
-  background: rgba(228,105,75,0.08);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(228,105,75,0.16);
-}
-.vg-mini-opt-correct {
-  border-color: #4A7C59;
-  background: rgba(74,124,89,0.14);
-  font-weight: 700;
-  transform: none;
-}
-.vg-mini-opt-wrong {
-  opacity: 0.45;
-  transform: none;
-}
-.vg-cta {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  background: #E4694B;
-  color: #FFF8F2;
-  border: none;
-  border-radius: 14px;
-  font-family: 'Lato', sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  padding: 16px 20px;
-  cursor: pointer;
-  margin-top: 6px;
-  transition: background 0.18s, transform 0.1s;
-}
-.vg-cta:hover:not(:disabled) { background: #CF5A3F; }
-.vg-cta:active:not(:disabled) { transform: scale(0.98); }
-.vg-cta:disabled {
-  background: rgba(47,74,61,0.18);
-  color: rgba(47,74,61,0.42);
-  cursor: not-allowed;
-}
-.vg-feedback {
-  margin-top: 14px;
-  border-radius: 14px;
-  padding: 16px 18px;
-  animation: vgFadeIn 0.3s ease both;
-}
-.vg-feedback-ok { background: rgba(74,124,89,0.10); border: 1px solid rgba(74,124,89,0.25); }
-.vg-feedback-ko { background: rgba(228,105,75,0.08); border: 1px solid rgba(228,105,75,0.22); }
-.vg-feedback-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 17px;
-  font-weight: 700;
-  color: #1E2A24;
-  margin-bottom: 6px;
-}
-.vg-feedback-text {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13.5px;
-  color: #2F4A3D;
-  line-height: 1.6;
-}
-.vg-kiro-bubble {
-  font-family: 'DM Sans', sans-serif;
-  font-style: italic;
-  font-size: 13.5px;
-  color: #4B3828;
-  line-height: 1.55;
-  background: rgba(140,106,74,0.10);
-  border-radius: 14px;
-  padding: 14px 16px;
-  margin-bottom: 6px;
-}
-.vg-celebration {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin: 0 0 10px;
-  pointer-events: none;
-}
-.vg-spark {
-  font-size: 16px;
-  color: #D9A441;
-  animation: vgSpark 1.1s ease-out both;
-}
-.vg-spark:nth-child(2) { color: #E4694B; animation-delay: 0.08s; }
-.vg-spark:nth-child(3) { color: #2C8C86; animation-delay: 0.16s; }
-.vg-spark:nth-child(4) { color: #E4694B; animation-delay: 0.24s; }
-.vg-spark:nth-child(5) { color: #D9A441; animation-delay: 0.32s; }
-.vg-terrain-card {
-  background: var(--soft);
-  border-left: 4px solid #2F4A3D;
-  border-radius: 0 18px 18px 0;
-  padding: 22px 22px 20px;
-  margin-bottom: 16px;
-  animation: vgFadeIn 0.3s ease both;
-}
-.vg-terrain-steps {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin-top: 6px;
-}
-.vg-terrain-step {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-.vg-terrain-step-num {
-  flex-shrink: 0;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: #2F4A3D;
-  color: #F2EBD9;
-  font-family: 'Lato', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.vg-terrain-step-text {
-  font-family: 'Lato', sans-serif;
-  font-size: 14.5px;
-  color: #2F4A3D;
-  line-height: 1.55;
-  padding-top: 3px;
-}
-.vg-indice-box {
-  background: rgba(44,140,134,0.10);
-  border-radius: 16px;
-  padding: 18px 20px;
-  margin-bottom: 22px;
-}
-.vg-btn-back {
-  display: block;
-  width: 100%;
-  background: none;
-  border: none;
-  color: #5A7A6A;
-  opacity: 0.75;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12.5px;
-  text-align: center;
-  padding: 12px;
-  margin-top: 6px;
-  cursor: pointer;
-  text-decoration: underline;
+@keyframes rwsPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
-/* ── DS — Défi final de "La Vie en Groupe" (D-02) — mini-écrans ────────
-   Réutilise les classes .vg-card/.vg-title/.vg-text/.vg-mini-*/.vg-cta/
-   .vg-feedback*/.vg-progress*/.vg-celebration/.vg-spark déjà définies
-   ci-dessus, sans les modifier. Seuls les éléments propres à l'écran de
-   résultat (récapitulatif, badge XP) sont ajoutés ici. ── */
-.vg-result-subtitle {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 19px;
-  font-weight: 700;
-  color: #1E2A24;
-  margin-bottom: 8px;
+.rws-game-progress { margin: 4px 0 20px; }
+.rws-game-progress-steps { display: flex; align-items: center; margin-bottom: 8px; }
+.rws-game-progress-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: rgba(47,74,61,0.15); flex-shrink: 0;
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
-.vg-recap-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin: 4px 0 18px;
+.rws-game-progress-dot-done { background: #2F4A3D; }
+.rws-game-progress-dot-active {
+  background: #D9A441; transform: scale(1.35);
+  box-shadow: 0 0 0 4px rgba(217,164,65,0.22);
 }
-.vg-recap-card {
-  background: rgba(44,140,134,0.10);
-  color: #1E2A24;
-  border-radius: 12px;
-  padding: 11px 14px;
-  font-family: 'Lato', sans-serif;
-  font-size: 13px;
-  font-weight: 600;
+.rws-game-progress-line {
+  flex: 1; height: 3px; background: rgba(47,74,61,0.12);
+  margin: 0 5px; border-radius: 100px; transition: background 0.3s ease;
 }
-.vg-xp-badge {
-  text-align: center;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: #2F4A3D;
-  background: rgba(217,164,65,0.16);
-  border-radius: 100px;
-  padding: 10px 0;
-  margin: 4px 0 14px;
+.rws-game-progress-line-done { background: #2F4A3D; }
+.rws-game-progress-text {
+  font-family: 'Lato', sans-serif; font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: #5A7A6A;
 }
-.vg-xp-badge-test {
-  text-align: center;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: #8A5A3A;
-  background: rgba(192,90,42,0.08);
-  border-radius: 12px;
-  padding: 10px 14px;
-  margin: 4px 0 14px;
+
+.rws-game-card {
+  background: var(--soft); border: 1px solid rgba(47,74,61,0.10);
+  border-radius: 20px; padding: 26px 24px 24px; margin-bottom: 18px;
+  box-shadow: 0 4px 20px rgba(47,74,61,0.06);
+  animation: rwsFadeIn 0.3s ease both;
+}
+.rws-game-title {
+  font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700;
+  color: #1E2A24; line-height: 1.25; margin-bottom: 12px;
+}
+.rws-game-situation {
+  font-family: 'Lato', sans-serif; font-size: 14.5px; font-style: italic;
+  color: #5A7A6A; line-height: 1.6; margin-bottom: 10px;
+}
+.rws-game-prompt {
+  font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600;
+  color: #1E2A24; line-height: 1.4; margin-bottom: 14px;
+}
+.rws-game-phrase {
+  font-family: 'Lato', sans-serif; font-size: 16px; color: #2F4A3D;
+  line-height: 1.7; margin-bottom: 16px;
+}
+.rws-blank {
+  display: inline-block; min-width: 84px; text-align: center;
+  font-weight: 700; color: #2C8C86; border-bottom: 2px solid #2C8C86;
+  padding: 0 4px;
+}
+
+.rws-choice-list { display: flex; flex-direction: column; gap: 11px; }
+.rws-choice-list-row { flex-direction: row; }
+.rws-choice-list-pool { margin-bottom: 16px; }
+.rws-choice-card {
+  flex: 1; background: var(--cream); border: 2px solid rgba(47,74,61,0.14);
+  border-radius: 14px; font-family: 'Lato', sans-serif; font-size: 15px;
+  font-weight: 600; color: #2F4A3D; padding: 16px 18px; text-align: left;
+  cursor: pointer; line-height: 1.45; box-shadow: 0 2px 6px rgba(47,74,61,0.05);
+  transition: border-color 0.15s, background 0.15s, transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+}
+.rws-choice-list-row .rws-choice-card { text-align: center; }
+.rws-choice-card:hover:not(:disabled) {
+  border-color: rgba(228,105,75,0.45); transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(47,74,61,0.10);
+}
+.rws-choice-card:disabled { cursor: default; }
+.rws-choice-card-selected {
+  border-color: #E4694B; background: rgba(228,105,75,0.08);
+  transform: translateY(-2px); box-shadow: 0 6px 16px rgba(228,105,75,0.16);
+}
+.rws-choice-card-correct {
+  border-color: #3F9142; background: rgba(63,145,66,0.16); font-weight: 700;
+  transform: none; animation: rwsPop 0.3s ease;
+}
+.rws-choice-card-wrong { opacity: 0.45; transform: none; }
+
+.rws-word-tiles { display: flex; flex-wrap: wrap; gap: 10px; }
+.rws-word-tile {
+  background: var(--cream); border: 2px solid rgba(44,140,134,0.35);
+  border-radius: 100px; font-family: 'Lato', sans-serif; font-size: 14.5px;
+  font-weight: 700; color: #2C8C86; padding: 11px 20px; cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, transform 0.15s, opacity 0.15s;
+}
+.rws-word-tile:hover:not(:disabled) { transform: translateY(-2px); }
+.rws-word-tile:disabled { cursor: default; }
+.rws-word-tile-selected { border-color: #E4694B; background: rgba(228,105,75,0.10); color: #2F4A3D; }
+.rws-word-tile-correct {
+  border-color: #3F9142; background: rgba(63,145,66,0.18); color: #1E2A24;
+  animation: rwsPop 0.3s ease;
+}
+.rws-word-tile-wrong { opacity: 0.4; }
+
+.rws-classify-zones { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
+.rws-classify-zone {
+  display: block; width: 100%; box-sizing: border-box; text-align: left;
+  background: rgba(44,140,134,0.07); border: 2px dashed rgba(44,140,134,0.35);
+  border-radius: 14px; padding: 14px 16px; cursor: pointer; font: inherit;
+  transition: border-color 0.15s, background 0.15s;
+}
+.rws-classify-zone:disabled { cursor: default; }
+.rws-classify-zone:hover:not(:disabled) { border-color: rgba(44,140,134,0.6); }
+.rws-classify-zone-label {
+  font-family: 'Lato', sans-serif; font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: #2C8C86; margin-bottom: 8px;
+}
+.rws-classify-zone-items { display: flex; flex-direction: column; gap: 8px; }
+.rws-classify-item {
+  background: var(--cream); border-radius: 10px; padding: 10px 12px;
+  font-family: 'Lato', sans-serif; font-size: 13.5px; font-weight: 600;
+  color: #2F4A3D; animation: rwsFadeIn 0.25s ease both;
+}
+.rws-classify-item-correct { background: rgba(63,145,66,0.18); }
+.rws-classify-item-wrong { background: rgba(228,105,75,0.14); opacity: 0.75; }
+
+.rws-sequence-list { display: flex; flex-direction: column; gap: 10px; }
+.rws-sequence-item {
+  display: flex; align-items: center; gap: 12px; width: 100%; box-sizing: border-box;
+  background: var(--cream); border: 2px solid rgba(47,74,61,0.14); border-radius: 14px;
+  padding: 14px 16px; cursor: pointer; font: inherit; text-align: left;
+  transition: border-color 0.15s, background 0.15s, opacity 0.15s;
+}
+.rws-sequence-item:disabled { cursor: default; }
+.rws-sequence-item:hover:not(:disabled) { border-color: rgba(217,164,65,0.5); }
+.rws-sequence-item-placed { border-color: #D9A441; background: rgba(217,164,65,0.10); }
+.rws-sequence-item-correct { border-color: #3F9142; background: rgba(63,145,66,0.16); }
+.rws-sequence-item-wrong { opacity: 0.5; }
+.rws-sequence-item-num {
+  flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+  background: #2F4A3D; color: #F2EBD9; font-family: 'Lato', sans-serif;
+  font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+}
+.rws-sequence-item-text { font-family: 'Lato', sans-serif; font-size: 14px; color: #2F4A3D; line-height: 1.4; }
+
+.rws-kiro-bubble {
+  font-family: 'DM Sans', sans-serif; font-style: italic; font-size: 13.5px;
+  color: #4B3828; line-height: 1.55; background: rgba(140,106,74,0.10);
+  border-radius: 14px; padding: 14px 16px; margin-bottom: 6px;
+}
+
+.rws-feedback-panel {
+  margin-top: 14px; border-radius: 16px; padding: 18px 20px;
+  animation: rwsFadeIn 0.3s ease both;
+}
+.rws-feedback-panel-ok { background: #3F9142; }
+.rws-feedback-panel-ko { background: #E4694B; }
+.rws-feedback-title {
+  font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 700;
+  color: #FFFFFF; margin-bottom: 6px;
+}
+.rws-feedback-text { font-family: 'DM Sans', sans-serif; font-size: 13.5px; color: #FFFFFF; opacity: 0.95; line-height: 1.6; }
+.rws-clue-chip {
+  display: inline-block; background: rgba(255,255,255,0.25); color: #FFFFFF;
+  border-radius: 100px; padding: 2px 10px; font-weight: 700; letter-spacing: 0.04em;
+}
+
+.rws-btn-primary {
+  display: block; width: 100%; box-sizing: border-box; background: #E4694B;
+  color: #FFF8F2; border: none; border-radius: 14px; font-family: 'Lato', sans-serif;
+  font-size: 15px; font-weight: 700; letter-spacing: 0.03em; padding: 16px 20px;
+  cursor: pointer; margin-top: 8px; transition: background 0.18s, transform 0.1s;
+}
+.rws-btn-primary:hover:not(:disabled) { background: #CF5A3F; }
+.rws-btn-primary:active:not(:disabled) { transform: scale(0.98); }
+.rws-btn-secondary {
+  display: block; width: 100%; box-sizing: border-box; background: none;
+  border: 1.5px solid rgba(47,74,61,0.25); color: #5A7A6A; border-radius: 12px;
+  font-family: 'Lato', sans-serif; font-size: 13px; font-weight: 700; padding: 11px 16px;
+  cursor: pointer; margin-top: 10px;
+}
+
+.rws-celebration { display: flex; justify-content: center; gap: 16px; margin: 0 0 10px; pointer-events: none; }
+.rws-spark { font-size: 16px; color: #D9A441; animation: rwsSpark 1.1s ease-out both; }
+.rws-spark:nth-child(2) { color: #E4694B; animation-delay: 0.08s; }
+.rws-spark:nth-child(3) { color: #2C8C86; animation-delay: 0.16s; }
+.rws-spark:nth-child(4) { color: #E4694B; animation-delay: 0.24s; }
+.rws-spark:nth-child(5) { color: #D9A441; animation-delay: 0.32s; }
+
+.rws-final-title {
+  font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700;
+  color: #1E2A24; margin-bottom: 14px;
+}
+.rws-result-subtitle {
+  font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 700;
+  color: #1E2A24; margin-bottom: 8px;
+}
+.rws-recap-grid { display: flex; flex-direction: column; gap: 8px; margin: 4px 0 16px; }
+.rws-recap-card {
+  background: rgba(44,140,134,0.10); color: #1E2A24; border-radius: 12px;
+  padding: 11px 14px; font-family: 'Lato', sans-serif; font-size: 12.5px;
+  font-weight: 700; letter-spacing: 0.02em; text-align: center;
+}
+.rws-terrain-box {
+  background: var(--soft); border-left: 4px solid #2F4A3D; border-radius: 0 16px 16px 0;
+  padding: 16px 18px; margin-bottom: 16px;
+}
+.rws-terrain-label {
+  font-family: 'Lato', sans-serif; font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: #2F4A3D; margin-bottom: 8px;
+}
+.rws-terrain-text { font-family: 'Lato', sans-serif; font-size: 13.5px; color: #2F4A3D; line-height: 1.6; }
+.rws-xp-badge {
+  text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 22px;
+  font-weight: 600; color: #2F4A3D; background: rgba(217,164,65,0.18);
+  border-radius: 100px; padding: 10px 0; margin: 4px 0 14px;
+}
+.rws-xp-badge-test {
+  text-align: center; font-family: 'DM Sans', sans-serif; font-size: 12.5px;
+  font-weight: 600; color: #8A5A3A; background: rgba(192,90,42,0.08);
+  border-radius: 12px; padding: 10px 14px; margin: 4px 0 14px;
 }
 
 /* Phase quiz */
@@ -11384,8 +11271,7 @@ function ouvrirDossierSo(dossierId, xp) {
   _dossierPhase = 'lecture';
   _dossierRep   = [null, null, null];
   _dossierRevue = false;
-  _vgStep = 1; _vgQ2Answer = null; _vgQ2Verified = false; _vgQ3Answer = null; _vgQ3Verified = false;
-  _vgQuizStep = 0; _vgQuizVerified = false;
+  vgReinitialiserParcours();
   if (!_dossierTestMode) { recordDossierLastRead(dossierId); }
   showScreen('dossier-so');
 }
@@ -11397,8 +11283,7 @@ function ouvrirBiblioDossier(dossierId) {
   _dossierPhase = 'lecture';
   _dossierRep   = [null, null, null];
   _dossierRevue = true;
-  _vgStep = 1; _vgQ2Answer = null; _vgQ2Verified = false; _vgQ3Answer = null; _vgQ3Verified = false;
-  _vgQuizStep = 0; _vgQuizVerified = false;
+  vgReinitialiserParcours();
   recordDossierLastRead(dossierId);
   showScreen('dossier-so');
 }
@@ -11410,10 +11295,6 @@ function renderDossierSo() {
     el.innerHTML = '<div class="ds-error">Dossier introuvable.</div>';
     return;
   }
-  // Prototype de défi final en mini-écrans — périmètre limité à ce seul dossier
-  if (_dossierRef === 'vie-en-groupe' && _dossierPhase === 'quiz')      { _renderVgQuiz(el); return; }
-  if (_dossierRef === 'vie-en-groupe' && _dossierPhase === 'resultats') { _renderVgResultats(el); return; }
-
   if (_dossierPhase === 'lecture')    _renderDossierLecture(el);
   else if (_dossierPhase === 'quiz')  _renderDossierQuiz(el);
   else                                _renderDossierResultats(el);
@@ -11424,8 +11305,8 @@ function _renderDossierLecture(el) {
 
   // Prototype de lecture augmentée — périmètre limité à ce seul dossier (voir chantier pédagogique)
   if (_dossierRef === 'memoire-cheval') { _renderDossierLectureMemoire(el, data); return; }
-  // Prototype de parcours ludique en 4 étapes — périmètre limité à ce seul dossier
-  if (_dossierRef === 'vie-en-groupe') { _renderDossierLectureVieGroupe(el, data); return; }
+  // Prototype de ludification — 5 mini-jeux + écran final — périmètre limité à ce seul dossier
+  if (_dossierRef === 'vie-en-groupe') { _renderVieGroupeParcours(el, data); return; }
 
   // Source du contenu : fiche existante (ficheId) ou contenu inline dans data
   var src;
@@ -11498,392 +11379,408 @@ function _renderDossierLectureMemoire(el, data) {
 }
 
 // ============================================================
-// PROTOTYPE LUDIQUE — Dossier D-02 "La Vie en Groupe" — v2
-// Parcours en 4 étapes façon petite enquête, une action principale par
-// écran. Périmètre strictement limité à ce dossier. N'affecte aucun
-// autre Dossier ni la logique de validation finale (questions
-// inchangées, gérées par _renderDossierQuiz / terminerLectureDossier).
-// Aucun XP, déblocage ou compteur n'est attribué par les mini-questions
-// ni par le geste "Vérifier" : ils servent uniquement à rendre la
-// lecture active.
+// LUDIFICATION — Dossier D-02 "La Vie en Groupe" — V4
+// Parcours continu de 5 mini-jeux + un écran final, périmètre
+// strictement limité à ce dossier. Composants CSS génériques (.rws-*)
+// pensés pour être réutilisés plus tard par d'autres contenus, mais
+// utilisés uniquement ici pour l'instant.
+// Réutilise sans les modifier validerMissionDossier() (XP/déblocage,
+// gestion du mode test QG) et debloqueDossierSo(). N'utilise plus
+// terminerLectureDossier() / _renderDossierQuiz / validerQuizDossier /
+// _renderDossierResultats, qui restent inchangées pour tous les autres
+// Dossiers (D-01, D-03, D-04, D-05, D-06).
+// Aucun XP, score ou déblocage n'est attribué par un mini-jeu pris
+// isolément — seul validerMissionDossier(), appelé une seule fois sur
+// l'écran final, attribue l'XP et le déblocage du Dossier.
 // ============================================================
-var _vgStep       = 1;     // 1 à 4
-var _vgQ2Answer   = null;  // 'A' | 'B' | 'C' — sélection avant vérification
-var _vgQ2Verified = false; // true une fois "Vérifier" cliqué (verrouille le choix)
-var _vgQ3Answer   = null;  // 'A' | 'B' | 'C'
-var _vgQ3Verified = false;
+var _vgStep = 1;      // 1 à 5 = mini-jeux, 6 = écran final
+var _vgScore = 0;     // nombre de mini-jeux réussis (0 à 5) — en mémoire uniquement, aucune monnaie créée
 
-function vgAvancerEtape() {
-  if (_vgStep < 4) _vgStep++;
+var _vgG1Answer   = null;  // 'A' | 'B' | 'C'
+var _vgG2Answer   = null;  // 'distance' | 'confiance' | 'domination'
+var _vgG3Selected = null;  // index de carte en attente de catégorie (0-3) ou null
+var _vgG3Assign   = [null, null, null, null]; // 'observation' | 'interpretation' | null par carte
+var _vgG4Order    = [];    // indices (dans VG_G4_ACTIONS) dans l'ordre cliqué par l'utilisateur
+var _vgG5Answer1  = null;  // 'A' | 'B' | 'C'
+var _vgG5Answer2  = null;  // 'possible' | 'probable' | 'certaine'
+
+function vgReinitialiserParcours() {
+  _vgStep = 1; _vgScore = 0;
+  _vgG1Answer = null;
+  _vgG2Answer = null;
+  _vgG3Selected = null; _vgG3Assign = [null, null, null, null];
+  _vgG4Order = [];
+  _vgG5Answer1 = null; _vgG5Answer2 = null;
+}
+
+function vgAvancerJeu() {
+  if (_vgStep < 6) _vgStep++;
   renderDossierSo();
   var wrap = document.querySelector('#screen-dossier-so .acad-page-wrap');
   if (wrap) wrap.scrollTop = 0;
 }
 
-function vgEtapePrecedente() {
-  if (_vgStep > 1) _vgStep--;
-  renderDossierSo();
-  var wrap = document.querySelector('#screen-dossier-so .acad-page-wrap');
-  if (wrap) wrap.scrollTop = 0;
-}
-
-function vgSelectQ2(choice) {
-  if (_vgQ2Verified) return; // déjà vérifié — choix verrouillé
-  _vgQ2Answer = choice;
-  renderDossierSo();
-}
-
-function vgVerifierQ2() {
-  if (_vgQ2Answer === null || _vgQ2Verified) return;
-  _vgQ2Verified = true;
-  renderDossierSo();
-}
-
-function vgSelectQ3(choice) {
-  if (_vgQ3Verified) return;
-  _vgQ3Answer = choice;
-  renderDossierSo();
-}
-
-function vgVerifierQ3() {
-  if (_vgQ3Answer === null || _vgQ3Verified) return;
-  _vgQ3Verified = true;
-  renderDossierSo();
-}
-
-function _renderDossierLectureVieGroupe(el, data) {
-  var dotsHtml = '';
-  for (var i = 1; i <= 4; i++) {
-    var dotCls = 'vg-progress-dot' + (i < _vgStep ? ' vg-progress-dot-done' : i === _vgStep ? ' vg-progress-dot-active' : '');
-    dotsHtml += '<div class="' + dotCls + '"></div>';
-    if (i < 4) {
-      dotsHtml += '<div class="vg-progress-line' + (i < _vgStep ? ' vg-progress-line-done' : '') + '"></div>';
-    }
+function _rwsGameProgressHtml(current, total) {
+  var dots = '';
+  for (var i = 1; i <= total; i++) {
+    var cls = 'rws-game-progress-dot' + (i < current ? ' rws-game-progress-dot-done' : i === current ? ' rws-game-progress-dot-active' : '');
+    dots += '<div class="' + cls + '"></div>';
+    if (i < total) dots += '<div class="rws-game-progress-line' + (i < current ? ' rws-game-progress-line-done' : '') + '"></div>';
   }
-  var progressHtml = '<div class="vg-progress">'
-    + '<div class="vg-progress-steps">' + dotsHtml + '</div>'
-    + '<div class="vg-progress-text">Étape ' + _vgStep + ' sur 4</div>'
+  return '<div class="rws-game-progress">'
+    + '<div class="rws-game-progress-steps">' + dots + '</div>'
+    + '<div class="rws-game-progress-text">Jeu ' + current + ' sur ' + total + '</div>'
     + '</div>';
+}
 
-  var stepHtml;
-  if (_vgStep === 1)      stepHtml = _renderVgEtape1();
-  else if (_vgStep === 2) stepHtml = _renderVgEtape2();
-  else if (_vgStep === 3) stepHtml = _renderVgEtape3();
-  else                    stepHtml = _renderVgEtape4();
+function _renderVieGroupeParcours(el, data) {
+  var bodyHtml;
+  if (_vgStep <= 5) {
+    bodyHtml = '<div class="ds-eyebrow">📚 Dossier de So</div>'
+      + '<div class="ds-titre">' + esc(data.titre) + '</div>'
+      + ({1:_renderVgGame1, 2:_renderVgGame2, 3:_renderVgGame3, 4:_renderVgGame4, 5:_renderVgGame5}[_vgStep])();
+  } else {
+    bodyHtml = _renderVgResultatsFinal();
+  }
+  el.innerHTML = (_dossierTestMode ? _testBannerHtml() : '') + '<div class="ds-lecture">' + bodyHtml + '</div>';
+}
 
-  var backHtml = (_vgStep > 1)
-    ? '<button class="vg-btn-back" onclick="vgEtapePrecedente()">← Étape précédente</button>'
+// ── Mini-jeu 1 — Que vois-tu vraiment ? (observation directe) ──────────
+var VG_G1_OPTIONS = [
+  { key: 'A', label: 'Il cherche à me dominer.' },
+  { key: 'B', label: 'Il augmente la distance entre nous.' },
+  { key: 'C', label: 'Il n\'aime pas les humains.' }
+];
+
+function _renderVgGame1() {
+  var verified = _vgG1Answer !== null;
+  var optsHtml = VG_G1_OPTIONS.map(function(o) {
+    var cls = 'rws-choice-card';
+    if (verified) {
+      if (o.key === 'B') cls += ' rws-choice-card-correct';
+      else if (o.key === _vgG1Answer) cls += ' rws-choice-card-wrong';
+    }
+    return '<button class="' + cls + '" onclick="vgG1Select(\'' + o.key + '\')"' + (verified ? ' disabled' : '') + '>' + esc(o.label) + '</button>';
+  }).join('');
+
+  var feedbackHtml = '', nextHtml = '';
+  if (verified) {
+    var ok = _vgG1Answer === 'B';
+    feedbackHtml = '<div class="rws-feedback-panel ' + (ok ? 'rws-feedback-panel-ok' : 'rws-feedback-panel-ko') + '">'
+      + (ok
+          ? '<div class="rws-feedback-title">✅ Indice trouvé : <span class="rws-clue-chip">DISTANCE</span></div>'
+            + '<div class="rws-feedback-text">Tu as décrit le comportement sans lui attribuer immédiatement une intention.</div>'
+          : '<div class="rws-feedback-title">🔎 Reviens aux faits</div>'
+            + '<div class="rws-feedback-text">« Dominer » ou « ne pas aimer » sont déjà des interprétations. Le fait visible est qu\'il augmente la distance.</div>')
+      + '</div>';
+    nextHtml = '<button class="rws-btn-primary" onclick="vgAvancerJeu()">Jeu suivant →</button>';
+  }
+
+  return _rwsGameProgressHtml(1, 5)
+    + '<div class="rws-game-card">'
+    +   '<div class="rws-game-title">🔎 Que vois-tu vraiment ?</div>'
+    +   '<div class="rws-game-situation">Tu avances vers un cheval. Il recule de deux pas.</div>'
+    +   '<div class="rws-game-prompt">Quelle phrase décrit seulement ce qui est visible ?</div>'
+    +   '<div class="rws-choice-list">' + optsHtml + '</div>'
+    + '</div>'
+    + feedbackHtml + nextHtml;
+}
+
+function vgG1Select(key) {
+  if (_vgG1Answer !== null) return;
+  _vgG1Answer = key;
+  if (key === 'B') _vgScore++;
+  renderDossierSo();
+}
+
+// ── Mini-jeu 2 — Complète l'indice (mot manquant, tuiles tactiles) ─────
+var VG_G2_TILES = ['distance', 'confiance', 'domination'];
+
+function _renderVgGame2() {
+  var verified = _vgG2Answer !== null;
+  var phraseHtml = 'Quand il recule, le cheval augmente la '
+    + '<span class="rws-blank">' + (verified ? esc(_vgG2Answer) : '……') + '</span>'
+    + ' entre nous.';
+
+  var tilesHtml = VG_G2_TILES.map(function(w) {
+    var cls = 'rws-word-tile';
+    if (verified) {
+      if (w === 'distance') cls += ' rws-word-tile-correct';
+      else if (w === _vgG2Answer) cls += ' rws-word-tile-wrong';
+    }
+    return '<button class="' + cls + '" onclick="vgG2Select(\'' + w + '\')"' + (verified ? ' disabled' : '') + '>' + w + '</button>';
+  }).join('');
+
+  var feedbackHtml = '', nextHtml = '';
+  if (verified) {
+    var ok = _vgG2Answer === 'distance';
+    feedbackHtml = '<div class="rws-feedback-panel ' + (ok ? 'rws-feedback-panel-ok' : 'rws-feedback-panel-ko') + '">'
+      + (ok
+          ? '<div class="rws-feedback-title">✅ Exact</div><div class="rws-feedback-text">Tu pars d\'un élément concret et observable.</div>'
+          : '<div class="rws-feedback-title">🔎 Regarde à nouveau</div><div class="rws-feedback-text">Le mot qui décrit ce qui est observable ici est « distance ».</div>')
+      + '</div>';
+    nextHtml = '<button class="rws-btn-primary" onclick="vgAvancerJeu()">Jeu suivant →</button>';
+  }
+
+  return _rwsGameProgressHtml(2, 5)
+    + '<div class="rws-game-card">'
+    +   '<div class="rws-game-title">✍️ Complète l\'indice</div>'
+    +   '<div class="rws-game-phrase">' + phraseHtml + '</div>'
+    +   '<div class="rws-word-tiles">' + tilesHtml + '</div>'
+    + '</div>'
+    + feedbackHtml + nextHtml;
+}
+
+function vgG2Select(word) {
+  if (_vgG2Answer !== null) return;
+  _vgG2Answer = word;
+  if (word === 'distance') _vgScore++;
+  renderDossierSo();
+}
+
+// ── Mini-jeu 3 — Fais le tri (observation / interprétation, sans drag) ─
+var VG_G3_CARDS = [
+  { text: 'Le cheval recule.',          cat: 'observation' },
+  { text: 'Le cheval est irrespectueux.', cat: 'interpretation' },
+  { text: 'Il tourne la tête.',          cat: 'observation' },
+  { text: 'Il cherche à dominer.',       cat: 'interpretation' }
+];
+
+function _renderVgGame3() {
+  var allPlaced = _vgG3Assign.every(function(c) { return c !== null; });
+
+  var poolHtml = VG_G3_CARDS.map(function(c, i) {
+    if (_vgG3Assign[i] !== null) return '';
+    var cls = 'rws-choice-card';
+    if (_vgG3Selected === i) cls += ' rws-choice-card-selected';
+    return '<button class="' + cls + '" onclick="vgG3SelectCard(' + i + ')">' + esc(c.text) + '</button>';
+  }).join('');
+
+  function renderZone(catKey, label) {
+    var itemsHtml = VG_G3_CARDS.map(function(c, i) {
+      if (_vgG3Assign[i] !== catKey) return '';
+      var cls = 'rws-classify-item';
+      if (allPlaced) cls += (c.cat === catKey) ? ' rws-classify-item-correct' : ' rws-classify-item-wrong';
+      return '<div class="' + cls + '">' + esc(c.text) + '</div>';
+    }).join('');
+    return '<button class="rws-classify-zone" onclick="vgG3AssignCategory(\'' + catKey + '\')"' + ((_vgG3Selected === null || allPlaced) ? ' disabled' : '') + '>'
+      + '<div class="rws-classify-zone-label">' + label + '</div>'
+      + '<div class="rws-classify-zone-items">' + itemsHtml + '</div>'
+      + '</button>';
+  }
+
+  var feedbackHtml = '', nextHtml = '';
+  if (allPlaced) {
+    feedbackHtml = '<div class="rws-feedback-panel rws-feedback-panel-ok">'
+      + '<div class="rws-feedback-title">✅ Bien classé</div>'
+      + '<div class="rws-feedback-text">Observer, c\'est commencer par ce que l\'on peut réellement voir.</div>'
+      + '</div>';
+    nextHtml = '<button class="rws-btn-primary" onclick="vgAvancerJeu()">Jeu suivant →</button>';
+  }
+
+  return _rwsGameProgressHtml(3, 5)
+    + '<div class="rws-game-card">'
+    +   '<div class="rws-game-title">🧠 Fais le tri</div>'
+    +   (poolHtml ? '<div class="rws-game-prompt">Sélectionne une carte, puis choisis sa catégorie.</div><div class="rws-choice-list rws-choice-list-pool">' + poolHtml + '</div>' : '')
+    +   '<div class="rws-classify-zones">' + renderZone('observation', 'OBSERVATION') + renderZone('interpretation', 'INTERPRÉTATION') + '</div>'
+    + '</div>'
+    + feedbackHtml + nextHtml;
+}
+
+function vgG3SelectCard(i) {
+  if (_vgG3Assign[i] !== null) return;
+  _vgG3Selected = i;
+  renderDossierSo();
+}
+
+function vgG3AssignCategory(cat) {
+  if (_vgG3Selected === null) return;
+  _vgG3Assign[_vgG3Selected] = cat;
+  _vgG3Selected = null;
+  if (_vgG3Assign.every(function(c) { return c !== null; })) {
+    var correct = _vgG3Assign.every(function(c, i) { return c === VG_G3_CARDS[i].cat; });
+    if (correct) _vgScore++;
+  }
+  renderDossierSo();
+}
+
+// ── Mini-jeu 4 — Remets l'approche dans l'ordre (sans drag-and-drop) ───
+var VG_G4_ACTIONS = [
+  'J\'arrête d\'avancer.',
+  'J\'attends quelques secondes.',
+  'J\'observe sa réaction.',
+  'J\'ajuste mon approche.'
+];
+var VG_G4_DISPLAY_ORDER = [2, 0, 3, 1]; // ordre d'affichage mélangé — l'ordre correct est 0,1,2,3
+
+function _renderVgGame4() {
+  var allPlaced = _vgG4Order.length === 4;
+
+  var cardsHtml = VG_G4_DISPLAY_ORDER.map(function(idx) {
+    var placedPos = _vgG4Order.indexOf(idx);
+    var cls = 'rws-sequence-item';
+    var badge = '';
+    if (placedPos !== -1) {
+      cls += ' rws-sequence-item-placed';
+      badge = '<span class="rws-sequence-item-num">' + (placedPos + 1) + '</span>';
+      if (allPlaced) cls += (placedPos === idx) ? ' rws-sequence-item-correct' : ' rws-sequence-item-wrong';
+    }
+    return '<button class="' + cls + '" onclick="vgG4SelectAction(' + idx + ')"' + ((placedPos !== -1 || allPlaced) ? ' disabled' : '') + '>'
+      + badge + '<span class="rws-sequence-item-text">' + esc(VG_G4_ACTIONS[idx]) + '</span></button>';
+  }).join('');
+
+  var resetHtml = (!allPlaced && _vgG4Order.length > 0)
+    ? '<button class="rws-btn-secondary" onclick="vgG4Recommencer()">Recommencer l\'ordre</button>'
     : '';
 
-  el.innerHTML = (_dossierTestMode ? _testBannerHtml() : '')
-    + '<div class="ds-lecture">'
-    + '<div class="ds-eyebrow">📚 Dossier de So</div>'
-    + '<div class="ds-titre">' + esc(data.titre) + '</div>'
-    + progressHtml
-    + stepHtml
-    + backHtml
-    + '</div>';
-}
-
-function _renderVgEtape1() {
-  return '<div class="vg-card">'
-    + '<div class="vg-title">🕵️ Prête à entrer dans sa bulle ?</div>'
-    + '<div class="vg-text">Ton défi : repérer le moment où ta présence devient confortable… ou trop proche.</div>'
-    + '<div class="vg-placeholder">'
-    +   '<div class="vg-placeholder-icon">🕵️</div>'
-    +   '<div class="vg-placeholder-label">Illustration à venir</div>'
-    + '</div>'
-    + '</div>'
-    + '<button class="vg-cta" onclick="vgAvancerEtape()">Je relève le défi →</button>';
-}
-
-function _renderVgEtape2() {
-  var options = [
-    { key: 'A', label: 'Il cherche à me dominer.' },
-    { key: 'B', label: 'Je suis peut-être allé trop vite ou trop près.' },
-    { key: 'C', label: 'Il veut que je le poursuive.' }
-  ];
-  var verified  = _vgQ2Verified;
-  var isCorrect = _vgQ2Answer === 'B';
-
-  var optsHtml = options.map(function(o) {
-    var cls = 'vg-mini-opt';
-    if (verified) {
-      if (o.key === 'B') cls += ' vg-mini-opt-correct';
-      else if (o.key === _vgQ2Answer) cls += ' vg-mini-opt-wrong';
-    } else if (o.key === _vgQ2Answer) {
-      cls += ' vg-mini-opt-selected';
-    }
-    return '<button class="' + cls + '" onclick="vgSelectQ2(\'' + o.key + '\')"' + (verified ? ' disabled' : '') + '>'
-      + esc(o.label) + '</button>';
-  }).join('');
-
-  var actionHtml;
-  if (!verified) {
-    actionHtml = '<button class="vg-cta" onclick="vgVerifierQ2()"' + (_vgQ2Answer === null ? ' disabled' : '') + '>Vérifier</button>';
-  } else {
-    var title2 = isCorrect ? '✅ Bien observé !' : '🔎 Pas si vite…';
-    var text2  = isCorrect
-      ? 'Le recul ne donne pas une certitude, mais il peut indiquer que la distance ou la manière d\'approcher ne convient pas encore.'
-      : 'Cette explication va trop loin. Commence par ce qui est visible : le cheval augmente la distance.';
-    actionHtml = '<div class="vg-feedback ' + (isCorrect ? 'vg-feedback-ok' : 'vg-feedback-ko') + '">'
-      +   '<div class="vg-feedback-title">' + title2 + '</div>'
-      +   '<div class="vg-feedback-text">' + text2 + '</div>'
-      + '</div>'
-      + '<button class="vg-cta" onclick="vgAvancerEtape()">Continuer l\'enquête →</button>';
+  var feedbackHtml = '', nextHtml = '';
+  if (allPlaced) {
+    feedbackHtml = '<div class="rws-feedback-panel rws-feedback-panel-ok">'
+      + '<div class="rws-feedback-title">✅ Bonne stratégie</div>'
+      + '<div class="rws-feedback-text">Tu laisses au cheval le temps de répondre avant de décider de la suite.</div>'
+      + '</div>';
+    nextHtml = '<button class="rws-btn-primary" onclick="vgAvancerJeu()">Jeu suivant →</button>';
   }
 
-  return '<div class="vg-card">'
-    + '<div class="vg-title">🔎 Premier indice</div>'
-    + '<div class="vg-text">Chaque cheval possède une distance à partir de laquelle une présence peut devenir inconfortable.</div>'
-    + '<div class="vg-mini-question">'
-    +   '<div class="vg-mini-q-label">Tu avances vers un cheval et il recule. Quelle hypothèse est la plus prudente ?</div>'
-    +   '<div class="vg-mini-opts">' + optsHtml + '</div>'
+  return _rwsGameProgressHtml(4, 5)
+    + '<div class="rws-game-card">'
+    +   '<div class="rws-game-title">🐴 Quelle est la bonne suite ?</div>'
+    +   '<div class="rws-game-situation">Le cheval recule pendant ton approche.</div>'
+    +   '<div class="rws-sequence-list">' + cardsHtml + '</div>'
+    +   resetHtml
     + '</div>'
-    + '</div>'
-    + actionHtml;
+    + feedbackHtml + nextHtml;
 }
 
-function _renderVgEtape3() {
-  var options = [
-    { key: 'A', label: 'Rien, il a raison.' },
-    { key: 'B', label: 'Il oublie d\'observer la réaction du cheval et de respecter sa distance.' },
-    { key: 'C', label: 'Il doit seulement avancer encore plus vite.' }
-  ];
-  var verified = _vgQ3Verified;
-
-  var optsHtml = options.map(function(o) {
-    var cls = 'vg-mini-opt';
-    if (verified) {
-      if (o.key === 'B') cls += ' vg-mini-opt-correct';
-      else if (o.key === _vgQ3Answer) cls += ' vg-mini-opt-wrong';
-    } else if (o.key === _vgQ3Answer) {
-      cls += ' vg-mini-opt-selected';
-    }
-    return '<button class="' + cls + '" onclick="vgSelectQ3(\'' + o.key + '\')"' + (verified ? ' disabled' : '') + '>'
-      + esc(o.label) + '</button>';
-  }).join('');
-
-  var actionHtml;
-  if (!verified) {
-    actionHtml = '<button class="vg-cta" onclick="vgVerifierQ3()"' + (_vgQ3Answer === null ? ' disabled' : '') + '>Vérifier</button>';
-  } else {
-    actionHtml = '<div class="vg-feedback vg-feedback-ok">'
-      +   '<div class="vg-feedback-title">✅ Exact !</div>'
-      +   '<div class="vg-feedback-text">Une hypothèse doit être vérifiée avec plusieurs indices. Forcer la distance peut augmenter l\'inquiétude.</div>'
-      + '</div>'
-      + '<button class="vg-cta" onclick="vgAvancerEtape()">Préparer ma mission terrain →</button>';
+function vgG4SelectAction(idx) {
+  if (_vgG4Order.length >= 4 || _vgG4Order.indexOf(idx) !== -1) return;
+  _vgG4Order.push(idx);
+  if (_vgG4Order.length === 4) {
+    var ok = _vgG4Order.every(function(v, pos) { return v === pos; });
+    if (ok) _vgScore++;
   }
-
-  return '<div class="vg-card">'
-    + '<div class="vg-title">🦅 Kiro a une théorie…</div>'
-    + '<div class="vg-kiro-bubble">« S\'il s\'éloigne, je dois avancer plus vite pour lui montrer que je décide. »</div>'
-    + '<div class="vg-mini-question">'
-    +   '<div class="vg-mini-q-label">Que manque-t-il dans le raisonnement de Kiro ?</div>'
-    +   '<div class="vg-mini-opts">' + optsHtml + '</div>'
-    + '</div>'
-    + '</div>'
-    + actionHtml;
-}
-
-function _renderVgEtape4() {
-  var finalLabel = _dossierRevue ? '← Retour à la bibliothèque' : 'J\'ai compris — passer au défi final →';
-  var finalClick = _dossierRevue ? "showScreen('bibliotheque-so')" : 'terminerLectureDossier()';
-
-  return '<div class="vg-celebration">'
-    +   '<span class="vg-spark">✦</span><span class="vg-spark">✧</span><span class="vg-spark">✦</span>'
-    +   '<span class="vg-spark">✧</span><span class="vg-spark">✦</span>'
-    + '</div>'
-    + '<div class="vg-terrain-card">'
-    +   '<div class="vg-title">🐴 À toi de jouer sur le terrain</div>'
-    +   '<div class="vg-terrain-steps">'
-    +     '<div class="vg-terrain-step"><span class="vg-terrain-step-num">1</span><span class="vg-terrain-step-text">Approche lentement.</span></div>'
-    +     '<div class="vg-terrain-step"><span class="vg-terrain-step-num">2</span><span class="vg-terrain-step-text">Arrête-toi au premier changement visible : regard, respiration, tête, posture ou déplacement.</span></div>'
-    +     '<div class="vg-terrain-step"><span class="vg-terrain-step-num">3</span><span class="vg-terrain-step-text">Attends quelques secondes et observe ce qui se passe ensuite.</span></div>'
-    +   '</div>'
-    + '</div>'
-    + '<div class="vg-indice-box">'
-    +   '<div class="vg-eyebrow">🔎 L\'indice essentiel</div>'
-    +   '<div class="vg-text" style="margin-bottom:0;">Le cheval doit pouvoir choisir de rester ou de s\'éloigner.</div>'
-    + '</div>'
-    + '<button class="vg-cta" onclick="' + finalClick + '">' + finalLabel + '</button>';
-}
-
-// ============================================================
-// DÉFI FINAL EN MINI-ÉCRANS — Dossier D-02 "La Vie en Groupe" — V3
-// Périmètre strictement limité à ce dossier. Réutilise sans les modifier
-// terminerLectureDossier(), validerQuizDossier() (calcul du score sur
-// _dossierRep, inchangé) et validerMissionDossier() (XP/déblocage,
-// inchangé, y compris sa gestion du mode test QG). Seule la présentation
-// — une question à la fois au lieu des trois simultanément — change.
-// ============================================================
-var _vgQuizStep     = 0;     // 0 = écran de lancement, 1/2/3 = question courante
-var _vgQuizVerified = false; // true une fois "Vérifier" cliqué pour la question courante
-
-var VG_QUIZ_FEEDBACK = {
-  1: {
-    ok: { title: '✅ Bien observé', text: 'Le cheval augmente la distance. Cela peut indiquer que tu es trop proche ou que ton approche ne lui convient pas encore.' },
-    ko: { title: '🔎 Reviens à ce qui est visible', text: 'Le recul ne permet pas de conclure qu\'il joue ou qu\'il est simplement curieux. L\'indice observable est qu\'il augmente la distance.' }
-  },
-  2: {
-    ok: { title: '✅ Exact', text: 'Forcer la proximité peut augmenter l\'inquiétude. La confiance se construit aussi en laissant au cheval la possibilité de s\'éloigner.' },
-    ko: { title: '🔎 Pas tout à fait', text: 'La contrainte peut empêcher le cheval de s\'éloigner, mais elle ne garantit pas qu\'il se sente en confiance.' }
-  },
-  3: {
-    ok: { title: '✅ Enquête résolue', text: 'Une approche volontaire peut être un indice de confiance ou de disponibilité, à interpréter avec l\'ensemble du contexte.' },
-    ko: { title: '🔎 Observe encore', text: 'Une approche volontaire ne correspond pas automatiquement à de la peur ou de l\'indifférence. Il faut relier cet indice au reste de la situation.' }
-  }
-};
-
-function vgLancerDefiFinal() {
-  _vgQuizStep = 1;
-  renderDossierSo();
-  var wrap = document.querySelector('#screen-dossier-so .acad-page-wrap');
-  if (wrap) wrap.scrollTop = 0;
-}
-
-function vgSelectQuizReponse(valeur) {
-  if (_vgQuizVerified) return;
-  _dossierRep[_vgQuizStep - 1] = valeur;
   renderDossierSo();
 }
 
-function vgVerifierQuiz() {
-  if (_dossierRep[_vgQuizStep - 1] === null || _vgQuizVerified) return;
-  _vgQuizVerified = true;
+function vgG4Recommencer() {
+  _vgG4Order = [];
   renderDossierSo();
 }
 
-// Question suivante, ou calcul du résultat (via validerQuizDossier(),
-// inchangée) après la 3e question.
-function vgQuestionSuivante() {
-  if (_vgQuizStep < 3) {
-    _vgQuizStep++;
-    _vgQuizVerified = false;
-    renderDossierSo();
-    var wrap = document.querySelector('#screen-dossier-so .acad-page-wrap');
-    if (wrap) wrap.scrollTop = 0;
-  } else {
-    validerQuizDossier();
-  }
-}
+// ── Mini-jeu 5 — La fausse piste de Kiro (double interaction) ──────────
+var VG_G5_OPTIONS = [
+  { key: 'A', label: 'Le contexte et les autres indices observables.' },
+  { key: 'B', label: 'Rien, son explication est certaine.' },
+  { key: 'C', label: 'Il faut seulement avancer plus vite.' }
+];
+var VG_G5_CERTAINTY = [
+  { key: 'possible', label: 'Possible' },
+  { key: 'probable', label: 'Probable' },
+  { key: 'certaine', label: 'Certaine' }
+];
 
-function _vgDefiDots(current) {
-  var html = '';
-  for (var i = 1; i <= 3; i++) {
-    var cls = 'vg-progress-dot' + (i < current ? ' vg-progress-dot-done' : i === current ? ' vg-progress-dot-active' : '');
-    html += '<div class="' + cls + '"></div>';
-    if (i < 3) html += '<div class="vg-progress-line' + (i < current ? ' vg-progress-line-done' : '') + '"></div>';
-  }
-  return html;
-}
+function _renderVgGame5() {
+  var part1Done = _vgG5Answer1 !== null;
+  var part2Done = _vgG5Answer2 !== null;
 
-function _renderVgQuiz(el) {
-  var stepHtml = (_vgQuizStep === 0) ? _renderVgQuizIntro() : _renderVgQuizQuestion(_vgQuizStep);
-  el.innerHTML = (_dossierTestMode ? _testBannerHtml() : '') + stepHtml;
-}
-
-function _renderVgQuizIntro() {
-  return '<div class="vg-progress">'
-    + '<div class="vg-progress-steps">' + _vgDefiDots(1) + '</div>'
-    + '<div class="vg-progress-text">Défi 1 sur 3</div>'
-    + '</div>'
-    + '<div class="vg-card">'
-    +   '<div class="vg-title">🔓 Dernière étape : résous l\'enquête</div>'
-    +   '<div class="vg-text" style="margin-bottom:0;">Trois décisions rapides pour vérifier ton regard.</div>'
-    + '</div>'
-    + '<button class="vg-cta" onclick="vgLancerDefiFinal()">Commencer le défi final →</button>';
-}
-
-function _renderVgQuizQuestion(n) {
-  var data    = DOSSIERS_SO[_dossierRef];
-  var q       = data.questions[n - 1];
-  var current = _dossierRep[n - 1];
-  var verified = _vgQuizVerified;
-
-  var choix = (q.type === 'vf')
-    ? [{ val: true, label: 'Vrai' }, { val: false, label: 'Faux' }]
-    : q.options.map(function(opt, idx) { return { val: idx, label: opt }; });
-
-  var optsHtml = choix.map(function(c) {
-    var cls = 'vg-mini-opt';
-    var estCorrecte = c.val === q.bonne;
-    var estChoisie  = current === c.val;
-    if (verified) {
-      if (estCorrecte) cls += ' vg-mini-opt-correct';
-      else if (estChoisie) cls += ' vg-mini-opt-wrong';
-    } else if (estChoisie) {
-      cls += ' vg-mini-opt-selected';
+  var opts1Html = VG_G5_OPTIONS.map(function(o) {
+    var cls = 'rws-choice-card';
+    if (part1Done) {
+      if (o.key === 'A') cls += ' rws-choice-card-correct';
+      else if (o.key === _vgG5Answer1) cls += ' rws-choice-card-wrong';
     }
-    return '<button class="' + cls + '" onclick="vgSelectQuizReponse(' + JSON.stringify(c.val) + ')"' + (verified ? ' disabled' : '') + '>'
-      + esc(String(c.label)) + '</button>';
+    return '<button class="' + cls + '" onclick="vgG5SelectPart1(\'' + o.key + '\')"' + (part1Done ? ' disabled' : '') + '>' + esc(o.label) + '</button>';
   }).join('');
 
-  var actionHtml;
-  if (!verified) {
-    actionHtml = '<button class="vg-cta" onclick="vgVerifierQuiz()"' + (current === null ? ' disabled' : '') + '>Vérifier</button>';
-  } else {
-    var isCorrect = current === q.bonne;
-    var fb = isCorrect ? VG_QUIZ_FEEDBACK[n].ok : VG_QUIZ_FEEDBACK[n].ko;
-    var nextLabel = (n < 3) ? 'Question suivante →' : 'Voir le résultat de mon enquête →';
-    actionHtml = '<div class="vg-feedback ' + (isCorrect ? 'vg-feedback-ok' : 'vg-feedback-ko') + '">'
-      +   '<div class="vg-feedback-title">' + fb.title + '</div>'
-      +   '<div class="vg-feedback-text">' + fb.text + '</div>'
-      + '</div>'
-      + '<button class="vg-cta" onclick="vgQuestionSuivante()">' + nextLabel + '</button>';
+  var part2Html = '';
+  if (part1Done) {
+    var opts2Html = VG_G5_CERTAINTY.map(function(o) {
+      var cls = 'rws-choice-card';
+      if (part2Done) {
+        if (o.key === 'possible') cls += ' rws-choice-card-correct';
+        else if (o.key === _vgG5Answer2) cls += ' rws-choice-card-wrong';
+      }
+      return '<button class="' + cls + '" onclick="vgG5SelectPart2(\'' + o.key + '\')"' + (part2Done ? ' disabled' : '') + '>' + o.label + '</button>';
+    }).join('');
+    part2Html = '<div class="rws-game-prompt" style="margin-top:18px;">À quel point la conclusion de Kiro est-elle certaine ?</div>'
+      + '<div class="rws-choice-list rws-choice-list-row">' + opts2Html + '</div>';
   }
 
-  return '<div class="vg-progress">'
-    + '<div class="vg-progress-steps">' + _vgDefiDots(n) + '</div>'
-    + '<div class="vg-progress-text">Défi ' + n + ' sur 3</div>'
+  var feedbackHtml = '', nextHtml = '';
+  if (part2Done) {
+    feedbackHtml = '<div class="rws-feedback-panel rws-feedback-panel-ok">'
+      + '<div class="rws-feedback-title">✅ Fausse piste évitée</div>'
+      + '<div class="rws-feedback-text">Un seul comportement ne permet pas de conclure.</div>'
+      + '</div>';
+    nextHtml = '<button class="rws-btn-primary" onclick="vgAvancerJeu()">Voir mon résultat →</button>';
+  }
+
+  return _rwsGameProgressHtml(5, 5)
+    + '<div class="rws-game-card">'
+    +   '<div class="rws-game-title">🦅 Kiro conclut trop vite…</div>'
+    +   '<div class="rws-kiro-bubble">« Il recule, donc il refuse forcément de coopérer. »</div>'
+    +   '<div class="rws-game-prompt">Quel élément manque pour pouvoir vérifier cette hypothèse ?</div>'
+    +   '<div class="rws-choice-list">' + opts1Html + '</div>'
+    +   part2Html
     + '</div>'
-    + '<div class="vg-card">'
-    +   '<div class="vg-mini-q-label">' + esc(q.enonce) + '</div>'
-    +   '<div class="vg-mini-opts">' + optsHtml + '</div>'
-    + '</div>'
-    + actionHtml;
+    + feedbackHtml + nextHtml;
 }
 
-function _renderVgResultats(el) {
-  // Débloque le dossier dans la bibliothèque personnelle (idempotent) — ignoré en mode test
-  // (même règle que _renderDossierResultats, la fonction partagée équivalente)
-  if (!_dossierTestMode) { debloqueDossierSo(_dossierRef); }
+function vgG5SelectPart1(key) {
+  if (_vgG5Answer1 !== null) return;
+  _vgG5Answer1 = key;
+  renderDossierSo();
+}
 
-  var xp    = _dossierXp;
-  var score = _dossierScore;
+function vgG5SelectPart2(key) {
+  if (_vgG5Answer2 !== null) return;
+  _vgG5Answer2 = key;
+  if (_vgG5Answer1 === 'A' && key === 'possible') _vgScore++;
+  renderDossierSo();
+}
+
+// ── Écran final — résultat, récapitulatif, mission terrain, XP ─────────
+function _renderVgResultatsFinal() {
+  var xp = _dossierXp;
 
   var msg;
-  if (score === 3) {
-    msg = { title: '🌟 Regard affûté !', text: 'Tu as relié les indices sans aller trop vite dans tes conclusions.' };
-  } else if (score === 2) {
-    msg = { title: '🔎 Belle enquête !', text: 'Ton regard progresse. Continue à décrire avant d\'interpréter.' };
+  if (_vgScore >= 4) {
+    msg = { title: '🌟 Regard affûté', text: 'Tu as observé avant d\'interpréter.' };
+  } else if (_vgScore >= 2) {
+    msg = { title: '🔎 Belle progression', text: 'Ton regard devient plus précis.' };
   } else {
-    msg = { title: '🧭 Une nouvelle piste à explorer', text: 'Les erreurs font partie de l\'enquête. Reprends les indices tranquillement.' };
+    msg = { title: '🧭 Nouvelle piste', text: 'Reprends les faits visibles, sans te presser.' };
   }
 
-  var recapHtml = ['Observer la distance', 'Attendre la réaction', 'Vérifier avec plusieurs indices'].map(function(t) {
-    return '<div class="vg-recap-card">' + t + '</div>';
+  var recapHtml = ['DÉCRIRE LES FAITS', 'RESPECTER LA DISTANCE', 'VÉRIFIER UNE HYPOTHÈSE'].map(function(t) {
+    return '<div class="rws-recap-card">' + t + '</div>';
   }).join('');
 
   var xpHtml = _dossierTestMode
-    ? '<div class="vg-xp-badge-test">🧪 Mode test — XP non comptabilisé</div>'
-    : '<div class="vg-xp-badge">🎯 +' + xp + ' XP</div>';
+    ? '<div class="rws-xp-badge-test">🧪 Mode test — XP non comptabilisé</div>'
+    : '<div class="rws-xp-badge">🎯 +' + xp + ' XP</div>';
 
   var btnLabel = _dossierTestMode ? '🧪 Mode test — retour sans enregistrement' : 'Retourner à l\'Académie →';
 
-  el.innerHTML = (_dossierTestMode ? _testBannerHtml() : '')
-    + '<div class="vg-celebration">'
-    +   '<span class="vg-spark">✦</span><span class="vg-spark">✧</span><span class="vg-spark">✦</span>'
-    +   '<span class="vg-spark">✧</span><span class="vg-spark">✦</span>'
+  // Débloque le dossier dans la bibliothèque personnelle (idempotent) — ignoré en mode test
+  if (!_dossierTestMode) { debloqueDossierSo(_dossierRef); }
+
+  return '<div class="rws-celebration">'
+    +   '<span class="rws-spark">✦</span><span class="rws-spark">✧</span><span class="rws-spark">✦</span>'
+    +   '<span class="rws-spark">✧</span><span class="rws-spark">✦</span>'
     + '</div>'
-    + '<div class="vg-card" style="text-align:center;">'
-    +   '<div class="vg-title">Enquête terminée !</div>'
-    +   '<div class="vg-result-subtitle">' + msg.title + '</div>'
-    +   '<div class="vg-text" style="margin-bottom:0;">' + msg.text + '</div>'
+    + '<div class="rws-game-card" style="text-align:center;">'
+    +   '<div class="rws-final-title">Enquête résolue</div>'
+    +   '<div class="rws-result-subtitle">' + msg.title + '</div>'
+    +   '<div class="rws-game-prompt" style="margin-bottom:0;">' + msg.text + '</div>'
     + '</div>'
-    + '<div class="vg-recap-grid">' + recapHtml + '</div>'
+    + '<div class="rws-recap-grid">' + recapHtml + '</div>'
+    + '<div class="rws-terrain-box">'
+    +   '<div class="rws-terrain-label">🐴 Mission terrain</div>'
+    +   '<div class="rws-terrain-text">Lors de ta prochaine séance : arrête-toi au premier changement visible, puis observe ce qui se passe ensuite.</div>'
+    + '</div>'
     + xpHtml
-    + '<button class="vg-cta" onclick="validerMissionDossier(' + xp + ')">' + btnLabel + '</button>';
+    + '<button class="rws-btn-primary" onclick="validerMissionDossier(' + xp + ')">' + btnLabel + '</button>';
 }
 
 function terminerLectureDossier() {

@@ -1,0 +1,1080 @@
+{
+  "_meta": {
+    "statut": "matiere_premiere_non_integree",
+    "description": "Lot pilote de 25 notions extraites des notes de DU de Sophie, pour préparer la génération automatique de sessions ludiques. Non branché à l'interface. Voir 02-schema-notions.md pour le schéma complet et la liste des mécaniques.",
+    "source": "01-notes-transcription-source.md",
+    "nombre_notions": 25,
+    "notions_exemples_completes": ["MS-01", "AP-02", "CO-03", "DO-03", "BO-01"]
+  },
+  "notions": [
+    {
+      "id": "MS-01",
+      "chapitre": 1,
+      "categorie": "monde sensoriel",
+      "sous_theme": "vision — champ visuel et zones aveugles",
+      "titre_court": "Une vision presque à 360°... mais pas partout pareil",
+      "difficulte": "facile",
+      "fait_scientifique_principal": "La position latérale des yeux du cheval lui donne un champ monoculaire pouvant aller jusqu'à 212° et un champ binoculaire d'environ 60 à 70°, mais il existe de vraies zones aveugles : entre les deux yeux (juste devant lui), sous la gorge, au-dessus de la tête et derrière lui.",
+      "explication_courte": "Le cheval voit presque tout autour de lui sans bouger la tête, ce qui l'aide à repérer un danger de n'importe quelle direction. Mais certaines zones précises restent invisibles pour lui, et il doit tourner la tête ou le cou pour les regarder.",
+      "observations_possibles": [
+        "Le cheval tourne ou lève la tête pour regarder quelque chose qui est juste devant son chanfrein ou tout près de lui.",
+        "Il tressaute ou recule quand on approche une main directement dans une de ses zones aveugles sans lui parler ni le toucher progressivement.",
+        "Il oriente les oreilles et la tête ensemble vers un point avant même de sembler 'regarder' avec les yeux."
+      ],
+      "contextes_possibles": [
+        "Un geste brusque dans une zone aveugle peut surprendre même un cheval très calme, sans que cela traduise un problème de caractère.",
+        "Un cheval qui tourne beaucoup la tête vers l'arrière peut simplement chercher à voir une zone qu'il ne peut pas voir autrement — pas forcément un signe d'inquiétude générale."
+      ],
+      "hypotheses_prudentes": [
+        "Un sursaut face à un geste venu d'une zone aveugle serait plutôt lié à la surprise sensorielle qu'à une réaction de défiance envers la personne.",
+        "Un cheval qui recule quand on est pile devant lui pourrait chercher à retrouver une vision binoculaire plus confortable, plutôt que refuser le contact."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Croire que le cheval « voit tout » en permanence parce que son champ de vision est très large.",
+        "Penser qu'un cheval qui sursaute dans une zone aveugle est forcément un cheval nerveux ou mal éduqué."
+      ],
+      "informations_complementaires_a_rechercher": [
+        "Les notes ne précisent pas si l'étendue exacte des zones aveugles varie selon la morphologie de la tête (races à chanfrein différent, par exemple)."
+      ],
+      "conclusions_possibles": [
+        "Approcher ou toucher un cheval en passant par une zone aveugle demande une transition plus progressive (voix, contact d'abord ailleurs) qu'ailleurs sur le corps."
+      ],
+      "conclusions_non_etablies": [
+        "Un sursaut isolé dans une zone aveugle ne permet pas de conclure que le cheval est globalement craintif ou mal socialisé — il faut observer son comportement dans plusieurs situations avant de tirer une conclusion générale."
+      ],
+      "vocabulaire_cle": [
+        {"terme": "champ monoculaire", "definition": "Zone vue par un seul œil à la fois, sans profondeur de champ."},
+        {"terme": "champ binoculaire", "definition": "Zone vue par les deux yeux en même temps, avec perception du relief."},
+        {"terme": "zone aveugle", "definition": "Portion de l'espace qu'aucun des deux yeux ne peut voir sans bouger la tête."}
+      ],
+      "exemple_concret": "Si une personne s'approche pile devant le chanfrein du cheval sans lui parler, elle entre dans une zone aveugle : le cheval peut réagir en reculant simplement parce qu'il ne la voit plus distinctement, pas par méfiance.",
+      "feedback_positif_court": "Exactement — cette zone reste invisible pour lui tant qu'il ne tourne pas la tête.",
+      "feedback_correctif_court": "Pas tout à fait : cette zone fait justement partie des zones aveugles du cheval, malgré son champ de vision très large.",
+      "precaution_scientifique": "Le champ de vision large ne veut pas dire vision totale : il reste toujours prudent d'attribuer un recul ou un sursaut isolé à une seule cause avant d'avoir observé le cheval dans d'autres situations similaires.",
+      "references_notes": [],
+      "mecaniques_compatibles": ["qcm", "vrai_faux", "reconnaissance_posture", "etude_de_cas", "identification_erreur"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    },
+    {
+      "id": "MS-02",
+      "chapitre": 1,
+      "categorie": "monde sensoriel",
+      "sous_theme": "vision — perception des couleurs",
+      "titre_court": "Le cheval ne voit pas les couleurs comme nous",
+      "difficulte": "facile",
+      "fait_scientifique_principal": "Le cheval est dichromate (2 sortes de cônes contre 3 chez l'humain) : il perçoit mal le rouge, le marron, le gris et le vert, mais distingue bien le jaune, le blanc, le noir et le bleu. Il est en revanche plus sensible que nous aux contrastes et aux reflets.",
+      "explication_courte": "Les cônes de la rétine permettent de voir les couleurs. Le cheval en a moins de types que nous, donc certaines couleurs se ressemblent beaucoup pour lui — mais il repère très bien une variation de lumière ou d'ombre au sol.",
+      "observations_possibles": [
+        "Un cheval hésite devant une tache d'ombre ou de lumière franche au sol, plus que devant un obstacle uniformément coloré.",
+        "Un objet rouge et un objet vert de même intensité lumineuse peuvent lui sembler proches, alors qu'un jaune et un bleu se distinguent nettement."
+      ],
+      "contextes_possibles": [
+        "Une hésitation devant une flaque de lumière peut être confondue avec un refus d'obstacle si on ne pense pas à la sensibilité aux contrastes."
+      ],
+      "hypotheses_prudentes": [
+        "Un arrêt devant une zone d'ombre marquée pourrait s'expliquer par le contraste perçu plutôt que par une peur de l'obstacle en tant que tel."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Croire que le cheval voit « en noir et blanc » — il voit des couleurs, mais un nombre réduit par rapport à l'humain.",
+        "Penser que la couleur d'un objet (un plot rouge, par exemple) est ce qui impressionne le plus un cheval, alors que le contraste au sol peut jouer un rôle plus important."
+      ],
+      "informations_complementaires_a_rechercher": [
+        "Les notes ne détaillent pas de test précis mesurant l'écart d'acuité chromatique entre individus."
+      ],
+      "conclusions_possibles": [
+        "Privilégier des repères visuels au sol basés sur le contraste (clair/sombre) plutôt que sur des teintes que le cheval distingue mal."
+      ],
+      "conclusions_non_etablies": [
+        "On ne peut pas conclure qu'un cheval qui refuse un obstacle coloré le fait « à cause » de la couleur sans autre indice — d'autres facteurs (contraste, ombre, nouveauté de l'objet) peuvent aussi expliquer la réaction."
+      ],
+      "vocabulaire_cle": [
+        {"terme": "dichromate", "definition": "Qui perçoit les couleurs à partir de 2 types de cellules coniques, contre 3 chez l'humain (trichromate)."},
+        {"terme": "cônes", "definition": "Cellules de la rétine sensibles aux couleurs."},
+        {"terme": "bâtonnets", "definition": "Cellules de la rétine sensibles à la faible luminosité, permettant la vision en niveaux de gris."}
+      ],
+      "exemple_concret": "Une tache d'ombre ou de lumière par terre peut davantage attirer l'attention (ou l'hésitation) du cheval qu'un objet coloré en soi.",
+      "feedback_positif_court": "Voilà : le jaune et le bleu ressortent bien pour lui, contrairement au rouge et au vert.",
+      "feedback_correctif_court": "Pas exactement : le cheval distingue bien le jaune et le bleu, mais perçoit mal le rouge et le vert.",
+      "precaution_scientifique": "La sensibilité aux contrastes est bien documentée dans les notes, mais le lien direct entre une couleur précise et une réaction de peur reste une hypothèse à vérifier au cas par cas, pas une règle générale.",
+      "references_notes": [],
+      "mecaniques_compatibles": ["qcm", "vrai_faux", "association", "texte_a_trous"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    },
+    {
+      "id": "MS-03",
+      "chapitre": 1,
+      "categorie": "monde sensoriel",
+      "sous_theme": "vision — accoutumance aux changements de lumière",
+      "titre_court": "Pourquoi il hésite à entrer dans le van",
+      "difficulte": "moyen",
+      "fait_scientifique_principal": "Le cheval met 1 à 2 secondes de plus que l'humain à s'accoutumer aux changements d'intensité lumineuse, en raison d'une pupille plus lente à se rétracter.",
+      "explication_courte": "Passer brusquement de la lumière du jour à un endroit sombre (van, salle de soins) demande au cheval un temps d'adaptation un peu plus long qu'à nous. Ce court délai peut suffire à expliquer une hésitation à avancer.",
+      "observations_possibles": [
+        "Le cheval s'arrête net à l'entrée d'un van ou d'un bâtiment sombre en venant de l'extérieur, puis avance après un bref temps d'arrêt si on ne le presse pas.",
+        "Il recommence à avancer normalement si on lui laisse quelques secondes sans le brusquer."
+      ],
+      "contextes_possibles": [
+        "La même hésitation peut aussi venir d'un sol qui change (rampe de van, changement de matière) — il faut donc regarder plusieurs indices avant de conclure."
+      ],
+      "hypotheses_prudentes": [
+        "Un arrêt de quelques secondes à l'entrée d'un lieu sombre serait plausiblement lié au temps d'accoutumance visuelle plutôt qu'à un refus de principe."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Interpréter un arrêt à l'entrée d'un van comme de la « mauvaise volonté » ou un manque d'éducation, alors qu'il peut s'agir d'un temps sensoriel incompressible."
+      ],
+      "informations_complementaires_a_rechercher": [
+        "Les notes ne précisent pas si ce délai varie selon l'âge du cheval ou son expérience préalable des vans."
+      ],
+      "conclusions_possibles": [
+        "Laisser 2 secondes environ avant de redemander l'avancée peut suffire à résoudre l'hésitation, sans avoir besoin d'insister physiquement."
+      ],
+      "conclusions_non_etablies": [
+        "Un cheval qui reste bloqué plus longtemps que quelques secondes ne relève probablement plus seulement de ce facteur sensoriel — d'autres causes doivent alors être recherchées, sans present que ce soit automatiquement de la désobéissance."
+      ],
+      "vocabulaire_cle": [
+        {"terme": "accoutumance lumineuse", "definition": "Temps nécessaire à l'œil pour s'adapter à un changement d'intensité de lumière."}
+      ],
+      "exemple_concret": "Un cheval qui refuse d'avancer dans un endroit sombre comme le van ou la salle de soin en venant de l'extérieur peut simplement avoir besoin de 1 à 2 secondes pour que sa vision s'adapte.",
+      "feedback_positif_court": "C'est ça : quelques secondes suffisent souvent, inutile d'insister tout de suite.",
+      "feedback_correctif_court": "Pas tout à fait : le cheval a besoin d'un peu plus de temps que nous pour que ses yeux s'adaptent au changement de lumière.",
+      "precaution_scientifique": "Ce délai explique une hésitation ponctuelle à l'entrée d'un lieu sombre, mais ne permet pas à lui seul d'expliquer un blocage prolongé ou répété, qui peut avoir d'autres causes.",
+      "references_notes": [],
+      "mecaniques_compatibles": ["qcm", "etude_de_cas", "dilemme_guide", "vrai_faux"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    },
+    {
+      "id": "MS-04",
+      "chapitre": 1,
+      "categorie": "monde sensoriel",
+      "sous_theme": "vision — vision nocturne",
+      "titre_court": "Une vision de nuit bien meilleure que la nôtre",
+      "difficulte": "moyen",
+      "fait_scientifique_principal": "Le cheval voit mieux que l'humain dans l'obscurité grâce au tapetum lucidum, une membrane qui tapisse le fond de l'œil et réfléchit la lumière sur les bâtonnets, jouant un rôle d'amplificateur de lumière.",
+      "explication_courte": "Cette structure anatomique lui permet de continuer à surveiller son environnement et à garder une vie sociale la nuit, presque aussi bien que le jour.",
+      "observations_possibles": [
+        "Les yeux du cheval peuvent sembler « briller » sous une lumière artificielle la nuit, comme chez de nombreux animaux dotés d'un tapetum lucidum.",
+        "Le cheval continue à se déplacer, s'alimenter ou interagir avec ses congénères la nuit sans montrer de désorientation particulière."
+      ],
+      "contextes_possibles": [
+        "Une activité nocturne normale ne doit pas être confondue avec de l'agitation ou un trouble du sommeil."
+      ],
+      "hypotheses_prudentes": [],
+      "erreurs_ou_croyances_frequentes": [
+        "Penser que le cheval est complètement désorienté ou vulnérable dès que la nuit tombe."
+      ],
+      "informations_complementaires_a_rechercher": [
+        "Les notes ne précisent pas de mesure chiffrée du gain de sensibilité nocturne par rapport à l'humain."
+      ],
+      "conclusions_possibles": [
+        "Un box ou un paddock sans éclairage la nuit n'est pas en soi un problème sensoriel pour le cheval."
+      ],
+      "conclusions_non_etablies": [],
+      "vocabulaire_cle": [
+        {"terme": "tapetum lucidum", "definition": "Membrane réfléchissante au fond de l'œil qui amplifie la lumière disponible pour la vision nocturne."}
+      ],
+      "exemple_concret": "C'est la même structure qui fait briller les yeux des chevreuils dans les phares de voiture la nuit.",
+      "feedback_positif_court": "Exact : le tapetum lucidum lui donne un vrai avantage la nuit.",
+      "feedback_correctif_court": "Pas tout à fait : c'est justement grâce au tapetum lucidum que sa vision nocturne est meilleure que la nôtre.",
+      "precaution_scientifique": "",
+      "references_notes": [],
+      "mecaniques_compatibles": ["qcm", "vrai_faux", "texte_a_trous", "association"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    },
+    {
+      "id": "MS-05",
+      "chapitre": 1,
+      "categorie": "monde sensoriel",
+      "sous_theme": "olfaction — organe voméro-nasal et flehmen",
+      "titre_court": "La grimace qui sert à mieux sentir",
+      "difficulte": "moyen",
+      "fait_scientifique_principal": "En plus de l'odorat classique, le cheval possède l'organe voméro-nasal (organe de Jacobson), qui analyse les phéromones. Pour l'utiliser, il adopte la posture du flehmen : il retrousse la lèvre supérieure, enferme l'air dans la cavité nasale, ce qui réchauffe et agite les molécules odorantes vers cet organe.",
+      "explication_courte": "Le flehmen n'est pas une grimace de dégoût ni un signe d'agressivité : c'est un comportement d'analyse olfactive fine, notamment utile pour des informations liées à la reproduction.",
+      "observations_possibles": [
+        "Le cheval relève la tête, retrousse la lèvre supérieure et immobilise sa mâchoire quelques secondes après avoir senti une odeur particulière (urine, sécrétion...).",
+        "Ce comportement est plus fréquent chez les étalons face aux juments, en lien avec l'état de réceptivité de celles-ci."
+      ],
+      "contextes_possibles": [
+        "Le flehmen peut aussi survenir face à une odeur inhabituelle ou forte, pas uniquement dans un contexte reproducteur."
+      ],
+      "hypotheses_prudentes": [
+        "Un flehmen répété face à une odeur nouvelle pourrait traduire un besoin d'analyser précisément cette odeur, plutôt qu'un inconfort."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Interpréter le flehmen comme une expression faciale de dégoût ou de mécontentement, alors que c'est un acte d'analyse sensorielle."
+      ],
+      "informations_complementaires_a_rechercher": [],
+      "conclusions_possibles": [
+        "Un flehmen observé après avoir senti un objet ou une zone particulière indique un fort intérêt olfactif pour cette source."
+      ],
+      "conclusions_non_etablies": [
+        "Le flehmen seul ne permet pas de déduire précisément ce que le cheval a identifié (statut reproducteur, individu, etc.) sans connaître le contexte exact de l'observation."
+      ],
+      "vocabulaire_cle": [
+        {"terme": "organe voméro-nasal (organe de Jacobson)", "definition": "Organe sensoriel additionnel permettant l'analyse des phéromones."},
+        {"terme": "flehmen", "definition": "Posture de retroussement de la lèvre supérieure permettant d'acheminer l'air vers l'organe voméro-nasal."}
+      ],
+      "exemple_concret": "Un étalon qui sent l'urine d'une jument peut effectuer un flehmen pour analyser son état de réceptivité via les phéromones captées.",
+      "feedback_positif_court": "C'est bien ça : le flehmen sert à analyser finement une odeur, pas à exprimer un dégoût.",
+      "feedback_correctif_court": "Pas tout à fait : cette posture sert à capter les phéromones via l'organe voméro-nasal, ce n'est pas une grimace de rejet.",
+      "precaution_scientifique": "",
+      "references_notes": [],
+      "mecaniques_compatibles": ["qcm", "vrai_faux", "reconnaissance_posture", "identification_erreur"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    },
+
+    {
+      "id": "AP-01",
+      "chapitre": 2,
+      "categorie": "apprentissage",
+      "sous_theme": "apprentissages non associatifs — habituation vs sensibilisation",
+      "titre_court": "Habituer, pas juste répéter",
+      "difficulte": "moyen",
+      "fait_scientifique_principal": "L'habituation consiste à exposer progressivement le cheval à un stimulus en restant toujours sous son seuil de peur, en attendant et recommençant dès qu'il montre de la vigilance ; il ne suffit pas de répéter un stimulus pour que le cheval s'y habitue (ex. le tapis de selle).",
+      "explication_courte": "Répéter une action ne suffit pas si le cheval reste au-dessus de son seuil de peur à chaque fois : c'est le respect de ce seuil, palier par palier, qui construit l'habituation.",
+      "observations_possibles": [
+        "Un objet présenté trop vite ou trop près déclenche la même réaction de vigilance à chaque répétition, sans amélioration.",
+        "Un objet présenté par paliers progressifs (distance, intensité) entraîne une vigilance qui diminue au fil des essais."
+      ],
+      "contextes_possibles": [
+        "Un cheval qui ne s'habitue toujours pas après plusieurs séances a peut-être été exposé au-dessus de son seuil de peur depuis le début, plutôt que d'être « têtu »."
+      ],
+      "hypotheses_prudentes": [
+        "Une absence de progrès après plusieurs répétitions suggère plutôt une mauvaise calibration des paliers qu'un trait de caractère figé chez le cheval."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Croire que répéter un geste ou un objet suffit en soi à habituer un cheval, indépendamment de son niveau de peur à chaque essai."
+      ],
+      "informations_complementaires_a_rechercher": [],
+      "conclusions_possibles": [
+        "Un protocole d'habituation efficace nécessite de définir à l'avance seuil de vigilance, paliers, durée de séance, avant de commencer."
+      ],
+      "conclusions_non_etablies": [
+        "On ne peut pas conclure qu'un cheval qui ne progresse pas à l'habituation a un problème de tempérament sans avoir vérifié que la procédure respectait bien ses seuils."
+      ],
+      "vocabulaire_cle": [
+        {"terme": "habituation", "definition": "Diminution progressive d'une réaction de peur par exposition répétée et graduée, sans jamais dépasser le seuil de vigilance."},
+        {"terme": "sensibilisation", "definition": "Maintenir un stimulus jusqu'à ce que la réaction cesse, à l'inverse d'une exposition progressive."},
+        {"terme": "seuil de vigilance", "definition": "Niveau d'intensité d'un stimulus à partir duquel le cheval commence à réagir par de la vigilance ou de la peur."}
+      ],
+      "exemple_concret": "Le test de la pochette agitée : niveau 1 immobile à 3 mètres (x3), niveau 2 immobile à 1 mètre (x3), niveau 3 agitée à 1 mètre (x3), avec des pauses entre chaque palier, et retour au début si on va trop vite.",
+      "feedback_positif_court": "Exactement : c'est la progressivité par paliers qui fait l'habituation, pas la simple répétition.",
+      "feedback_correctif_court": "Pas tout à fait : répéter ne suffit pas si le seuil de peur est dépassé à chaque fois — il faut avancer par paliers progressifs.",
+      "precaution_scientifique": "Un cheval qui « ne s'habitue pas » n'est pas nécessairement un cheval à part : la procédure elle-même (paliers trop rapides, seuils mal évalués) est souvent en cause avant le tempérament individuel.",
+      "references_notes": [],
+      "mecaniques_compatibles": ["qcm", "sequence", "etude_de_cas", "vrai_faux", "identification_erreur"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    },
+    {
+      "id": "AP-02",
+      "chapitre": 2,
+      "categorie": "apprentissage",
+      "sous_theme": "apprentissage instrumental — renforcement négatif vs punition",
+      "titre_court": "Inconfort puis action, ou action puis inconfort ?",
+      "difficulte": "difficile",
+      "fait_scientifique_principal": "Le renforcement négatif et la punition ne suivent pas le même ordre ni le même but : dans le renforcement négatif, un inconfort précède l'action et cesse dès que le comportement souhaité apparaît (inconfort → action → apparition d'un comportement) ; dans la punition, une action est suivie d'un inconfort dans le but de faire disparaître un comportement (action → inconfort → disparition d'un comportement).",
+      "explication_courte": "Ces deux mécanismes utilisent tous les deux un inconfort, mais dans un ordre inverse et avec un objectif opposé : l'un fait apparaître un comportement voulu, l'autre cherche à faire disparaître un comportement indésirable.",
+      "observations_possibles": [
+        "Une pression de jambe qui s'arrête dès que le cheval trotte : l'inconfort précède et cesse à l'apparition du comportement voulu (renforcement négatif).",
+        "Une tape qui suit une morsure : l'action du cheval précède l'inconfort, dans le but de faire cesser ce comportement (punition)."
+      ],
+      "contextes_possibles": [
+        "Le même geste (une pression, une tape) peut relever de l'un ou l'autre mécanisme selon uniquement l'ordre chronologique par rapport au comportement du cheval — le contexte précis de la séquence compte plus que le geste isolé."
+      ],
+      "hypotheses_prudentes": [
+        "Un cheval qui ne progresse pas malgré un renforcement négatif appliqué pourrait recevoir un signal appliqué trop tard, trop tôt, ou de façon disproportionnée par rapport à ce qui est demandé — plutôt qu'être jugé incapable d'apprendre."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Confondre renforcement négatif et punition parce que les deux impliquent un inconfort, alors que l'ordre et le but diffèrent complètement.",
+        "Croire qu'un renforcement plus fort produit toujours un apprentissage plus rapide ou plus clair, alors qu'un renforcement disproportionné peut produire un tout autre comportement que celui recherché."
+      ],
+      "informations_complementaires_a_rechercher": [
+        "Les notes ne précisent pas de seuil objectif pour qualifier un renforcement de « disproportionné » — cela reste à évaluer au cas par cas selon le cheval."
+      ],
+      "conclusions_possibles": [
+        "Identifier clairement, avant d'agir, l'ordre souhaité (signal / renforcement / action) permet de rester cohérent et clair pour le cheval."
+      ],
+      "conclusions_non_etablies": [
+        "On ne peut pas conclure qu'un cheval « comprend » un ordre simplement parce qu'il a exécuté un comportement une fois — la compréhension durable se construit par la répétition strictement identique de la procédure."
+      ],
+      "vocabulaire_cle": [
+        {"terme": "renforcement négatif", "definition": "Retrait d'un inconfort dès l'apparition du comportement souhaité, ce qui augmente la probabilité que ce comportement réapparaisse."},
+        {"terme": "punition", "definition": "Ajout d'un inconfort après un comportement, dans le but de le faire disparaître."},
+        {"terme": "renforcement positif", "definition": "Ajout d'une gratification après un comportement, ce qui augmente sa probabilité de réapparition."}
+      ],
+      "exemple_concret": "Ordre = contact sur les flancs ; on serre les flancs (inconfort) ; le cheval cherche à se soustraire ; dès qu'il trotte, on arrête la pression — c'est le renforcement négatif, différent d'une tape donnée après une morsure (punition).",
+      "feedback_positif_court": "Voilà : l'ordre de la séquence (avant/après le comportement) est ce qui distingue les deux.",
+      "feedback_correctif_court": "Pas tout à fait : ce qui distingue les deux, c'est l'ordre — inconfort puis action pour le renforcement négatif, action puis inconfort pour la punition.",
+      "precaution_scientifique": "Ces mécanismes décrivent des séquences d'apprentissage précises ; ils ne doivent pas servir à justifier a posteriori n'importe quel usage de l'inconfort — les notes rappellent qu'il faut savoir doser le renforcement, sous peine d'obtenir un tout autre comportement que celui recherché.",
+      "references_notes": [],
+      "mecaniques_compatibles": ["sequence", "etude_de_cas", "classification", "identification_erreur", "dilemme_guide"],
+      "statut_revue": "a_reformuler",
+      "motif_revue": "Notion technique et sensible (dresse une frontière fine entre deux usages de l'inconfort) ; la formulation grand public doit éviter tout ton normatif du type « il faut faire ainsi » et rester descriptive, pour ne pas être lue comme une caution à l'usage de la contrainte."
+    },
+    {
+      "id": "AP-03",
+      "chapitre": 2,
+      "categorie": "apprentissage",
+      "sous_theme": "conditionnement — contiguïté et contingence temporelles",
+      "titre_court": "Le bon geste, mais au bon moment",
+      "difficulte": "difficile",
+      "fait_scientifique_principal": "Pour qu'une association se forme, le renforcement doit suivre la réponse dans un laps de temps très court (contiguïté temporelle) ; il faut en plus éviter de donner la même récompense en dehors des moments d'apprentissage (contingence), sous peine de brouiller l'association — la contingence compterait encore plus que la contiguïté.",
+      "explication_courte": "Le cheval associe un comportement à une récompense seulement si celle-ci arrive vite après ce comportement, et seulement si cette récompense n'est pas distribuée n'importe quand par ailleurs.",
+      "observations_possibles": [
+        "Une carotte donnée plusieurs secondes après le bon comportement risque de récompenser autre chose que ce qui était visé.",
+        "Un aliment donné librement toute la journée, puis réutilisé comme récompense d'apprentissage, perd une partie de sa valeur de signal clair."
+      ],
+      "contextes_possibles": [
+        "Un apprentissage qui « ne prend pas » peut avoir une cause très pratique : délai trop long entre l'action et le renforcement, plutôt qu'un cheval incapable de comprendre."
+      ],
+      "hypotheses_prudentes": [
+        "Une confusion répétée du cheval sur ce qui est demandé pourrait provenir d'un défaut de contiguïté ou de contingence plutôt que d'un manque de capacité d'apprentissage."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Penser que seule la contiguïté (rapidité du renforcement) compte, en négligeant la contingence (ne pas distribuer la même récompense hors apprentissage)."
+      ],
+      "informations_complementaires_a_rechercher": [],
+      "conclusions_possibles": [
+        "Réserver un aliment ou un geste de récompense spécifiquement à l'acquisition d'un apprentissage renforce la clarté du signal pour le cheval."
+      ],
+      "conclusions_non_etablies": [],
+      "vocabulaire_cle": [
+        {"terme": "contiguïté temporelle", "definition": "Délai très court entre une réponse et son renforcement, nécessaire à la formation d'une association."},
+        {"terme": "contingence", "definition": "Fait de réserver un renforcement aux moments d'apprentissage, en évitant de le distribuer hors de ce contexte."}
+      ],
+      "exemple_concret": "Ne pas utiliser les mêmes pommes données en dehors des séances pour féliciter l'acquisition d'un apprentissage, afin de préserver la valeur de signal de la récompense.",
+      "feedback_positif_court": "Exact : la rapidité du renforcement et le fait de le réserver à l'apprentissage comptent tous les deux.",
+      "feedback_correctif_court": "Pas tout à fait : au-delà de la rapidité (contiguïté), il faut aussi réserver la récompense à l'apprentissage (contingence).",
+      "precaution_scientifique": "",
+      "references_notes": [],
+      "mecaniques_compatibles": ["qcm", "etude_de_cas", "texte_a_trous", "identification_erreur"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    },
+    {
+      "id": "AP-04",
+      "chapitre": 2,
+      "categorie": "apprentissage",
+      "sous_theme": "signaux involontaires — l'effet Clever Hans",
+      "titre_court": "Le cheval qui savait « compter »",
+      "difficulte": "moyen",
+      "fait_scientifique_principal": "Au début du 20ᵉ siècle, un cheval réputé savoir compter en frappant du sabot réagissait en réalité à des mouvements imperceptibles du questionneur ou de l'assistance (mimique, inclinaison de tête ou du corps) qui connaissaient la réponse ; le cheval avait appris à réagir à ces signaux très subtils, pas à compter.",
+      "explication_courte": "Ce cas historique montre à quel point le cheval est sensible aux micro-signaux corporels humains, parfois émis sans que la personne s'en rende compte elle-même.",
+      "observations_possibles": [
+        "Un cheval semble « deviner » une réponse ou une intention alors que la personne présente connaissait déjà cette réponse.",
+        "Un comportement disparaît quand la personne qui connaît la réponse n'est plus visible ou n'est pas informée."
+      ],
+      "contextes_possibles": [
+        "Une performance impressionnante d'un cheval face à une tâche cognitive mérite d'être testée en aveugle avant d'être attribuée à une capacité de raisonnement complexe."
+      ],
+      "hypotheses_prudentes": [
+        "Une réaction très fiable d'un cheval face à une consigne pourrait s'expliquer par des indices corporels involontaires plutôt que par la compréhension du contenu exact de la consigne."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Attribuer au cheval une compréhension conceptuelle avancée (compter, comprendre une consigne complexe) sans avoir exclu la possibilité de signaux involontaires."
+      ],
+      "informations_complementaires_a_rechercher": [],
+      "conclusions_possibles": [
+        "Tester une capacité cognitive suspectée chez un cheval en s'assurant qu'aucun humain présent ne connaît la réponse attendue permet de distinguer une vraie capacité d'un effet Clever Hans."
+      ],
+      "conclusions_non_etablies": [
+        "Le fait qu'un cheval réagisse « juste » à une demande ne prouve pas qu'il en comprend le sens profond — cela peut relever de signaux corporels appris, sans que ce soit toujours le cas non plus."
+      ],
+      "vocabulaire_cle": [
+        {"terme": "effet Clever Hans", "definition": "Phénomène où un animal réagit à des signaux corporels involontaires d'un humain plutôt qu'au contenu réel d'une consigne."}
+      ],
+      "exemple_concret": "Le cheval Hans frappait du sabot jusqu'à percevoir un mouvement imperceptible du questionneur signalant d'arrêter — la performance disparaissait si le questionneur ne connaissait pas lui-même la réponse.",
+      "feedback_positif_court": "C'est ça : le cheval réagissait aux signaux du questionneur, pas à un calcul.",
+      "feedback_correctif_court": "Pas tout à fait : l'étude a montré que le cheval réagissait à des signaux corporels involontaires, pas à une capacité de calcul.",
+      "precaution_scientifique": "Ce cas historique reste une mise en garde méthodologique valable aujourd'hui : toute performance cognitive impressionnante d'un cheval mérite d'être testée en aveugle avant conclusion.",
+      "references_notes": [],
+      "mecaniques_compatibles": ["qcm", "etude_de_cas", "vrai_faux", "indices_progressifs"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    },
+
+    {
+      "id": "CO-01",
+      "chapitre": 3,
+      "categorie": "communication",
+      "sous_theme": "communication auditive — les 7 sons du répertoire vocal",
+      "titre_court": "Sept sons, sept messages différents",
+      "difficulte": "moyen",
+      "fait_scientifique_principal": "Le répertoire vocal du cheval comprend 7 types de sons distincts (hennissement, couinement, appel sourd, gémissement, souffle, ébrouement, ronflement), chacun associé à un contexte et une fonction différents, et souvent combinés à d'autres canaux de communication.",
+      "explication_courte": "Chaque son a sa propre signification probable : le hennissement signale une séparation, le couinement précède souvent un conflit, le souffle alerte d'un danger, etc. Un même son peut cependant avoir plusieurs significations selon le contexte (ex. l'ébrouement).",
+      "observations_possibles": [
+        "Un hennissement fort et prolongé (jusqu'à 1 km) lors d'une séparation de congénères.",
+        "Un couinement aigu et bref, bouche qui se retrousse, quand deux chevaux sont naseaux à naseaux.",
+        "Un souffle avec dilatation complète des naseaux et immobilisation face à un objet inhabituel."
+      ],
+      "contextes_possibles": [
+        "L'ébrouement peut signaler à la fois de la détente ou de l'impatience selon le reste de l'attitude du cheval — il faut donc regarder l'ensemble du comportement, pas seulement le son."
+      ],
+      "hypotheses_prudentes": [
+        "Un hennissement isolé, sans défécation ni agitation, signalerait un simple appel plutôt qu'un stress important ; associé à ces signes, il indiquerait un stress plus marqué."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Considérer que tous les hennissements traduisent le même niveau de détresse, indépendamment du reste du comportement observé.",
+        "Interpréter systématiquement l'ébrouement comme un signe de détente, alors qu'il peut aussi signaler de l'impatience."
+      ],
+      "informations_complementaires_a_rechercher": [
+        "Les notes signalent que le vocabulaire français est peu précis sur ces sons comparé à l'anglais — une vérification terminologique reste utile."
+      ],
+      "conclusions_possibles": [
+        "Associer le son entendu au reste de la posture et du contexte permet une interprétation plus fiable que le son seul."
+      ],
+      "conclusions_non_etablies": [
+        "Un seul son entendu une fois ne permet pas de diagnostiquer un état émotionnel stable chez le cheval."
+      ],
+      "vocabulaire_cle": [
+        {"terme": "hennissement (whinny)", "definition": "Cri porteur (jusqu'à 1 km), associé à une situation de séparation."},
+        {"terme": "couinement (squeal)", "definition": "Son aigu et bref, souvent accompagné d'un jet d'antérieur, précédant parfois un conflit."},
+        {"terme": "ébrouement (snort)", "definition": "Son proche de l'éternuement, pouvant signaler détente ou impatience selon le contexte."}
+      ],
+      "exemple_concret": "Si le hennissement d'un cheval séparé de ses congénères s'accompagne de défécation et d'agitation, le niveau de stress est probablement plus important que pour un simple appel ponctuel.",
+      "feedback_positif_court": "Bien vu : ce son correspond à ce contexte de communication.",
+      "feedback_correctif_court": "Pas tout à fait : ce son est plutôt associé à un autre contexte — pense à revoir le lien son/situation.",
+      "precaution_scientifique": "Un son isolé, entendu une seule fois, ne suffit jamais à conclure sur l'état émotionnel du cheval : le contexte et les autres signes (posture, comportement associé) doivent toujours être pris en compte ensemble.",
+      "references_notes": [],
+      "mecaniques_compatibles": ["association", "qcm", "classification", "etude_de_cas", "identification_erreur"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    },
+    {
+      "id": "CO-02",
+      "chapitre": 3,
+      "categorie": "communication",
+      "sous_theme": "communication olfactive — comportement naso-nasal",
+      "titre_court": "Se dire bonjour, naseaux contre naseaux",
+      "difficulte": "facile",
+      "fait_scientifique_principal": "Le comportement naso-nasal (deux chevaux se mettant naseaux contre naseaux) permet une identification précise du partenaire par échange d'odeurs : le cheval qui souffle émet une odeur, celui qui inspire capte celle de l'autre, avec des oreilles orientées différemment selon qu'il souffle (avant) ou inspire (arrière).",
+      "explication_courte": "Ce rituel simple sert à se reconnaître précisément par l'odeur, canal de communication complémentaire à la vue et à l'ouïe.",
+      "observations_possibles": [
+        "Deux chevaux se placent naseaux contre naseaux à l'approche l'un de l'autre.",
+        "Les oreilles de chacun changent d'orientation selon qu'il souffle ou inspire durant cet échange."
+      ],
+      "contextes_possibles": [
+        "Ce comportement peut aussi précéder un couinement ou un jet d'antérieur si l'échange tourne mal — il ne signale pas systématiquement une reconnaissance apaisée."
+      ],
+      "hypotheses_prudentes": [],
+      "erreurs_ou_croyances_frequentes": [
+        "Croire que ce contact naso-nasal est toujours un signe d'affection, alors qu'il peut aussi précéder une tension entre deux chevaux qui ne se connaissent pas encore."
+      ],
+      "informations_complementaires_a_rechercher": [],
+      "conclusions_possibles": [
+        "Ce rituel olfactif est une étape normale et attendue de première rencontre entre deux chevaux."
+      ],
+      "conclusions_non_etablies": [
+        "On ne peut pas prédire uniquement à partir de ce comportement si la suite de l'interaction sera calme ou tendue — il faut observer ce qui suit."
+      ],
+      "vocabulaire_cle": [
+        {"terme": "comportement naso-nasal", "definition": "Rituel de reconnaissance olfactive entre deux chevaux, naseaux contre naseaux."}
+      ],
+      "exemple_concret": "Deux chevaux qui se rencontrent pour la première fois dans un paddock commencent souvent par ce contact naso-nasal avant toute autre interaction.",
+      "feedback_positif_court": "Exactement, c'est un rituel d'identification par l'odeur.",
+      "feedback_correctif_court": "Pas tout à fait : ce contact sert avant tout à s'identifier mutuellement par l'odeur.",
+      "precaution_scientifique": "",
+      "references_notes": [],
+      "mecaniques_compatibles": ["qcm", "vrai_faux", "reconnaissance_posture", "texte_a_trous"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    },
+    {
+      "id": "CO-03",
+      "chapitre": 3,
+      "categorie": "communication",
+      "sous_theme": "communication visuelle — progressivité des postures",
+      "titre_court": "Les signes qui préviennent avant le coup",
+      "difficulte": "moyen",
+      "fait_scientifique_principal": "Le passage d'une posture à une autre est progressif : le cheval enchaîne une série de postures qui annoncent les suivantes, et cet enchaînement se poursuit ou s'arrête selon la réaction du destinataire du message (le comportement cesse si le message est perçu et suivi d'effet, il continue sinon).",
+      "explication_courte": "Avant un comportement agressif comme un coup, le cheval passe généralement par plusieurs signaux d'avertissement de plus en plus marqués. Ces signaux laissent le temps à l'autre (cheval ou humain) de réagir avant que la situation n'aille plus loin.",
+      "observations_possibles": [
+        "Avant de taper : encolure qui se relève, oreilles couchées, croupe qui se tourne vers l'autre, possible recul, puis coup si l'autre ne s'est pas éloigné.",
+        "L'enchaînement s'arrête à une étape intermédiaire si le destinataire s'éloigne ou change de comportement en réponse au signal."
+      ],
+      "contextes_possibles": [
+        "Une étude suisse citée dans les notes indique que les chevaux responsables d'accidents chez des vétérinaires n'étaient pas des chevaux nerveux — suggérant que le défaut d'attention aux signes avant-coureurs, plutôt que le tempérament du cheval, est souvent en cause.",
+        "Les vétérinaires possédant leur propre cheval seraient, selon cette même étude, plus sujets aux accidents que les autres — probablement par accoutumance et vigilance réduite."
+      ],
+      "hypotheses_prudentes": [
+        "Un accident avec un cheval jugé « calme » pourrait s'expliquer par une inattention aux signaux progressifs plutôt que par un changement brutal et imprévisible de comportement du cheval."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Penser qu'un coup ou une morsure surgit « sans prévenir » chez un cheval, alors que des signaux progressifs le précèdent presque toujours.",
+        "Croire que seuls les chevaux nerveux sont responsables d'accidents — les données suggèrent plutôt un défaut d'attention humaine aux signes avant-coureurs."
+      ],
+      "informations_complementaires_a_rechercher": [
+        "Les notes ne détaillent pas la durée typique entre le premier signal (encolure qui se relève) et un éventuel coup — cette durée mériterait d'être précisée."
+      ],
+      "conclusions_possibles": [
+        "Observer l'ensemble de la séquence posturale (et pas un seul signe isolé) permet d'anticiper une réaction avant qu'elle ne s'aggrave."
+      ],
+      "conclusions_non_etablies": [
+        "Un seul élément de la séquence (par exemple des oreilles couchées un instant) ne permet pas, à lui seul, de prédire qu'un coup va suivre : c'est l'enchaînement complet et le contexte qui comptent."
+      ],
+      "vocabulaire_cle": [
+        {"terme": "posture", "definition": "Position combinée de l'encolure, la queue, les membres, la tête et les naseaux, porteuse de sens dans la communication visuelle."},
+        {"terme": "signal avant-coureur", "definition": "Signe précoce qui annonce un comportement à venir si la situation ne change pas."}
+      ],
+      "exemple_concret": "Avant de taper, un cheval va relever l'encolure, coucher les oreilles, tourner sa croupe vers son congénère, peut-être reculer, et ensuite taper seulement si l'autre ne s'est pas éloigné entre-temps.",
+      "feedback_positif_court": "Exactement : c'est bien un enchaînement progressif de signaux, pas un geste isolé et soudain.",
+      "feedback_correctif_court": "Pas tout à fait : le coup est en général précédé de plusieurs signaux progressifs (encolure, oreilles, croupe) — ce n'est presque jamais un geste isolé et soudain.",
+      "precaution_scientifique": "Il faut observer l'ensemble des éléments de la posture et le contexte pour bien comprendre un cheval : un signe seul, pris isolément, ne veut pas forcément dire la même chose selon la situation.",
+      "references_notes": [],
+      "mecaniques_compatibles": ["sequence", "reconnaissance_posture", "etude_de_cas", "indices_progressifs", "dilemme_guide"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    },
+    {
+      "id": "CO-04",
+      "chapitre": 3,
+      "categorie": "communication",
+      "sous_theme": "communication tactile — toilettage mutuel",
+      "titre_court": "Se toiletter pour se réconcilier",
+      "difficulte": "facile",
+      "fait_scientifique_principal": "Le toilettage mutuel entre partenaires préférés (au niveau du garrot, de l'encolure, du dos) a une fonction hygiénique et abaisse la fréquence cardiaque ; on observe davantage de toilettages mutuels après des tensions sociales dans le groupe, ce qui en fait un moyen d'apaisement.",
+      "explication_courte": "Ce comportement n'est pas qu'une histoire d'hygiène : il joue aussi un rôle social d'apaisement, notamment après un conflit entre membres du groupe.",
+      "observations_possibles": [
+        "Deux chevaux se grattent mutuellement avec les lèvres et les dents, en alternance, sur des zones difficiles à atteindre seul.",
+        "Une augmentation des séquences de toilettage mutuel après une tension ou un conflit observé dans le groupe."
+      ],
+      "contextes_possibles": [
+        "Une caresse humaine (tapoter, flatter) n'a pas nécessairement le même effet apaisant qu'un toilettage mutuel équin, le cheval n'étant pas naturellement très tactile dans ses échanges avec les congénères."
+      ],
+      "hypotheses_prudentes": [
+        "Reproduire un geste proche du toilettage mutuel (grattage sur une zone préférée) pourrait renforcer positivement la relation avec un cheval, plutôt qu'une caresse générique."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Croire que toute forme de contact humain (caresses, tapes) est perçue de la même façon agréable par le cheval qu'un toilettage mutuel entre congénères."
+      ],
+      "informations_complementaires_a_rechercher": [],
+      "conclusions_possibles": [
+        "Trouver la zone préférée d'un cheval et imiter un geste de grattage plutôt qu'une caresse peut créer un contact plus positif et servir ensuite de renforcement."
+      ],
+      "conclusions_non_etablies": [],
+      "vocabulaire_cle": [
+        {"terme": "toilettage mutuel", "definition": "Comportement social où deux chevaux se grattent mutuellement, à fonction hygiénique et apaisante."}
+      ],
+      "exemple_concret": "Un cheval peut rendre la pareille en grattant du bout des lèvres la zone où on le gratte soi-même, signe que le contact est perçu positivement.",
+      "feedback_positif_court": "Voilà : ce comportement a bien une fonction d'apaisement social, en plus de l'hygiène.",
+      "feedback_correctif_court": "Pas tout à fait : le toilettage mutuel sert aussi à apaiser les tensions sociales, pas uniquement à l'hygiène.",
+      "precaution_scientifique": "",
+      "references_notes": [],
+      "mecaniques_compatibles": ["qcm", "vrai_faux", "etude_de_cas", "texte_a_trous"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    },
+
+    {
+      "id": "BT-01",
+      "chapitre": 4,
+      "categorie": "budget temps",
+      "sous_theme": "répartition des activités sur 24h",
+      "titre_court": "Une journée de cheval en liberté",
+      "difficulte": "facile",
+      "fait_scientifique_principal": "Un cheval adulte en totale liberté consacre environ 60 % de son temps (15-16h) à l'alimentation, 20 à 30 % (5-7h) au repos, 4 à 8 % (1-2h) à la vigilance, 4 à 8 % (1-2h) au déplacement, le reste étant réparti entre comportements sociaux, reproduction et maintenance.",
+      "explication_courte": "L'alimentation domine très largement le budget temps du cheval en liberté, loin devant toutes les autres activités réunies.",
+      "observations_possibles": [
+        "Un cheval au pré passe la majorité de la journée la tête baissée à brouter, en se déplaçant lentement.",
+        "Les moments de vigilance active ou de déplacement rapide restent brefs comparés au temps passé à s'alimenter."
+      ],
+      "contextes_possibles": [
+        "En milieu domestique, cette répartition change fortement (repas limités dans le temps) — la comparaison avec le milieu naturel aide à repérer un déséquilibre."
+      ],
+      "hypotheses_prudentes": [],
+      "erreurs_ou_croyances_frequentes": [
+        "Sous-estimer à quel point l'alimentation occupe la majorité du temps d'un cheval en liberté, et donc son besoin de fourrage quasi constant."
+      ],
+      "informations_complementaires_a_rechercher": [],
+      "conclusions_possibles": [
+        "Un cheval domestique dont le temps d'alimentation est très réduit par rapport à ces proportions naturelles voit son budget temps fortement modifié."
+      ],
+      "conclusions_non_etablies": [],
+      "vocabulaire_cle": [
+        {"terme": "budget temps", "definition": "Répartition des activités d'un animal sur 24 heures."}
+      ],
+      "exemple_concret": "Sur 24h, un cheval en liberté passe environ 15 à 16h à s'alimenter, contre seulement 1 à 2h à se déplacer.",
+      "feedback_positif_court": "C'est ça : l'alimentation domine très largement le budget temps naturel.",
+      "feedback_correctif_court": "Pas tout à fait : l'alimentation occupe la part la plus importante (environ 60 %), bien plus que le déplacement ou la vigilance.",
+      "precaution_scientifique": "",
+      "references_notes": [],
+      "mecaniques_compatibles": ["estimation", "qcm", "classification", "priorisation"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    },
+    {
+      "id": "BT-02",
+      "chapitre": 4,
+      "categorie": "budget temps",
+      "sous_theme": "repos — phases de sommeil et besoin de décubitus",
+      "titre_court": "Pourquoi il doit aussi se coucher",
+      "difficulte": "moyen",
+      "fait_scientifique_principal": "Le cheval alterne repos debout (somnolence ou sommeil à ondes lentes) et repos couché (décubitus sternal ou latéral), ce dernier seul permettant le sommeil paradoxal ; les chevaux peuvent augmenter leur temps de récupération mais pas le réduire sans risque pour leur santé.",
+      "explication_courte": "Dormir debout ne suffit pas à tout : le sommeil paradoxal, important pour la santé du cheval, nécessite qu'il se couche, au moins par courtes périodes.",
+      "observations_possibles": [
+        "Un cheval au repos debout a les yeux mi-clos, les oreilles légèrement en arrière, un postérieur au repos et la lèvre inférieure pendante.",
+        "Un cheval couché en décubitus latéral (tout du long) plutôt qu'en décubitus sternal (« en vache »)."
+      ],
+      "contextes_possibles": [
+        "Un cheval qui ne se couche jamais dans un box trop petit ou dans un environnement où il ne se sent pas en sécurité peut accumuler un déficit de sommeil paradoxal, sans que cela se voie autrement qu'à travers une fatigue ou une émotivité plus grande."
+      ],
+      "hypotheses_prudentes": [
+        "Une émotivité inhabituelle chez un cheval pourrait, entre autres causes possibles, être liée à un manque de repos couché plutôt qu'à un trait de caractère."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Croire qu'un cheval qui dort debout n'a pas besoin de se coucher du tout.",
+        "Penser qu'un espace de couchage n'est qu'un détail de confort et non un besoin physiologique."
+      ],
+      "informations_complementaires_a_rechercher": [],
+      "conclusions_possibles": [
+        "Un espace suffisant et un environnement sécurisant pour permettre le décubitus font partie des besoins de base du cheval, pas d'un luxe."
+      ],
+      "conclusions_non_etablies": [
+        "L'absence de décubitus observée une seule fois ne permet pas de conclure à un problème de bien-être généralisé — il faudrait l'observer sur la durée."
+      ],
+      "vocabulaire_cle": [
+        {"terme": "décubitus sternal", "definition": "Position couchée « en vache », sur le sternum."},
+        {"terme": "décubitus latéral", "definition": "Position couchée sur le flanc, tout du long."},
+        {"terme": "sommeil paradoxal", "definition": "Phase de sommeil profond associée au relâchement musculaire complet, uniquement possible couché."}
+      ],
+      "exemple_concret": "En raison de son poids, le cheval ne peut pas rester longtemps couché et se repose donc en plusieurs fois plutôt qu'en une seule longue période.",
+      "feedback_positif_court": "Exactement : le repos couché est indispensable, notamment pour le sommeil paradoxal.",
+      "feedback_correctif_court": "Pas tout à fait : le repos debout ne suffit pas à tout — le sommeil paradoxal nécessite que le cheval se couche.",
+      "precaution_scientifique": "Un cheval vu une seule fois sans se coucher ne permet pas de conclure à un trouble : c'est l'observation répétée dans le temps qui donne une indication fiable.",
+      "references_notes": [],
+      "mecaniques_compatibles": ["qcm", "vrai_faux", "reconnaissance_posture", "classification"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    },
+    {
+      "id": "BT-03",
+      "chapitre": 4,
+      "categorie": "budget temps",
+      "sous_theme": "facteurs de variation du budget temps",
+      "titre_court": "Pas deux chevaux avec le même emploi du temps",
+      "difficulte": "moyen",
+      "fait_scientifique_principal": "Le budget temps varie selon le statut social et l'âge (un étalon est plus vigilant, une jument pâture davantage, les poulains dorment plus et interagissent plus socialement) ainsi que selon les rythmes saisonniers (davantage d'alimentation en hiver, davantage de déplacements en été pour échapper aux insectes et à la chaleur).",
+      "explication_courte": "Le budget temps théorique (60 % alimentation, etc.) est une moyenne : chaque cheval l'ajuste selon son âge, son statut social et la saison.",
+      "observations_possibles": [
+        "Un étalon qui interrompt plus souvent son alimentation pour scruter les alentours qu'une jument du même groupe.",
+        "Des poulains qui dorment davantage et multiplient les interactions de jeu par rapport aux adultes.",
+        "Plus de temps passé à s'alimenter en hiver qu'au printemps, lorsque l'herbe est plus rare."
+      ],
+      "contextes_possibles": [
+        "Un changement de comportement saisonnier normal (plus de déplacement en été à cause des insectes) ne doit pas être confondu avec un signe de mal-être."
+      ],
+      "hypotheses_prudentes": [],
+      "erreurs_ou_croyances_frequentes": [
+        "Comparer directement le comportement de deux chevaux d'âge ou de statut social différents comme s'ils devaient suivre exactement le même budget temps."
+      ],
+      "informations_complementaires_a_rechercher": [
+        "Les notes précisent qu'il ne semble pas y avoir de réel rythme circadien chez le cheval, mais plutôt une réaction aux conditions d'environnement — nuance à garder en tête plutôt que de parler d'une « horloge interne » stricte."
+      ],
+      "conclusions_possibles": [
+        "Interpréter le comportement d'un cheval en tenant compte de son âge, de son statut social et de la saison en cours donne une lecture plus juste que la moyenne générale."
+      ],
+      "conclusions_non_etablies": [],
+      "vocabulaire_cle": [
+        {"terme": "rythme circadien", "definition": "Rythme biologique interne d'environ 24 heures ; chez le cheval, les notes indiquent une relation aux conditions d'environnement plutôt qu'une horloge interne stricte."}
+      ],
+      "exemple_concret": "Des chevaux New Forest en semi-liberté ont tendance à se mettre sous couvert d'arbres à la tombée de la nuit et à en sortir au lever du jour (observation de Stéphanie Tyler).",
+      "feedback_positif_court": "Bien vu : le budget temps théorique s'ajuste selon l'individu et la saison.",
+      "feedback_correctif_court": "Pas tout à fait : le budget temps varie selon l'âge, le statut social et la saison — ce n'est pas un chiffre figé identique pour tous.",
+      "precaution_scientifique": "Le budget temps « moyen » ne doit pas servir de norme rigide : les écarts liés à l'âge, au statut social ou à la saison sont normaux et attendus.",
+      "references_notes": ["Stéphanie Tyler (observation New Forest)"],
+      "mecaniques_compatibles": ["comparaison", "qcm", "classification", "etude_de_cas"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    },
+    {
+      "id": "BT-04",
+      "chapitre": 4,
+      "categorie": "budget temps",
+      "sous_theme": "comparaison budget temps naturel / domestique",
+      "titre_court": "Même cheval, emploi du temps très différent",
+      "difficulte": "moyen",
+      "fait_scientifique_principal": "Le répertoire comportemental du cheval domestique ne diffère pas fondamentalement de celui du milieu naturel, mais certains comportements ne peuvent pas s'exprimer, leur durée ou fréquence est modifiée, et des changements qualitatifs apparaissent (repas limités dans le temps, peu de mobilité lente mais plus de déplacements rapides, vie sociale aux conditions variables).",
+      "explication_courte": "Le cheval domestique garde les mêmes besoins de base qu'à l'état naturel, mais son mode de vie l'empêche souvent de les exprimer de la même façon, ce qui peut avoir des conséquences sur son comportement.",
+      "observations_possibles": [
+        "Des repas limités à deux ou trois moments dans la journée au lieu d'une alimentation quasi continue.",
+        "Des séquences de déplacement rapide (trot, galop) plus fréquentes en box ou en sortie qu'en pâturage naturel, où le pas domine largement."
+      ],
+      "contextes_possibles": [
+        "Une agitation observée après une longue période de confinement peut être une compensation d'un manque de mobilité lente, plutôt qu'un excès d'énergie à corriger par plus de travail."
+      ],
+      "hypotheses_prudentes": [
+        "Des déplacements rapides et répétés en liberté après une sortie de box pourraient traduire un besoin de mouvement resté insatisfait, plutôt qu'un trait de caractère « nerveux »."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Penser que le mode de vie domestique n'a pas d'impact réel sur le comportement du cheval tant que ses besoins de base (nourriture, eau, soins) sont couverts."
+      ],
+      "informations_complementaires_a_rechercher": [],
+      "conclusions_possibles": [
+        "Comparer un comportement observé en domestique à son équivalent en milieu naturel aide à repérer ce qui relève d'une contrainte du mode de vie plutôt que d'un problème individuel."
+      ],
+      "conclusions_non_etablies": [],
+      "vocabulaire_cle": [
+        {"terme": "répertoire comportemental", "definition": "Ensemble des comportements qu'une espèce est capable d'exprimer."}
+      ],
+      "exemple_concret": "Un cheval au pré mange en marchant sur de longues périodes ; un cheval au box reçoit deux ou trois repas limités dans le temps — une transformation majeure de son rapport à l'alimentation.",
+      "feedback_positif_court": "Exactement : les besoins restent les mêmes, mais les conditions changent la façon de les exprimer.",
+      "feedback_correctif_court": "Pas tout à fait : le répertoire de base ne change pas fondamentalement, mais la fréquence et la façon d'exprimer certains comportements sont modifiées en domestique.",
+      "precaution_scientifique": "",
+      "references_notes": [],
+      "mecaniques_compatibles": ["comparaison", "classification", "qcm", "etude_de_cas"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    },
+
+    {
+      "id": "DO-01",
+      "chapitre": 5,
+      "categorie": "domestication",
+      "sous_theme": "impact du confinement en box",
+      "titre_court": "Ce que le box change dans le corps",
+      "difficulte": "moyen",
+      "fait_scientifique_principal": "Plus les chevaux passent de temps en box, plus ils réagissent par une activité accrue en liberté (augmentation des déplacements rapides par privation) ; le temps passé au box augmente aussi le risque de comportements anormaux, et un petit box réduit le temps de repos couché, avec un impact sur le sommeil paradoxal.",
+      "explication_courte": "Le confinement prolongé modifie à la fois le mouvement (plus de déplacements rapides en compensation) et le repos (moins de sommeil profond) du cheval.",
+      "observations_possibles": [
+        "Un cheval qui se met à courir, faire des écarts ou s'agiter fortement dès sa sortie de box, après une longue période de confinement.",
+        "Moins de séquences de repos couché observées chez un cheval logé dans un petit box."
+      ],
+      "contextes_possibles": [
+        "Une agitation à la sortie du box ne doit pas être lue comme un excès d'énergie « à dépenser par le travail » mais plutôt comme une conséquence attendue du confinement."
+      ],
+      "hypotheses_prudentes": [
+        "Une émotivité accrue chez un cheval très confiné pourrait s'expliquer, au moins en partie, par ce manque chronique de mouvement et de repos couché plutôt que par son tempérament seul."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Penser qu'un cheval « débordant d'énergie » à la sortie du box a simplement un fort caractère, sans considérer le rôle du confinement lui-même."
+      ],
+      "informations_complementaires_a_rechercher": [
+        "Les notes indiquent qu'au-delà de 12h par jour au pré, le risque de comportements anormaux diminuerait, mais ne précisent pas de seuil symétrique équivalent côté box."
+      ],
+      "conclusions_possibles": [
+        "Réduire le temps de confinement en box et augmenter le temps au paddock ou au pré peut diminuer ces effets."
+      ],
+      "conclusions_non_etablies": [
+        "Une agitation ponctuelle à la sortie du box ne permet pas de diagnostiquer un trouble comportemental — elle doit être suivie dans la durée avant conclusion."
+      ],
+      "vocabulaire_cle": [
+        {"terme": "confinement", "definition": "Temps passé par le cheval dans un espace restreint (le box), limitant ses possibilités de mouvement."}
+      ],
+      "exemple_concret": "Une étude sur le débourrage citée dans les notes associe le confinement à une multiplication par 10 des mouvements de tête et à une augmentation des sauts de mouton.",
+      "feedback_positif_court": "C'est ça : le confinement a un impact mesurable, à la fois sur le mouvement et sur le repos.",
+      "feedback_correctif_court": "Pas tout à fait : le confinement prolongé tend à augmenter les déplacements rapides compensatoires et à réduire le repos couché, pas l'inverse.",
+      "precaution_scientifique": "Le lien entre confinement et comportement est bien documenté dans les notes, mais le confinement est aussi souvent confondu avec l'isolement social : les deux facteurs doivent être distingués avant de conclure sur une cause précise.",
+      "references_notes": [],
+      "mecaniques_compatibles": ["comparaison", "qcm", "etude_de_cas", "priorisation"],
+      "statut_revue": "a_verifier_scientifiquement",
+      "motif_revue": "Mentionne un seuil chiffré (« au-delà de 12h par jour au pré ») sans plus de détail sur l'étude source — à confirmer avant diffusion telle quelle."
+    },
+    {
+      "id": "DO-02",
+      "chapitre": 5,
+      "categorie": "domestication",
+      "sous_theme": "isolement social et stéréotypies",
+      "titre_court": "Seul, le cheval en paie le prix",
+      "difficulte": "moyen",
+      "fait_scientifique_principal": "L'isolement social est considéré comme une source majeure de stéréotypies et d'agressivité (envers l'humain, les congénères ou lui-même) ; les étalons élevés seuls montrent plus d'agressivité directe que ceux élevés en groupe. Un miroir ou une grille entre boxes réduisent certaines stéréotypies, mais la vraie solution reste de procurer des contacts sociaux réels.",
+      "explication_courte": "Priver un cheval de contact social a des effets comportementaux mesurables ; des palliatifs existent (miroir, grille) mais ne remplacent pas un vrai contact social.",
+      "observations_possibles": [
+        "Des comportements répétitifs sans fonction apparente (stéréotypies) apparaissant après une mise à l'isolement.",
+        "Une agressivité plus directe (menace de mordre) chez un étalon élevé seul, comparée à des comportements d'évitement plus subtils chez un étalon élevé en groupe."
+      ],
+      "contextes_possibles": [
+        "Une stéréotypie qui persiste malgré l'ajout d'un miroir dans le box suggère que la cause sociale profonde n'est pas résolue par ce seul palliatif."
+      ],
+      "hypotheses_prudentes": [
+        "Une agressivité inhabituelle chez un cheval isolé pourrait relever, au moins en partie, du manque de contact social plutôt que d'un trait de caractère intrinsèque."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Considérer un miroir ou une grille comme des solutions suffisantes en soi, sans chercher à offrir un vrai contact social au cheval.",
+        "Qualifier un cheval agressif de « mauvais caractère » sans interroger ses conditions de vie sociale."
+      ],
+      "informations_complementaires_a_rechercher": [],
+      "conclusions_possibles": [
+        "Mettre les chevaux en groupe dès que possible (paddock, manège, stabulation) réduit le risque de stéréotypies et d'agressivité liées à l'isolement."
+      ],
+      "conclusions_non_etablies": [
+        "Une stéréotypie observée chez un cheval ne permet pas, à elle seule, de dire que l'isolement social en est la cause unique : d'autres facteurs (alimentation, confinement) peuvent se cumuler."
+      ],
+      "vocabulaire_cle": [
+        {"terme": "stéréotypie", "definition": "Comportement répétitif, sans fonction apparente, jamais observé en milieu naturel."},
+        {"terme": "isolement social", "definition": "Absence de contact avec des congénères, considérée comme un facteur de risque majeur de mal-être chez le cheval."}
+      ],
+      "exemple_concret": "Une part importante des chevaux développe au moins une stéréotypie dans les semaines suivant leur première mise au box isolé, selon les notes.",
+      "feedback_positif_court": "Exact : l'isolement social est un facteur de risque majeur, bien documenté.",
+      "feedback_correctif_court": "Pas tout à fait : un miroir ou une grille peuvent atténuer certains signes, mais ne remplacent pas un vrai contact social — c'est ce dernier qui traite la cause.",
+      "precaution_scientifique": "Une stéréotypie ou une agressivité ne doit jamais être réduite à un jugement de caractère : il s'agit avant tout d'un signal à interroger sur les conditions de vie du cheval.",
+      "references_notes": [],
+      "mecaniques_compatibles": ["etude_de_cas", "qcm", "dilemme_guide", "comparaison", "identification_erreur"],
+      "statut_revue": "a_reformuler",
+      "motif_revue": "Contient un pourcentage précis (« 67 % ») dans les notes source associé à un délai de 12 semaines ; à garder au conditionnel/prudent dans la reformulation grand public plutôt que d'afficher le chiffre brut sans plus de source détaillée."
+    },
+    {
+      "id": "DO-03",
+      "chapitre": 5,
+      "categorie": "domestication",
+      "sous_theme": "alimentation domestique et troubles digestifs",
+      "titre_court": "Trop de concentrés, pas assez de fibres",
+      "difficulte": "difficile",
+      "fait_scientifique_principal": "L'alimentation domestique s'écarte fortement du modèle naturel (repas limités, forte concentration énergétique et en amidon, apports en fibres variables) ; ces changements sont associés à des troubles comme les ulcères gastriques, les coliques ou les fourbures, notamment parce que l'estomac du cheval, conçu pour être rempli en continu, se vide toutes les 3 heures environ.",
+      "explication_courte": "Le système digestif du cheval est fait pour une alimentation quasi continue et pauvre en amidon. Un régime concentré et espacé dans le temps crée un déséquilibre pouvant mener à des troubles digestifs.",
+      "observations_possibles": [
+        "Des changements de comportement comme le bâillement, une perte d'appétit ou une dégradation de l'état général, cités dans les notes comme des indices possibles (mais non certains) de trouble digestif.",
+        "Une alimentation concentrée avec de longs intervalles entre les repas."
+      ],
+      "contextes_possibles": [
+        "Ces signes de changement de comportement peuvent aussi avoir d'autres origines que digestives — ils orientent vers une vigilance accrue, pas vers un diagnostic."
+      ],
+      "hypotheses_prudentes": [
+        "Un bâillement fréquent ou une baisse d'appétit pourraient être des signes d'appel à surveiller de près, en lien possible avec un inconfort digestif, sans que cela constitue une preuve en soi."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Penser qu'un cheval qui mange beaucoup de concentrés est simplement « bien nourri », sans considérer le déséquilibre que cela peut créer avec le manque de fibres.",
+        "Diagnostiquer un ulcère ou une colique soi-même à partir d'un seul changement de comportement observé."
+      ],
+      "informations_complementaires_a_rechercher": [
+        "Les notes elles-mêmes indiquent que ces changements de comportement donnent des « indications » pour être plus vigilant, sans être des preuves diagnostiques — un professionnel reste nécessaire pour confirmer un trouble digestif réel."
+      ],
+      "conclusions_possibles": [
+        "Privilégier les fibres à volonté et fractionner les apports en concentrés réduit le risque de déséquilibre digestif décrit dans les notes."
+      ],
+      "conclusions_non_etablies": [
+        "Aucun changement de comportement isolé (bâillement, baisse d'appétit) ne permet à lui seul de diagnostiquer un ulcère, une colique ou une fourbure : seul un professionnel vétérinaire peut confirmer un trouble digestif."
+      ],
+      "vocabulaire_cle": [
+        {"terme": "ulcère gastrique", "definition": "Lésion de la paroi de l'estomac, favorisée par l'acidité excessive liée à un estomac trop souvent vide."},
+        {"terme": "fourbure", "definition": "Trouble douloureux du pied du cheval, associé notamment à un excès d'amidon dans l'alimentation."},
+        {"terme": "colique", "definition": "Douleur abdominale chez le cheval, pouvant avoir plusieurs origines dont alimentaires."}
+      ],
+      "exemple_concret": "Installer des filets à foin à petites mailles permet de ralentir la prise alimentaire et de se rapprocher du rythme naturel d'ingestion quasi continue.",
+      "feedback_positif_court": "C'est ça : le déséquilibre entre concentrés et fibres est bien identifié comme un facteur de risque digestif.",
+      "feedback_correctif_court": "Pas tout à fait : c'est justement l'excès de concentrés et le manque de fibres à volonté qui créent ce déséquilibre digestif, pas l'inverse.",
+      "precaution_scientifique": "Ce point touche à la santé digestive : les signes évoqués (bâillement, perte d'appétit...) sont des indices de vigilance, jamais un diagnostic. Toute suspicion réelle de trouble digestif doit être orientée vers un vétérinaire, jamais tranchée par l'application elle-même.",
+      "references_notes": [],
+      "mecaniques_compatibles": ["etude_de_cas", "qcm", "comparaison", "identification_erreur", "priorisation"],
+      "statut_revue": "a_verifier_scientifiquement",
+      "motif_revue": "Touche à des troubles de santé (ulcères, coliques, fourbures) : formulation à vérifier pour s'assurer qu'aucune phrase ne puisse être lue comme une invitation à l'auto-diagnostic ; les seuils chiffrés précis du chapitre 6 (ex. doses de concentrés, intervalles horaires) ne sont pas repris ici et mériteraient une relecture séparée avant tout usage."
+    },
+    {
+      "id": "DO-04",
+      "chapitre": 5,
+      "categorie": "domestication",
+      "sous_theme": "relation humain/cheval — positionnement",
+      "titre_court": "Où se placer change tout",
+      "difficulte": "moyen",
+      "fait_scientifique_principal": "Une étude de Rennes citée dans les notes montre que la position de l'humain modifie la réponse du cheval : plus la personne est loin devant, plus la latence de réponse augmente et les oreilles se tournent souvent vers l'arrière ; plus elle est proche de la tête, plus le cheval réagit vite ; les chevaux montrent une latence plus rapide et une attitude plus positive quand l'humain est proche et attentif visuellement.",
+      "explication_courte": "La façon dont une personne se positionne par rapport au cheval influence concrètement la rapidité et la qualité de sa réponse — ce n'est pas un détail neutre.",
+      "observations_possibles": [
+        "Un cheval qui met plus de temps à réagir ou à s'arrêter quand la personne est loin devant lui ou derrière son épaule.",
+        "Une réaction plus rapide et des oreilles orientées différemment quand la personne reste proche de la tête et visuellement attentive."
+      ],
+      "contextes_possibles": [
+        "Une latence de réponse plus longue ne doit pas être interprétée comme de la désobéissance si elle est liée simplement au positionnement de la personne."
+      ],
+      "hypotheses_prudentes": [
+        "Un cheval qui semble « lent à répondre » avec une personne pourrait réagir différemment si cette personne changeait simplement de position par rapport à lui."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Attribuer une lenteur de réponse à un manque d'attention ou d'éducation du cheval sans considérer le rôle du positionnement humain."
+      ],
+      "informations_complementaires_a_rechercher": [],
+      "conclusions_possibles": [
+        "Se tenir proche de la tête du cheval et rester visuellement attentif favorise une réponse plus rapide et une attitude plus positive."
+      ],
+      "conclusions_non_etablies": [
+        "Ce constat ne permet pas de conclure qu'un positionnement optimal suffit à lui seul à garantir une bonne relation globale avec le cheval — la relation se construit sur la durée, par des interactions répétées."
+      ],
+      "vocabulaire_cle": [
+        {"terme": "latence de réponse", "definition": "Délai entre une demande faite au cheval et sa réponse effective."}
+      ],
+      "exemple_concret": "Plus la personne est proche de la tête du cheval, plus il marche vite, s'arrête vite, et présente une latence de réponse plus rapide, avec l'oreille droite orientée vers elle.",
+      "feedback_positif_court": "Exactement : la position de l'humain influence directement la rapidité et la qualité de la réponse du cheval.",
+      "feedback_correctif_court": "Pas tout à fait : selon l'étude citée, un positionnement proche et attentif accélère la réponse du cheval, un positionnement loin devant la ralentit.",
+      "precaution_scientifique": "",
+      "references_notes": ["étude de Rennes (positionnement humain/cheval)"],
+      "mecaniques_compatibles": ["etude_de_cas", "qcm", "comparaison", "dilemme_guide"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    },
+
+    {
+      "id": "BO-01",
+      "chapitre": 6,
+      "categorie": "bien-être et observation",
+      "sous_theme": "stéréotypies — définition et formes classiques",
+      "titre_court": "Tic à l'ours, tic à l'appui : ce que ça veut dire",
+      "difficulte": "facile",
+      "fait_scientifique_principal": "Les stéréotypies sont des séquences comportementales répétitives, sans but ni fonction apparents, jamais observées en milieu naturel. Trois formes classiques chez le cheval : le tic à l'ours (mouvements latéraux de tête/encolure/avant-main), le tic à l'appui ou à l'air (prise d'appui des incisives et déglutition d'air, avec ou sans appui), et le « box walking » (déplacement répété selon le même trajet dans le box).",
+      "explication_courte": "Ce sont des comportements que le cheval ne développe pas dans la nature : ils apparaissent en réponse à un environnement qui ne répond pas à ses besoins, et non par « vice » ou mauvais caractère.",
+      "observations_possibles": [
+        "Un cheval qui balance latéralement la tête et l'encolure de façon répétitive et invariante (tic à l'ours).",
+        "Un cheval qui prend appui avec ses incisives sur un objet fixe en avalant de l'air, ou qui avale de l'air sans appui (tic à l'air).",
+        "Un cheval qui parcourt toujours le même trajet dans son box (box walking)."
+      ],
+      "contextes_possibles": [
+        "Une stéréotypie peut être confondue avec un simple « tic » sans gravité si l'on ne sait pas qu'elle signale généralement un environnement inadapté."
+      ],
+      "hypotheses_prudentes": [
+        "L'apparition d'une stéréotypie suggère plutôt un environnement à interroger (confinement, alimentation, vie sociale) qu'un trait de caractère du cheval lui-même."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Considérer une stéréotypie comme un simple « vice » propre à l'animal, sans lien avec ses conditions de vie.",
+        "Chercher uniquement à faire cesser le comportement (par une contention par exemple) sans s'interroger sur sa cause, ce qui peut augmenter le stress du cheval."
+      ],
+      "informations_complementaires_a_rechercher": [
+        "Les notes évoquent des « sensibilités génétiques » (davantage chez certaines races ou lignées) sans plus de détail sur les mécanismes biologiques précis — point à creuser."
+      ],
+      "conclusions_possibles": [
+        "Observer une stéréotypie doit amener à s'interroger sur l'environnement du cheval (logement, alimentation, vie sociale) plutôt qu'à chercher uniquement à supprimer le geste."
+      ],
+      "conclusions_non_etablies": [
+        "La présence d'une stéréotypie ne permet pas de diagnostiquer précisément quelle cause (alimentation, isolement, confinement) en est à l'origine sans une observation plus large des conditions de vie du cheval — plusieurs facteurs peuvent se cumuler."
+      ],
+      "vocabulaire_cle": [
+        {"terme": "stéréotypie", "definition": "Séquence comportementale répétitive, invariante, sans fonction apparente, jamais observée en milieu naturel."},
+        {"terme": "tic à l'ours", "definition": "Mouvements latéraux répétitifs de la tête, de l'encolure et de l'avant-main."},
+        {"terme": "tic à l'appui / à l'air", "definition": "Prise d'appui des incisives (ou non) suivie d'une déglutition d'air."},
+        {"terme": "box walking", "definition": "Déplacement répété suivant systématiquement le même trajet dans le box."}
+      ],
+      "exemple_concret": "Un cheval qui prend appui sur la mangeoire avec ses incisives et avale de l'air de façon répétée exprime un tic à l'appui, une stéréotypie jamais observée à l'état naturel.",
+      "feedback_positif_court": "Exactement : c'est un comportement jamais vu en milieu naturel, signal d'un environnement à interroger.",
+      "feedback_correctif_court": "Pas tout à fait : ce comportement est une stéréotypie, absente en milieu naturel — plutôt un signal à interroger qu'un simple vice individuel.",
+      "precaution_scientifique": "Une stéréotypie n'est jamais un diagnostic en soi et ne doit jamais être réduite à un « mauvais caractère » : c'est un signal invitant à regarder les conditions de vie du cheval dans leur ensemble, idéalement avec un professionnel si le doute persiste.",
+      "references_notes": ["Mason 1991", "McGreevy 1995", "Bachmann 2003", "Nicol 1999", "Hausberger 2009"],
+      "mecaniques_compatibles": ["qcm", "classification", "association", "reconnaissance_posture", "identification_erreur"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    },
+    {
+      "id": "BO-02",
+      "chapitre": 6,
+      "categorie": "bien-être et observation",
+      "sous_theme": "sous-estimation du mal-être — observation directe vs questionnaire",
+      "titre_court": "Ce que les soigneurs voient... et ne voient pas",
+      "difficulte": "difficile",
+      "fait_scientifique_principal": "Selon les notes, une étude comparant observation directe et questionnaire sur 373 chevaux trouve environ 37,5 % de chevaux présentant au moins une stéréotypie par observation directe, contre seulement environ 5,4 % détectés par questionnaire — un accord jugé faible entre les deux méthodes.",
+      "explication_courte": "Les personnes qui s'occupent des chevaux au quotidien sous-estiment souvent, sans le vouloir, la fréquence réelle des stéréotypies — l'observation directe en révèle beaucoup plus que ce que rapportent les questionnaires.",
+      "observations_possibles": [
+        "Un cheval présentant une stéréotypie non signalée par son soigneur habituel lors d'un questionnaire, mais repérée lors d'une observation directe et prolongée.",
+        "Une réticence à signaler un comportement stéréotypique par crainte qu'il soit perçu comme un « vice » ou un signe de mauvais entretien."
+      ],
+      "contextes_possibles": [
+        "Un cheval peut interrompre son comportement stéréotypique lorsqu'il se sent observé, ce qui peut fausser une observation ponctuelle et donner une impression de fréquence plus faible que la réalité."
+      ],
+      "hypotheses_prudentes": [
+        "L'écart important entre observation directe et questionnaire suggérerait que la prévalence réelle des stéréotypies est largement sous-estimée dans la pratique courante, plutôt que rare."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Se fier uniquement à ce que rapporte un questionnaire ou un souvenir général pour évaluer le bien-être d'un cheval, sans observation directe et prolongée."
+      ],
+      "informations_complementaires_a_rechercher": [
+        "Le chiffre de coefficient d'agrément cité dans les notes (Kappa de Cohen autour de 0,14) mériterait d'être vérifié et recontextualisé avant toute reformulation grand public."
+      ],
+      "conclusions_possibles": [
+        "Privilégier une observation directe et répétée dans le temps plutôt qu'un simple questionnement ponctuel donne une image plus fiable du bien-être réel d'un cheval."
+      ],
+      "conclusions_non_etablies": [
+        "Ces chiffres, issus d'une étude particulière, ne permettent pas d'affirmer une prévalence universelle identique dans tous les contextes d'élevage ou d'équitation."
+      ],
+      "vocabulaire_cle": [
+        {"terme": "Kappa de Cohen", "definition": "Indicateur statistique mesurant l'accord entre deux méthodes d'évaluation, ici observation directe et questionnaire."}
+      ],
+      "exemple_concret": "Un centre équestre peut estimer via questionnaire qu'un seul cheval présente une stéréotypie, alors qu'une observation directe et prolongée en révèle plusieurs.",
+      "feedback_positif_court": "C'est ça : l'observation directe et prolongée révèle beaucoup plus de choses qu'un simple questionnaire.",
+      "feedback_correctif_court": "Pas tout à fait : les études montrent au contraire que les questionnaires sous-estiment nettement la fréquence réelle par rapport à l'observation directe.",
+      "precaution_scientifique": "Cette notion s'appuie sur les chiffres d'une étude précise citée dans les notes : elle illustre une tendance (sous-estimation) plutôt qu'une statistique universelle à appliquer telle quelle à toute situation.",
+      "references_notes": ["Visser 2008", "Waters 2002"],
+      "mecaniques_compatibles": ["comparaison", "qcm", "etude_de_cas", "estimation"],
+      "statut_revue": "a_verifier_scientifiquement",
+      "motif_revue": "Chiffres précis (37,5 %, 5,4 %, Kappa=0,14) tirés d'une étude particulière citée dans les notes : à vérifier/recontextualiser avant diffusion pour éviter une généralisation abusive et s'assurer de la bonne attribution de l'étude."
+    },
+    {
+      "id": "BO-03",
+      "chapitre": 6,
+      "categorie": "bien-être et observation",
+      "sous_theme": "croyances à vérifier",
+      "titre_court": "Un cheval qui bâille est-il forcément détendu ?",
+      "difficulte": "moyen",
+      "fait_scientifique_principal": "Les notes relèvent plusieurs croyances courantes à interroger : « les chevaux agressifs ont mauvais caractère » (ou sont-ils en souffrance ?), « les chevaux adultes qui jouent vont bien » (ou évacuent-ils du stress ?), « les chevaux qui bâillent sont détendus » (ou expriment-ils de la frustration ?) — dans chaque cas, le même comportement pourrait avoir deux significations opposées.",
+      "explication_courte": "Certains comportements qu'on associe spontanément à un état positif (jeu, bâillement) pourraient en réalité, dans certains contextes, signaler l'inverse — du stress ou de la frustration plutôt que du bien-être.",
+      "observations_possibles": [
+        "Un cheval adulte qui joue de façon inhabituellement fréquente ou intense par rapport à son comportement habituel.",
+        "Des bâillements répétés en dehors des moments de repos ou de détente évidente."
+      ],
+      "contextes_possibles": [
+        "Le jeu chez un poulain et le jeu chez un adulte n'ont pas nécessairement la même signification par défaut — le contexte et la fréquence comptent."
+      ],
+      "hypotheses_prudentes": [
+        "Un bâillement répété pourrait, selon le contexte, traduire de la détente comme de la frustration — les notes elles-mêmes le présentent comme une question ouverte plutôt qu'une réponse tranchée."
+      ],
+      "erreurs_ou_croyances_frequentes": [
+        "Assumer automatiquement qu'un cheval qui joue ou qui bâille va nécessairement bien, sans considérer le contexte ni la fréquence."
+      ],
+      "informations_complementaires_a_rechercher": [
+        "Les notes elles-mêmes présentent ces trois croyances comme des questions non tranchées (« ou... ? ») plutôt que des faits établis — cela doit être conservé tel quel, sans forcer de réponse définitive dans un exercice."
+      ],
+      "conclusions_possibles": [
+        "Face à un comportement habituellement lu comme positif, il reste utile de vérifier le contexte et la fréquence avant de conclure au bien-être."
+      ],
+      "conclusions_non_etablies": [
+        "Les notes ne tranchent pas elles-mêmes ces questions : on ne peut donc pas affirmer que le jeu adulte ou le bâillement sont systématiquement de bons ou de mauvais signes."
+      ],
+      "vocabulaire_cle": [],
+      "exemple_concret": "Un cheval adulte qui se met à jouer de façon marquée après une période de confinement pourrait évacuer une tension accumulée plutôt que manifester une simple bonne humeur.",
+      "feedback_positif_court": "Bien vu : ces comportements ne sont pas automatiquement de bons signes, le contexte compte.",
+      "feedback_correctif_court": "Pas tout à fait : ces comportements peuvent aussi, selon le contexte, signaler du stress plutôt que du bien-être — les notes laissent la question ouverte.",
+      "precaution_scientifique": "Cette notion porte explicitement sur des questions non tranchées dans les notes elles-mêmes : l'exercice doit rester au niveau de la question ouverte, sans jamais présenter une réponse comme certaine.",
+      "references_notes": [],
+      "mecaniques_compatibles": ["vrai_faux", "dilemme_guide", "etude_de_cas", "identification_erreur"],
+      "statut_revue": "a_reformuler",
+      "motif_revue": "Les notes présentent ces points comme des questions ouvertes (« ou est-ce que... ? ») ; il faut veiller à ce qu'aucun exercice ne transforme ces interrogations en réponse affirmée à choisir dans un QCM fermé."
+    },
+    {
+      "id": "BO-04",
+      "chapitre": 6,
+      "categorie": "bien-être et observation",
+      "sous_theme": "solutions d'enrichissement — fourrage et substrat",
+      "titre_court": "Une solution simple : plus de fourrage",
+      "difficulte": "facile",
+      "fait_scientifique_principal": "Offrir des possibilités de fourragement (filets de foin à petites mailles, diversité de foins) est présenté dans les notes comme une solution simple à effet majeur sur le bien-être : budget-temps qui redevient plus naturel, apparition du repos couché et du toilettage mutuel, plus d'interactions sociales positives, moins d'agressivité. Le choix du substrat (paille plutôt que copeaux) influence aussi le temps de repos couché.",
+      "explication_courte": "Parmi toutes les pistes d'amélioration du bien-être en domestique, l'accès prolongé au fourrage ressort comme l'une des plus simples à mettre en place et l'une des plus efficaces.",
+      "observations_possibles": [
+        "Une reprise du repos couché et du toilettage mutuel après la mise en place de filets de foin en quantité suffisante.",
+        "Une préférence observable pour la paille plutôt que pour des copeaux comme substrat de couchage."
+      ],
+      "contextes_possibles": [
+        "Un manque de fourrage peut expliquer une disparition de comportements normaux (repos couché, roulade, toilettage mutuel) sans qu'il s'agisse forcément d'un problème social ou de logement à lui seul."
+      ],
+      "hypotheses_prudentes": [],
+      "erreurs_ou_croyances_frequentes": [
+        "Penser que les objets ou jouets d'enrichissement sont toujours la solution la plus efficace, alors que les notes indiquent que les enrichissements les plus fonctionnels restent liés à l'alimentation."
+      ],
+      "informations_complementaires_a_rechercher": [],
+      "conclusions_possibles": [
+        "Augmenter l'accès au fourrage est une mesure simple et concrète à recommander en priorité pour améliorer le bien-être d'un cheval domestique."
+      ],
+      "conclusions_non_etablies": [
+        "Cette mesure ne règle pas nécessairement tous les facteurs de mal-être (isolement social, confinement) qui peuvent se cumuler indépendamment de l'alimentation."
+      ],
+      "vocabulaire_cle": [
+        {"terme": "enrichissement", "definition": "Modification de l'environnement du cheval domestique visant à se rapprocher de ses conditions de vie naturelles."}
+      ],
+      "exemple_concret": "La distribution de nombreux filets de foin répartis dans un paddock a permis, selon les notes, de retrouver un budget-temps proche de la normale et une amélioration de l'état corporel des juments observées.",
+      "feedback_positif_court": "Exactement : le fourrage à volonté est l'une des pistes les plus simples et les plus efficaces.",
+      "feedback_correctif_court": "Pas tout à fait : selon les notes, ce sont les enrichissements liés à l'alimentation (comme le fourrage à volonté) qui ont l'effet le plus net, plus que les objets ou jouets seuls.",
+      "precaution_scientifique": "",
+      "references_notes": ["Benhajali 2008", "Benhajali 2009", "Hunter & Houpt 1986", "Pederson 2000"],
+      "mecaniques_compatibles": ["qcm", "vrai_faux", "priorisation", "comparaison"],
+      "statut_revue": "validable_directement",
+      "motif_revue": ""
+    }
+  ]
+}

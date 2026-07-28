@@ -59,27 +59,45 @@ Le chapitre 6 (cours Hausberger) recoupe largement les chapitres 4 et 5 mais app
 
 ---
 
-## 3. Les 15 mécaniques de jeu
+## 3. Les 15 mécaniques de jeu — liste officielle
 
-**Point d'attention** : la liste des 15 mécaniques n'a pas été retransmise dans le message de brief reçu par le moteur (elle a été évoquée mais son détail ne figure pas dans la transcription fournie). La liste ci-dessous est donc une **proposition de reconstruction**, cohérente avec les 5 mini-jeux déjà prototypés sur le Dossier D-02 (composants `rws-*` existants) et avec les formats déjà utilisés ailleurs dans l'app (QCM, Interrogatoire Flash). **Elle doit être relue et confirmée par le QG avant que le moteur ne s'appuie dessus.**
+La liste ci-dessous est la liste **officielle**, confirmée par le QG. Elle remplace la liste reconstruite utilisée dans une version précédente de ce document et des fichiers de données. Chaque mécanique conserve un nom technique interne en `snake_case` (utilisé dans `mecaniques_compatibles` et dans le champ `mecanique` des exercices), avec correspondance explicite vers l'intitulé officiel.
 
-1. `qcm` — **QCM classique** : une question, plusieurs choix, une bonne réponse.
-2. `vrai_faux` — **Vrai / Faux** : affirmation à trancher, souvent utile pour casser une croyance fréquente.
-3. `association` — **Association** : relier deux colonnes (ex. son ↔ signification, sens ↔ organe).
-4. `classification` — **Classification / tri** : répartir des éléments dans des catégories (existe déjà : `rws-classify-zone`).
-5. `sequence` — **Remise en ordre** : reconstituer une séquence chronologique ou logique (existe déjà : `rws-sequence-item`).
-6. `texte_a_trous` — **Texte à trous** : compléter une phrase clé avec le bon terme de vocabulaire.
-7. `etude_de_cas` — **Étude de cas / scénario** : une situation concrète à interpréter, avec plusieurs indices.
-8. `identification_erreur` — **Identification d'erreur** : repérer l'affirmation fausse glissée dans un lot (format « Kiro se trompe »).
-9. `estimation` — **Estimation / curseur** : approcher une valeur chiffrée sans exiger la précision exacte.
-10. `indices_progressifs` — **Indices progressifs** : révéler des indices un par un avant de faire trancher.
-11. `comparaison` — **Comparaison** : mettre en regard deux situations (nature/domestique, avant/après).
-12. `reconnaissance_posture` — **Reconnaissance de posture/situation** : à partir d'une description textuelle ou d'un pictogramme, identifier ce qui est montré.
-13. `priorisation` — **Priorisation / hiérarchisation** : classer des éléments par ordre d'importance ou de probabilité.
-14. `rappel_differe` — **Rappel différé** : revenir sur une notion vue plus tôt dans le parcours, après un délai.
-15. `dilemme_guide` — **Dilemme guidé** : choisir une action face à une situation, puis découvrir la conséquence.
+| # | Intitulé officiel | Nom technique | Ancien nom reconstruit (abandonné) |
+|---|---|---|---|
+| 1 | Mot manquant | `mot_manquant` | texte_a_trous |
+| 2 | Phrase à reconstruire | `phrase_a_reconstruire` | (absent de la liste reconstruite) |
+| 3 | Observation ou interprétation | `observation_ou_interpretation` | (absent de la liste reconstruite) |
+| 4 | Vrai, faux ou pas assez d'indices | `vrai_faux_ou_indices_insuffisants` | vrai_faux (sans la 3ᵉ option) |
+| 5 | Trouver l'intrus | `trouver_intrus` | identification_erreur (partiellement) |
+| 6 | Associer deux éléments | `associer_deux_elements` | association |
+| 7 | Remettre une séquence dans l'ordre | `remettre_sequence_ordre` | sequence |
+| 8 | Choisir plusieurs indices avant de conclure | `indices_avant_conclusion` | indices_progressifs |
+| 9 | Éliminer une conclusion abusive | `eliminer_conclusion_abusive` | (absent de la liste reconstruite) |
+| 10 | Choisir un niveau de certitude | `niveau_de_certitude` | (absent de la liste reconstruite) |
+| 11 | Corriger le rapport d'un enquêteur | `corriger_rapport_enqueteur` | identification_erreur (autre partie ; proche du format « Kiro se trompe » déjà présent dans l'app) |
+| 12 | Comparer deux contextes | `comparer_deux_contextes` | comparaison |
+| 13 | Identifier l'information manquante | `information_manquante` | (absent de la liste reconstruite) |
+| 14 | Classer plusieurs éléments | `classer_elements` | classification |
+| 15 | Choisir la meilleure étape suivante | `meilleure_etape_suivante` | dilemme_guide |
 
-Une notion n'est jamais taguée avec les 15 : seules les mécaniques qui ont un sens pour son contenu réel sont retenues (ex. une notion purement anatomique se prête mal à un « dilemme guidé »).
+**Le QCM classique n'appartient pas à cette liste de 15.** Il reste un format de base déjà utilisé ailleurs dans l'app (ex. Interrogatoire Flash), utilisable en complément mais plafonné à 1 occurrence par notion (voir consigne du lot pilote). Son nom technique dans les exercices est `qcm_classique`, distinct du champ `mecaniques_compatibles` qui ne référence que les 15 mécaniques officielles.
+
+Une notion n'est jamais taguée avec les 15 : seules les mécaniques qui ont un sens pour son contenu réel sont retenues (ex. une notion purement anatomique se prête mal à « choisir la meilleure étape suivante »). Certaines mécaniques (`phrase_a_reconstruire`, `information_manquante`) ne sont pas encore utilisées dans ce lot pilote de 25 notions ; cela ne signifie pas qu'elles sont invalides, seulement qu'aucune notion actuelle ne s'y prêtait mieux qu'à une autre.
+
+## 3bis. Structure du champ `references_notes`
+
+Pour distinguer explicitement l'origine de chaque élément d'une notion, `references_notes` est structuré en trois parties plutôt qu'une simple liste :
+
+```
+"references_notes": {
+  "bibliographie_explicite": [...],            // références auteur/année réellement citées dans les notes (ex. "Hausberger 2009") — vide si les notes ne citent personne pour cette notion
+  "affirmations_notes_sans_reference": [...],   // noms des champs qui paraphrasent un contenu affirmé par les notes elles-mêmes, sans qu'une étude y soit nommée
+  "interpretations_structuration": [...]        // noms des champs qui sont une valeur ajoutée par la structuration (hypothèses, mises en garde, feedback...), absents tels quels du texte source
+}
+```
+
+Par construction, `interpretations_structuration` contient presque toujours les mêmes champs (`observations_possibles`, `contextes_possibles`, `hypotheses_prudentes`, `erreurs_ou_croyances_frequentes`, `informations_complementaires_a_rechercher`, `conclusions_possibles`, `conclusions_non_etablies`, `precaution_scientifique`, `feedback_positif_court`, `feedback_correctif_court`) : ce sont par nature des ajouts pédagogiques, pas des citations. `bibliographie_explicite` ne doit jamais contenir de référence absente du document source — aucune référence n'est inventée.
 
 ---
 
@@ -97,9 +115,11 @@ Une notion n'est jamais taguée avec les 15 : seules les mécaniques qui ont un 
 
 ## 5. Statuts de revue (étape de contrôle)
 
-- **`validable_directement`** — fait stable, formulation déjà prudente, pas de chiffre isolé fragile.
-- **`a_reformuler`** — le fond est correct mais la formulation des notes est trop catégorique ou trop « il faut » normatif pour un exercice grand public.
-- **`a_verifier_scientifiquement`** — contient un chiffre précis, une donnée datée, ou une généralisation à sourcing faible qui mériterait une relecture par Sophie ou une source récente avant diffusion.
-- **`a_exclure_temporairement`** — trop proche d'un diagnostic médical, ou repose sur une information interne aux notes jugée incertaine/contradictoire, à ne pas exposer tant que non tranchée.
+**Règle de disqualification automatique (posée par le QG) :** une notion contenant un chiffre précis, un seuil, une affirmation médicale, une causalité, ou une généralisation absolue **ne peut pas** recevoir automatiquement le statut `validable_directement`, même si sa formulation semble par ailleurs prudente. Elle doit systématiquement être classée dans l'un des trois statuts suivants — le classement en `validable_directement` est réservé aux notions ne comportant strictement aucun de ces cinq éléments.
 
-Motifs de flag typiques : chiffre précis (%, durée, seuil), formulation médicale, généralisation peu sourcée, ton trop certain, contenu potentiellement daté (étude antérieure aux années 2000, ou terminologie qui a pu évoluer).
+- **`validable_directement`** — fait stable, formulation déjà prudente, aucun chiffre, seuil, affirmation médicale, causalité ou généralisation absolue.
+- **`a_reformuler`** — le fond est correct mais la formulation est trop catégorique, normative, ou présente une interprétation comme un résultat démontré (confusion résultat/interprétation).
+- **`a_verifier_scientifiquement`** — contient un chiffre précis, un seuil, une donnée datée, une affirmation à caractère médical/physiologique, ou une généralisation à sourcing faible qui mériterait une relecture par Sophie ou une source récente avant diffusion.
+- **`a_exclure_temporairement`** — trop proche d'un diagnostic médical individuel, ou repose sur une information interne aux notes jugée incertaine/contradictoire, à ne pas exposer tant que non tranchée.
+
+Motifs de flag typiques : chiffre précis (%, durée, seuil), formulation médicale ou physiologique, causalité affirmée à partir d'une simple corrélation, généralisation absolue (« jamais », « toujours »), ton trop certain, contenu potentiellement daté (étude antérieure aux années 2000, ou terminologie qui a pu évoluer).

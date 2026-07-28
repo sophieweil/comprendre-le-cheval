@@ -1,10 +1,11 @@
 {
   "_meta": {
     "statut": "matiere_premiere_non_integree",
-    "description": "Lot pilote de 25 notions extraites des notes de DU de Sophie, pour préparer la génération automatique de sessions ludiques. Non branché à l'interface. Voir 02-schema-notions.md pour le schéma complet et la liste des mécaniques.",
+    "description": "Lot pilote de 25 notions extraites des notes de DU de Sophie, pour préparer la génération automatique de sessions ludiques. Non branché à l'interface. Voir 02-schema-notions.md pour le schéma complet, la liste officielle des 15 mécaniques et la structure de references_notes.",
     "source": "01-notes-transcription-source.md",
     "nombre_notions": 25,
-    "notions_exemples_completes": ["MS-01", "AP-02", "CO-03", "DO-03", "BO-01"]
+    "notions_exemples_completes": ["MS-01", "AP-02", "CO-03", "DO-03", "BO-01"],
+    "passe_de_correction": "Corrections appliquées suite à la validation provisoire du QG : liste officielle des 15 mécaniques, reformulations MS-01/CO-03/DO-03/BO-01, durcissement des statuts de revue, restructuration de references_notes."
   },
   "notions": [
     {
@@ -26,8 +27,8 @@
         "Un cheval qui tourne beaucoup la tête vers l'arrière peut simplement chercher à voir une zone qu'il ne peut pas voir autrement — pas forcément un signe d'inquiétude générale."
       ],
       "hypotheses_prudentes": [
-        "Un sursaut face à un geste venu d'une zone aveugle serait plutôt lié à la surprise sensorielle qu'à une réaction de défiance envers la personne.",
-        "Un cheval qui recule quand on est pile devant lui pourrait chercher à retrouver une vision binoculaire plus confortable, plutôt que refuser le contact."
+        "Une difficulté de perception ou un effet de surprise sensorielle dans cette zone aveugle peut constituer une hypothèse parmi d'autres pour expliquer un recul, à confronter au contexte et aux autres indicateurs observés — sans exclure d'autres causes possibles (bruit, douleur, expérience antérieure...).",
+        "Un cheval qui recule quand on est pile devant lui pourrait, entre autres hypothèses possibles, chercher à retrouver une vision binoculaire plus confortable ; cela reste une piste parmi d'autres, pas une explication automatique."
       ],
       "erreurs_ou_croyances_frequentes": [
         "Croire que le cheval « voit tout » en permanence parce que son champ de vision est très large.",
@@ -47,14 +48,18 @@
         {"terme": "champ binoculaire", "definition": "Zone vue par les deux yeux en même temps, avec perception du relief."},
         {"terme": "zone aveugle", "definition": "Portion de l'espace qu'aucun des deux yeux ne peut voir sans bouger la tête."}
       ],
-      "exemple_concret": "Si une personne s'approche pile devant le chanfrein du cheval sans lui parler, elle entre dans une zone aveugle : le cheval peut réagir en reculant simplement parce qu'il ne la voit plus distinctement, pas par méfiance.",
+      "exemple_concret": "Si une personne s'approche pile devant le chanfrein du cheval sans lui parler, elle entre dans une zone aveugle : un recul du cheval peut, entre autres explications possibles, être lié au fait qu'il ne la voit plus distinctement.",
       "feedback_positif_court": "Exactement — cette zone reste invisible pour lui tant qu'il ne tourne pas la tête.",
       "feedback_correctif_court": "Pas tout à fait : cette zone fait justement partie des zones aveugles du cheval, malgré son champ de vision très large.",
       "precaution_scientifique": "Le champ de vision large ne veut pas dire vision totale : il reste toujours prudent d'attribuer un recul ou un sursaut isolé à une seule cause avant d'avoir observé le cheval dans d'autres situations similaires.",
-      "references_notes": [],
-      "mecaniques_compatibles": ["qcm", "vrai_faux", "reconnaissance_posture", "etude_de_cas", "identification_erreur"],
-      "statut_revue": "validable_directement",
-      "motif_revue": ""
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "informations_complementaires_a_rechercher", "conclusions_possibles", "conclusions_non_etablies", "precaution_scientifique", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["vrai_faux_ou_indices_insuffisants", "observation_ou_interpretation", "indices_avant_conclusion", "trouver_intrus"],
+      "statut_revue": "a_verifier_scientifiquement",
+      "motif_revue": "Contient des chiffres précis (champ monoculaire ~212°, champ binoculaire ~60-70°) : donnée anatomique bien établie mais chiffrée, à confirmer par une source de référence avant statut définitif, conformément à la règle du QG (aucun chiffre précis ne peut être validé automatiquement). Hypothèses reformulées lors de la passe de correction pour éviter toute certitude excessive sur la cause d'un recul."
     },
     {
       "id": "MS-02",
@@ -73,7 +78,7 @@
         "Une hésitation devant une flaque de lumière peut être confondue avec un refus d'obstacle si on ne pense pas à la sensibilité aux contrastes."
       ],
       "hypotheses_prudentes": [
-        "Un arrêt devant une zone d'ombre marquée pourrait s'expliquer par le contraste perçu plutôt que par une peur de l'obstacle en tant que tel."
+        "Un arrêt devant une zone d'ombre marquée pourrait s'expliquer par le contraste perçu plutôt que par une peur de l'obstacle en tant que tel — parmi d'autres hypothèses possibles."
       ],
       "erreurs_ou_croyances_frequentes": [
         "Croire que le cheval voit « en noir et blanc » — il voit des couleurs, mais un nombre réduit par rapport à l'humain.",
@@ -97,10 +102,14 @@
       "feedback_positif_court": "Voilà : le jaune et le bleu ressortent bien pour lui, contrairement au rouge et au vert.",
       "feedback_correctif_court": "Pas exactement : le cheval distingue bien le jaune et le bleu, mais perçoit mal le rouge et le vert.",
       "precaution_scientifique": "La sensibilité aux contrastes est bien documentée dans les notes, mais le lien direct entre une couleur précise et une réaction de peur reste une hypothèse à vérifier au cas par cas, pas une règle générale.",
-      "references_notes": [],
-      "mecaniques_compatibles": ["qcm", "vrai_faux", "association", "texte_a_trous"],
-      "statut_revue": "validable_directement",
-      "motif_revue": ""
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "informations_complementaires_a_rechercher", "conclusions_possibles", "conclusions_non_etablies", "precaution_scientifique", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["vrai_faux_ou_indices_insuffisants", "associer_deux_elements", "mot_manquant"],
+      "statut_revue": "a_verifier_scientifiquement",
+      "motif_revue": "Contient un chiffre précis (2 types de cônes contre 3 chez l'humain) ; donnée bien établie en littérature mais chiffrée, à confirmer par une source de référence avant statut définitif."
     },
     {
       "id": "MS-03",
@@ -119,7 +128,7 @@
         "La même hésitation peut aussi venir d'un sol qui change (rampe de van, changement de matière) — il faut donc regarder plusieurs indices avant de conclure."
       ],
       "hypotheses_prudentes": [
-        "Un arrêt de quelques secondes à l'entrée d'un lieu sombre serait plausiblement lié au temps d'accoutumance visuelle plutôt qu'à un refus de principe."
+        "Un arrêt de quelques secondes à l'entrée d'un lieu sombre serait plausiblement lié, entre autres hypothèses, au temps d'accoutumance visuelle plutôt qu'à un refus de principe."
       ],
       "erreurs_ou_croyances_frequentes": [
         "Interpréter un arrêt à l'entrée d'un van comme de la « mauvaise volonté » ou un manque d'éducation, alors qu'il peut s'agir d'un temps sensoriel incompressible."
@@ -128,22 +137,26 @@
         "Les notes ne précisent pas si ce délai varie selon l'âge du cheval ou son expérience préalable des vans."
       ],
       "conclusions_possibles": [
-        "Laisser 2 secondes environ avant de redemander l'avancée peut suffire à résoudre l'hésitation, sans avoir besoin d'insister physiquement."
+        "Laisser quelques secondes avant de redemander l'avancée peut suffire à résoudre l'hésitation, sans avoir besoin d'insister physiquement."
       ],
       "conclusions_non_etablies": [
-        "Un cheval qui reste bloqué plus longtemps que quelques secondes ne relève probablement plus seulement de ce facteur sensoriel — d'autres causes doivent alors être recherchées, sans present que ce soit automatiquement de la désobéissance."
+        "Un cheval qui reste bloqué plus longtemps que quelques secondes ne relève probablement plus seulement de ce facteur sensoriel — d'autres causes doivent alors être recherchées, sans présumer que ce soit automatiquement de la désobéissance."
       ],
       "vocabulaire_cle": [
         {"terme": "accoutumance lumineuse", "definition": "Temps nécessaire à l'œil pour s'adapter à un changement d'intensité de lumière."}
       ],
-      "exemple_concret": "Un cheval qui refuse d'avancer dans un endroit sombre comme le van ou la salle de soin en venant de l'extérieur peut simplement avoir besoin de 1 à 2 secondes pour que sa vision s'adapte.",
+      "exemple_concret": "Un cheval qui refuse d'avancer dans un endroit sombre comme le van ou la salle de soin en venant de l'extérieur peut simplement avoir besoin d'un court instant pour que sa vision s'adapte.",
       "feedback_positif_court": "C'est ça : quelques secondes suffisent souvent, inutile d'insister tout de suite.",
       "feedback_correctif_court": "Pas tout à fait : le cheval a besoin d'un peu plus de temps que nous pour que ses yeux s'adaptent au changement de lumière.",
       "precaution_scientifique": "Ce délai explique une hésitation ponctuelle à l'entrée d'un lieu sombre, mais ne permet pas à lui seul d'expliquer un blocage prolongé ou répété, qui peut avoir d'autres causes.",
-      "references_notes": [],
-      "mecaniques_compatibles": ["qcm", "etude_de_cas", "dilemme_guide", "vrai_faux"],
-      "statut_revue": "validable_directement",
-      "motif_revue": ""
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "informations_complementaires_a_rechercher", "conclusions_possibles", "conclusions_non_etablies", "precaution_scientifique", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["observation_ou_interpretation", "meilleure_etape_suivante", "vrai_faux_ou_indices_insuffisants"],
+      "statut_revue": "a_verifier_scientifiquement",
+      "motif_revue": "Contient un seuil chiffré (1 à 2 secondes d'accoutumance lumineuse) ; à confirmer avant diffusion telle quelle."
     },
     {
       "id": "MS-04",
@@ -179,8 +192,12 @@
       "feedback_positif_court": "Exact : le tapetum lucidum lui donne un vrai avantage la nuit.",
       "feedback_correctif_court": "Pas tout à fait : c'est justement grâce au tapetum lucidum que sa vision nocturne est meilleure que la nôtre.",
       "precaution_scientifique": "",
-      "references_notes": [],
-      "mecaniques_compatibles": ["qcm", "vrai_faux", "texte_a_trous", "association"],
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "erreurs_ou_croyances_frequentes", "informations_complementaires_a_rechercher", "conclusions_possibles", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["vrai_faux_ou_indices_insuffisants", "mot_manquant", "associer_deux_elements"],
       "statut_revue": "validable_directement",
       "motif_revue": ""
     },
@@ -221,8 +238,12 @@
       "feedback_positif_court": "C'est bien ça : le flehmen sert à analyser finement une odeur, pas à exprimer un dégoût.",
       "feedback_correctif_court": "Pas tout à fait : cette posture sert à capter les phéromones via l'organe voméro-nasal, ce n'est pas une grimace de rejet.",
       "precaution_scientifique": "",
-      "references_notes": [],
-      "mecaniques_compatibles": ["qcm", "vrai_faux", "reconnaissance_posture", "identification_erreur"],
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "conclusions_possibles", "conclusions_non_etablies", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["vrai_faux_ou_indices_insuffisants", "observation_ou_interpretation", "trouver_intrus"],
       "statut_revue": "validable_directement",
       "motif_revue": ""
     },
@@ -261,14 +282,18 @@
         {"terme": "sensibilisation", "definition": "Maintenir un stimulus jusqu'à ce que la réaction cesse, à l'inverse d'une exposition progressive."},
         {"terme": "seuil de vigilance", "definition": "Niveau d'intensité d'un stimulus à partir duquel le cheval commence à réagir par de la vigilance ou de la peur."}
       ],
-      "exemple_concret": "Le test de la pochette agitée : niveau 1 immobile à 3 mètres (x3), niveau 2 immobile à 1 mètre (x3), niveau 3 agitée à 1 mètre (x3), avec des pauses entre chaque palier, et retour au début si on va trop vite.",
+      "exemple_concret": "Le test de la pochette agitée, décrit dans les notes avec des paliers de distance croissants et plusieurs répétitions par palier, entrecoupés de pauses, avec retour au début si on va trop vite.",
       "feedback_positif_court": "Exactement : c'est la progressivité par paliers qui fait l'habituation, pas la simple répétition.",
       "feedback_correctif_court": "Pas tout à fait : répéter ne suffit pas si le seuil de peur est dépassé à chaque fois — il faut avancer par paliers progressifs.",
-      "precaution_scientifique": "Un cheval qui « ne s'habitue pas » n'est pas nécessairement un cheval à part : la procédure elle-même (paliers trop rapides, seuils mal évalués) est souvent en cause avant le tempérament individuel.",
-      "references_notes": [],
-      "mecaniques_compatibles": ["qcm", "sequence", "etude_de_cas", "vrai_faux", "identification_erreur"],
-      "statut_revue": "validable_directement",
-      "motif_revue": ""
+      "precaution_scientifique": "Un cheval qui « ne s'habitue pas » n'est pas nécessairement un cheval à part : la procédure elle-même (paliers trop rapides, seuils mal évalués) est souvent en cause avant le tempérament individuel. Le protocole précis décrit dans les notes (distances, nombre de répétitions) est un exemple donné, pas une méthode unique à appliquer telle quelle à tous les chevaux.",
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "conclusions_possibles", "conclusions_non_etablies", "precaution_scientifique", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["remettre_sequence_ordre", "eliminer_conclusion_abusive", "vrai_faux_ou_indices_insuffisants", "trouver_intrus"],
+      "statut_revue": "a_reformuler",
+      "motif_revue": "Contient des valeurs procédurales précises (distances en mètres, nombre de répétitions) tirées d'un protocole spécifique des notes ; reformulé pour éviter qu'elles soient lues comme une méthode universelle et unique à appliquer telle quelle."
     },
     {
       "id": "AP-02",
@@ -311,8 +336,12 @@
       "feedback_positif_court": "Voilà : l'ordre de la séquence (avant/après le comportement) est ce qui distingue les deux.",
       "feedback_correctif_court": "Pas tout à fait : ce qui distingue les deux, c'est l'ordre — inconfort puis action pour le renforcement négatif, action puis inconfort pour la punition.",
       "precaution_scientifique": "Ces mécanismes décrivent des séquences d'apprentissage précises ; ils ne doivent pas servir à justifier a posteriori n'importe quel usage de l'inconfort — les notes rappellent qu'il faut savoir doser le renforcement, sous peine d'obtenir un tout autre comportement que celui recherché.",
-      "references_notes": [],
-      "mecaniques_compatibles": ["sequence", "etude_de_cas", "classification", "identification_erreur", "dilemme_guide"],
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "informations_complementaires_a_rechercher", "conclusions_possibles", "conclusions_non_etablies", "precaution_scientifique", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["remettre_sequence_ordre", "observation_ou_interpretation", "classer_elements", "corriger_rapport_enqueteur", "meilleure_etape_suivante"],
       "statut_revue": "a_reformuler",
       "motif_revue": "Notion technique et sensible (dresse une frontière fine entre deux usages de l'inconfort) ; la formulation grand public doit éviter tout ton normatif du type « il faut faire ainsi » et rester descriptive, pour ne pas être lue comme une caution à l'usage de la contrainte."
     },
@@ -351,8 +380,12 @@
       "feedback_positif_court": "Exact : la rapidité du renforcement et le fait de le réserver à l'apprentissage comptent tous les deux.",
       "feedback_correctif_court": "Pas tout à fait : au-delà de la rapidité (contiguïté), il faut aussi réserver la récompense à l'apprentissage (contingence).",
       "precaution_scientifique": "",
-      "references_notes": [],
-      "mecaniques_compatibles": ["qcm", "etude_de_cas", "texte_a_trous", "identification_erreur"],
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "conclusions_possibles", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["observation_ou_interpretation", "mot_manquant", "trouver_intrus"],
       "statut_revue": "validable_directement",
       "motif_revue": ""
     },
@@ -392,8 +425,12 @@
       "feedback_positif_court": "C'est ça : le cheval réagissait aux signaux du questionneur, pas à un calcul.",
       "feedback_correctif_court": "Pas tout à fait : l'étude a montré que le cheval réagissait à des signaux corporels involontaires, pas à une capacité de calcul.",
       "precaution_scientifique": "Ce cas historique reste une mise en garde méthodologique valable aujourd'hui : toute performance cognitive impressionnante d'un cheval mérite d'être testée en aveugle avant conclusion.",
-      "references_notes": [],
-      "mecaniques_compatibles": ["qcm", "etude_de_cas", "vrai_faux", "indices_progressifs"],
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "conclusions_possibles", "conclusions_non_etablies", "precaution_scientifique", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["eliminer_conclusion_abusive", "vrai_faux_ou_indices_insuffisants", "indices_avant_conclusion"],
       "statut_revue": "validable_directement",
       "motif_revue": ""
     },
@@ -408,7 +445,7 @@
       "fait_scientifique_principal": "Le répertoire vocal du cheval comprend 7 types de sons distincts (hennissement, couinement, appel sourd, gémissement, souffle, ébrouement, ronflement), chacun associé à un contexte et une fonction différents, et souvent combinés à d'autres canaux de communication.",
       "explication_courte": "Chaque son a sa propre signification probable : le hennissement signale une séparation, le couinement précède souvent un conflit, le souffle alerte d'un danger, etc. Un même son peut cependant avoir plusieurs significations selon le contexte (ex. l'ébrouement).",
       "observations_possibles": [
-        "Un hennissement fort et prolongé (jusqu'à 1 km) lors d'une séparation de congénères.",
+        "Un hennissement fort et prolongé lors d'une séparation de congénères.",
         "Un couinement aigu et bref, bouche qui se retrousse, quand deux chevaux sont naseaux à naseaux.",
         "Un souffle avec dilatation complète des naseaux et immobilisation face à un objet inhabituel."
       ],
@@ -416,7 +453,7 @@
         "L'ébrouement peut signaler à la fois de la détente ou de l'impatience selon le reste de l'attitude du cheval — il faut donc regarder l'ensemble du comportement, pas seulement le son."
       ],
       "hypotheses_prudentes": [
-        "Un hennissement isolé, sans défécation ni agitation, signalerait un simple appel plutôt qu'un stress important ; associé à ces signes, il indiquerait un stress plus marqué."
+        "Un hennissement isolé, sans défécation ni agitation, signalerait plutôt un simple appel qu'un stress important ; associé à ces signes, il indiquerait un stress plus marqué — l'un et l'autre restant des hypothèses à confronter au contexte."
       ],
       "erreurs_ou_croyances_frequentes": [
         "Considérer que tous les hennissements traduisent le même niveau de détresse, indépendamment du reste du comportement observé.",
@@ -432,7 +469,7 @@
         "Un seul son entendu une fois ne permet pas de diagnostiquer un état émotionnel stable chez le cheval."
       ],
       "vocabulaire_cle": [
-        {"terme": "hennissement (whinny)", "definition": "Cri porteur (jusqu'à 1 km), associé à une situation de séparation."},
+        {"terme": "hennissement (whinny)", "definition": "Cri porteur, associé à une situation de séparation."},
         {"terme": "couinement (squeal)", "definition": "Son aigu et bref, souvent accompagné d'un jet d'antérieur, précédant parfois un conflit."},
         {"terme": "ébrouement (snort)", "definition": "Son proche de l'éternuement, pouvant signaler détente ou impatience selon le contexte."}
       ],
@@ -440,10 +477,14 @@
       "feedback_positif_court": "Bien vu : ce son correspond à ce contexte de communication.",
       "feedback_correctif_court": "Pas tout à fait : ce son est plutôt associé à un autre contexte — pense à revoir le lien son/situation.",
       "precaution_scientifique": "Un son isolé, entendu une seule fois, ne suffit jamais à conclure sur l'état émotionnel du cheval : le contexte et les autres signes (posture, comportement associé) doivent toujours être pris en compte ensemble.",
-      "references_notes": [],
-      "mecaniques_compatibles": ["association", "qcm", "classification", "etude_de_cas", "identification_erreur"],
-      "statut_revue": "validable_directement",
-      "motif_revue": ""
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "informations_complementaires_a_rechercher", "conclusions_possibles", "conclusions_non_etablies", "precaution_scientifique", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["associer_deux_elements", "classer_elements", "observation_ou_interpretation", "trouver_intrus"],
+      "statut_revue": "a_verifier_scientifiquement",
+      "motif_revue": "Contient des chiffres précis (7 types de sons, portée sonore initialement estimée à 1 km dans les notes) ; à confirmer avant diffusion telle quelle."
     },
     {
       "id": "CO-02",
@@ -479,8 +520,12 @@
       "feedback_positif_court": "Exactement, c'est un rituel d'identification par l'odeur.",
       "feedback_correctif_court": "Pas tout à fait : ce contact sert avant tout à s'identifier mutuellement par l'odeur.",
       "precaution_scientifique": "",
-      "references_notes": [],
-      "mecaniques_compatibles": ["qcm", "vrai_faux", "reconnaissance_posture", "texte_a_trous"],
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "erreurs_ou_croyances_frequentes", "conclusions_possibles", "conclusions_non_etablies", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["vrai_faux_ou_indices_insuffisants", "observation_ou_interpretation", "mot_manquant"],
       "statut_revue": "validable_directement",
       "motif_revue": ""
     },
@@ -498,24 +543,26 @@
         "L'enchaînement s'arrête à une étape intermédiaire si le destinataire s'éloigne ou change de comportement en réponse au signal."
       ],
       "contextes_possibles": [
-        "Une étude suisse citée dans les notes indique que les chevaux responsables d'accidents chez des vétérinaires n'étaient pas des chevaux nerveux — suggérant que le défaut d'attention aux signes avant-coureurs, plutôt que le tempérament du cheval, est souvent en cause.",
-        "Les vétérinaires possédant leur propre cheval seraient, selon cette même étude, plus sujets aux accidents que les autres — probablement par accoutumance et vigilance réduite."
+        "Résultat rapporté par une étude suisse citée dans les notes : les chevaux responsables d'accidents chez des vétérinaires n'étaient pas des chevaux nerveux. Hypothèse proposée par les notes à partir de ce résultat (non démontrée directement par l'étude elle-même) : certains signes avant-coureurs auraient pu ne pas être perçus par les personnes concernées.",
+        "Autre résultat rapporté par la même étude : les vétérinaires possédant leur propre cheval seraient plus sujets aux accidents que les autres. Hypothèse avancée par les notes à partir de ce résultat (également non démontrée directement) : une accoutumance liée à la familiarité pourrait réduire la vigilance — à traiter comme une piste, pas comme une conclusion établie."
       ],
       "hypotheses_prudentes": [
-        "Un accident avec un cheval jugé « calme » pourrait s'expliquer par une inattention aux signaux progressifs plutôt que par un changement brutal et imprévisible de comportement du cheval."
+        "Un accident avec un cheval jugé « calme » pourrait, entre autres hypothèses possibles, s'expliquer par une inattention aux signaux progressifs plutôt que par un changement brutal et imprévisible de comportement du cheval."
       ],
       "erreurs_ou_croyances_frequentes": [
         "Penser qu'un coup ou une morsure surgit « sans prévenir » chez un cheval, alors que des signaux progressifs le précèdent presque toujours.",
-        "Croire que seuls les chevaux nerveux sont responsables d'accidents — les données suggèrent plutôt un défaut d'attention humaine aux signes avant-coureurs."
+        "Croire que seuls les chevaux nerveux sont responsables d'accidents — le résultat rapporté (chevaux non nerveux impliqués) invite à envisager l'hypothèse d'un défaut d'attention humaine, sans que cela soit démontré comme la cause unique."
       ],
       "informations_complementaires_a_rechercher": [
-        "Les notes ne détaillent pas la durée typique entre le premier signal (encolure qui se relève) et un éventuel coup — cette durée mériterait d'être précisée."
+        "Les notes ne détaillent pas la durée typique entre le premier signal (encolure qui se relève) et un éventuel coup — cette durée mériterait d'être précisée.",
+        "Les notes ne précisent pas la méthodologie exacte de l'étude suisse citée (taille de l'échantillon, définition de « nerveux ») — utile à retrouver avant de s'appuyer davantage sur ce résultat."
       ],
       "conclusions_possibles": [
         "Observer l'ensemble de la séquence posturale (et pas un seul signe isolé) permet d'anticiper une réaction avant qu'elle ne s'aggrave."
       ],
       "conclusions_non_etablies": [
-        "Un seul élément de la séquence (par exemple des oreilles couchées un instant) ne permet pas, à lui seul, de prédire qu'un coup va suivre : c'est l'enchaînement complet et le contexte qui comptent."
+        "Un seul élément de la séquence (par exemple des oreilles couchées un instant) ne permet pas, à lui seul, de prédire qu'un coup va suivre : c'est l'enchaînement complet et le contexte qui comptent.",
+        "Le résultat de l'étude suisse (chevaux non nerveux impliqués dans des accidents) ne permet pas, à lui seul, d'établir que le défaut d'attention humaine est LA cause des accidents : c'est une hypothèse plausible tirée du résultat, pas une démonstration."
       ],
       "vocabulaire_cle": [
         {"terme": "posture", "definition": "Position combinée de l'encolure, la queue, les membres, la tête et les naseaux, porteuse de sens dans la communication visuelle."},
@@ -524,11 +571,15 @@
       "exemple_concret": "Avant de taper, un cheval va relever l'encolure, coucher les oreilles, tourner sa croupe vers son congénère, peut-être reculer, et ensuite taper seulement si l'autre ne s'est pas éloigné entre-temps.",
       "feedback_positif_court": "Exactement : c'est bien un enchaînement progressif de signaux, pas un geste isolé et soudain.",
       "feedback_correctif_court": "Pas tout à fait : le coup est en général précédé de plusieurs signaux progressifs (encolure, oreilles, croupe) — ce n'est presque jamais un geste isolé et soudain.",
-      "precaution_scientifique": "Il faut observer l'ensemble des éléments de la posture et le contexte pour bien comprendre un cheval : un signe seul, pris isolément, ne veut pas forcément dire la même chose selon la situation.",
-      "references_notes": [],
-      "mecaniques_compatibles": ["sequence", "reconnaissance_posture", "etude_de_cas", "indices_progressifs", "dilemme_guide"],
-      "statut_revue": "validable_directement",
-      "motif_revue": ""
+      "precaution_scientifique": "Il faut observer l'ensemble des éléments de la posture et le contexte pour bien comprendre un cheval : un signe seul, pris isolément, ne veut pas forcément dire la même chose selon la situation. Le résultat de l'étude suisse citée dans les notes doit être distingué de l'hypothèse explicative qui en est tirée : l'un est un fait rapporté, l'autre une interprétation prudente, non démontrée par l'étude elle-même.",
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "informations_complementaires_a_rechercher", "conclusions_possibles", "conclusions_non_etablies", "precaution_scientifique", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["remettre_sequence_ordre", "observation_ou_interpretation", "eliminer_conclusion_abusive", "indices_avant_conclusion", "meilleure_etape_suivante"],
+      "statut_revue": "a_reformuler",
+      "motif_revue": "Contenait une formulation causale présentant l'interprétation d'une étude suisse comme un résultat démontré (« suggérant que le défaut d'attention... est souvent en cause ») ; reformulée pour distinguer clairement le résultat rapporté (chevaux non nerveux impliqués) de l'hypothèse proposée (signes non perçus), conformément à la demande du QG."
     },
     {
       "id": "CO-04",
@@ -552,7 +603,9 @@
       "erreurs_ou_croyances_frequentes": [
         "Croire que toute forme de contact humain (caresses, tapes) est perçue de la même façon agréable par le cheval qu'un toilettage mutuel entre congénères."
       ],
-      "informations_complementaires_a_rechercher": [],
+      "informations_complementaires_a_rechercher": [
+        "Les notes ne précisent pas l'ampleur mesurée de la baisse de fréquence cardiaque ni la méthode de mesure utilisée."
+      ],
       "conclusions_possibles": [
         "Trouver la zone préférée d'un cheval et imiter un geste de grattage plutôt qu'une caresse peut créer un contact plus positif et servir ensuite de renforcement."
       ],
@@ -564,10 +617,14 @@
       "feedback_positif_court": "Voilà : ce comportement a bien une fonction d'apaisement social, en plus de l'hygiène.",
       "feedback_correctif_court": "Pas tout à fait : le toilettage mutuel sert aussi à apaiser les tensions sociales, pas uniquement à l'hygiène.",
       "precaution_scientifique": "",
-      "references_notes": [],
-      "mecaniques_compatibles": ["qcm", "vrai_faux", "etude_de_cas", "texte_a_trous"],
-      "statut_revue": "validable_directement",
-      "motif_revue": ""
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "conclusions_possibles", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["vrai_faux_ou_indices_insuffisants", "observation_ou_interpretation", "mot_manquant"],
+      "statut_revue": "a_verifier_scientifiquement",
+      "motif_revue": "Contient une affirmation à caractère physiologique (abaissement de la fréquence cardiaque lors du toilettage mutuel) ; à confirmer avant diffusion telle quelle."
     },
 
     {
@@ -598,14 +655,18 @@
       "vocabulaire_cle": [
         {"terme": "budget temps", "definition": "Répartition des activités d'un animal sur 24 heures."}
       ],
-      "exemple_concret": "Sur 24h, un cheval en liberté passe environ 15 à 16h à s'alimenter, contre seulement 1 à 2h à se déplacer.",
+      "exemple_concret": "Sur 24h, un cheval en liberté passe la majorité de son temps à s'alimenter, contre une part bien plus faible à se déplacer.",
       "feedback_positif_court": "C'est ça : l'alimentation domine très largement le budget temps naturel.",
-      "feedback_correctif_court": "Pas tout à fait : l'alimentation occupe la part la plus importante (environ 60 %), bien plus que le déplacement ou la vigilance.",
+      "feedback_correctif_court": "Pas tout à fait : l'alimentation occupe la part la plus importante, bien plus que le déplacement ou la vigilance.",
       "precaution_scientifique": "",
-      "references_notes": [],
-      "mecaniques_compatibles": ["estimation", "qcm", "classification", "priorisation"],
-      "statut_revue": "validable_directement",
-      "motif_revue": ""
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "erreurs_ou_croyances_frequentes", "conclusions_possibles", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["classer_elements", "remettre_sequence_ordre", "mot_manquant"],
+      "statut_revue": "a_verifier_scientifiquement",
+      "motif_revue": "Contient des chiffres précis de répartition du budget temps (60 %, 15-16h, etc.) ; à confirmer avant diffusion telle quelle."
     },
     {
       "id": "BT-02",
@@ -646,10 +707,14 @@
       "feedback_positif_court": "Exactement : le repos couché est indispensable, notamment pour le sommeil paradoxal.",
       "feedback_correctif_court": "Pas tout à fait : le repos debout ne suffit pas à tout — le sommeil paradoxal nécessite que le cheval se couche.",
       "precaution_scientifique": "Un cheval vu une seule fois sans se coucher ne permet pas de conclure à un trouble : c'est l'observation répétée dans le temps qui donne une indication fiable.",
-      "references_notes": [],
-      "mecaniques_compatibles": ["qcm", "vrai_faux", "reconnaissance_posture", "classification"],
-      "statut_revue": "validable_directement",
-      "motif_revue": ""
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "conclusions_possibles", "conclusions_non_etablies", "precaution_scientifique", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["vrai_faux_ou_indices_insuffisants", "observation_ou_interpretation", "classer_elements"],
+      "statut_revue": "a_verifier_scientifiquement",
+      "motif_revue": "Contient un chiffre précis (cycles de sommeil de 30 à 60 minutes) ; à confirmer avant diffusion telle quelle."
     },
     {
       "id": "BT-03",
@@ -659,7 +724,7 @@
       "titre_court": "Pas deux chevaux avec le même emploi du temps",
       "difficulte": "moyen",
       "fait_scientifique_principal": "Le budget temps varie selon le statut social et l'âge (un étalon est plus vigilant, une jument pâture davantage, les poulains dorment plus et interagissent plus socialement) ainsi que selon les rythmes saisonniers (davantage d'alimentation en hiver, davantage de déplacements en été pour échapper aux insectes et à la chaleur).",
-      "explication_courte": "Le budget temps théorique (60 % alimentation, etc.) est une moyenne : chaque cheval l'ajuste selon son âge, son statut social et la saison.",
+      "explication_courte": "Le budget temps théorique est une moyenne : chaque cheval l'ajuste selon son âge, son statut social et la saison.",
       "observations_possibles": [
         "Un étalon qui interrompt plus souvent son alimentation pour scruter les alentours qu'une jument du même groupe.",
         "Des poulains qui dorment davantage et multiplient les interactions de jeu par rapport aux adultes.",
@@ -686,8 +751,12 @@
       "feedback_positif_court": "Bien vu : le budget temps théorique s'ajuste selon l'individu et la saison.",
       "feedback_correctif_court": "Pas tout à fait : le budget temps varie selon l'âge, le statut social et la saison — ce n'est pas un chiffre figé identique pour tous.",
       "precaution_scientifique": "Le budget temps « moyen » ne doit pas servir de norme rigide : les écarts liés à l'âge, au statut social ou à la saison sont normaux et attendus.",
-      "references_notes": ["Stéphanie Tyler (observation New Forest)"],
-      "mecaniques_compatibles": ["comparaison", "qcm", "classification", "etude_de_cas"],
+      "references_notes": {
+        "bibliographie_explicite": ["Stéphanie Tyler (observation New Forest)"],
+        "affirmations_notes_sans_reference": ["explication_courte", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "erreurs_ou_croyances_frequentes", "informations_complementaires_a_rechercher", "conclusions_possibles", "precaution_scientifique", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["comparer_deux_contextes", "classer_elements", "observation_ou_interpretation"],
       "statut_revue": "validable_directement",
       "motif_revue": ""
     },
@@ -725,8 +794,12 @@
       "feedback_positif_court": "Exactement : les besoins restent les mêmes, mais les conditions changent la façon de les exprimer.",
       "feedback_correctif_court": "Pas tout à fait : le répertoire de base ne change pas fondamentalement, mais la fréquence et la façon d'exprimer certains comportements sont modifiées en domestique.",
       "precaution_scientifique": "",
-      "references_notes": [],
-      "mecaniques_compatibles": ["comparaison", "classification", "qcm", "etude_de_cas"],
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "conclusions_possibles", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["comparer_deux_contextes", "classer_elements", "observation_ou_interpretation"],
       "statut_revue": "validable_directement",
       "motif_revue": ""
     },
@@ -754,7 +827,7 @@
         "Penser qu'un cheval « débordant d'énergie » à la sortie du box a simplement un fort caractère, sans considérer le rôle du confinement lui-même."
       ],
       "informations_complementaires_a_rechercher": [
-        "Les notes indiquent qu'au-delà de 12h par jour au pré, le risque de comportements anormaux diminuerait, mais ne précisent pas de seuil symétrique équivalent côté box."
+        "Les notes indiquent qu'au-delà de 12h par jour au pré, le risque de comportements anormaux diminuerait, mais ne précisent pas de seuil symétrique équivalent côté box, ni la méthodologie exacte de l'étude."
       ],
       "conclusions_possibles": [
         "Réduire le temps de confinement en box et augmenter le temps au paddock ou au pré peut diminuer ces effets."
@@ -765,14 +838,18 @@
       "vocabulaire_cle": [
         {"terme": "confinement", "definition": "Temps passé par le cheval dans un espace restreint (le box), limitant ses possibilités de mouvement."}
       ],
-      "exemple_concret": "Une étude sur le débourrage citée dans les notes associe le confinement à une multiplication par 10 des mouvements de tête et à une augmentation des sauts de mouton.",
+      "exemple_concret": "Une étude sur le débourrage citée dans les notes associe le confinement à une nette augmentation des mouvements de tête et des sauts de mouton — chiffre précis à vérifier avant diffusion.",
       "feedback_positif_court": "C'est ça : le confinement a un impact mesurable, à la fois sur le mouvement et sur le repos.",
       "feedback_correctif_court": "Pas tout à fait : le confinement prolongé tend à augmenter les déplacements rapides compensatoires et à réduire le repos couché, pas l'inverse.",
       "precaution_scientifique": "Le lien entre confinement et comportement est bien documenté dans les notes, mais le confinement est aussi souvent confondu avec l'isolement social : les deux facteurs doivent être distingués avant de conclure sur une cause précise.",
-      "references_notes": [],
-      "mecaniques_compatibles": ["comparaison", "qcm", "etude_de_cas", "priorisation"],
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "informations_complementaires_a_rechercher", "conclusions_possibles", "conclusions_non_etablies", "precaution_scientifique", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["comparer_deux_contextes", "eliminer_conclusion_abusive", "remettre_sequence_ordre"],
       "statut_revue": "a_verifier_scientifiquement",
-      "motif_revue": "Mentionne un seuil chiffré (« au-delà de 12h par jour au pré ») sans plus de détail sur l'étude source — à confirmer avant diffusion telle quelle."
+      "motif_revue": "Mentionne un seuil chiffré (« au-delà de 12h par jour au pré ») et une multiplication chiffrée des mouvements de tête, sans plus de détail sur l'étude source — à confirmer avant diffusion telle quelle."
     },
     {
       "id": "DO-02",
@@ -805,17 +882,21 @@
         "Une stéréotypie observée chez un cheval ne permet pas, à elle seule, de dire que l'isolement social en est la cause unique : d'autres facteurs (alimentation, confinement) peuvent se cumuler."
       ],
       "vocabulaire_cle": [
-        {"terme": "stéréotypie", "definition": "Comportement répétitif, sans fonction apparente, jamais observé en milieu naturel."},
+        {"terme": "stéréotypie", "definition": "Comportement répétitif, sans fonction apparente, décrit dans les notes comme non rapporté en conditions naturelles."},
         {"terme": "isolement social", "definition": "Absence de contact avec des congénères, considérée comme un facteur de risque majeur de mal-être chez le cheval."}
       ],
-      "exemple_concret": "Une part importante des chevaux développe au moins une stéréotypie dans les semaines suivant leur première mise au box isolé, selon les notes.",
-      "feedback_positif_court": "Exact : l'isolement social est un facteur de risque majeur, bien documenté.",
+      "exemple_concret": "Une part importante des chevaux développerait au moins une stéréotypie dans les semaines suivant leur première mise au box isolé, selon un chiffre cité dans les notes, à vérifier avant diffusion.",
+      "feedback_positif_court": "Exact : l'isolement social est un facteur de risque majeur, bien documenté dans les notes.",
       "feedback_correctif_court": "Pas tout à fait : un miroir ou une grille peuvent atténuer certains signes, mais ne remplacent pas un vrai contact social — c'est ce dernier qui traite la cause.",
       "precaution_scientifique": "Une stéréotypie ou une agressivité ne doit jamais être réduite à un jugement de caractère : il s'agit avant tout d'un signal à interroger sur les conditions de vie du cheval.",
-      "references_notes": [],
-      "mecaniques_compatibles": ["etude_de_cas", "qcm", "dilemme_guide", "comparaison", "identification_erreur"],
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "conclusions_possibles", "conclusions_non_etablies", "precaution_scientifique", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["observation_ou_interpretation", "meilleure_etape_suivante", "comparer_deux_contextes", "trouver_intrus"],
       "statut_revue": "a_reformuler",
-      "motif_revue": "Contient un pourcentage précis (« 67 % ») dans les notes source associé à un délai de 12 semaines ; à garder au conditionnel/prudent dans la reformulation grand public plutôt que d'afficher le chiffre brut sans plus de source détaillée."
+      "motif_revue": "Contient un pourcentage précis dans les notes source associé à un délai de 12 semaines ; gardé au conditionnel/prudent dans la reformulation grand public plutôt que d'afficher le chiffre brut sans plus de source détaillée."
     },
     {
       "id": "DO-03",
@@ -824,44 +905,50 @@
       "sous_theme": "alimentation domestique et troubles digestifs",
       "titre_court": "Trop de concentrés, pas assez de fibres",
       "difficulte": "difficile",
-      "fait_scientifique_principal": "L'alimentation domestique s'écarte fortement du modèle naturel (repas limités, forte concentration énergétique et en amidon, apports en fibres variables) ; ces changements sont associés à des troubles comme les ulcères gastriques, les coliques ou les fourbures, notamment parce que l'estomac du cheval, conçu pour être rempli en continu, se vide toutes les 3 heures environ.",
-      "explication_courte": "Le système digestif du cheval est fait pour une alimentation quasi continue et pauvre en amidon. Un régime concentré et espacé dans le temps crée un déséquilibre pouvant mener à des troubles digestifs.",
+      "fait_scientifique_principal": "L'alimentation domestique s'écarte fortement du modèle naturel (repas limités, forte concentration énergétique et en amidon, apports en fibres variables). Les notes associent ces changements à un risque accru de troubles digestifs (ulcères gastriques, coliques, fourbures), et évoquent un estomac qui se viderait toutes les 3 heures environ — ces éléments chiffrés et ce lien de cause à effet restent à vérifier scientifiquement et ne doivent pas être présentés comme confirmés.",
+      "explication_courte": "Le système digestif du cheval serait fait pour une alimentation quasi continue et pauvre en amidon, selon les notes. Un régime concentré et espacé dans le temps est associé à un déséquilibre pouvant favoriser des troubles digestifs — un lien à considérer avec prudence plutôt que comme une certitude.",
       "observations_possibles": [
         "Des changements de comportement comme le bâillement, une perte d'appétit ou une dégradation de l'état général, cités dans les notes comme des indices possibles (mais non certains) de trouble digestif.",
         "Une alimentation concentrée avec de longs intervalles entre les repas."
       ],
       "contextes_possibles": [
-        "Ces signes de changement de comportement peuvent aussi avoir d'autres origines que digestives — ils orientent vers une vigilance accrue, pas vers un diagnostic."
+        "Ces signes de changement de comportement peuvent aussi avoir d'autres origines que digestives — ils orientent vers une vigilance accrue, jamais vers un diagnostic."
       ],
       "hypotheses_prudentes": [
-        "Un bâillement fréquent ou une baisse d'appétit pourraient être des signes d'appel à surveiller de près, en lien possible avec un inconfort digestif, sans que cela constitue une preuve en soi."
+        "Un bâillement fréquent ou une baisse d'appétit pourraient être des signes d'appel à surveiller de près, parmi d'autres hypothèses possibles, sans que cela constitue une preuve d'un trouble digestif particulier."
       ],
       "erreurs_ou_croyances_frequentes": [
         "Penser qu'un cheval qui mange beaucoup de concentrés est simplement « bien nourri », sans considérer le déséquilibre que cela peut créer avec le manque de fibres.",
         "Diagnostiquer un ulcère ou une colique soi-même à partir d'un seul changement de comportement observé."
       ],
       "informations_complementaires_a_rechercher": [
-        "Les notes elles-mêmes indiquent que ces changements de comportement donnent des « indications » pour être plus vigilant, sans être des preuves diagnostiques — un professionnel reste nécessaire pour confirmer un trouble digestif réel."
+        "Les notes elles-mêmes indiquent que ces changements de comportement donnent des « indications » pour être plus vigilant, sans être des preuves diagnostiques — un professionnel reste nécessaire pour confirmer un trouble digestif réel.",
+        "Les seuils chiffrés précis évoqués ailleurs dans les notes (doses de concentrés, intervalles horaires, délai de vidange gastrique) restent à vérifier auprès d'une source scientifique actualisée avant toute diffusion affirmative."
       ],
       "conclusions_possibles": [
-        "Privilégier les fibres à volonté et fractionner les apports en concentrés réduit le risque de déséquilibre digestif décrit dans les notes."
+        "Privilégier les fibres à volonté et fractionner les apports en concentrés est présenté dans les notes comme une piste pour réduire le risque de déséquilibre digestif décrit — à confirmer scientifiquement avant diffusion comme un fait établi."
       ],
       "conclusions_non_etablies": [
-        "Aucun changement de comportement isolé (bâillement, baisse d'appétit) ne permet à lui seul de diagnostiquer un ulcère, une colique ou une fourbure : seul un professionnel vétérinaire peut confirmer un trouble digestif."
+        "Aucun changement de comportement isolé (bâillement, baisse d'appétit) ne permet à lui seul de diagnostiquer un ulcère, une colique ou une fourbure : seul un professionnel vétérinaire peut confirmer un trouble digestif.",
+        "Le lien de cause à effet entre un régime concentré et l'apparition d'un trouble digestif précis reste, en l'état de cette structuration, une association rapportée par les notes et non une démonstration clinique vérifiée."
       ],
       "vocabulaire_cle": [
-        {"terme": "ulcère gastrique", "definition": "Lésion de la paroi de l'estomac, favorisée par l'acidité excessive liée à un estomac trop souvent vide."},
-        {"terme": "fourbure", "definition": "Trouble douloureux du pied du cheval, associé notamment à un excès d'amidon dans l'alimentation."},
+        {"terme": "ulcère gastrique", "definition": "Lésion de la paroi de l'estomac ; les notes l'associent à une acidité excessive liée à un estomac souvent vide, lien à vérifier scientifiquement."},
+        {"terme": "fourbure", "definition": "Trouble douloureux du pied du cheval ; les notes l'associent à un excès d'amidon dans l'alimentation, lien à vérifier scientifiquement."},
         {"terme": "colique", "definition": "Douleur abdominale chez le cheval, pouvant avoir plusieurs origines dont alimentaires."}
       ],
-      "exemple_concret": "Installer des filets à foin à petites mailles permet de ralentir la prise alimentaire et de se rapprocher du rythme naturel d'ingestion quasi continue.",
-      "feedback_positif_court": "C'est ça : le déséquilibre entre concentrés et fibres est bien identifié comme un facteur de risque digestif.",
-      "feedback_correctif_court": "Pas tout à fait : c'est justement l'excès de concentrés et le manque de fibres à volonté qui créent ce déséquilibre digestif, pas l'inverse.",
-      "precaution_scientifique": "Ce point touche à la santé digestive : les signes évoqués (bâillement, perte d'appétit...) sont des indices de vigilance, jamais un diagnostic. Toute suspicion réelle de trouble digestif doit être orientée vers un vétérinaire, jamais tranchée par l'application elle-même.",
-      "references_notes": [],
-      "mecaniques_compatibles": ["etude_de_cas", "qcm", "comparaison", "identification_erreur", "priorisation"],
+      "exemple_concret": "Installer des filets à foin à petites mailles est présenté dans les notes comme un moyen de ralentir la prise alimentaire et de se rapprocher du rythme naturel d'ingestion.",
+      "feedback_positif_court": "C'est ça : le déséquilibre entre concentrés et fibres est présenté dans les notes comme un facteur de risque digestif à surveiller — une association, pas une certitude clinique.",
+      "feedback_correctif_court": "Pas tout à fait : c'est plutôt l'excès de concentrés et le manque de fibres à volonté qui sont associés à ce déséquilibre digestif dans les notes, pas l'inverse — ce lien reste à vérifier scientifiquement avant d'être présenté comme acquis.",
+      "precaution_scientifique": "Ce point touche à la santé digestive : les signes évoqués (bâillement, perte d'appétit...) sont des indices de vigilance, jamais un diagnostic, et aucun exercice construit à partir de cette notion ne doit permettre de déduire un trouble médical à partir d'un seul comportement observé. Toute suspicion réelle de trouble digestif doit être discutée avec un vétérinaire, jamais tranchée par l'application elle-même.",
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["exemple_concret", "vocabulaire_cle"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "informations_complementaires_a_rechercher", "conclusions_possibles", "conclusions_non_etablies", "precaution_scientifique", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["eliminer_conclusion_abusive", "comparer_deux_contextes", "corriger_rapport_enqueteur", "niveau_de_certitude"],
       "statut_revue": "a_verifier_scientifiquement",
-      "motif_revue": "Touche à des troubles de santé (ulcères, coliques, fourbures) : formulation à vérifier pour s'assurer qu'aucune phrase ne puisse être lue comme une invitation à l'auto-diagnostic ; les seuils chiffrés précis du chapitre 6 (ex. doses de concentrés, intervalles horaires) ne sont pas repris ici et mériteraient une relecture séparée avant tout usage."
+      "motif_revue": "Contient des chiffres précis, des seuils alimentaires et un délai de vidange gastrique, ainsi qu'un lien causal avec des troubles digestifs (ulcères, coliques, fourbures) : ces éléments restent marqués « à vérifier scientifiquement » et ne doivent jamais être présentés comme confirmés. Reformulé pour retirer toute formulation causale trop directe et garantir qu'aucun exercice ne permette de déduire un trouble médical à partir d'un seul comportement observé ; l'orientation vers un vétérinaire en cas de doute reste explicite dans precaution_scientifique."
     },
     {
       "id": "DO-04",
@@ -870,8 +957,8 @@
       "sous_theme": "relation humain/cheval — positionnement",
       "titre_court": "Où se placer change tout",
       "difficulte": "moyen",
-      "fait_scientifique_principal": "Une étude de Rennes citée dans les notes montre que la position de l'humain modifie la réponse du cheval : plus la personne est loin devant, plus la latence de réponse augmente et les oreilles se tournent souvent vers l'arrière ; plus elle est proche de la tête, plus le cheval réagit vite ; les chevaux montrent une latence plus rapide et une attitude plus positive quand l'humain est proche et attentif visuellement.",
-      "explication_courte": "La façon dont une personne se positionne par rapport au cheval influence concrètement la rapidité et la qualité de sa réponse — ce n'est pas un détail neutre.",
+      "fait_scientifique_principal": "Une étude de Rennes citée dans les notes rapporte que la position de l'humain serait associée à la réponse du cheval : plus la personne est loin devant, plus la latence de réponse augmenterait et les oreilles se tourneraient souvent vers l'arrière ; plus elle est proche de la tête, plus le cheval réagirait vite ; les chevaux montreraient une latence plus rapide et une attitude plus positive quand l'humain est proche et attentif visuellement.",
+      "explication_courte": "La façon dont une personne se positionne par rapport au cheval serait associée, selon l'étude citée, à la rapidité et à la qualité de sa réponse — un facteur qui ne semble pas neutre, à considérer avec prudence plutôt que comme une loi générale.",
       "observations_possibles": [
         "Un cheval qui met plus de temps à réagir ou à s'arrêter quand la personne est loin devant lui ou derrière son épaule.",
         "Une réaction plus rapide et des oreilles orientées différemment quand la personne reste proche de la tête et visuellement attentive."
@@ -880,14 +967,16 @@
         "Une latence de réponse plus longue ne doit pas être interprétée comme de la désobéissance si elle est liée simplement au positionnement de la personne."
       ],
       "hypotheses_prudentes": [
-        "Un cheval qui semble « lent à répondre » avec une personne pourrait réagir différemment si cette personne changeait simplement de position par rapport à lui."
+        "Un cheval qui semble « lent à répondre » avec une personne pourrait réagir différemment si cette personne changeait simplement de position par rapport à lui — une hypothèse parmi d'autres, à confronter à l'observation répétée."
       ],
       "erreurs_ou_croyances_frequentes": [
         "Attribuer une lenteur de réponse à un manque d'attention ou d'éducation du cheval sans considérer le rôle du positionnement humain."
       ],
-      "informations_complementaires_a_rechercher": [],
+      "informations_complementaires_a_rechercher": [
+        "Les notes ne précisent pas la taille de l'échantillon ni la méthodologie complète de l'étude de Rennes citée — utile à retrouver avant diffusion affirmative."
+      ],
       "conclusions_possibles": [
-        "Se tenir proche de la tête du cheval et rester visuellement attentif favorise une réponse plus rapide et une attitude plus positive."
+        "Se tenir proche de la tête du cheval et rester visuellement attentif est associé, selon l'étude citée, à une réponse plus rapide et une attitude plus positive."
       ],
       "conclusions_non_etablies": [
         "Ce constat ne permet pas de conclure qu'un positionnement optimal suffit à lui seul à garantir une bonne relation globale avec le cheval — la relation se construit sur la durée, par des interactions répétées."
@@ -895,14 +984,18 @@
       "vocabulaire_cle": [
         {"terme": "latence de réponse", "definition": "Délai entre une demande faite au cheval et sa réponse effective."}
       ],
-      "exemple_concret": "Plus la personne est proche de la tête du cheval, plus il marche vite, s'arrête vite, et présente une latence de réponse plus rapide, avec l'oreille droite orientée vers elle.",
-      "feedback_positif_court": "Exactement : la position de l'humain influence directement la rapidité et la qualité de la réponse du cheval.",
-      "feedback_correctif_court": "Pas tout à fait : selon l'étude citée, un positionnement proche et attentif accélère la réponse du cheval, un positionnement loin devant la ralentit.",
-      "precaution_scientifique": "",
-      "references_notes": ["étude de Rennes (positionnement humain/cheval)"],
-      "mecaniques_compatibles": ["etude_de_cas", "qcm", "comparaison", "dilemme_guide"],
-      "statut_revue": "validable_directement",
-      "motif_revue": ""
+      "exemple_concret": "Plus la personne est proche de la tête du cheval, plus il marcherait vite, s'arrêterait vite, avec une latence de réponse plus rapide, selon l'étude citée dans les notes.",
+      "feedback_positif_court": "Exactement : selon l'étude citée, la position de l'humain serait associée à la rapidité et à la qualité de la réponse du cheval.",
+      "feedback_correctif_court": "Pas tout à fait : selon l'étude citée, un positionnement proche et attentif serait associé à une réponse plus rapide, un positionnement loin devant à une réponse plus lente.",
+      "precaution_scientifique": "Ce résultat est rapporté par une étude particulière : il doit être traité comme une association observée, pas comme une loi de cause à effet valable dans toutes les situations.",
+      "references_notes": {
+        "bibliographie_explicite": ["étude de Rennes (positionnement humain/cheval)"],
+        "affirmations_notes_sans_reference": ["exemple_concret"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "informations_complementaires_a_rechercher", "conclusions_possibles", "conclusions_non_etablies", "precaution_scientifique", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["observation_ou_interpretation", "comparer_deux_contextes", "meilleure_etape_suivante"],
+      "statut_revue": "a_reformuler",
+      "motif_revue": "Contenait une formulation causale trop directe (« influence concrètement ») pour un résultat d'étude corrélationnel ; reformulée en langage plus prudent (« serait associée à »), conformément à la demande du QG."
     },
 
     {
@@ -912,46 +1005,51 @@
       "sous_theme": "stéréotypies — définition et formes classiques",
       "titre_court": "Tic à l'ours, tic à l'appui : ce que ça veut dire",
       "difficulte": "facile",
-      "fait_scientifique_principal": "Les stéréotypies sont des séquences comportementales répétitives, sans but ni fonction apparents, jamais observées en milieu naturel. Trois formes classiques chez le cheval : le tic à l'ours (mouvements latéraux de tête/encolure/avant-main), le tic à l'appui ou à l'air (prise d'appui des incisives et déglutition d'air, avec ou sans appui), et le « box walking » (déplacement répété selon le même trajet dans le box).",
-      "explication_courte": "Ce sont des comportements que le cheval ne développe pas dans la nature : ils apparaissent en réponse à un environnement qui ne répond pas à ses besoins, et non par « vice » ou mauvais caractère.",
+      "fait_scientifique_principal": "Les stéréotypies sont des séquences comportementales répétitives, sans but ni fonction apparents, décrites dans les notes comme caractéristiques des conditions domestiques et non rapportées dans les conditions naturelles étudiées. Trois formes classiques chez le cheval : le tic à l'ours (mouvements latéraux de tête/encolure/avant-main), le tic à l'appui ou à l'air (prise d'appui des incisives et déglutition d'air, avec ou sans appui), et le « box walking » (déplacement répété selon le même trajet dans le box).",
+      "explication_courte": "Ce sont des comportements décrits dans les notes comme propres aux conditions de vie domestiques : ils peuvent être associés à des contraintes environnementales, sociales, alimentaires ou liées à l'histoire individuelle du cheval, sans qu'on puisse en déterminer précisément la cause à partir de ce seul constat — et non un « vice » ou un trait de mauvais caractère.",
       "observations_possibles": [
         "Un cheval qui balance latéralement la tête et l'encolure de façon répétitive et invariante (tic à l'ours).",
         "Un cheval qui prend appui avec ses incisives sur un objet fixe en avalant de l'air, ou qui avale de l'air sans appui (tic à l'air).",
         "Un cheval qui parcourt toujours le même trajet dans son box (box walking)."
       ],
       "contextes_possibles": [
-        "Une stéréotypie peut être confondue avec un simple « tic » sans gravité si l'on ne sait pas qu'elle signale généralement un environnement inadapté."
+        "Une stéréotypie peut être confondue avec un simple « tic » sans gravité si l'on ne connaît pas son lien possible avec les conditions de vie du cheval."
       ],
       "hypotheses_prudentes": [
-        "L'apparition d'une stéréotypie suggère plutôt un environnement à interroger (confinement, alimentation, vie sociale) qu'un trait de caractère du cheval lui-même."
+        "L'apparition d'une stéréotypie peut être associée à des contraintes environnementales, sociales, alimentaires ou liées à l'histoire individuelle du cheval, sans permettre à elle seule d'en déterminer précisément la cause actuelle."
       ],
       "erreurs_ou_croyances_frequentes": [
         "Considérer une stéréotypie comme un simple « vice » propre à l'animal, sans lien avec ses conditions de vie.",
         "Chercher uniquement à faire cesser le comportement (par une contention par exemple) sans s'interroger sur sa cause, ce qui peut augmenter le stress du cheval."
       ],
       "informations_complementaires_a_rechercher": [
-        "Les notes évoquent des « sensibilités génétiques » (davantage chez certaines races ou lignées) sans plus de détail sur les mécanismes biologiques précis — point à creuser."
+        "Les notes évoquent des « sensibilités génétiques » (davantage chez certaines races ou lignées) sans plus de détail sur les mécanismes biologiques précis — point à creuser.",
+        "Les notes affirment que ces comportements ne sont pas rapportés en conditions naturelles étudiées, sans préciser l'étendue des observations en milieu naturel sur lesquelles repose cette affirmation — à vérifier avant de la présenter comme absolue."
       ],
       "conclusions_possibles": [
-        "Observer une stéréotypie doit amener à s'interroger sur l'environnement du cheval (logement, alimentation, vie sociale) plutôt qu'à chercher uniquement à supprimer le geste."
+        "Observer une stéréotypie doit amener à s'interroger sur les conditions de vie du cheval (logement, alimentation, vie sociale, histoire individuelle) plutôt qu'à chercher uniquement à supprimer le geste."
       ],
       "conclusions_non_etablies": [
-        "La présence d'une stéréotypie ne permet pas de diagnostiquer précisément quelle cause (alimentation, isolement, confinement) en est à l'origine sans une observation plus large des conditions de vie du cheval — plusieurs facteurs peuvent se cumuler."
+        "La présence d'une stéréotypie ne permet pas de déterminer précisément quelle contrainte (alimentation, isolement, confinement, histoire individuelle) en est à l'origine sans une observation plus large des conditions de vie du cheval — plusieurs facteurs peuvent se cumuler."
       ],
       "vocabulaire_cle": [
-        {"terme": "stéréotypie", "definition": "Séquence comportementale répétitive, invariante, sans fonction apparente, jamais observée en milieu naturel."},
+        {"terme": "stéréotypie", "definition": "Séquence comportementale répétitive, invariante, sans fonction apparente, décrite dans les notes comme non rapportée dans les conditions naturelles étudiées."},
         {"terme": "tic à l'ours", "definition": "Mouvements latéraux répétitifs de la tête, de l'encolure et de l'avant-main."},
         {"terme": "tic à l'appui / à l'air", "definition": "Prise d'appui des incisives (ou non) suivie d'une déglutition d'air."},
         {"terme": "box walking", "definition": "Déplacement répété suivant systématiquement le même trajet dans le box."}
       ],
-      "exemple_concret": "Un cheval qui prend appui sur la mangeoire avec ses incisives et avale de l'air de façon répétée exprime un tic à l'appui, une stéréotypie jamais observée à l'état naturel.",
-      "feedback_positif_court": "Exactement : c'est un comportement jamais vu en milieu naturel, signal d'un environnement à interroger.",
-      "feedback_correctif_court": "Pas tout à fait : ce comportement est une stéréotypie, absente en milieu naturel — plutôt un signal à interroger qu'un simple vice individuel.",
-      "precaution_scientifique": "Une stéréotypie n'est jamais un diagnostic en soi et ne doit jamais être réduite à un « mauvais caractère » : c'est un signal invitant à regarder les conditions de vie du cheval dans leur ensemble, idéalement avec un professionnel si le doute persiste.",
-      "references_notes": ["Mason 1991", "McGreevy 1995", "Bachmann 2003", "Nicol 1999", "Hausberger 2009"],
-      "mecaniques_compatibles": ["qcm", "classification", "association", "reconnaissance_posture", "identification_erreur"],
-      "statut_revue": "validable_directement",
-      "motif_revue": ""
+      "exemple_concret": "Un cheval qui prend appui sur la mangeoire avec ses incisives et avale de l'air de façon répétée exprime un tic à l'appui, une stéréotypie décrite dans les notes comme non observée dans les conditions naturelles étudiées.",
+      "feedback_positif_court": "Exactement : ce comportement est décrit dans les notes comme propre aux conditions domestiques — un signe à associer prudemment aux conditions de vie, sans en déterminer la cause exacte d'un seul coup d'œil.",
+      "feedback_correctif_court": "Pas tout à fait : ce comportement est une stéréotypie, décrite dans les notes comme caractéristique des conditions domestiques — à associer prudemment aux conditions de vie du cheval, plutôt qu'à un simple vice individuel.",
+      "precaution_scientifique": "Une stéréotypie n'est jamais un diagnostic en soi et ne doit jamais être réduite à un « mauvais caractère » : elle peut être associée à plusieurs facteurs (environnement, vie sociale, alimentation, histoire individuelle) sans qu'un seul constat permette d'en isoler la cause — idéalement à discuter avec un professionnel si le doute persiste.",
+      "references_notes": {
+        "bibliographie_explicite": ["Mason 1991", "McGreevy 1995", "Bachmann 2003", "Nicol 1999", "Hausberger 2009"],
+        "affirmations_notes_sans_reference": ["exemple_concret"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "informations_complementaires_a_rechercher", "conclusions_possibles", "conclusions_non_etablies", "precaution_scientifique", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["classer_elements", "associer_deux_elements", "observation_ou_interpretation", "corriger_rapport_enqueteur", "eliminer_conclusion_abusive"],
+      "statut_revue": "a_reformuler",
+      "motif_revue": "Contenait une généralisation absolue (« jamais observées en milieu naturel ») et une formulation causale trop directe (« signale un environnement inadapté ») ; reformulées conformément à la demande du QG pour parler de comportements associés à des contraintes possibles plutôt que de causes établies, et pour ne plus présenter l'absence en milieu naturel comme une vérité universelle non vérifiée."
     },
     {
       "id": "BO-02",
@@ -960,8 +1058,8 @@
       "sous_theme": "sous-estimation du mal-être — observation directe vs questionnaire",
       "titre_court": "Ce que les soigneurs voient... et ne voient pas",
       "difficulte": "difficile",
-      "fait_scientifique_principal": "Selon les notes, une étude comparant observation directe et questionnaire sur 373 chevaux trouve environ 37,5 % de chevaux présentant au moins une stéréotypie par observation directe, contre seulement environ 5,4 % détectés par questionnaire — un accord jugé faible entre les deux méthodes.",
-      "explication_courte": "Les personnes qui s'occupent des chevaux au quotidien sous-estiment souvent, sans le vouloir, la fréquence réelle des stéréotypies — l'observation directe en révèle beaucoup plus que ce que rapportent les questionnaires.",
+      "fait_scientifique_principal": "Selon les notes, une étude comparant observation directe et questionnaire sur un échantillon de chevaux trouve une proportion nettement plus élevée de chevaux présentant au moins une stéréotypie par observation directe que par questionnaire — avec un accord jugé faible entre les deux méthodes.",
+      "explication_courte": "Les personnes qui s'occupent des chevaux au quotidien sous-estimeraient souvent, sans le vouloir, la fréquence réelle des stéréotypies — l'observation directe en révélerait beaucoup plus que ce que rapportent les questionnaires, selon cette étude.",
       "observations_possibles": [
         "Un cheval présentant une stéréotypie non signalée par son soigneur habituel lors d'un questionnaire, mais repérée lors d'une observation directe et prolongée.",
         "Une réticence à signaler un comportement stéréotypique par crainte qu'il soit perçu comme un « vice » ou un signe de mauvais entretien."
@@ -970,31 +1068,35 @@
         "Un cheval peut interrompre son comportement stéréotypique lorsqu'il se sent observé, ce qui peut fausser une observation ponctuelle et donner une impression de fréquence plus faible que la réalité."
       ],
       "hypotheses_prudentes": [
-        "L'écart important entre observation directe et questionnaire suggérerait que la prévalence réelle des stéréotypies est largement sous-estimée dans la pratique courante, plutôt que rare."
+        "L'écart rapporté entre observation directe et questionnaire suggérerait que la prévalence réelle des stéréotypies est sous-estimée dans la pratique courante — une hypothèse tirée d'une étude particulière, pas une règle générale démontrée pour tout contexte."
       ],
       "erreurs_ou_croyances_frequentes": [
         "Se fier uniquement à ce que rapporte un questionnaire ou un souvenir général pour évaluer le bien-être d'un cheval, sans observation directe et prolongée."
       ],
       "informations_complementaires_a_rechercher": [
-        "Le chiffre de coefficient d'agrément cité dans les notes (Kappa de Cohen autour de 0,14) mériterait d'être vérifié et recontextualisé avant toute reformulation grand public."
+        "Les chiffres précis cités dans les notes (taux de détection par observation vs questionnaire, coefficient d'agrément) mériteraient d'être vérifiés et recontextualisés avant toute reformulation grand public."
       ],
       "conclusions_possibles": [
-        "Privilégier une observation directe et répétée dans le temps plutôt qu'un simple questionnement ponctuel donne une image plus fiable du bien-être réel d'un cheval."
+        "Privilégier une observation directe et répétée dans le temps plutôt qu'un simple questionnement ponctuel donne, selon cette étude, une image plus fiable du bien-être réel d'un cheval."
       ],
       "conclusions_non_etablies": [
-        "Ces chiffres, issus d'une étude particulière, ne permettent pas d'affirmer une prévalence universelle identique dans tous les contextes d'élevage ou d'équitation."
+        "Ces résultats, issus d'une étude particulière, ne permettent pas d'affirmer une prévalence universelle identique dans tous les contextes d'élevage ou d'équitation."
       ],
       "vocabulaire_cle": [
         {"terme": "Kappa de Cohen", "definition": "Indicateur statistique mesurant l'accord entre deux méthodes d'évaluation, ici observation directe et questionnaire."}
       ],
       "exemple_concret": "Un centre équestre peut estimer via questionnaire qu'un seul cheval présente une stéréotypie, alors qu'une observation directe et prolongée en révèle plusieurs.",
-      "feedback_positif_court": "C'est ça : l'observation directe et prolongée révèle beaucoup plus de choses qu'un simple questionnaire.",
-      "feedback_correctif_court": "Pas tout à fait : les études montrent au contraire que les questionnaires sous-estiment nettement la fréquence réelle par rapport à l'observation directe.",
-      "precaution_scientifique": "Cette notion s'appuie sur les chiffres d'une étude précise citée dans les notes : elle illustre une tendance (sous-estimation) plutôt qu'une statistique universelle à appliquer telle quelle à toute situation.",
-      "references_notes": ["Visser 2008", "Waters 2002"],
-      "mecaniques_compatibles": ["comparaison", "qcm", "etude_de_cas", "estimation"],
+      "feedback_positif_court": "C'est ça : selon cette étude, l'observation directe et prolongée révèle davantage de stéréotypies qu'un simple questionnaire.",
+      "feedback_correctif_court": "Pas tout à fait : cette étude rapporte au contraire que les questionnaires sous-estiment nettement la fréquence détectée par rapport à l'observation directe.",
+      "precaution_scientifique": "Cette notion s'appuie sur les chiffres d'une étude précise citée dans les notes : elle illustre une tendance (sous-estimation) rapportée dans ce contexte précis, pas une statistique universelle à appliquer telle quelle à toute situation.",
+      "references_notes": {
+        "bibliographie_explicite": ["Visser 2008", "Waters 2002"],
+        "affirmations_notes_sans_reference": [],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "informations_complementaires_a_rechercher", "conclusions_possibles", "conclusions_non_etablies", "precaution_scientifique", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["comparer_deux_contextes", "eliminer_conclusion_abusive", "niveau_de_certitude"],
       "statut_revue": "a_verifier_scientifiquement",
-      "motif_revue": "Chiffres précis (37,5 %, 5,4 %, Kappa=0,14) tirés d'une étude particulière citée dans les notes : à vérifier/recontextualiser avant diffusion pour éviter une généralisation abusive et s'assurer de la bonne attribution de l'étude."
+      "motif_revue": "Chiffres précis (taux de détection par observation vs questionnaire, coefficient d'agrément) tirés d'une étude particulière citée dans les notes : à vérifier/recontextualiser avant diffusion pour éviter une généralisation abusive et s'assurer de la bonne attribution de l'étude."
     },
     {
       "id": "BO-03",
@@ -1032,8 +1134,12 @@
       "feedback_positif_court": "Bien vu : ces comportements ne sont pas automatiquement de bons signes, le contexte compte.",
       "feedback_correctif_court": "Pas tout à fait : ces comportements peuvent aussi, selon le contexte, signaler du stress plutôt que du bien-être — les notes laissent la question ouverte.",
       "precaution_scientifique": "Cette notion porte explicitement sur des questions non tranchées dans les notes elles-mêmes : l'exercice doit rester au niveau de la question ouverte, sans jamais présenter une réponse comme certaine.",
-      "references_notes": [],
-      "mecaniques_compatibles": ["vrai_faux", "dilemme_guide", "etude_de_cas", "identification_erreur"],
+      "references_notes": {
+        "bibliographie_explicite": [],
+        "affirmations_notes_sans_reference": ["fait_scientifique_principal", "explication_courte", "exemple_concret"],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "hypotheses_prudentes", "erreurs_ou_croyances_frequentes", "informations_complementaires_a_rechercher", "conclusions_possibles", "conclusions_non_etablies", "precaution_scientifique", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["vrai_faux_ou_indices_insuffisants", "meilleure_etape_suivante", "niveau_de_certitude", "trouver_intrus"],
       "statut_revue": "a_reformuler",
       "motif_revue": "Les notes présentent ces points comme des questions ouvertes (« ou est-ce que... ? ») ; il faut veiller à ce qu'aucun exercice ne transforme ces interrogations en réponse affirmée à choisir dans un QCM fermé."
     },
@@ -1044,8 +1150,8 @@
       "sous_theme": "solutions d'enrichissement — fourrage et substrat",
       "titre_court": "Une solution simple : plus de fourrage",
       "difficulte": "facile",
-      "fait_scientifique_principal": "Offrir des possibilités de fourragement (filets de foin à petites mailles, diversité de foins) est présenté dans les notes comme une solution simple à effet majeur sur le bien-être : budget-temps qui redevient plus naturel, apparition du repos couché et du toilettage mutuel, plus d'interactions sociales positives, moins d'agressivité. Le choix du substrat (paille plutôt que copeaux) influence aussi le temps de repos couché.",
-      "explication_courte": "Parmi toutes les pistes d'amélioration du bien-être en domestique, l'accès prolongé au fourrage ressort comme l'une des plus simples à mettre en place et l'une des plus efficaces.",
+      "fait_scientifique_principal": "Offrir des possibilités de fourragement (filets de foin à petites mailles, diversité de foins) est présenté dans les notes comme une solution simple associée à un effet notable sur le bien-être : budget-temps qui redevient plus proche de la normale, réapparition du repos couché et du toilettage mutuel, davantage d'interactions sociales positives, moins d'agressivité, et une amélioration rapportée de l'état corporel et de la fertilité des juments observées. Le choix du substrat (paille plutôt que copeaux) est également associé au temps de repos couché.",
+      "explication_courte": "Parmi les pistes d'amélioration du bien-être en domestique évoquées dans les notes, l'accès prolongé au fourrage ressort comme l'une des plus simples à mettre en place et l'une des plus associées à des effets positifs.",
       "observations_possibles": [
         "Une reprise du repos couché et du toilettage mutuel après la mise en place de filets de foin en quantité suffisante.",
         "Une préférence observable pour la paille plutôt que pour des copeaux comme substrat de couchage."
@@ -1057,9 +1163,11 @@
       "erreurs_ou_croyances_frequentes": [
         "Penser que les objets ou jouets d'enrichissement sont toujours la solution la plus efficace, alors que les notes indiquent que les enrichissements les plus fonctionnels restent liés à l'alimentation."
       ],
-      "informations_complementaires_a_rechercher": [],
+      "informations_complementaires_a_rechercher": [
+        "Les effectifs et chiffres précis de l'étude sur la distribution de filets de foin (nombre de filets, quantités) restent à vérifier avant toute reformulation affirmative pour un exercice grand public."
+      ],
       "conclusions_possibles": [
-        "Augmenter l'accès au fourrage est une mesure simple et concrète à recommander en priorité pour améliorer le bien-être d'un cheval domestique."
+        "Augmenter l'accès au fourrage est présenté dans les notes comme une mesure simple et concrète à recommander en priorité pour améliorer le bien-être d'un cheval domestique."
       ],
       "conclusions_non_etablies": [
         "Cette mesure ne règle pas nécessairement tous les facteurs de mal-être (isolement social, confinement) qui peuvent se cumuler indépendamment de l'alimentation."
@@ -1067,14 +1175,18 @@
       "vocabulaire_cle": [
         {"terme": "enrichissement", "definition": "Modification de l'environnement du cheval domestique visant à se rapprocher de ses conditions de vie naturelles."}
       ],
-      "exemple_concret": "La distribution de nombreux filets de foin répartis dans un paddock a permis, selon les notes, de retrouver un budget-temps proche de la normale et une amélioration de l'état corporel des juments observées.",
-      "feedback_positif_court": "Exactement : le fourrage à volonté est l'une des pistes les plus simples et les plus efficaces.",
-      "feedback_correctif_court": "Pas tout à fait : selon les notes, ce sont les enrichissements liés à l'alimentation (comme le fourrage à volonté) qui ont l'effet le plus net, plus que les objets ou jouets seuls.",
-      "precaution_scientifique": "",
-      "references_notes": ["Benhajali 2008", "Benhajali 2009", "Hunter & Houpt 1986", "Pederson 2000"],
-      "mecaniques_compatibles": ["qcm", "vrai_faux", "priorisation", "comparaison"],
-      "statut_revue": "validable_directement",
-      "motif_revue": ""
+      "exemple_concret": "La distribution de nombreux filets de foin répartis dans un paddock est associée, selon les notes, à un budget-temps plus proche de la normale et à une amélioration rapportée de l'état corporel des juments observées.",
+      "feedback_positif_court": "Exactement : le fourrage à volonté est présenté dans les notes comme l'une des pistes les plus simples et les plus associées à des effets positifs.",
+      "feedback_correctif_court": "Pas tout à fait : selon les notes, ce sont les enrichissements liés à l'alimentation (comme le fourrage à volonté) qui sont associés à l'effet le plus net, plus que les objets ou jouets seuls.",
+      "precaution_scientifique": "Les bénéfices rapportés (état corporel, fertilité) proviennent d'une étude particulière citée dans les notes : ils doivent être présentés comme des résultats associés à une intervention précise, pas comme une garantie généralisable à toute situation.",
+      "references_notes": {
+        "bibliographie_explicite": ["Benhajali 2008", "Benhajali 2009", "Hunter & Houpt 1986", "Pederson 2000"],
+        "affirmations_notes_sans_reference": [],
+        "interpretations_structuration": ["observations_possibles", "contextes_possibles", "erreurs_ou_croyances_frequentes", "informations_complementaires_a_rechercher", "conclusions_possibles", "conclusions_non_etablies", "precaution_scientifique", "feedback_positif_court", "feedback_correctif_court"]
+      },
+      "mecaniques_compatibles": ["vrai_faux_ou_indices_insuffisants", "remettre_sequence_ordre", "comparer_deux_contextes"],
+      "statut_revue": "a_verifier_scientifiquement",
+      "motif_revue": "Contient une affirmation à caractère physiologique/reproducteur (amélioration de l'état corporel et de la fertilité) ; à confirmer avant diffusion telle quelle."
     }
   ]
 }

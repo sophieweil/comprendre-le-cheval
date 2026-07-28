@@ -1,49 +1,51 @@
 {
   "_meta": {
     "statut": "matiere_premiere_non_integree",
-    "description": "3 exercices variés (mécaniques différentes, au maximum 1 QCM classique) pour chacune des 5 notions choisies comme exemples complets du lot pilote.",
-    "notions_couvertes": ["MS-01", "AP-02", "CO-03", "DO-03", "BO-01"]
+    "description": "3 exercices variés (mécaniques différentes parmi la liste officielle des 15, au maximum 1 QCM classique) pour chacune des 5 notions choisies comme exemples complets du lot pilote.",
+    "notions_couvertes": ["MS-01", "AP-02", "CO-03", "DO-03", "BO-01"],
+    "note_mecaniques": "Le champ 'mecanique' référence soit un nom technique de la liste officielle des 15 (voir 02-schema-notions.md §3), soit 'qcm_classique' pour le format de base plafonné à 1 par notion."
   },
   "exercices": [
     {
       "id": "MS-01-EX1",
       "notion_id": "MS-01",
-      "mecanique": "etude_de_cas",
+      "mecanique": "eliminer_conclusion_abusive",
       "enonce": "Léa s'approche de son cheval Orage par devant, pile face à son chanfrein, et lui tend la main sans un mot. Orage recule d'un pas.",
-      "question": "Quelle est l'hypothèse la plus prudente pour expliquer ce recul ?",
+      "question": "Deux de ces trois conclusions vont au-delà de ce qu'on peut affirmer à partir de cette seule observation. Laquelle reste une hypothèse prudente ?",
       "options": [
         "Orage a peur de Léa et ne lui fait pas confiance.",
-        "Orage ne voit plus distinctement la main dans cette zone, ce qui l'a surpris.",
+        "Une difficulté de perception dans cette zone aveugle peut constituer une hypothèse parmi d'autres pour expliquer ce recul, à confronter au contexte.",
         "Orage refuse le contact parce qu'il est de mauvaise humeur."
       ],
       "reponse_correcte": 1,
-      "feedback_positif": "Exactement — juste devant son chanfrein, Orage est dans une zone aveugle. Le recul est une réaction sensorielle bien plus qu'un jugement sur Léa.",
-      "feedback_correctif": "Pas tout à fait : Léa se trouvait pile devant le chanfrein d'Orage, une zone aveugle. Avant de conclure à de la peur ou de la mauvaise volonté, il vaut mieux considérer cette explication sensorielle, plus simple et plus probable."
+      "feedback_positif": "Voilà l'hypothèse la plus prudente : juste devant son chanfrein, Orage est dans une zone aveugle. Une difficulté de perception est une piste plausible, à confronter à d'autres indices — pas une conclusion certaine sur son caractère ou sa confiance envers Léa.",
+      "feedback_correctif": "Les deux autres options concluent trop vite sur l'état d'esprit d'Orage à partir d'un seul recul. La zone où se trouvait Léa est une zone aveugle : une difficulté de perception est une hypothèse plus prudente, à confronter au contexte plutôt qu'à retenir automatiquement."
     },
     {
       "id": "MS-01-EX2",
       "notion_id": "MS-01",
-      "mecanique": "vrai_faux",
+      "mecanique": "vrai_faux_ou_indices_insuffisants",
       "enonce": "« Le cheval voit à peu près tout ce qui se passe autour de lui à tout moment, sans avoir besoin de bouger la tête. »",
-      "reponse_correcte": false,
-      "feedback_positif": "Vrai de dire faux : son champ de vision est très large, mais il existe de vraies zones aveugles (devant le chanfrein, sous la gorge, au-dessus de la tête, derrière lui).",
-      "feedback_correctif": "C'est faux : malgré un champ de vision très large, il existe de vraies zones aveugles que le cheval ne peut voir sans tourner la tête."
+      "options": ["Vrai", "Faux", "Pas assez d'indices pour trancher"],
+      "reponse_correcte": 1,
+      "feedback_positif": "C'est bien faux : son champ de vision est très large, mais il existe de vraies zones aveugles (devant le chanfrein, sous la gorge, au-dessus de la tête, derrière lui) — on a ici assez d'éléments pour trancher.",
+      "feedback_correctif": "C'est faux, et on a ici assez d'indices pour le dire : malgré un champ de vision très large, il existe de vraies zones aveugles que le cheval ne peut voir sans tourner la tête."
     },
     {
       "id": "MS-01-EX3",
       "notion_id": "MS-01",
-      "mecanique": "qcm",
+      "mecanique": "qcm_classique",
       "enonce": "Quel est approximativement le champ binoculaire du cheval (la zone vue avec les deux yeux en même temps) ?",
       "options": ["Environ 10 à 20°", "Environ 60 à 70°", "Environ 212°"],
       "reponse_correcte": 1,
-      "feedback_positif": "Exact, environ 60 à 70° — c'est la zone où il perçoit le relief, contrairement au reste de son champ de vision monoculaire.",
-      "feedback_correctif": "Pas tout à fait : 212° correspond au champ monoculaire total (vision large mais sans relief) ; le champ binoculaire, plus étroit, est d'environ 60 à 70°."
+      "feedback_positif": "Exact, environ 60 à 70° selon les notes — c'est la zone où il perçoit le relief, contrairement au reste de son champ de vision monoculaire. Ce chiffre reste à confirmer par une source de référence (statut : à vérifier scientifiquement).",
+      "feedback_correctif": "Pas tout à fait : 212° correspond, selon les notes, au champ monoculaire total (vision large mais sans relief) ; le champ binoculaire, plus étroit, est d'environ 60 à 70°."
     },
 
     {
       "id": "AP-02-EX1",
       "notion_id": "AP-02",
-      "mecanique": "sequence",
+      "mecanique": "remettre_sequence_ordre",
       "enonce": "Remets dans le bon ordre les étapes d'un renforcement négatif classique (pression de jambe pour demander le trot).",
       "elements": [
         "Le cavalier serre les flancs du cheval (inconfort).",
@@ -58,7 +60,7 @@
     {
       "id": "AP-02-EX2",
       "notion_id": "AP-02",
-      "mecanique": "dilemme_guide",
+      "mecanique": "meilleure_etape_suivante",
       "enonce": "Ton cheval vient de mordre un licol accroché près de lui. Tu veux que ce comportement ne se reproduise pas.",
       "question": "Quelle séquence correspond à une punition, telle que décrite dans les notes ?",
       "options": [
@@ -74,22 +76,22 @@
     {
       "id": "AP-02-EX3",
       "notion_id": "AP-02",
-      "mecanique": "identification_erreur",
-      "enonce": "Une des affirmations suivantes confond renforcement négatif et punition. Laquelle ?",
+      "mecanique": "corriger_rapport_enqueteur",
+      "enonce": "Kiro a noté dans son rapport : « Une des affirmations suivantes confond renforcement négatif et punition. » Aide-le à identifier laquelle.",
       "options": [
         "Le renforcement négatif fait apparaître un comportement en retirant un inconfort dès qu'il se produit.",
         "La punition et le renforcement négatif reposent tous les deux sur un inconfort, appliqué exactement de la même façon et dans le même but.",
         "La punition ajoute un inconfort après une action, dans le but de la faire disparaître."
       ],
       "reponse_correcte": 1,
-      "feedback_positif": "Exactement, c'est cette affirmation qui confond les deux : l'ordre (avant/après l'action) et le but (faire apparaître/disparaître) diffèrent complètement.",
+      "feedback_positif": "Exactement, c'est cette affirmation qu'il faut corriger dans le rapport : l'ordre (avant/après l'action) et le but (faire apparaître/disparaître) diffèrent complètement entre les deux mécanismes.",
       "feedback_correctif": "Regarde de plus près : une des trois phrases prétend que renforcement négatif et punition fonctionnent « de la même façon », ce qui est faux — l'ordre et le but des deux mécanismes sont opposés."
     },
 
     {
       "id": "CO-03-EX1",
       "notion_id": "CO-03",
-      "mecanique": "sequence",
+      "mecanique": "remettre_sequence_ordre",
       "enonce": "Remets dans l'ordre la séquence de signaux qui précède généralement un coup entre deux chevaux.",
       "elements": [
         "L'encolure se relève.",
@@ -104,8 +106,8 @@
     {
       "id": "CO-03-EX2",
       "notion_id": "CO-03",
-      "mecanique": "indices_progressifs",
-      "enonce": "Un cheval est observé dans un pré. Indice 1 : son encolure se relève légèrement. Indice 2 (dévoile après réponse) : ses oreilles se couchent vers l'arrière. Indice 3 : sa croupe commence à pivoter vers un congénère proche.",
+      "mecanique": "indices_avant_conclusion",
+      "enonce": "Un cheval est observé dans un pré. Indice 1 : son encolure se relève légèrement. Indice 2 (dévoilé après réponse) : ses oreilles se couchent vers l'arrière. Indice 3 : sa croupe commence à pivoter vers un congénère proche.",
       "question": "Après le 3ᵉ indice, que doit faire une personne présente entre les deux chevaux ?",
       "options": [
         "Rester où elle est, la situation ne la concerne pas.",
@@ -119,65 +121,66 @@
     {
       "id": "CO-03-EX3",
       "notion_id": "CO-03",
-      "mecanique": "qcm",
-      "enonce": "D'après une étude suisse citée dans les notes sur les accidents chez les vétérinaires équins, quel facteur ressort le plus souvent ?",
+      "mecanique": "observation_ou_interpretation",
+      "enonce": "Une étude suisse citée dans les notes rapporte ce résultat : « les chevaux responsables d'accidents chez des vétérinaires n'étaient pas des chevaux nerveux ».",
+      "question": "Parmi ces deux phrases, laquelle est le résultat rapporté par l'étude, et laquelle est une interprétation qui en est tirée (non démontrée directement par l'étude) ?",
       "options": [
-        "Les chevaux responsables d'accidents étaient particulièrement nerveux.",
-        "Un défaut d'attention aux signes avant-coureurs, y compris chez des chevaux jugés calmes.",
-        "Les accidents touchaient uniquement des chevaux inconnus des vétérinaires."
+        "A. Les chevaux responsables d'accidents n'étaient pas nerveux. — B. Certains signes avant-coureurs ont peut-être été moins perçus par les personnes concernées.",
+        "A. Les chevaux responsables d'accidents étaient tous nerveux. — B. L'étude prouve que les vétérinaires ne font jamais attention.",
+        "Les deux phrases sont des résultats mesurés directement par l'étude."
       ],
-      "reponse_correcte": 1,
-      "feedback_positif": "Exact : l'étude suggère surtout un défaut d'attention aux signaux progressifs, pas un tempérament nerveux.",
-      "feedback_correctif": "Pas tout à fait : les chevaux responsables d'accidents n'étaient pas particulièrement nerveux — l'étude pointe plutôt un défaut d'attention aux signes avant-coureurs."
+      "reponse_correcte": 0,
+      "feedback_positif": "Exactement : la phrase A est le résultat rapporté (chevaux non nerveux impliqués), la phrase B est une hypothèse que les notes en tirent — plausible, mais non démontrée par l'étude elle-même.",
+      "feedback_correctif": "Regarde à nouveau : seule une des deux phrases correspond au résultat réellement rapporté par l'étude (chevaux non nerveux) ; l'autre n'est qu'une hypothèse explicative, pas une preuve mesurée."
     },
 
     {
       "id": "DO-03-EX1",
       "notion_id": "DO-03",
-      "mecanique": "etude_de_cas",
+      "mecanique": "eliminer_conclusion_abusive",
       "enonce": "Un cheval reçoit deux gros repas de concentrés par jour, avec un grand intervalle sans rien manger entre les deux, et peu de fourrage à disposition.",
       "question": "Quelle est la conclusion la plus prudente à tirer de cette seule description ?",
       "options": [
         "Ce cheval a forcément un ulcère gastrique.",
-        "Ce mode d'alimentation correspond à un profil de risque digestif décrit dans les notes, à surveiller — sans que cela constitue un diagnostic.",
+        "Ce mode d'alimentation correspond à un profil associé à un risque digestif dans les notes, à surveiller — sans que cela constitue un diagnostic.",
         "Ce mode d'alimentation ne pose aucun problème tant que le cheval mange à sa faim."
       ],
       "reponse_correcte": 1,
-      "feedback_positif": "Voilà la bonne prudence : ce profil alimentaire est un facteur de risque à surveiller, pas une preuve de maladie.",
-      "feedback_correctif": "Pas tout à fait : ce mode d'alimentation correspond à un profil de risque décrit dans les notes — mais seul un vétérinaire peut confirmer un trouble digestif réel, jamais une observation seule."
+      "feedback_positif": "Voilà la bonne prudence : ce profil alimentaire est associé à un facteur de risque à surveiller, pas une preuve de maladie. En cas de doute réel sur la santé du cheval, seul un vétérinaire peut se prononcer.",
+      "feedback_correctif": "Pas tout à fait : ce mode d'alimentation correspond à un profil associé à un risque dans les notes — mais aucune observation seule ne permet de conclure à un trouble digestif réel ; seul un vétérinaire peut le confirmer."
     },
     {
       "id": "DO-03-EX2",
       "notion_id": "DO-03",
-      "mecanique": "comparaison",
-      "enonce": "Compare ces deux façons de nourrir un cheval au box, en cochant celle qui se rapproche le plus du fonctionnement digestif naturel décrit dans les notes.",
+      "mecanique": "comparer_deux_contextes",
+      "enonce": "Compare ces deux façons de nourrir un cheval au box, en cochant celle qui se rapproche le plus du fonctionnement digestif décrit dans les notes comme naturel pour le cheval.",
       "options": [
         "2 gros repas de concentrés par jour, avec de longues périodes sans rien à manger.",
         "Du foin à volonté dans un filet à petites mailles, complété par une petite quantité de concentrés."
       ],
       "reponse_correcte": 1,
-      "feedback_positif": "Exactement : cette option se rapproche d'une alimentation quasi continue, pauvre en amidon — plus proche du fonctionnement naturel de l'estomac du cheval.",
-      "feedback_correctif": "Pas la meilleure option : l'estomac du cheval est conçu pour être rempli en continu — de longues périodes sans rien manger, avec beaucoup de concentrés, s'en éloignent nettement plus."
+      "feedback_positif": "Exactement : cette option se rapproche d'une alimentation quasi continue et pauvre en amidon, plus proche de ce que les notes décrivent comme le fonctionnement naturel du système digestif du cheval.",
+      "feedback_correctif": "Pas la meilleure option : les notes décrivent un système digestif fait pour être sollicité en continu — de longues périodes sans rien manger, avec beaucoup de concentrés, s'en éloignent nettement plus."
     },
     {
       "id": "DO-03-EX3",
       "notion_id": "DO-03",
-      "mecanique": "identification_erreur",
-      "enonce": "Une des trois affirmations suivantes va au-delà de ce que les notes permettent réellement d'affirmer. Laquelle ?",
+      "mecanique": "corriger_rapport_enqueteur",
+      "enonce": "Kiro a écrit dans son rapport : « Un cheval qui bâille beaucoup a forcément un ulcère gastrique. » Une des trois affirmations suivantes correspond à cette erreur de Kiro. Laquelle ?",
       "options": [
         "Un régime trop concentré et pauvre en fibres est associé, dans les notes, à un risque accru de troubles digestifs.",
         "Un cheval qui bâille beaucoup a forcément un ulcère gastrique.",
         "Des changements de comportement comme le bâillement peuvent être des indices à surveiller, sans être une preuve en soi."
       ],
       "reponse_correcte": 1,
-      "feedback_positif": "Exactement : affirmer qu'un bâillement fréquent « prouve » un ulcère va bien au-delà de ce que les notes établissent — c'est un indice à surveiller, pas un diagnostic.",
-      "feedback_correctif": "Regarde de nouveau : l'affirmation qui pose problème est celle qui transforme un simple indice comportemental (le bâillement) en diagnostic certain (un ulcère) — les notes ne permettent jamais ce raccourci."
+      "feedback_positif": "Exactement : c'est bien l'erreur de Kiro. Affirmer qu'un bâillement fréquent « prouve » un ulcère va bien au-delà de ce que les notes établissent — c'est un indice à surveiller, jamais un diagnostic. Seul un vétérinaire peut confirmer un trouble digestif réel.",
+      "feedback_correctif": "Regarde de nouveau le rapport de Kiro : l'erreur est de transformer un simple indice comportemental (le bâillement) en diagnostic certain (un ulcère) — les notes ne permettent jamais ce raccourci, et seul un vétérinaire peut trancher une vraie suspicion de trouble digestif."
     },
 
     {
       "id": "BO-01-EX1",
       "notion_id": "BO-01",
-      "mecanique": "classification",
+      "mecanique": "classer_elements",
       "enonce": "Classe chaque description dans la bonne catégorie de stéréotypie.",
       "elements": [
         "Le cheval balance latéralement la tête et l'encolure de façon répétée.",
@@ -192,27 +195,27 @@
     {
       "id": "BO-01-EX2",
       "notion_id": "BO-01",
-      "mecanique": "association",
+      "mecanique": "associer_deux_elements",
       "enonce": "Associe chaque stéréotypie à ce qu'elle n'est PAS.",
       "colonne_gauche": ["Tic à l'ours", "Tic à l'appui", "Box walking"],
-      "colonne_droite": ["Un simple vice sans rapport avec les conditions de vie", "Un comportement observé aussi en milieu naturel", "Un signe à ignorer une fois qu'il est installé"],
-      "reponse_correcte": {"Tic à l'ours": "Un simple vice sans rapport avec les conditions de vie", "Tic à l'appui": "Un comportement observé aussi en milieu naturel", "Box walking": "Un signe à ignorer une fois qu'il est installé"},
-      "feedback_positif": "Exactement : dans les trois cas, ces stéréotypies ne sont ni un vice isolé, ni un comportement naturel, ni un signal à négliger.",
-      "feedback_correctif": "Pas tout à fait : aucune stéréotypie n'est un simple « vice », un comportement observé en nature, ou un signe à ignorer — toutes trois signalent un environnement à interroger."
+      "colonne_droite": ["Un simple vice sans rapport avec les conditions de vie", "Un comportement décrit dans les notes comme observé aussi en milieu naturel", "Un signe à ignorer une fois qu'il est installé"],
+      "reponse_correcte": {"Tic à l'ours": "Un simple vice sans rapport avec les conditions de vie", "Tic à l'appui": "Un comportement décrit dans les notes comme observé aussi en milieu naturel", "Box walking": "Un signe à ignorer une fois qu'il est installé"},
+      "feedback_positif": "Exactement : ces trois stéréotypies ne sont ni un vice isolé, ni un comportement rapporté en milieu naturel par les notes, ni un signal à ignorer — elles peuvent être associées à des contraintes de vie diverses (environnement, alimentation, vie sociale, histoire individuelle), sans qu'on puisse en conclure une cause unique.",
+      "feedback_correctif": "Pas tout à fait : aucune de ces trois stéréotypies n'est un simple « vice », un comportement rapporté en milieu naturel par les notes, ou un signe à ignorer — elles peuvent être associées à plusieurs contraintes de vie, sans qu'un seul constat permette d'en isoler la cause."
     },
     {
       "id": "BO-01-EX3",
       "notion_id": "BO-01",
-      "mecanique": "qcm",
+      "mecanique": "qcm_classique",
       "enonce": "Face à un cheval qui développe une stéréotypie, quelle est l'attitude la plus cohérente avec ce que disent les notes ?",
       "options": [
         "Chercher uniquement à faire cesser le geste, par exemple avec une contention.",
-        "S'interroger sur l'environnement du cheval (logement, alimentation, vie sociale) à l'origine possible du comportement.",
+        "S'interroger sur les conditions de vie du cheval (logement, alimentation, vie sociale, histoire individuelle), sans en déduire une cause unique.",
         "Considérer que c'est un trait de caractère propre à ce cheval, sans rien changer."
       ],
       "reponse_correcte": 1,
-      "feedback_positif": "Exactement : la bonne piste est de questionner l'environnement, pas de supprimer le geste ou de l'ignorer.",
-      "feedback_correctif": "Pas tout à fait : supprimer le geste de force peut augmenter le stress sans traiter la cause ; la bonne approche est de s'interroger sur l'environnement du cheval."
+      "feedback_positif": "Exactement : la bonne piste est de s'interroger sur les conditions de vie du cheval, pas de supprimer le geste de force ou de l'ignorer comme un simple trait de caractère.",
+      "feedback_correctif": "Pas tout à fait : supprimer le geste de force peut augmenter le stress sans traiter la cause ; la bonne approche est de s'interroger sur les conditions de vie du cheval, sans se limiter à un seul facteur."
     }
   ]
 }

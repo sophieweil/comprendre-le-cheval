@@ -4580,6 +4580,12 @@ body {
   font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--earth);
   opacity: 0.65; text-align: center; margin-top: 14px;
 }
+.enquete-suite-highlight { animation: enqueteSuitePulse 1.4s ease-out 1; outline: none; }
+@keyframes enqueteSuitePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(201,150,62,0.5); border-color: rgba(201,150,62,0.7); }
+  70%  { box-shadow: 0 0 0 12px rgba(201,150,62,0); border-color: rgba(201,150,62,0.7); }
+  100% { box-shadow: 0 0 0 0 rgba(201,150,62,0); border-color: rgba(139,94,60,0.14); }
+}
 
 /* ===== QUÊTE TERRAIN — écran prototype ===== */
 .qt-prompt-card {
@@ -7520,7 +7526,20 @@ function showScreen(id) {
   if (id === 'carnet') renderCarnet();
   if (id === 'budget-temps') populateBtHorseSelect();
   if (id === 'main') { renderSessionBar(); }
-  if (id === 'academie') { renderAcademieDate(); renderMainDashboard(); renderRituelDuJour(); renderDefis(); renderDiscoveryBanner(); renderKiroMessage(); }
+  if (id === 'academie') {
+    renderAcademieDate(); renderMainDashboard(); renderRituelDuJour(); renderDefis(); renderDiscoveryBanner(); renderKiroMessage();
+    if (_focusEnqueteSuiteApresAcademie) {
+      _focusEnqueteSuiteApresAcademie = false; // consommé immédiatement — ne vise que ce seul retour
+      setTimeout(function() {
+        var bloc = document.getElementById('enquete-suite-block');
+        if (!bloc) return; // pas de contenu à approfondir aujourd'hui — pas de défilement forcé
+        bloc.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        bloc.focus({ preventScroll: true });
+        bloc.classList.add('enquete-suite-highlight');
+        setTimeout(function() { bloc.classList.remove('enquete-suite-highlight'); }, 1500);
+      }, 60);
+    }
+  }
   if (id === 'defis') renderDefis();
   if (id === 'fiches') renderFiches();
   if (id === 'observer') { renderObserver(); renderObserverMissionBtn(); }
@@ -8687,7 +8706,7 @@ function renderContinuerEnqueteHtml(todayMission) {
       + '<div class="enquete-suite-sub">Rien de nouveau à explorer pour l\'instant — reviens bientôt.</div>'
       + '</div>';
 
-  return '<div class="enquete-suite">'
+  return '<div class="enquete-suite" id="enquete-suite-block" tabindex="-1">'
     + '<div class="enquete-suite-header">🔎 Continuer l\'enquête</div>'
     + '<div class="enquete-suite-intro">Ta Mission du jour est terminée. Tu peux t\'arrêter ici… ou suivre une nouvelle piste.</div>'
     + '<div class="enquete-suite-grid">'
@@ -11207,6 +11226,20 @@ function incrementMissionsCount() {
   return n;
 }
 
+// Compteur dédié aux Missions Cheval (toutes réf. confondues) — sert
+// uniquement à afficher un nombre honnête d'observations consignées en fin
+// de C-04 ("Les Oreilles, Dix Minutes"). N'affiche rien sur les autres
+// Missions Cheval, qui ne lisent pas cette valeur pour l'instant.
+function getMissionsChevalCount() {
+  return parseInt(localStorage.getItem('missions_cheval_count') || '0', 10);
+}
+
+function incrementMissionsChevalCount() {
+  var n = getMissionsChevalCount() + 1;
+  localStorage.setItem('missions_cheval_count', String(n));
+  return n;
+}
+
 // Vérifie et débloque les badges d'exploration selon l'état actuel
 // Retourne la liste des IDs nouvellement débloqués
 function checkExplorationBadges(missionType) {
@@ -12199,6 +12232,11 @@ var _mcStep     = 0;       // index de l'étape en cours (0-based)
 var _mcPhase    = 'steps'; // 'steps' | 'recap'
 var _mcTestMode      = false; // true = mode test sans XP ni sauvegarde
 var _dossierTestMode = false; // true = mode test sans XP ni sauvegarde
+// true = au prochain rendu de l'Académie, faire défiler jusqu'au bloc
+// "Continuer l'enquête", lui donner le focus et une mise en évidence brève.
+// Consommé (remis à false) dès utilisation — ne doit jamais persister au-delà
+// d'un seul retour à l'Académie.
+var _focusEnqueteSuiteApresAcademie = false;
 var _testMissionOverride = null; // mission object for afficherMissionSuivante(), null = use getMissionDuJour()
 var _testNextMissionIdx  = -1;  // cycle counter for afficherMissionSuivante()
 
@@ -12404,6 +12442,11 @@ function _renderMCRecap(el, mission) {
   // C-05 "Présence Immobile" → portrait pédagogique personnalisé
   if (mission.ref === 'C-05') {
     _renderC05Portrait(el, mission);
+    return;
+  }
+  // C-04 "Les Oreilles, Dix Minutes" → fin dédiée (fiche factuelle + limite + piste)
+  if (mission.ref === 'C-04') {
+    _renderC04Fin(el, mission);
     return;
   }
 
@@ -12668,6 +12711,247 @@ function _renderC05Portrait(el, mission) {
   html += '<button class="mc-btn-retour" onclick="retourEtapeMC()">← Modifier</button>';
 
   el.innerHTML = (_mcTestMode ? _testBannerHtml() : '') + html;
+}
+
+// ============================================================
+// FIN DÉDIÉE — MISSION C-04 « Les Oreilles, Dix Minutes »
+// ============================================================
+// Les 3 champs saisis (en_avant, en_arriere, stimulus) sont des champs texte
+// libres. Le résultat produit ici reste strictement factuel : aucune
+// conclusion sur l'attention, l'écoute, l'émotion ou l'intention du cheval.
+// Validé QG (semaine 1 / jour 2) — corrections : pas d'alternance déduite,
+// pas de seuil 3:1, synthèses reformulées, pistes en comparaison de
+// contextes, progression honnête (compteur d'observations, pas un niveau).
+
+// Extrait prudemment un entier d'un champ texte libre.
+// Retourne null si aucun chiffre exploitable n'est trouvé — à distinguer
+// d'un vrai 0, qui reste une valeur valide.
+function _parseEntierChampOreilles(raw) {
+  if (raw === undefined || raw === null) return null;
+  var s = String(raw).trim();
+  if (s === '') return null;
+  var m = s.match(/\d+/);
+  if (!m) return null;
+  var n = parseInt(m[0], 10);
+  if (isNaN(n) || n < 0) return null;
+  return n;
+}
+
+// Compare les deux comptages selon la règle d'affichage prudente validée
+// par le QG : écart absolu ≤ 1 → "proche" (jamais présentée comme un seuil
+// scientifique, seulement une prudence d'affichage).
+function _comparerOrientationsOreilles(nAvant, nArriere) {
+  if (nAvant === null || nArriere === null) return 'incomplet';
+  var diff = nAvant - nArriere;
+  if (Math.abs(diff) <= 1) return 'proche';
+  return diff > 0 ? 'avant_plus' : 'arriere_plus';
+}
+
+// Classe le stimulus en 5 catégories simples par mots-clés. Le texte saisi
+// par l'utilisateur n'est jamais modifié — seule cette classification interne
+// sert à choisir la limite et la piste adaptées.
+function _classifierStimulusOreilles(raw) {
+  var s = String(raw || '').trim();
+  if (s.length < 2) return 'non_identifie';
+  var low = s.toLowerCase();
+  if (typeof low.normalize === 'function') {
+    low = low.normalize('NFD').replace(/[̀-ͯ]/g, '');
+  }
+  var lowTrim = low.replace(/[.\s]+$/, '').trim();
+  if (/\b(aucun|rien)\b/.test(lowTrim)) return 'non_identifie';
+  if (lowTrim === 'moi' || lowTrim === 'moi-meme' || lowTrim === 'moi meme' || lowTrim === "c'est moi") return 'moi';
+  if (/\b(cheval|chevaux|jument|juments|poulain|poulains|etalon|hongre|congenere|congeneres)\b/.test(lowTrim)) return 'cheval';
+  if (/\b(bruit|son|moteur|tracteur|voiture|klaxon|aboiement|explosion)\b/.test(lowTrim)) return 'son';
+  if (/\b(personne|humain|quelqu'un|quelqu un|promeneur|cavalier|cavaliere|visiteur|inconnu)\b/.test(lowTrim)) return 'personne';
+  return 'autre';
+}
+
+// Bloc B — phrase de synthèse. Jamais "alternance" ni "changement répété" à
+// partir des seuls totaux ; jamais "très majoritairement" ni "dominante
+// nette" ; "une seule orientation..." uniquement si l'autre vaut réellement 0.
+function _syntheseOrientationsOreilles(nAvant, nArriere, cmp) {
+  if (cmp === 'incomplet') {
+    return "Les données saisies ne permettent pas encore de comparer les deux orientations.";
+  }
+  if (cmp === 'proche') {
+    return "Les deux orientations ont été relevées dans des quantités proches.";
+  }
+  if (cmp === 'avant_plus') {
+    return (nArriere === 0)
+      ? "Une seule orientation a été relevée sur toute la période : vers l'avant."
+      : "L'orientation vers l'avant a été relevée plus souvent pendant ces dix minutes.";
+  }
+  return (nAvant === 0)
+    ? "Une seule orientation a été relevée sur toute la période : vers l'arrière."
+    : "L'orientation vers l'arrière a été relevée plus souvent pendant ces dix minutes.";
+}
+
+// Bloc C — limite claire, jamais culpabilisante ni professorale, jamais de
+// conclusion sur l'attention/l'écoute/l'émotion du cheval.
+function _limiteOreilles(categorie, cmp, stimulusEsc) {
+  if (cmp === 'incomplet') {
+    return "Avec une valeur non renseignée, ces chiffres ne permettent pas encore de tirer une comparaison utile.";
+  }
+  if (categorie === 'moi') {
+    return "Quand le stimulus principal, c'est toi, il devient difficile de distinguer ta présence des autres éléments du contexte — ces chiffres ne permettent pas de faire la part des choses.";
+  }
+  if (categorie === 'non_identifie') {
+    return "Sans élément déclencheur clairement identifié, ces chiffres restent difficiles à relier à une cause précise.";
+  }
+  var objet = categorie === 'cheval'   ? 'cet autre cheval'
+            : categorie === 'son'      ? 'ce bruit'
+            : categorie === 'personne' ? 'cette personne'
+            : ('« ' + stimulusEsc + ' »');
+  return "Ces chiffres ne permettent pas encore de savoir si " + objet + " explique à lui seul ces relevés — pour ça, il faudrait comparer un moment avec et un moment sans.";
+}
+
+// Bloc D — prochaine piste : comparer des contextes, jamais confirmer une
+// interprétation. Formulations approuvées telles quelles par le QG.
+function _pisteOreilles(categorie, stimulusEsc) {
+  if (categorie === 'cheval') {
+    return "Lors d'une prochaine observation, compare un moment où cet autre cheval est présent avec un moment où il ne l'est pas. Note seulement si les relevés diffèrent.";
+  }
+  if (categorie === 'son') {
+    return "Compare un court moment avec ce bruit et un court moment sans ce bruit, en gardant autant que possible le reste du contexte similaire.";
+  }
+  if (categorie === 'personne') {
+    return "Compare un moment où cette personne est proche avec un moment où elle est plus éloignée ou absente.";
+  }
+  if (categorie === 'moi') {
+    return "Lors d'une prochaine observation, compare deux distances ou deux positions différentes de ta part, sans conclure trop vite que tu es la cause des orientations relevées.";
+  }
+  if (categorie === 'non_identifie') {
+    return "La prochaine fois, note l'élément présent juste avant chaque orientation relevée, sans chercher immédiatement une explication.";
+  }
+  return "La prochaine fois, compare un court moment où « " + stimulusEsc + " » est présent avec un moment où il ne l'est pas, si les conditions le permettent.";
+}
+
+// Assemble le résultat complet à partir des 3 réponses libres saisies.
+// avantAffiche / arriereAffiche / stimulusAffiche sont les valeurs BRUTES à
+// échapper par l'appelant (esc()) au moment du rendu. synthese / limite /
+// piste sont des phrases déjà sûres à insérer telles quelles : la seule
+// portion issue de la saisie libre (cas "autre" du stimulus) y est déjà
+// échappée en amont, pour éviter tout double-échappement.
+function genererResultatOreilles(rawAvant, rawArriere, rawStimulus) {
+  var nAvant   = _parseEntierChampOreilles(rawAvant);
+  var nArriere = _parseEntierChampOreilles(rawArriere);
+  var cmp      = _comparerOrientationsOreilles(nAvant, nArriere);
+
+  var stimulusTexte = String(rawStimulus || '').trim();
+  var categorie      = _classifierStimulusOreilles(stimulusTexte);
+  var stimulusEsc    = esc(stimulusTexte.length ? stimulusTexte : 'Non renseigné');
+
+  return {
+    avantAffiche:    nAvant   === null ? 'Non renseigné' : String(nAvant),
+    arriereAffiche:  nArriere === null ? 'Non renseigné' : String(nArriere),
+    stimulusAffiche: stimulusTexte.length ? stimulusTexte : 'Non renseigné',
+    synthese: _syntheseOrientationsOreilles(nAvant, nArriere, cmp),
+    limite:   _limiteOreilles(categorie, cmp, stimulusEsc),
+    piste:    _pisteOreilles(categorie, stimulusEsc)
+  };
+}
+
+function _renderC04Fin(el, mission) {
+  var resultat = genererResultatOreilles(
+    _mcFormData['en_avant']   || '',
+    _mcFormData['en_arriere'] || '',
+    _mcFormData['stimulus']   || ''
+  );
+
+  var html = '<div class="mc-mission-zone">'
+    + '<div class="mc-eyebrow">🐴 Mission Cheval</div>'
+    + '<div class="mc-title">' + esc(mission.titre) + '</div>'
+    + '<div class="mc-xp-badge">+' + mission.xp + ' XP</div>'
+    + '</div>';
+
+  html += '<div class="mc-portrait-outer">';
+
+  // A — Validation immédiate (la démarche, pas la performance)
+  html += '<div class="mc-portrait-header">'
+    + '<div class="mc-portrait-meta-badge">Réflexe validé</div>'
+    + '<div class="mc-portrait-titre">Tu as compté avant d\'interpréter. C\'est exactement le bon réflexe.</div>'
+    + '</div>';
+
+  // B — Portrait factuel (fiche d'enquête)
+  html += '<div class="mc-portrait-bloc mc-portrait-bloc-observe">'
+    + '<div class="mc-portrait-bloc-header">'
+    +   '<span class="mc-portrait-bloc-icon">🔎</span>'
+    +   '<span class="mc-portrait-bloc-label">Fiche d\'observation — 10 minutes</span>'
+    + '</div>'
+    + '<div class="mc-recap-rows">'
+    +   '<div class="mc-recap-row"><span class="mc-recap-label">👂→ Oreilles en avant</span><span class="mc-recap-val">' + esc(resultat.avantAffiche) + '</span></div>'
+    +   '<div class="mc-recap-row"><span class="mc-recap-label">←👂 Oreilles en arrière</span><span class="mc-recap-val">' + esc(resultat.arriereAffiche) + '</span></div>'
+    +   '<div class="mc-recap-row"><span class="mc-recap-label">⚡ Stimulus principal</span><span class="mc-recap-val">« ' + esc(resultat.stimulusAffiche) + ' »</span></div>'
+    + '</div>'
+    + '<div class="mc-portrait-bloc-text">' + resultat.synthese + '</div>'
+    + '</div>';
+
+  // C — Limite claire
+  html += '<div class="mc-portrait-bloc mc-portrait-bloc-verify">'
+    + '<div class="mc-portrait-bloc-header">'
+    +   '<span class="mc-portrait-bloc-icon">🌱</span>'
+    +   '<span class="mc-portrait-bloc-label">Ce que ça ne permet pas encore de savoir</span>'
+    + '</div>'
+    + '<div class="mc-portrait-bloc-text">' + resultat.limite + '</div>'
+    + '</div>';
+
+  // D — Prochaine piste (comparer des contextes, pas confirmer)
+  html += '<div class="mc-portrait-bloc mc-portrait-bloc-next">'
+    + '<div class="mc-portrait-bloc-header">'
+    +   '<span class="mc-portrait-bloc-icon">👣</span>'
+    +   '<span class="mc-portrait-bloc-label">À observer la prochaine fois</span>'
+    + '</div>'
+    + '<div class="mc-portrait-bloc-text">' + resultat.piste + '</div>'
+    + '</div>';
+
+  // E — Progression honnête : un compteur réel, jamais un niveau de
+  // compétence ni un pourcentage arbitraire. En mode test, le compteur
+  // affiché est celui déjà enregistré (pas de prévisualisation +1), pour ne
+  // pas laisser croire à une progression qui ne sera pas sauvegardée.
+  var nbObservations = _mcTestMode ? getMissionsChevalCount() : (getMissionsChevalCount() + 1);
+  var pluriel = nbObservations > 1 ? 's' : '';
+  html += '<div class="mc-portrait-quote">'
+    + '<div class="mc-portrait-quote-label">🧭 Observer sans interpréter</div>'
+    + '<div class="mc-portrait-quote-text">' + nbObservations + ' observation' + pluriel + ' consignée' + pluriel + ' dans les Missions Cheval.</div>'
+    + '</div>'
+    + '<div style="font-family:\'DM Sans\',sans-serif;font-size:12px;color:#6B3010;opacity:0.75;text-align:center;margin-top:6px;">Ce réflexe se construit en répétant des observations factuelles dans différents contextes.</div>';
+
+  html += '</div>'; // /mc-portrait-outer
+
+  // F — Deux sorties uniquement
+  var ctaLabel = _mcTestMode ? '🧪 Terminer le test' : 'Continuer l\'enquête →';
+  html += '<button class="mc-btn-done mc-portrait-cta" style="margin-top:20px;" onclick="validerMissionOreillesC04(' + mission.xp + ', true)">'
+    + ctaLabel + '</button>';
+  if (_mcTestMode) {
+    html += '<div style="font-family:\'DM Sans\',sans-serif;font-size:11.5px;text-align:center;color:#6B3010;opacity:0.75;margin-top:6px;">Cette simulation ne modifie pas ta progression réelle.</div>';
+  } else {
+    html += '<button class="mc-btn-retour" onclick="validerMissionOreillesC04(' + mission.xp + ', false)">Retour à l\'Académie</button>';
+  }
+
+  el.innerHTML = (_mcTestMode ? _testBannerHtml() : '') + html;
+}
+
+// Valide C-04 et navigue. focusEnquete=true ("Continuer l'enquête") demande
+// un défilement + focus + mise en évidence brève du bloc "Continuer
+// l'enquête" au prochain rendu de l'Académie ; focusEnquete=false ("Retour
+// à l'Académie") laisse le retour standard, sans mise en évidence. Dans les
+// deux cas la mission est validée (XP + compteur) : le choix ne porte que
+// sur la suite, pas sur l'enregistrement de l'observation déjà saisie.
+function validerMissionOreillesC04(xp, focusEnquete) {
+  if (_mcTestMode) {
+    _mcTestMode          = false;
+    _testMissionOverride = null;
+    _mcPhase    = 'steps';
+    _mcStep     = 0;
+    _mcFormData = {};
+    showScreen('academie');
+    return;
+  }
+  var alreadyDoneToday = isMissionV1DoneToday();
+  if (!alreadyDoneToday) { incrementMissionsChevalCount(); }
+  if (focusEnquete) { _focusEnqueteSuiteApresAcademie = true; }
+  completeMission(xp, 'mission_cheval');
+  if (alreadyDoneToday) { showScreen('academie'); }
 }
 
 // ── [TEST TEMPORAIRE] ─────────────────────────────────────────────────────

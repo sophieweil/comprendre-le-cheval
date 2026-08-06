@@ -5772,6 +5772,24 @@ body {
 .mc-test-reset:hover { border-color: rgba(192,82,42,0.60); color: rgba(192,82,42,0.85); }
 /* ── fin [TEST TEMPORAIRE] ─────────────────────────────────────── */
 
+/* ── [PROTOTYPE QG — Boucle témoin V1] — retirer avec le bloc HTML/JS
+     correspondant. Réutilise au maximum .rws-*, .mc-peda-box, .acad-*
+     déjà en place ; ce bloc n'ajoute que ce qui n'existe pas encore
+     (glisser-déposer tactile, emplacement d'illustration Kiro). ── */
+.protoqg-item-pool { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.protoqg-drag-card { touch-action: none; user-select: none; }
+.protoqg-dragging { cursor: grabbing; box-shadow: 0 10px 26px rgba(47,74,61,0.24); opacity: 0.97; }
+.protoqg-zone-active { border-color: #E4694B !important; background: rgba(228,105,75,0.10) !important; }
+.protoqg-kiro-slot {
+  display: flex; align-items: center; justify-content: center;
+  height: 92px; border: 1.5px dashed rgba(47,74,61,0.25); border-radius: 14px;
+  margin-bottom: 14px; font-family: 'Lato', sans-serif; font-size: 10.5px;
+  letter-spacing: 0.06em; color: rgba(47,74,61,0.4); text-transform: uppercase;
+  text-align: center; padding: 8px;
+}
+.protoqg-mention { border-top: 3px solid rgba(192,82,42,0.35); }
+/* ── fin [PROTOTYPE QG — Boucle témoin V1] ──────────────────────── */
+
 /* ── Bandeau Mode Test ─────────────────────────────────────────── */
 .test-mode-banner {
   display: flex; align-items: flex-start; gap: 10px;
@@ -6393,6 +6411,9 @@ body {
     </button>
     <button class="acad-test-btn" onclick="afficherMissionSuivante()">
       🔄 Tester la mission suivante
+    </button>
+    <button class="acad-test-btn" onclick="showScreen('proto-qg-boucle')">
+      🧪 Tester la boucle témoin V1
     </button>
     <div id="test-preview-zone"></div>
   </div>
@@ -7114,6 +7135,26 @@ body {
 </div>
 </div>
 
+<!-- ══ [PROTOTYPE QG — Boucle témoin V1] ══════════════════════════════════
+     Prototype QG uniquement — accessible depuis la Zone de test QG.
+     N'apparaît jamais dans la Mission du jour, Continuer l'enquête ni la
+     Bibliothèque. N'écrit rien dans l'état réel de l'application.
+     Retrait : supprimer ce bloc <div class="screen" id="screen-proto-qg-boucle">…</div>.
+════════════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="screen-proto-qg-boucle">
+<div class="acad-page-wrap">
+  <div class="home-logo-zone">
+    <img src="logo-ride-with-so.png" alt="Ride With So — Sophie Weil" class="logo-ride-with-so">
+  </div>
+  <div class="acad-header-row">
+    <div class="acad-back-home" onclick="showScreen('academie')">← Académie</div>
+    <div class="sub-header-title">🧪 Prototype QG</div>
+  </div>
+  <div id="protoqg-content"></div>
+</div>
+</div>
+<!-- ══ fin [PROTOTYPE QG — Boucle témoin V1] ═════════════════════════════ -->
+
 <script>
 // ============================================================
 // DATA
@@ -7552,6 +7593,7 @@ function showScreen(id) {
     _kePhase = 'playing'; _keCasIndex = 0; _keAnswered = false; _keSelectedIdx = -1; _keScore = 0;
     renderScreenKiroErreur();
   }
+  if (id === 'proto-qg-boucle') { protoQgReset(); protoQgRender(); }
   // Classement : accessible en aperçu QG même quand LEADERBOARD_ENABLED = false
   if (id === 'leaderboard') renderScreenLeaderboard();
 }
@@ -13053,6 +13095,561 @@ function startFlashQuizTest() {
   startFlashQuiz(qid, 'test');
 }
 // ── fin [TEST TEMPORAIRE] ─────────────────────────────────────────────────
+
+// ============================================================
+// [PROTOTYPE QG — Boucle témoin V1] — « Orientation des oreilles vers
+// l'arrière ». Accessible uniquement depuis la Zone de test QG.
+// N'écrit jamais dans l'état réel (XP, scores, déblocages, historique,
+// localStorage) : tout l'état de session vit dans les variables ci-dessous,
+// réinitialisées à chaque ouverture (voir protoQgReset(), appelé par
+// showScreen('proto-qg-boucle')). Statut du contenu : proposition
+// pédagogique à valider — voir controles_generation dans le JSON.
+// Retrait : supprimer ce bloc jusqu'à « fin [PROTOTYPE QG] » inclus.
+// ============================================================
+
+// Source de contenu unique — JSON fourni par le QG, non modifié.
+var PROTOQG_BOUCLE_OREILLES = {
+  "session_id": "s_oreilles_arriere_001",
+  "notion_id": "n_orientation_oreilles_arriere",
+  "notion_libelle": "Orientation des oreilles vers l'arrière",
+  "statut_fiche": "Proposition pédagogique fondée sur des principes généraux des notes — à valider",
+  "duree_cible_sec": 240,
+  "difficulte": "standard",
+  "prototype": true,
+  "ecrans": [
+    {
+      "ordre": 1,
+      "type": "choix_initial",
+      "situation": "Écurie, 14 h 10. Un cheval est au travail sur le plat depuis huit minutes. Ses deux oreilles sont orientées vers l'arrière.",
+      "consigne": "Ton hypothèse, maintenant.",
+      "interaction": "tap_unique_sans_validation",
+      "relance_si_abstention": false,
+      "correction_affichee": false,
+      "options": [
+        { "id": "o1a", "libelle": "Il est contrarié", "role": "interpretation_affective", "feedback": "Enregistré. On garde ça de côté." },
+        { "id": "o1b", "libelle": "Il porte peut-être son attention vers l'arrière", "role": "hypothese_compatible", "feedback": "Enregistré. On garde ça de côté." },
+        { "id": "o1c", "libelle": "Il refuse de travailler", "role": "interpretation_intentionnelle", "feedback": "Enregistré. On garde ça de côté." },
+        { "id": "o1d", "libelle": "Je n'ai pas assez d'éléments", "role": "suspension_de_jugement", "feedback": "Enregistré. Suspendre son jugement à ce stade est une position tenable. On continue." }
+      ],
+      "enregistre_dans_etat": "choix_initial"
+    },
+    {
+      "ordre": 2,
+      "type": "tri_observation_interpretation",
+      "consigne": "Avant d'aller plus loin, remets de l'ordre. Ce qui a été vu / ce qui a été déduit.",
+      "interaction": "glisser_vers_zone",
+      "zones": ["OBSERVE", "DEDUIT"],
+      "items": [
+        { "id": "o2a", "texte": "Les deux oreilles sont orientées vers l'arrière", "zone_attendue": "OBSERVE" },
+        { "id": "o2b", "texte": "Il travaille depuis huit minutes", "zone_attendue": "OBSERVE" },
+        { "id": "o2c", "texte": "Il en a assez de la séance", "zone_attendue": "DEDUIT" },
+        { "id": "o2d", "texte": "Il est attentif à ce qui se passe derrière lui", "zone_attendue": "DEDUIT" }
+      ],
+      "feedbacks": {
+        "juste_observe": "Oui. Ça, quelqu'un d'autre le verrait aussi.",
+        "juste_deduit": "Exact. Personne ne peut voir ça — c'est déjà une lecture.",
+        "erreur_deduit_en_observe": "Presque. Est-ce que tu pourrais le filmer ? Non — donc ce n'est pas une observation.",
+        "erreur_observe_en_deduit": "Là tu es trop prudent. Ça, c'est visible à l'œil nu."
+      },
+      "enregistre_dans_etat": "erreurs_tri_observation_interpretation"
+    },
+    {
+      "ordre": 3,
+      "type": "indice_et_information_utile",
+      "indice_revele": {
+        "texte": "Un second cheval est entré dans la carrière, derrière lui. Les oreilles se sont orientées vers l'arrière quelques secondes après cette entrée.",
+        "chronologie_explicite": true,
+        "statut": "piste_renforcante",
+        "renforce_hypotheses": ["h_attention_arriere"],
+        "ecarte_hypotheses": [],
+        "encart_obligatoire": "Une succession n'est pas une cause. Le fait que l'orientation ait changé après l'entrée du congénère renforce l'hypothèse d'une attention portée vers l'arrière. Elle ne l'établit pas, et n'écarte aucune autre cause."
+      },
+      "consigne": "Qu'est-ce qui t'aiderait le plus à avancer ?",
+      "interaction": "selection_unique",
+      "options": [
+        { "id": "o3a", "libelle": "Savoir si les oreilles bougent ensemble ou indépendamment au fil de la séquence", "criticite": "haute", "accepte": true, "feedback": "Oui. Les deux oreilles peuvent s'orienter indépendamment. Leur mouvement au fil de la séquence apporterait une information supplémentaire." },
+        { "id": "o3b", "libelle": "Le nom du cheval", "criticite": "basse", "accepte": false, "feedback": "Ça ne changera pas ta lecture. Reviens à ce qui se passe là, maintenant." },
+        { "id": "o3c", "libelle": "Ce que fait le reste de son corps", "criticite": "haute", "accepte": true, "feedback": "Bien vu. L'orientation des oreilles fournit un indice, mais ne suffit pas seule à conclure." },
+        { "id": "o3d", "libelle": "Depuis combien de temps il est monté ce mois-ci", "criticite": "basse", "accepte": false, "feedback": "Intéressant sur le fond, mais ça ne t'aide pas à lire cette seconde précise." }
+      ]
+    },
+    {
+      "ordre": 4,
+      "type": "revision_hypothese",
+      "rappel_dynamique": "Rappel : à 14 h 10, tu as retenu → {{choix_initial.libelle}}",
+      "contexte_acquis": "Depuis, tu sais qu'un autre cheval est entré derrière lui, et que les oreilles ont bougé après cette entrée.",
+      "interaction": "selection_unique",
+      "aucune_option_fausse": true,
+      "principe_feedback": "coherence_avec_informations_disponibles",
+      "options": [
+        { "id": "o4a", "libelle": "Je conserve mon hypothèse", "role": "maintien" },
+        { "id": "o4b", "libelle": "Je la modifie", "role": "revision", "declenche_sous_selection": true },
+        { "id": "o4c", "libelle": "Je suspends mon jugement", "role": "suspension" }
+      ],
+      "feedbacks_conditionnels": [
+        { "si_choix_initial_role": "hypothese_compatible", "si_choix": "o4a", "texte": "Cohérent. Ton hypothèse reste compatible avec ce que tu viens d'apprendre, et l'élément nouveau va plutôt dans son sens." },
+        { "si_choix_initial_role": "hypothese_compatible", "si_choix": "o4b", "texte": "Tu peux, mais rien ne t'y oblige : ton hypothèse de départ tenait toujours." },
+        { "si_choix_initial_role": "interpretation_affective", "si_choix": "o4a", "texte": "Ton hypothèse n'est pas écartée, mais elle repose sur une lecture de son état interne que rien ici ne documente." },
+        { "si_choix_initial_role": "interpretation_affective", "si_choix": "o4b", "texte": "Cohérent avec ce que tu viens d'apprendre." },
+        { "si_choix_initial_role": "interpretation_intentionnelle", "si_choix": "o4a", "texte": "Ton hypothèse n'est pas écartée, mais elle prête au cheval une intention que rien dans ce que tu as vu ne documente." },
+        { "si_choix_initial_role": "interpretation_intentionnelle", "si_choix": "o4b", "texte": "Cohérent avec ce que tu viens d'apprendre." },
+        { "si_choix_initial_role": "suspension_de_jugement", "si_choix": "o4a", "texte": "Tenable. Tu as un élément de plus, mais pas de quoi trancher." },
+        { "si_choix_initial_role": "suspension_de_jugement", "si_choix": "o4b", "texte": "Cohérent : tu as maintenant un élément qui t'autorise à formuler une piste." },
+        { "si_choix_initial_role": "*", "si_choix": "o4c", "texte": "Position recevable. Ce n'est pas une dérobade." }
+      ],
+      "enregistre_dans_etat": "a_revise_son_choix"
+    },
+    {
+      "ordre": 5,
+      "type": "correction_de_kiro",
+      "replique_kiro": "Bon, c'est clair. Les oreilles en arrière, il travaille depuis huit minutes, il est agacé par la séance. J'écris « cheval contrarié par le travail ». Affaire classée.",
+      "consigne": "Corrige-le. Sélectionne tout ce qui ne va pas.",
+      "interaction": "selection_multiple_avec_validation",
+      "nb_erreurs_attendues": 3,
+      "options": [
+        { "id": "o5a", "libelle": "Il présente un fait comme une preuve de ce que ressent le cheval", "erreur": true, "categorie": "saut_interpretatif" },
+        { "id": "o5b", "libelle": "Il ne tient pas compte de l'entrée du second cheval", "erreur": true, "categorie": "contexte_ignore" },
+        { "id": "o5c", "libelle": "Il conclut alors qu'il manque encore des informations", "erreur": true, "categorie": "conclusion_prematuree" },
+        { "id": "o5d", "libelle": "Il ne mentionne pas la race du cheval", "erreur": false, "feedback": "Ça ne l'aurait pas empêché de se tromper." },
+        { "id": "o5e", "libelle": "Il a noté que les oreilles sont orientées vers l'arrière", "erreur": false, "feedback": "Non, ça il l'a bien vu. C'est la seule chose qu'il a bien faite." }
+      ],
+      "feedbacks": {
+        "complet": "Kiro raye tout. « D'accord, d'accord. Je reprends depuis le début. »",
+        "partiel": "Tu en as attrapé {{n}}. Il en reste {{r}} — relis ce qu'il affirme, et ce qu'il ferme trop vite."
+      }
+    },
+    {
+      "ordre": 6,
+      "type": "certitude_et_synthese",
+      "enonce_evalue": "Ce cheval porte son attention vers un élément situé derrière lui.",
+      "interaction": "selection_unique",
+      "niveau_attendu": "possible",
+      "options": [
+        { "id": "o6a", "libelle": "Possible", "feedback": "C'est juste. Tu as un indice et une chronologie qui vont dans ce sens. C'est une piste, pas encore une lecture solide." },
+        { "id": "o6b", "libelle": "Probable", "feedback": "Un cran trop loin. Il te faudrait plusieurs indices convergents — la position du reste du corps, le mouvement de chaque oreille au fil de la séquence, la répétition du signal — avant de parler de probable." },
+        { "id": "o6c", "libelle": "Non établi", "feedback": "Tu as tout de même un élément qui va dans ce sens. « Possible » décrit mieux où tu en es." }
+      ],
+      "enregistre_dans_etat": "niveau_certitude_choisi",
+      "synthese": {
+        "observe": [
+          "Les oreilles sont orientées vers l'arrière.",
+          "Le cheval travaille depuis huit minutes.",
+          "Un second cheval est entré derrière lui.",
+          "L'orientation a changé après cette entrée."
+        ],
+        "hypotheses_envisageables": [
+          "Une attention portée vers un élément situé derrière.",
+          "Une réponse à un autre élément du contexte.",
+          "D'autres hypothèses qui nécessitent des observations complémentaires."
+        ],
+        "a_verifier": [
+          "La chronologie précise.",
+          "Le mouvement de chaque oreille au fil de la séquence.",
+          "La posture et le mouvement du reste du corps.",
+          "La répétition ou non dans des contextes comparables."
+        ],
+        "mention_prudente_obligatoire": "Cette observation isolée ne permet pas d'évaluer ni d'exclure une éventuelle gêne. Si d'autres signes font suspecter un problème médical, un examen vétérinaire reste nécessaire."
+      },
+      "sortie": "Une nouvelle affaire sera bientôt disponible.",
+      "teaser_notion_suivante": null
+    }
+  ],
+  "donnees_utilisateur": {
+    "choix_initial": null,
+    "a_revise_son_choix": null,
+    "erreurs_tri_observation_interpretation": [],
+    "niveau_certitude_choisi": null,
+    "_note": "Réponses brutes conservées pour personnalisation future. Aucune inférence de trait ne doit être dérivée de ces champs en l'état."
+  },
+  "controles_generation": {
+    "generable": true,
+    "blocages": [],
+    "statut_source": "proposition_pedagogique_a_valider"
+  }
+};
+
+// ── État de session (mémoire uniquement, jamais localStorage) ──────────────
+var _protoQgEcran   = 1;     // 1..6
+var _protoQgEtat    = null;  // miroir de donnees_utilisateur — reset à l'ouverture
+var _protoQgEc1Feedback = null;
+var _protoQgEc2Assign   = {};    // { itemId: 'OBSERVE' | 'DEDUIT' }
+var _protoQgEc2LastFeedback = null;
+var _protoQgEc3Phase = 'avant_indice'; // 'avant_indice' | 'apres_indice'
+var _protoQgEc3Choix = null;
+var _protoQgEc4Choix = null;
+var _protoQgEc5Selected = {}; // { itemId: true }
+var _protoQgEc5Valide   = false;
+var _protoQgEc6Choix = null;
+var _protoQgDrag     = null;  // état du glisser-déposer en cours (écran 2)
+
+function _protoQgEcranData(ordre) { return PROTOQG_BOUCLE_OREILLES.ecrans[ordre - 1]; }
+
+// Réinitialise tout l'état — appelé à chaque ouverture du prototype
+// (showScreen('proto-qg-boucle')), jamais lu ni écrit ailleurs dans l'app.
+function protoQgReset() {
+  _protoQgEcran = 1;
+  _protoQgEtat = {
+    choix_initial: null,
+    a_revise_son_choix: null,
+    erreurs_tri_observation_interpretation: [],
+    niveau_certitude_choisi: null
+  };
+  _protoQgEc1Feedback = null;
+  _protoQgEc2Assign = {};
+  _protoQgEc2LastFeedback = null;
+  _protoQgEc3Phase = 'avant_indice';
+  _protoQgEc3Choix = null;
+  _protoQgEc4Choix = null;
+  _protoQgEc5Selected = {};
+  _protoQgEc5Valide = false;
+  _protoQgEc6Choix = null;
+  _protoQgDrag = null;
+}
+
+function _protoQgProgressHtml(current) {
+  var total = 6, dots = '';
+  for (var i = 1; i <= total; i++) {
+    var cls = 'rws-game-progress-dot' + (i < current ? ' rws-game-progress-dot-done' : i === current ? ' rws-game-progress-dot-active' : '');
+    dots += '<div class="' + cls + '"></div>';
+    if (i < total) dots += '<div class="rws-game-progress-line' + (i < current ? ' rws-game-progress-line-done' : '') + '"></div>';
+  }
+  return '<div class="rws-game-progress">'
+    + '<div class="rws-game-progress-steps">' + dots + '</div>'
+    + '<div class="rws-game-progress-text">Écran ' + current + ' sur ' + total + '</div>'
+    + '</div>';
+}
+
+function protoQgRender() {
+  var el = document.getElementById('protoqg-content');
+  if (!el) return;
+  var bodyFn = {1:_protoQgRenderEcran1, 2:_protoQgRenderEcran2, 3:_protoQgRenderEcran3, 4:_protoQgRenderEcran4, 5:_protoQgRenderEcran5, 6:_protoQgRenderEcran6}[_protoQgEcran];
+  el.innerHTML = _protoQgProgressHtml(_protoQgEcran) + (bodyFn ? bodyFn() : '');
+}
+
+function protoQgAvancer() {
+  _protoQgEcran++;
+  protoQgRender();
+}
+
+// ── Écran 1 — choix initial (tap unique, aucune correction) ────────────────
+function _protoQgRenderEcran1() {
+  var data = _protoQgEcranData(1);
+  var deja = !!_protoQgEtat.choix_initial;
+  var optionsHtml = data.options.map(function(opt) {
+    var selected = deja && _protoQgEtat.choix_initial.id === opt.id;
+    return '<button class="rws-choice-card' + (selected ? ' rws-choice-card-selected' : '') + '" ' + (deja ? 'disabled ' : '')
+      + 'onclick="protoQgEc1Choisir(\'' + opt.id + '\')">' + esc(opt.libelle) + '</button>';
+  }).join('');
+  var feedbackHtml = _protoQgEc1Feedback
+    ? '<div class="rws-feedback-panel rws-feedback-panel-ok"><div class="rws-feedback-text">' + esc(_protoQgEc1Feedback) + '</div></div>'
+    : '';
+  return '<div class="rws-game-card">'
+    + '<div class="rws-game-situation">' + esc(data.situation) + '</div>'
+    + '<div class="rws-game-prompt">' + esc(data.consigne) + '</div>'
+    + '<div class="rws-choice-list">' + optionsHtml + '</div>'
+    + '</div>' + feedbackHtml;
+}
+
+function protoQgEc1Choisir(optId) {
+  if (_protoQgEtat.choix_initial) return;
+  var opt = _protoQgEcranData(1).options.filter(function(o) { return o.id === optId; })[0];
+  if (!opt) return;
+  _protoQgEtat.choix_initial = { id: opt.id, libelle: opt.libelle, role: opt.role };
+  _protoQgEc1Feedback = opt.feedback;
+  protoQgRender();
+  setTimeout(function() {
+    if (_protoQgEcran !== 1) return; // sécurité si l'écran a déjà changé entre-temps
+    _protoQgEc1Feedback = null;
+    protoQgAvancer();
+  }, 1100);
+}
+
+// ── Écran 2 — tri OBSERVÉ / DÉDUIT, glisser-déposer tactile (pointer events,
+//    fonctionne au doigt comme à la souris — contrairement au drag-and-drop
+//    HTML5 natif, mal supporté sur mobile) ──────────────────────────────────
+function _protoQgRenderEcran2() {
+  var data = _protoQgEcranData(2);
+  var poolHtml = data.items.map(function(item) {
+    if (_protoQgEc2Assign[item.id]) return '';
+    return '<div class="rws-choice-card protoqg-drag-card" data-protoqg-item="' + item.id + '" '
+      + 'onpointerdown="protoQgEc2PointerDown(event,\'' + item.id + '\')">' + esc(item.texte) + '</div>';
+  }).join('');
+
+  function renderZone(zoneKey) {
+    var itemsHtml = data.items.map(function(item) {
+      if (_protoQgEc2Assign[item.id] !== zoneKey) return '';
+      var ok = item.zone_attendue === zoneKey;
+      return '<div class="rws-classify-item ' + (ok ? 'rws-classify-item-correct' : 'rws-classify-item-wrong') + '">' + esc(item.texte) + '</div>';
+    }).join('');
+    return '<div class="rws-classify-zone" data-protoqg-zone="' + zoneKey + '">'
+      + '<div class="rws-classify-zone-label">' + esc(zoneKey) + '</div>'
+      + '<div class="rws-classify-zone-items">' + itemsHtml + '</div>'
+      + '</div>';
+  }
+
+  var allPlaced = data.items.every(function(item) { return !!_protoQgEc2Assign[item.id]; });
+  var feedbackHtml = _protoQgEc2LastFeedback
+    ? '<div class="rws-feedback-panel ' + (_protoQgEc2LastFeedback.ok ? 'rws-feedback-panel-ok' : 'rws-feedback-panel-ko') + '">'
+      + '<div class="rws-feedback-text">' + esc(_protoQgEc2LastFeedback.texte) + '</div></div>'
+    : '';
+  var nextHtml = allPlaced ? '<button class="rws-btn-primary" onclick="protoQgAvancer()">Continuer →</button>' : '';
+
+  return '<div class="rws-game-card">'
+    + '<div class="rws-game-prompt">' + esc(data.consigne) + '</div>'
+    + (poolHtml ? '<div class="protoqg-item-pool">' + poolHtml + '</div>' : '')
+    + '<div class="rws-classify-zones">' + renderZone(data.zones[0]) + renderZone(data.zones[1]) + '</div>'
+    + '</div>' + feedbackHtml + nextHtml;
+}
+
+function protoQgEc2PointerDown(e, itemId) {
+  if (_protoQgEc2Assign[itemId]) return;
+  e.preventDefault();
+  var el = e.currentTarget;
+  var rect = el.getBoundingClientRect();
+  try { el.setPointerCapture(e.pointerId); } catch (err) {}
+  _protoQgDrag = {
+    pointerId: e.pointerId, itemId: itemId, el: el,
+    offsetX: e.clientX - rect.left, offsetY: e.clientY - rect.top,
+    hoverZone: null
+  };
+  el.classList.add('protoqg-dragging');
+  el.style.position = 'fixed';
+  el.style.left = rect.left + 'px';
+  el.style.top = rect.top + 'px';
+  el.style.width = rect.width + 'px';
+  el.style.zIndex = '999';
+}
+
+function protoQgEc2PointerMove(e) {
+  if (!_protoQgDrag || e.pointerId !== _protoQgDrag.pointerId) return;
+  var d = _protoQgDrag;
+  d.el.style.left = (e.clientX - d.offsetX) + 'px';
+  d.el.style.top = (e.clientY - d.offsetY) + 'px';
+  // Défilement automatique près des bords de l'écran : sur un écran mobile
+  // (375 px), le pool de 4 cartes + les 2 zones peuvent dépasser la hauteur
+  // visible. touch-action:none bloque le défilement tactile natif pendant
+  // le glisser (nécessaire pour que le geste ne soit pas capté par le
+  // navigateur) — sans ce défilement programmatique, les zones situées sous
+  // le pli resteraient inatteignables au doigt.
+  var edge = 70, vh = window.innerHeight;
+  if (e.clientY < edge) window.scrollBy(0, -16);
+  else if (e.clientY > vh - edge) window.scrollBy(0, 16);
+  d.el.style.pointerEvents = 'none';
+  var under = document.elementFromPoint(e.clientX, e.clientY);
+  d.el.style.pointerEvents = '';
+  var zoneEl = under ? under.closest('[data-protoqg-zone]') : null;
+  document.querySelectorAll('.protoqg-zone-active').forEach(function(z) { z.classList.remove('protoqg-zone-active'); });
+  if (zoneEl) zoneEl.classList.add('protoqg-zone-active');
+  d.hoverZone = zoneEl ? zoneEl.getAttribute('data-protoqg-zone') : null;
+}
+
+function protoQgEc2PointerUp(e) {
+  if (!_protoQgDrag || e.pointerId !== _protoQgDrag.pointerId) return;
+  var d = _protoQgDrag;
+  document.querySelectorAll('.protoqg-zone-active').forEach(function(z) { z.classList.remove('protoqg-zone-active'); });
+  _protoQgDrag = null;
+  if (d.hoverZone) {
+    protoQgEc2Drop(d.itemId, d.hoverZone);
+  } else {
+    protoQgRender(); // dépose hors zone : annulé, l'item revient dans le pool
+  }
+}
+
+function protoQgEc2Drop(itemId, zone) {
+  var data = _protoQgEcranData(2);
+  var item = data.items.filter(function(i) { return i.id === itemId; })[0];
+  if (!item) return;
+  _protoQgEc2Assign[itemId] = zone;
+  var ok = item.zone_attendue === zone;
+  var key = ok
+    ? (zone === 'OBSERVE' ? 'juste_observe' : 'juste_deduit')
+    : (zone === 'OBSERVE' ? 'erreur_deduit_en_observe' : 'erreur_observe_en_deduit');
+  _protoQgEc2LastFeedback = { ok: ok, texte: data.feedbacks[key] };
+  if (!ok) _protoQgEtat.erreurs_tri_observation_interpretation.push(itemId);
+  protoQgRender();
+}
+
+document.addEventListener('pointermove', function(e) { if (_protoQgDrag) protoQgEc2PointerMove(e); });
+document.addEventListener('pointerup',   function(e) { if (_protoQgDrag) protoQgEc2PointerUp(e); });
+document.addEventListener('pointercancel', function(e) { if (_protoQgDrag) protoQgEc2PointerUp(e); });
+
+// ── Écran 3 — indice puis information utile ─────────────────────────────────
+function _protoQgRenderEcran3() {
+  var data = _protoQgEcranData(3);
+  if (_protoQgEc3Phase === 'avant_indice') {
+    return '<div class="rws-game-card">'
+      + '<div class="rws-game-prompt">Un nouvel élément est disponible.</div>'
+      + '<button class="rws-btn-primary" onclick="protoQgEc3RevelerIndice()">👁 Révéler l\'indice</button>'
+      + '</div>';
+  }
+  var indiceHtml = '<div class="rws-kiro-bubble">' + esc(data.indice_revele.texte) + '</div>';
+  var deja = !!_protoQgEc3Choix;
+  var optionsHtml = data.options.map(function(opt) {
+    var selected = _protoQgEc3Choix === opt.id;
+    return '<button class="rws-choice-card' + (selected ? ' rws-choice-card-selected' : '') + '" ' + (deja ? 'disabled ' : '')
+      + 'onclick="protoQgEc3Choisir(\'' + opt.id + '\')">' + esc(opt.libelle) + '</button>';
+  }).join('');
+
+  var feedbackHtml = '', encartHtml = '', nextHtml = '';
+  if (deja) {
+    var chosen = data.options.filter(function(o) { return o.id === _protoQgEc3Choix; })[0];
+    feedbackHtml = '<div class="rws-feedback-panel ' + (chosen.accepte ? 'rws-feedback-panel-ok' : 'rws-feedback-panel-ko') + '">'
+      + '<div class="rws-feedback-text">' + esc(chosen.feedback) + '</div></div>';
+    encartHtml = '<div class="mc-peda-box"><span class="mc-peda-icon">🔬</span><span class="mc-peda-text">' + esc(data.indice_revele.encart_obligatoire) + '</span></div>';
+    nextHtml = '<button class="rws-btn-primary" onclick="protoQgAvancer()">Continuer →</button>';
+  }
+
+  return '<div class="rws-game-card">'
+    + indiceHtml
+    + '<div class="rws-game-prompt">' + esc(data.consigne) + '</div>'
+    + '<div class="rws-choice-list">' + optionsHtml + '</div>'
+    + '</div>' + feedbackHtml + encartHtml + nextHtml;
+}
+
+function protoQgEc3RevelerIndice() {
+  _protoQgEc3Phase = 'apres_indice';
+  protoQgRender();
+}
+
+function protoQgEc3Choisir(optId) {
+  if (_protoQgEc3Choix) return;
+  _protoQgEc3Choix = optId;
+  protoQgRender();
+}
+
+// ── Écran 4 — révision (rappel dynamique, aucune option fausse) ────────────
+function _protoQgRenderEcran4() {
+  var data = _protoQgEcranData(4);
+  var rappel = data.rappel_dynamique.replace(/\{\{choix_initial\.libelle\}\}/g, _protoQgEtat.choix_initial.libelle);
+  var deja = !!_protoQgEc4Choix;
+  var optionsHtml = data.options.map(function(opt) {
+    var selected = _protoQgEc4Choix === opt.id;
+    return '<button class="rws-choice-card' + (selected ? ' rws-choice-card-selected' : '') + '" ' + (deja ? 'disabled ' : '')
+      + 'onclick="protoQgEc4Choisir(\'' + opt.id + '\')">' + esc(opt.libelle) + '</button>';
+  }).join('');
+
+  var feedbackHtml = '', nextHtml = '';
+  if (deja) {
+    var role = _protoQgEtat.choix_initial.role;
+    var match = data.feedbacks_conditionnels.filter(function(f) { return f.si_choix === _protoQgEc4Choix && f.si_choix_initial_role === role; })[0]
+      || data.feedbacks_conditionnels.filter(function(f) { return f.si_choix === _protoQgEc4Choix && f.si_choix_initial_role === '*'; })[0];
+    feedbackHtml = '<div class="rws-feedback-panel rws-feedback-panel-ok"><div class="rws-feedback-text">' + esc(match ? match.texte : '') + '</div></div>';
+    nextHtml = '<button class="rws-btn-primary" onclick="protoQgAvancer()">Continuer →</button>';
+  }
+
+  return '<div class="rws-game-card">'
+    + '<div class="rws-game-prompt">' + esc(rappel) + '</div>'
+    + '<div class="rws-game-situation">' + esc(data.contexte_acquis) + '</div>'
+    + '<div class="rws-choice-list">' + optionsHtml + '</div>'
+    + '</div>' + feedbackHtml + nextHtml;
+}
+
+function protoQgEc4Choisir(optId) {
+  if (_protoQgEc4Choix) return;
+  var opt = _protoQgEcranData(4).options.filter(function(o) { return o.id === optId; })[0];
+  _protoQgEc4Choix = optId;
+  _protoQgEtat.a_revise_son_choix = !!(opt && opt.role === 'revision');
+  protoQgRender();
+}
+
+// ── Écran 5 — correction de Kiro (sélection multiple, 3 erreurs) ───────────
+function _protoQgRenderEcran5() {
+  var data = _protoQgEcranData(5);
+  var optionsHtml = data.options.map(function(opt) {
+    var selected = !!_protoQgEc5Selected[opt.id];
+    return '<button class="rws-choice-card' + (selected ? ' rws-choice-card-selected' : '') + '" ' + (_protoQgEc5Valide ? 'disabled ' : '')
+      + 'onclick="protoQgEc5Toggle(\'' + opt.id + '\')">' + esc(opt.libelle) + '</button>';
+  }).join('');
+
+  var feedbackHtml = '', nextHtml = '';
+  var valideBtn = !_protoQgEc5Valide ? '<button class="rws-btn-primary" onclick="protoQgEc5Valider()">Valider</button>' : '';
+
+  if (_protoQgEc5Valide) {
+    var trueErrors = data.options.filter(function(o) { return o.erreur; }).map(function(o) { return o.id; });
+    var selectedIds = Object.keys(_protoQgEc5Selected).filter(function(id) { return _protoQgEc5Selected[id]; });
+    var n = selectedIds.filter(function(id) { return trueErrors.indexOf(id) !== -1; }).length;
+    var r = data.nb_erreurs_attendues - n;
+    var wrongPicks = selectedIds.filter(function(id) { return trueErrors.indexOf(id) === -1; });
+    var complet = (n === data.nb_erreurs_attendues && wrongPicks.length === 0);
+    var mainTexte = complet
+      ? data.feedbacks.complet
+      : data.feedbacks.partiel.replace(/\{\{n\}\}/g, n).replace(/\{\{r\}\}/g, r);
+    var extraHtml = wrongPicks.map(function(id) {
+      var opt = data.options.filter(function(o) { return o.id === id; })[0];
+      return (opt && opt.feedback) ? '<div class="rws-feedback-text" style="margin-top:8px;">' + esc(opt.feedback) + '</div>' : '';
+    }).join('');
+    feedbackHtml = '<div class="rws-feedback-panel ' + (complet ? 'rws-feedback-panel-ok' : 'rws-feedback-panel-ko') + '">'
+      + '<div class="rws-feedback-text">' + esc(mainTexte) + '</div>' + extraHtml + '</div>';
+    nextHtml = '<button class="rws-btn-primary" onclick="protoQgAvancer()">Continuer →</button>';
+  }
+
+  return '<div class="rws-game-card">'
+    + '<div class="protoqg-kiro-slot">Emplacement réservé — illustration de Kiro (fournie plus tard)</div>'
+    + '<div class="rws-kiro-bubble">' + esc(data.replique_kiro) + '</div>'
+    + '<div class="rws-game-prompt">' + esc(data.consigne) + '</div>'
+    + '<div class="rws-choice-list">' + optionsHtml + '</div>'
+    + valideBtn
+    + '</div>' + feedbackHtml + nextHtml;
+}
+
+function protoQgEc5Toggle(optId) {
+  if (_protoQgEc5Valide) return;
+  _protoQgEc5Selected[optId] = !_protoQgEc5Selected[optId];
+  protoQgRender();
+}
+
+function protoQgEc5Valider() {
+  _protoQgEc5Valide = true;
+  protoQgRender();
+}
+
+// ── Écran 6 — certitude puis synthèse (mention prudente ici uniquement) ────
+function _protoQgRenderEcran6() {
+  var data = _protoQgEcranData(6);
+  var deja = !!_protoQgEc6Choix;
+  var optionsHtml = data.options.map(function(opt) {
+    var selected = _protoQgEc6Choix === opt.id;
+    return '<button class="rws-choice-card' + (selected ? ' rws-choice-card-selected' : '') + '" ' + (deja ? 'disabled ' : '')
+      + 'onclick="protoQgEc6Choisir(\'' + opt.id + '\')">' + esc(opt.libelle) + '</button>';
+  }).join('');
+
+  var feedbackHtml = '', syntheseHtml = '', exitHtml = '';
+  if (deja) {
+    var chosen = data.options.filter(function(o) { return o.id === _protoQgEc6Choix; })[0];
+    feedbackHtml = '<div class="rws-feedback-panel rws-feedback-panel-ok"><div class="rws-feedback-text">' + esc(chosen.feedback) + '</div></div>';
+
+    function blocListe(titre, arr) {
+      return '<div class="rws-classify-zone-label" style="margin-top:14px;">' + esc(titre) + '</div>'
+        + '<div class="rws-classify-zone-items">' + arr.map(function(t) { return '<div class="rws-classify-item">' + esc(t) + '</div>'; }).join('') + '</div>';
+    }
+    syntheseHtml = '<div class="rws-game-card">'
+      + blocListe('Observé', data.synthese.observe)
+      + blocListe('Hypothèses envisageables', data.synthese.hypotheses_envisageables)
+      + blocListe('À vérifier', data.synthese.a_verifier)
+      + '<div class="mc-peda-box protoqg-mention" style="margin-top:16px;"><span class="mc-peda-icon">🩺</span><span class="mc-peda-text">' + esc(data.synthese.mention_prudente_obligatoire) + '</span></div>'
+      + '</div>';
+
+    var teaserHtml = data.teaser_notion_suivante ? '<div class="rws-game-situation">' + esc(data.teaser_notion_suivante) + '</div>' : '';
+    exitHtml = '<div class="rws-game-card">'
+      + '<div class="rws-game-prompt">' + esc(data.sortie) + '</div>'
+      + teaserHtml
+      + '<button class="rws-btn-secondary" onclick="showScreen(\'academie\')">← Retour à la zone QG</button>'
+      + '</div>';
+  }
+
+  return '<div class="rws-game-card">'
+    + '<div class="rws-game-prompt">' + esc(data.enonce_evalue) + '</div>'
+    + '<div class="rws-choice-list">' + optionsHtml + '</div>'
+    + '</div>' + feedbackHtml + syntheseHtml + exitHtml;
+}
+
+function protoQgEc6Choisir(optId) {
+  if (_protoQgEc6Choix) return;
+  _protoQgEc6Choix = optId;
+  _protoQgEtat.niveau_certitude_choisi = optId;
+  protoQgRender();
+}
+// ── fin [PROTOTYPE QG — Boucle témoin V1] ───────────────────────────────────
 
 // ============================================================
 // KIRO S'EST TROMPÉ — Rendu et logique

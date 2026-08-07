@@ -5790,6 +5790,81 @@ body {
 .protoqg-mention { border-top: 3px solid rgba(192,82,42,0.35); }
 /* ── fin [PROTOTYPE QG — Boucle témoin V1] ──────────────────────── */
 
+/* ── [PROTOTYPE QG — Radar d'enquêteur] — retirer avec le bloc HTML/JS
+     correspondant. Rupture volontaire avec la palette beige du reste de
+     l'app (demande explicite du QG) : fond vif, zones pleines couleur,
+     tout le reste (typographies, structure d'écran, bouton QG) reprend
+     les conventions déjà en place. ── */
+#screen-radar-enqueteur .acad-page-wrap {
+  background: linear-gradient(165deg, #FFEFD6 0%, #FFE0D0 55%, #FFD9E4 100%);
+}
+.radar-progress { display: flex; gap: 5px; margin: 4px 0 18px; }
+.radar-progress-seg {
+  flex: 1; height: 7px; border-radius: 100px; background: rgba(44,26,14,0.12);
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+.radar-progress-seg-active { background: #FFB74A; }
+.radar-progress-seg-ok { background: #3F9142; }
+.radar-progress-seg-ko { background: #E4694B; }
+
+.radar-carte {
+  background: #FFFFFF; border-radius: 26px; padding: 40px 22px;
+  margin-bottom: 16px; min-height: 140px; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 10px 30px rgba(140,60,20,0.14);
+  animation: rwsFadeIn 0.28s ease both;
+}
+.radar-phrase {
+  font-family: 'Cormorant Garamond', serif; font-size: 25px; font-weight: 700;
+  color: #2C1A0E; text-align: center; line-height: 1.35;
+}
+
+.radar-feedback {
+  text-align: center; font-family: 'Lato', sans-serif; font-size: 15px; font-weight: 800;
+  letter-spacing: 0.02em; padding: 10px 14px; border-radius: 100px; margin-bottom: 14px;
+  animation: rwsPop 0.28s ease;
+}
+.radar-feedback-ok { background: rgba(63,145,66,0.16); color: #235C26; }
+.radar-feedback-ko { background: rgba(228,105,75,0.16); color: #A03D22; }
+
+.radar-zones { display: flex; gap: 12px; }
+.radar-zone {
+  flex: 1; border: none; border-radius: 22px; padding: 30px 10px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  cursor: pointer; transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.2s ease;
+  box-shadow: 0 8px 22px rgba(140,60,20,0.16);
+}
+.radar-zone:active { transform: scale(0.96); }
+.radar-zone-disabled { opacity: 0.55; pointer-events: none; }
+.radar-zone-vois { background: #17A398; }
+.radar-zone-interprete { background: #E4694B; }
+.radar-zone-emoji { font-size: 34px; line-height: 1; }
+.radar-zone-label {
+  font-family: 'Lato', sans-serif; font-size: 13.5px; font-weight: 800;
+  letter-spacing: 0.06em; color: #FFFFFF; text-transform: uppercase;
+}
+
+.radar-fin { text-align: center; padding: 30px 6px 10px; animation: rwsFadeIn 0.3s ease both; }
+.radar-fin-titre {
+  font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 700;
+  color: #2C1A0E; margin-bottom: 6px; animation: rwsPop 0.4s ease;
+}
+.radar-fin-sous { font-family: 'Lato', sans-serif; font-size: 14px; color: #6B4A2E; margin-bottom: 22px; }
+.radar-btn-primary {
+  display: block; width: 100%; box-sizing: border-box; background: #FFB74A;
+  color: #2C1A0E; border: none; border-radius: 100px; font-family: 'Lato', sans-serif;
+  font-size: 15px; font-weight: 800; letter-spacing: 0.02em; padding: 16px 20px;
+  cursor: pointer; margin-bottom: 12px; box-shadow: 0 8px 20px rgba(255,183,74,0.35);
+  transition: transform 0.1s ease;
+}
+.radar-btn-primary:active { transform: scale(0.98); }
+.radar-btn-secondary {
+  display: block; width: 100%; box-sizing: border-box; background: none;
+  border: 1.5px solid rgba(44,26,14,0.2); color: #6B4A2E; border-radius: 100px;
+  font-family: 'Lato', sans-serif; font-size: 13px; font-weight: 700; padding: 12px 16px;
+  cursor: pointer;
+}
+/* ── fin [PROTOTYPE QG — Radar d'enquêteur] ─────────────────────── */
+
 /* ── Bandeau Mode Test ─────────────────────────────────────────── */
 .test-mode-banner {
   display: flex; align-items: flex-start; gap: 10px;
@@ -6414,6 +6489,9 @@ body {
     </button>
     <button class="acad-test-btn" onclick="showScreen('proto-qg-boucle')">
       🧪 Tester la boucle témoin V1
+    </button>
+    <button class="acad-test-btn" onclick="showScreen('radar-enqueteur')">
+      🧪 Tester Radar d'enquêteur
     </button>
     <div id="test-preview-zone"></div>
   </div>
@@ -7155,6 +7233,26 @@ body {
 </div>
 <!-- ══ fin [PROTOTYPE QG — Boucle témoin V1] ═════════════════════════════ -->
 
+<!-- ══ [PROTOTYPE QG — Radar d'enquêteur] ═════════════════════════════════
+     Prototype QG uniquement — accessible depuis la Zone de test QG.
+     N'apparaît jamais dans la Mission du jour, Continuer l'enquête ni la
+     Bibliothèque. N'écrit rien dans l'état réel de l'application.
+     Retrait : supprimer ce bloc <div class="screen" id="screen-radar-enqueteur">…</div>.
+════════════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="screen-radar-enqueteur">
+<div class="acad-page-wrap">
+  <div class="home-logo-zone">
+    <img src="logo-ride-with-so.png" alt="Ride With So — Sophie Weil" class="logo-ride-with-so">
+  </div>
+  <div class="acad-header-row">
+    <div class="acad-back-home" onclick="showScreen('academie')">← Académie</div>
+    <div class="sub-header-title">🔍 Radar d'enquêteur</div>
+  </div>
+  <div id="radar-content"></div>
+</div>
+</div>
+<!-- ══ fin [PROTOTYPE QG — Radar d'enquêteur] ═════════════════════════════ -->
+
 <script>
 // ============================================================
 // DATA
@@ -7594,6 +7692,7 @@ function showScreen(id) {
     renderScreenKiroErreur();
   }
   if (id === 'proto-qg-boucle') { protoQgReset(); protoQgRender(); }
+  if (id === 'radar-enqueteur') { radarReset(); radarRender(); }
   // Classement : accessible en aperçu QG même quand LEADERBOARD_ENABLED = false
   if (id === 'leaderboard') renderScreenLeaderboard();
 }
@@ -13650,6 +13749,151 @@ function protoQgEc6Choisir(optId) {
   protoQgRender();
 }
 // ── fin [PROTOTYPE QG — Boucle témoin V1] ───────────────────────────────────
+
+// ============================================================
+// [PROTOTYPE QG — Radar d'enquêteur] — « JE VOIS / J'INTERPRÈTE ».
+// Accessible uniquement depuis la Zone de test QG. N'écrit jamais dans
+// l'état réel (XP, scores, déblocages, historique, localStorage) : tout
+// l'état de session vit dans les variables ci-dessous, réinitialisées à
+// chaque ouverture (radarReset(), appelé par showScreen('radar-enqueteur')).
+// 10 cartes validées pédagogiquement par le QG — texte et classification
+// non modifiables sans nouvelle validation.
+// Retrait : supprimer ce bloc jusqu'à « fin [PROTOTYPE QG — Radar
+// d'enquêteur] » inclus.
+// ============================================================
+
+var RADAR_CARTES = {
+  1:  { texte: "Les oreilles sont couchées vers l'arrière.",            type: 'VOIS' },
+  2:  { texte: "Il couche les oreilles parce qu'il est contrarié.",     type: 'INTERPRETE' },
+  3:  { texte: "La queue fouette l'air plusieurs fois.",                type: 'VOIS' },
+  4:  { texte: "Il en a assez de cet exercice.",                       type: 'INTERPRETE' },
+  5:  { texte: "Les naseaux sont largement dilatés.",                   type: 'VOIS' },
+  6:  { texte: "Le bruit l'inquiète.",                                  type: 'INTERPRETE' },
+  7:  { texte: "Il recule de trois pas.",                               type: 'VOIS' },
+  8:  { texte: "Il tourne la tête vers la gauche.",                     type: 'VOIS' },
+  9:  { texte: "Il a du mal à se concentrer aujourd'hui.",              type: 'INTERPRETE' },
+  10: { texte: "Il ignore délibérément la personne qui l'appelle.",     type: 'INTERPRETE' }
+};
+// Ordre validé : jamais 3 cartes de suite du même type (ici, alternance
+// stricte), le piège pédagogique (#10) toujours en dernier.
+var RADAR_ORDRE_INITIAL = [1, 2, 5, 4, 7, 6, 3, 9, 8, 10];
+
+// ── État de session (mémoire uniquement, jamais localStorage) ──────────────
+var _radarOrdre      = [];
+var _radarIndex      = 0;
+var _radarRatees     = [];
+var _radarScoreOk    = 0;
+var _radarPhase      = 'jeu'; // 'jeu' | 'fin'
+var _radarDernier    = null;  // { correct, texte } — feedback en cours d'affichage
+var _radarVerrou     = false; // anti-double-tap pendant le feedback
+var _radarHistorique = [];    // [{id, correct}] de la manche en cours, pour la barre de progression
+
+// Réinitialise tout l'état — appelé à chaque ouverture du prototype
+// (showScreen('radar-enqueteur')), jamais lu ni écrit ailleurs dans l'app.
+function radarReset() {
+  _radarOrdre = RADAR_ORDRE_INITIAL.slice();
+  _radarIndex = 0;
+  _radarRatees = [];
+  _radarScoreOk = 0;
+  _radarPhase = 'jeu';
+  _radarDernier = null;
+  _radarVerrou = false;
+  _radarHistorique = [];
+}
+
+function radarRender() {
+  var el = document.getElementById('radar-content');
+  if (!el) return;
+  el.innerHTML = (_radarPhase === 'fin') ? _radarRenderFin() : _radarRenderCarte();
+}
+
+function _radarProgressHtml() {
+  var total = _radarOrdre.length, segs = '';
+  for (var i = 0; i < total; i++) {
+    var cls = 'radar-progress-seg';
+    if (i < _radarHistorique.length) cls += _radarHistorique[i].correct ? ' radar-progress-seg-ok' : ' radar-progress-seg-ko';
+    else if (i === _radarIndex) cls += ' radar-progress-seg-active';
+    segs += '<div class="' + cls + '"></div>';
+  }
+  return '<div class="radar-progress">' + segs + '</div>';
+}
+
+function _radarRenderCarte() {
+  var id = _radarOrdre[_radarIndex];
+  var carte = RADAR_CARTES[id];
+  var feedbackHtml = _radarDernier
+    ? '<div class="radar-feedback ' + (_radarDernier.correct ? 'radar-feedback-ok' : 'radar-feedback-ko') + '">' + esc(_radarDernier.texte) + '</div>'
+    : '';
+  var dis = _radarVerrou ? ' disabled' : '';
+  var disCls = _radarVerrou ? ' radar-zone-disabled' : '';
+  return _radarProgressHtml()
+    + '<div class="radar-carte"><div class="radar-phrase">' + esc(carte.texte) + '</div></div>'
+    + feedbackHtml
+    + '<div class="radar-zones">'
+    +   '<button class="radar-zone radar-zone-vois' + disCls + '"' + dis + ' onclick="radarRepondre(\'VOIS\')">'
+    +     '<span class="radar-zone-emoji">👀</span><span class="radar-zone-label">Je vois</span>'
+    +   '</button>'
+    +   '<button class="radar-zone radar-zone-interprete' + disCls + '"' + dis + ' onclick="radarRepondre(\'INTERPRETE\')">'
+    +     '<span class="radar-zone-emoji">💭</span><span class="radar-zone-label">J\'interprète</span>'
+    +   '</button>'
+    + '</div>';
+}
+
+function radarRepondre(reponse) {
+  if (_radarVerrou) return;
+  var id = _radarOrdre[_radarIndex];
+  var carte = RADAR_CARTES[id];
+  var correct = (reponse === carte.type);
+  var texte;
+  if (carte.type === 'VOIS') {
+    texte = correct ? 'Exact 👀' : 'Ça, c\'est observable.';
+  } else {
+    texte = correct ? 'Oui 💭' : 'Là, tu interprètes.';
+  }
+  _radarDernier = { correct: correct, texte: texte };
+  _radarHistorique.push({ id: id, correct: correct });
+  if (correct) { _radarScoreOk++; } else { _radarRatees.push(id); }
+  _radarVerrou = true;
+  radarRender();
+
+  setTimeout(function() {
+    _radarIndex++;
+    _radarDernier = null;
+    _radarVerrou = false;
+    if (_radarIndex >= _radarOrdre.length) { _radarPhase = 'fin'; }
+    radarRender();
+  }, 700);
+}
+
+function _radarRenderFin() {
+  var total = _radarHistorique.length;
+  var ok = _radarScoreOk;
+  var nbRatees = _radarRatees.length;
+  var titre = (nbRatees === 0 ? '🎉 ' : '👀💭 ') + ok + '/' + total;
+  var sousTitre = nbRatees === 0 ? 'Tout juste !' : (nbRatees + (nbRatees > 1 ? ' cartes à retravailler.' : ' carte à retravailler.'));
+  var rejouerBtn = nbRatees > 0
+    ? '<button class="radar-btn-primary" onclick="radarRejouerRatees()">🔁 Rejouer les ' + nbRatees + ' ratée' + (nbRatees > 1 ? 's' : '') + '</button>'
+    : '';
+  return '<div class="radar-fin">'
+    + '<div class="radar-fin-titre">' + esc(titre) + '</div>'
+    + '<div class="radar-fin-sous">' + esc(sousTitre) + '</div>'
+    + rejouerBtn
+    + '<button class="radar-btn-secondary" onclick="showScreen(\'academie\')">← Retour à la zone QG</button>'
+    + '</div>';
+}
+
+function radarRejouerRatees() {
+  _radarOrdre = _radarRatees.slice();
+  _radarRatees = [];
+  _radarIndex = 0;
+  _radarScoreOk = 0;
+  _radarHistorique = [];
+  _radarPhase = 'jeu';
+  _radarDernier = null;
+  _radarVerrou = false;
+  radarRender();
+}
+// ── fin [PROTOTYPE QG — Radar d'enquêteur] ──────────────────────────────────
 
 // ============================================================
 // KIRO S'EST TROMPÉ — Rendu et logique

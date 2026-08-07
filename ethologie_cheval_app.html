@@ -5807,6 +5807,8 @@ body {
 .radar-progress-seg-ok { background: #3F9142; }
 .radar-progress-seg-ko { background: #E4694B; }
 
+.radar-timer { height: 8px; border-radius: 100px; background: rgba(44,26,14,0.12); overflow: hidden; margin-bottom: 10px; }
+.radar-timer-fill { height: 100%; width: 100%; background: #FFB74A; border-radius: 100px; }
 .radar-carte {
   background: #FFFFFF; border-radius: 26px; padding: 40px 22px;
   margin-bottom: 16px; min-height: 140px; display: flex; align-items: center; justify-content: center;
@@ -13774,9 +13776,10 @@ var RADAR_CARTES = {
   9:  { texte: "Il a du mal à se concentrer aujourd'hui.",              type: 'INTERPRETE' },
   10: { texte: "Il ignore délibérément la personne qui l'appelle.",     type: 'INTERPRETE' }
 };
-// Ordre validé : jamais 3 cartes de suite du même type (ici, alternance
-// stricte), le piège pédagogique (#10) toujours en dernier.
-var RADAR_ORDRE_INITIAL = [1, 2, 5, 4, 7, 6, 3, 9, 8, 10];
+// Ordre validé : volontairement non alterné (2 à 3 cartes du même type
+// peuvent se suivre, pour casser tout effet de motif prévisible), le piège
+// pédagogique (#10) toujours en dernier.
+var RADAR_ORDRE_INITIAL = [1, 3, 7, 2, 5, 4, 6, 8, 9, 10];
 
 // ── État de session (mémoire uniquement, jamais localStorage) ──────────────
 var _radarOrdre      = [];
@@ -13787,10 +13790,13 @@ var _radarPhase      = 'jeu'; // 'jeu' | 'fin'
 var _radarDernier    = null;  // { correct, texte } — feedback en cours d'affichage
 var _radarVerrou     = false; // anti-double-tap pendant le feedback
 var _radarHistorique = [];    // [{id, correct}] de la manche en cours, pour la barre de progression
+var _radarTimerId    = null;  // id du setTimeout du compte à rebours de la carte affichée
 
 // Réinitialise tout l'état — appelé à chaque ouverture du prototype
 // (showScreen('radar-enqueteur')), jamais lu ni écrit ailleurs dans l'app.
 function radarReset() {
+  clearTimeout(_radarTimerId);
+  _radarTimerId = null;
   _radarOrdre = RADAR_ORDRE_INITIAL.slice();
   _radarIndex = 0;
   _radarRatees = [];
@@ -13804,7 +13810,50 @@ function radarReset() {
 function radarRender() {
   var el = document.getElementById('radar-content');
   if (!el) return;
-  el.innerHTML = (_radarPhase === 'fin') ? _radarRenderFin() : _radarRenderCarte();
+  if (_radarPhase === 'fin') {
+    clearTimeout(_radarTimerId);
+    _radarTimerId = null;
+    el.innerHTML = _radarRenderFin();
+    return;
+  }
+  el.innerHTML = _radarRenderCarte();
+  // Ne (re)lance le compte à rebours que pour une carte fraîche, jamais
+  // pendant l'affichage bref du feedback (_radarDernier non nul).
+  if (!_radarDernier) {
+    _radarDemarrerMinuteur();
+    _radarDemarrerBarreMinuteur();
+  }
+}
+
+// Compte à rebours de 5 s : temps écoulé = carte comptée comme ratée.
+// Se neutralise tout seul si la carte a changé ou si l'écran a été quitté
+// entre-temps (garde contre un onclick="showScreen('academie')" pendant
+// le décompte).
+function _radarDemarrerMinuteur() {
+  clearTimeout(_radarTimerId);
+  var indexAuDepart = _radarIndex;
+  _radarTimerId = setTimeout(function() {
+    _radarTimerId = null;
+    if (_radarVerrou || _radarIndex !== indexAuDepart) return;
+    var screenEl = document.getElementById('screen-radar-enqueteur');
+    if (!screenEl || !screenEl.classList.contains('active')) return;
+    radarRepondre(null); // null = temps écoulé, aucune réponse choisie
+  }, 5000);
+}
+
+// Anime la barre de compte à rebours visible (5 s, largeur 100% → 0%).
+function _radarDemarrerBarreMinuteur() {
+  var fill = document.getElementById('radar-timer-fill');
+  if (!fill) return;
+  fill.style.transition = 'none';
+  fill.style.width = '100%';
+  void fill.offsetWidth; // force le recalcul de mise en page avant la transition
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      fill.style.transition = 'width 5s linear';
+      fill.style.width = '0%';
+    });
+  });
 }
 
 function _radarProgressHtml() {
@@ -13826,7 +13875,9 @@ function _radarRenderCarte() {
     : '';
   var dis = _radarVerrou ? ' disabled' : '';
   var disCls = _radarVerrou ? ' radar-zone-disabled' : '';
+  var timerHtml = _radarDernier ? '' : '<div class="radar-timer"><div class="radar-timer-fill" id="radar-timer-fill"></div></div>';
   return _radarProgressHtml()
+    + timerHtml
     + '<div class="radar-carte"><div class="radar-phrase">' + esc(carte.texte) + '</div></div>'
     + feedbackHtml
     + '<div class="radar-zones">'
@@ -13839,13 +13890,18 @@ function _radarRenderCarte() {
     + '</div>';
 }
 
+// reponse : 'VOIS' | 'INTERPRETE' | null (null = temps écoulé, aucun tap)
 function radarRepondre(reponse) {
   if (_radarVerrou) return;
+  clearTimeout(_radarTimerId);
+  _radarTimerId = null;
   var id = _radarOrdre[_radarIndex];
   var carte = RADAR_CARTES[id];
-  var correct = (reponse === carte.type);
+  var correct = (reponse !== null) && (reponse === carte.type);
   var texte;
-  if (carte.type === 'VOIS') {
+  if (reponse === null) {
+    texte = '⏱ Trop tard.';
+  } else if (carte.type === 'VOIS') {
     texte = correct ? 'Exact 👀' : 'Ça, c\'est observable.';
   } else {
     texte = correct ? 'Oui 💭' : 'Là, tu interprètes.';
@@ -13883,6 +13939,8 @@ function _radarRenderFin() {
 }
 
 function radarRejouerRatees() {
+  clearTimeout(_radarTimerId);
+  _radarTimerId = null;
   _radarOrdre = _radarRatees.slice();
   _radarRatees = [];
   _radarIndex = 0;

@@ -5867,6 +5867,126 @@ body {
 }
 /* ── fin [PROTOTYPE QG — Radar d'enquêteur] ─────────────────────── */
 
+/* ── [PROTOTYPE QG — L'Affaire du Pré] — retirer avec le bloc HTML/JS
+     correspondant. Même famille visuelle que le Radar (fond dégradé vif,
+     zones pleine couleur) : réutilise .radar-carte, .radar-phrase,
+     .radar-zone*, .radar-btn-primary/secondary, .rws-kiro-bubble tels
+     quels ; n'ajoute que ce qui est propre aux 4 épreuves. ── */
+#screen-affaire-pre .acad-page-wrap {
+  background: linear-gradient(165deg, #FFEFD6 0%, #FFE0D0 55%, #FFD9E4 100%);
+}
+@keyframes preShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); } 40% { transform: translateX(7px); }
+  60% { transform: translateX(-5px); } 80% { transform: translateX(4px); }
+}
+.pre-shake { animation: preShake 0.4s ease; }
+@keyframes preFlash {
+  0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.95); }
+  100% { box-shadow: 0 0 0 22px rgba(255,255,255,0); }
+}
+.pre-flash { animation: preFlash 0.32s ease-out; }
+.pre-feedback-mini {
+  text-align: center; font-family: 'Lato', sans-serif; font-size: 14px; font-weight: 800;
+  min-height: 20px; margin: 10px 0 2px; color: #6B4A2E;
+}
+.pre-feedback-mini.pre-feedback-ok { color: #235C26; }
+
+/* Écran 0 — entrée */
+.pre-intro { text-align: center; padding-top: 30px; }
+@keyframes preKiroSlide {
+  0% { transform: translateX(-130px); opacity: 0; }
+  22% { opacity: 1; }
+  58% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(90px); opacity: 0; }
+}
+.pre-kiro-traverse { font-size: 46px; animation: preKiroSlide 1.7s ease-in-out both; }
+@keyframes preCardDrop {
+  0% { transform: translateY(-34px) scale(0.8); opacity: 0; }
+  62% { transform: translateY(6px) scale(1.06); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+.pre-carte-titre {
+  display: inline-block; background: #FFFFFF; border-radius: 20px; padding: 20px 26px;
+  font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: #2C1A0E;
+  box-shadow: 0 10px 26px rgba(140,60,20,0.16);
+  animation: preCardDrop 0.5s ease-out 1.05s both;
+}
+.pre-dots { display: flex; justify-content: center; gap: 12px; margin-top: 26px; animation: rwsFadeIn 0.4s ease 1.65s both; }
+.pre-dot { width: 15px; height: 15px; border-radius: 50%; background: rgba(44,26,14,0.16); }
+.pre-dot-on { background: #3F9142; animation: rwsPop 0.4s ease both; }
+
+/* Épreuve 2 — silhouette */
+.pre-e2-situation { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 700; color: #2C1A0E; text-align: center; margin-bottom: 4px; }
+.pre-e2-consigne { font-family: 'Lato', sans-serif; font-size: 13px; color: #6B4A2E; text-align: center; margin-bottom: 14px; }
+.pre-horse-svg { width: 100%; height: auto; display: block; margin: 6px auto 4px; }
+.pre-horse-line { fill: none; stroke: #4A3A2A; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.pre-zone { fill: rgba(44,26,14,0.09); stroke: rgba(44,26,14,0.22); stroke-width: 1.5; cursor: pointer; transition: fill 0.15s ease; }
+.pre-zone:hover { fill: rgba(44,26,14,0.16); }
+.pre-zone-ok { fill: rgba(63,145,66,0.55) !important; stroke: #3F9142; animation: rwsPop 0.35s ease; }
+.pre-zone-miss { fill: rgba(44,26,14,0.05) !important; stroke: rgba(44,26,14,0.12); }
+@keyframes preHintPulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+.pre-zone-hint { fill: rgba(255,183,74,0.6) !important; stroke: #FFB74A; animation: preHintPulse 1s ease-in-out infinite; }
+
+/* Épreuve 3 — carnet de Kiro */
+.pre-e3-carnet { background: #FFFCF5; border-radius: 18px; padding: 28px 20px; box-shadow: 0 8px 24px rgba(140,60,20,0.14); margin-bottom: 8px; }
+.pre-e3-phrase { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 600; color: #2C1A0E; line-height: 1.7; text-align: center; }
+.pre-e3-consigne { font-family: 'Lato', sans-serif; font-size: 12.5px; color: #6B4A2E; text-align: center; margin-top: 10px; }
+.pre-e3-mot { cursor: pointer; padding: 2px 4px; border-radius: 5px; transition: background 0.15s ease; }
+.pre-e3-mot:hover { background: rgba(255,183,74,0.25); }
+.pre-e3-mot-raye { text-decoration: line-through; text-decoration-color: #E4694B; text-decoration-thickness: 3px; color: #A03D22; }
+@keyframes preWobble {
+  0%, 100% { display: inline-block; transform: translateX(0) rotate(0); }
+  25% { transform: translateX(-3px) rotate(-3deg); }
+  75% { transform: translateX(3px) rotate(3deg); }
+}
+.pre-e3-mot-vacille { display: inline-block; animation: preWobble 0.4s ease; }
+
+/* Épreuve 4 — curseur */
+.pre-e4-rappel { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: #2C1A0E; text-align: center; line-height: 1.5; margin-bottom: 4px; }
+.pre-e4-consigne { font-family: 'Lato', sans-serif; font-size: 13px; font-weight: 800; color: #6B4A2E; text-align: center; margin: 6px 0 18px; }
+.pre-e4-track-wrap { background: #FFFFFF; border-radius: 20px; padding: 22px 18px 18px; box-shadow: 0 8px 22px rgba(140,60,20,0.14); }
+.pre-e4-labels { display: flex; justify-content: space-between; font-family: 'Lato', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 0.04em; color: #8A6A4A; margin-bottom: 6px; }
+.pre-e4-slider {
+  -webkit-appearance: none; appearance: none; width: 100%; height: 14px; border-radius: 100px;
+  background: linear-gradient(90deg, #B8C4D9 0%, #FFB74A 55%, #E4694B 100%);
+  outline: none; margin: 10px 0;
+}
+.pre-e4-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 34px; height: 34px; border-radius: 50%;
+  background: #FFFFFF; border: 4px solid #2C1A0E; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+.pre-e4-slider::-moz-range-thumb {
+  width: 34px; height: 34px; border-radius: 50%; background: #FFFFFF; border: 4px solid #2C1A0E; cursor: pointer;
+}
+.pre-e4-slider:disabled::-webkit-slider-thumb { border-color: #3F9142; }
+
+/* Écran final */
+.pre-fin { text-align: center; padding-top: 14px; }
+.pre-fin-titre { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: #2C1A0E; margin: 16px 0 20px; animation: rwsPop 0.4s ease both; }
+@keyframes preJetonDrop {
+  0% { transform: translateY(-40px) scale(0.6); opacity: 0; }
+  60% { transform: translateY(8px) scale(1.08); opacity: 1; }
+  80% { transform: translateY(-3px) scale(0.98); }
+  100% { transform: translateY(0) scale(1); }
+}
+.pre-jeton {
+  display: inline-block; background: #FFB74A; color: #2C1A0E; border-radius: 100px;
+  font-family: 'Lato', sans-serif; font-size: 13px; font-weight: 800; padding: 10px 18px;
+  box-shadow: 0 8px 20px rgba(255,183,74,0.4); animation: preJetonDrop 0.6s ease-out both;
+  margin-bottom: 18px;
+}
+.pre-grille { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+.pre-grille-case {
+  aspect-ratio: 1; border-radius: 12px; background: rgba(44,26,14,0.08);
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+  animation: rwsFadeIn 0.3s ease both;
+}
+.pre-grille-case-remplie { background: rgba(63,145,66,0.18); }
+.pre-grille-case-pulse { animation: preHintPulse 1.4s ease-in-out infinite; }
+.pre-fin-teaser { font-family: 'DM Sans', sans-serif; font-style: italic; font-size: 13px; color: #6B4A2E; margin-bottom: 20px; }
+/* ── fin [PROTOTYPE QG — L'Affaire du Pré] ──────────────────────── */
+
 /* ── Bandeau Mode Test ─────────────────────────────────────────── */
 .test-mode-banner {
   display: flex; align-items: flex-start; gap: 10px;
@@ -6494,6 +6614,9 @@ body {
     </button>
     <button class="acad-test-btn" onclick="showScreen('radar-enqueteur')">
       🧪 Tester Radar d'enquêteur
+    </button>
+    <button class="acad-test-btn" onclick="showScreen('affaire-pre')">
+      🧪 Tester L'Affaire du Pré
     </button>
     <div id="test-preview-zone"></div>
   </div>
@@ -7255,6 +7378,28 @@ body {
 </div>
 <!-- ══ fin [PROTOTYPE QG — Radar d'enquêteur] ═════════════════════════════ -->
 
+<!-- ══ [PROTOTYPE QG — L'Affaire du Pré] ═══════════════════════════════════
+     Mission témoin à 4 micro-épreuves. Accessible uniquement depuis la
+     Zone de test QG de l'Académie (bouton dédié). Aucun impact sur la
+     Mission du jour, les XP, les déblocages, l'historique ou tout autre
+     écran. N'apparaît jamais dans la Mission du jour, Continuer l'enquête
+     ni la Bibliothèque. N'écrit rien dans l'état réel de l'application.
+     Retrait : supprimer ce bloc <div class="screen" id="screen-affaire-pre">…</div>.
+════════════════════════════════════════════════════════════════════════ -->
+<div class="screen" id="screen-affaire-pre">
+<div class="acad-page-wrap">
+  <div class="home-logo-zone">
+    <img src="logo-ride-with-so.png" alt="Ride With So — Sophie Weil" class="logo-ride-with-so">
+  </div>
+  <div class="acad-header-row">
+    <div class="acad-back-home" onclick="showScreen('academie')">← Académie</div>
+    <div class="sub-header-title">🌾 L'Affaire du Pré</div>
+  </div>
+  <div id="pre-content"></div>
+</div>
+</div>
+<!-- ══ fin [PROTOTYPE QG — L'Affaire du Pré] ═══════════════════════════════ -->
+
 <script>
 // ============================================================
 // DATA
@@ -7695,6 +7840,7 @@ function showScreen(id) {
   }
   if (id === 'proto-qg-boucle') { protoQgReset(); protoQgRender(); }
   if (id === 'radar-enqueteur') { radarReset(); radarRender(); }
+  if (id === 'affaire-pre') { preReset(); preRender(); }
   // Classement : accessible en aperçu QG même quand LEADERBOARD_ENABLED = false
   if (id === 'leaderboard') renderScreenLeaderboard();
 }
@@ -13952,6 +14098,383 @@ function radarRejouerRatees() {
   radarRender();
 }
 // ── fin [PROTOTYPE QG — Radar d'enquêteur] ──────────────────────────────────
+
+// ============================================================
+// [PROTOTYPE QG — L'Affaire du Pré] — mission témoin, 4 micro-épreuves.
+// Accessible uniquement depuis la Zone de test QG. N'écrit jamais dans
+// l'état réel (XP, scores, déblocages, historique, localStorage) : tout
+// l'état de session vit dans les variables ci-dessous, réinitialisées à
+// chaque ouverture (preReset(), appelé par showScreen('affaire-pre')).
+// La grille 12 cases / compteur « 3 sur 12 » / teaser de l'écran final
+// sont factices, affichés en dur — aucun système de progression réel.
+// Retrait : supprimer ce bloc jusqu'à « fin [PROTOTYPE QG — L'Affaire du
+// Pré] » inclus, ainsi que le bloc CSS et le bloc HTML correspondants.
+// ============================================================
+
+var PRE_E1_CARTES = [
+  { texte: "Les naseaux sont largement dilatés.",              type: 'VOIS' },
+  { texte: "Le bruit l'inquiète.",                              type: 'INTERPRETE' },
+  { texte: "Il couche les oreilles parce qu'il est contrarié.", type: 'INTERPRETE' }
+];
+
+// Coordonnées sur le viewBox 0 0 400 240 de la silhouette (asset unique,
+// réutilisé aux deux tours). Exception ponctuelle validée par le QG au
+// dessin d'une silhouette de cheval au trait simple — non un mascotte.
+var PRE_E2_ZONES = [
+  { id: 'oreilles',    cx: 298, cy: 15,  r: 22 },
+  { id: 'naseaux',     cx: 362, cy: 85,  r: 20 },
+  { id: 'encolure',    cx: 315, cy: 118, r: 22 },
+  { id: 'dos',         cx: 200, cy: 68,  r: 22 },
+  { id: 'queue',       cx: 80,  cy: 155, r: 20 },
+  { id: 'anterieurs',  cx: 262, cy: 190, r: 22 },
+  { id: 'posterieurs', cx: 118, cy: 190, r: 22 }
+];
+
+var PRE_E2_TOURS = [
+  { situation: "Il vient de sursauter.",                       consigne: "Où tu regardes en premier ?", zonePertinente: 'encolure' },
+  { situation: "Un cheval inconnu approche par la gauche.",    consigne: "Où tu regardes en premier ?", zonePertinente: 'oreilles' }
+];
+
+// ── État de session (mémoire uniquement, jamais localStorage) ──────────────
+var _prePhase        = 'intro'; // 'intro' | 'e1' | 'e2' | 'e3' | 'e4' | 'fin'
+var _preTimerIds     = [];
+
+var _preE1Index      = 0;
+var _preE1Verrou     = false;
+var _preE1Feedback   = null;  // { correct, texte } | null
+var _preE1Anim       = null;  // 'flash' | 'shake' | null
+
+var _preE2Tour       = 0;     // index dans PRE_E2_TOURS
+var _preE2Resolu     = false; // tour courant résolu (pertinent OU indice révélé)
+var _preE2ZoneTappee = null;
+var _preE2Hint       = null;  // id de la zone indice, une fois révélée
+
+var _preE3Tentatives = 0;
+var _preE3Resolu     = false;
+var _preE3MotVacille = null;  // index du mot qui vacille (transitoire)
+var _preE3Bulle      = "Kiro, penché sur son carnet, a l'air content de lui.";
+
+var _preE4Valeur     = 50;
+var _preE4Verrou     = false;
+
+// Réinitialise tout l'état — appelé à chaque ouverture du prototype
+// (showScreen('affaire-pre')), jamais lu ni écrit ailleurs dans l'app.
+function preReset() {
+  _preClearAllTimers();
+  _prePhase = 'intro';
+  _preE1Index = 0;
+  _preE1Verrou = false;
+  _preE1Feedback = null;
+  _preE1Anim = null;
+  _preE2Tour = 0;
+  _preE2Resolu = false;
+  _preE2ZoneTappee = null;
+  _preE2Hint = null;
+  _preE3Tentatives = 0;
+  _preE3Resolu = false;
+  _preE3MotVacille = null;
+  _preE3Bulle = "Kiro, penché sur son carnet, a l'air content de lui.";
+  _preE4Valeur = 50;
+  _preE4Verrou = false;
+}
+
+function _preScreenActive() {
+  var screenEl = document.getElementById('screen-affaire-pre');
+  return !!screenEl && screenEl.classList.contains('active');
+}
+
+// setTimeout traqué : annulable en bloc par _preClearAllTimers(), et
+// neutralisé tout seul si l'écran a été quitté avant son déclenchement
+// (garde contre un onclick="showScreen('academie')" en cours de route).
+function _preSetTimeout(fn, ms) {
+  var id = setTimeout(function() {
+    _preTimerIds = _preTimerIds.filter(function(t) { return t !== id; });
+    if (!_preScreenActive()) return;
+    fn();
+  }, ms);
+  _preTimerIds.push(id);
+  return id;
+}
+
+function _preClearAllTimers() {
+  _preTimerIds.forEach(function(id) { clearTimeout(id); });
+  _preTimerIds = [];
+}
+
+function preRender() {
+  var el = document.getElementById('pre-content');
+  if (!el) return;
+  if (_prePhase === 'intro') { el.innerHTML = _preRenderIntro(); _preLancerIntro(); return; }
+  if (_prePhase === 'e1')    { el.innerHTML = _preRenderE1(); return; }
+  if (_prePhase === 'e2')    { el.innerHTML = _preRenderE2(); return; }
+  if (_prePhase === 'e3')    { el.innerHTML = _preRenderE3(); return; }
+  if (_prePhase === 'e4')    { el.innerHTML = _preRenderE4(); return; }
+  if (_prePhase === 'fin')   { el.innerHTML = _preRenderFin(); return; }
+}
+
+function _preDotsHtml(nbAllumes) {
+  var dots = '';
+  for (var i = 0; i < 4; i++) {
+    dots += '<div class="pre-dot' + (i < nbAllumes ? ' pre-dot-on' : '') + '"></div>';
+  }
+  return '<div class="pre-dots">' + dots + '</div>';
+}
+
+// ── Écran 0 — entrée (non interactif, ~3 s, enchaîne tout seul) ────────────
+function _preRenderIntro() {
+  return '<div class="pre-intro">'
+    + '<div class="pre-kiro-traverse">🦅</div>'
+    + '<div class="pre-carte-titre">🌾 L\'Affaire du Pré</div>'
+    + _preDotsHtml(0)
+    + '</div>';
+}
+
+function _preLancerIntro() {
+  _preSetTimeout(function() {
+    _prePhase = 'e1';
+    preRender();
+  }, 3000);
+}
+
+// ── Épreuve 1 — 👀 Radar (3 cartes, jamais bloqué) ──────────────────────────
+function _preRenderE1() {
+  var carte = PRE_E1_CARTES[_preE1Index];
+  var feedbackHtml = '<div class="pre-feedback-mini' + (_preE1Feedback && _preE1Feedback.correct ? ' pre-feedback-ok' : '') + '">'
+    + (_preE1Feedback ? esc(_preE1Feedback.texte) : '') + '</div>';
+  var dis = _preE1Verrou ? ' disabled' : '';
+  var disCls = _preE1Verrou ? ' radar-zone-disabled' : '';
+  var carteAnimCls = _preE1Anim === 'shake' ? ' pre-shake' : '';
+  var flashVois = (_preE1Anim === 'flash' && carte.type === 'VOIS') ? ' pre-flash' : '';
+  var flashInterprete = (_preE1Anim === 'flash' && carte.type === 'INTERPRETE') ? ' pre-flash' : '';
+  return '<div class="radar-carte' + carteAnimCls + '"><div class="radar-phrase">' + esc(carte.texte) + '</div></div>'
+    + feedbackHtml
+    + '<div class="radar-zones">'
+    +   '<button class="radar-zone radar-zone-vois' + disCls + flashVois + '"' + dis + ' onclick="preE1Repondre(\'VOIS\')">'
+    +     '<span class="radar-zone-emoji">👀</span><span class="radar-zone-label">Je vois</span>'
+    +   '</button>'
+    +   '<button class="radar-zone radar-zone-interprete' + disCls + flashInterprete + '"' + dis + ' onclick="preE1Repondre(\'INTERPRETE\')">'
+    +     '<span class="radar-zone-emoji">💭</span><span class="radar-zone-label">J\'interprète</span>'
+    +   '</button>'
+    + '</div>';
+}
+
+function preE1Repondre(reponse) {
+  if (_preE1Verrou) return;
+  var carte = PRE_E1_CARTES[_preE1Index];
+  var correct = (reponse === carte.type);
+  _preE1Verrou = true;
+  if (correct) {
+    _preE1Anim = 'flash';
+    _preE1Feedback = { correct: true, texte: '✨' };
+    preRender();
+    _preSetTimeout(preE1Avancer, 300);
+  } else {
+    _preE1Anim = 'shake';
+    _preE1Feedback = { correct: false, texte: carte.type === 'VOIS' ? 'Ça s\'observe.' : 'Tu interprètes là.' };
+    preRender();
+    _preSetTimeout(preE1Avancer, 900);
+  }
+}
+
+function preE1Avancer() {
+  _preE1Index++;
+  _preE1Verrou = false;
+  _preE1Feedback = null;
+  _preE1Anim = null;
+  if (_preE1Index >= PRE_E1_CARTES.length) { _prePhase = 'e2'; }
+  preRender();
+}
+
+// ── Épreuve 2 — 🎯 Où tu regardes ? (silhouette, 2 tours) ──────────────────
+function _preHorseSvgHtml() {
+  var tour = PRE_E2_TOURS[_preE2Tour];
+  var zonesHtml = PRE_E2_ZONES.map(function(z) {
+    var cls = 'pre-zone';
+    if (_preE2ZoneTappee === z.id) {
+      cls += (z.id === tour.zonePertinente) ? ' pre-zone-ok' : ' pre-zone-miss';
+    }
+    if (_preE2Hint === z.id) cls += ' pre-zone-hint';
+    var onclick = _preE2Resolu ? '' : ' onclick="preE2Tapper(\'' + z.id + '\')"';
+    return '<circle class="' + cls + '" cx="' + z.cx + '" cy="' + z.cy + '" r="' + z.r + '"' + onclick + '></circle>';
+  }).join('');
+  return '<svg class="pre-horse-svg" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">'
+    + '<path class="pre-horse-line" d="M 300,20 C 280,25 270,35 262,50 C 255,62 240,65 200,66 C 165,67 140,70 128,78" />'
+    + '<path class="pre-horse-line" d="M 300,20 C 320,22 340,35 355,55 C 365,68 368,78 362,88 C 358,95 348,96 340,90" />'
+    + '<path class="pre-horse-line" d="M 340,90 C 330,105 315,120 300,135 C 290,145 280,150 268,152" />'
+    + '<path class="pre-horse-line" d="M 268,152 C 220,158 170,155 132,145" />'
+    + '<path class="pre-horse-line" d="M 128,78 C 108,85 95,100 92,118 C 90,130 100,140 112,148" />'
+    + '<path class="pre-horse-line" d="M 292,22 L 285,4 L 300,16" />'
+    + '<path class="pre-horse-line" d="M 305,18 L 312,0 L 316,15" />'
+    + '<path class="pre-horse-line" d="M 90,115 C 78,135 70,160 74,195" />'
+    + '<path class="pre-horse-line" d="M 250,150 L 245,224" />'
+    + '<path class="pre-horse-line" d="M 275,150 L 280,224" />'
+    + '<path class="pre-horse-line" d="M 110,145 L 100,224" />'
+    + '<path class="pre-horse-line" d="M 130,145 L 135,224" />'
+    + zonesHtml
+    + '</svg>';
+}
+
+function _preRenderE2() {
+  var tour = PRE_E2_TOURS[_preE2Tour];
+  var feedbackTexte = '';
+  if (_preE2Resolu && _preE2ZoneTappee === tour.zonePertinente) feedbackTexte = '✨ Bon réflexe.';
+  var feedbackHtml = '<div class="pre-feedback-mini' + (feedbackTexte ? ' pre-feedback-ok' : '') + '">' + feedbackTexte + '</div>';
+  return '<div class="pre-e2-situation">' + esc(tour.situation) + '</div>'
+    + '<div class="pre-e2-consigne">' + esc(tour.consigne) + '</div>'
+    + _preHorseSvgHtml()
+    + feedbackHtml;
+}
+
+function preE2Tapper(zoneId) {
+  if (_preE2Resolu) return;
+  var tour = PRE_E2_TOURS[_preE2Tour];
+  _preE2ZoneTappee = zoneId;
+  if (zoneId === tour.zonePertinente) {
+    _preE2Resolu = true;
+    preRender();
+    _preSetTimeout(preE2Avancer, 900);
+  } else {
+    preRender();
+    _preSetTimeout(function() {
+      _preE2Hint = tour.zonePertinente;
+      _preE2Resolu = true;
+      preRender();
+      _preSetTimeout(preE2Avancer, 1300);
+    }, 500);
+  }
+}
+
+function preE2Avancer() {
+  _preE2Tour++;
+  _preE2ZoneTappee = null;
+  _preE2Hint = null;
+  _preE2Resolu = false;
+  if (_preE2Tour >= PRE_E2_TOURS.length) { _prePhase = 'e3'; }
+  preRender();
+}
+
+// ── Épreuve 3 — 🕵️ Le carnet de Kiro ───────────────────────────────────────
+var PRE_E3_MOTS = ["Le", "cheval", "recule", "parce", "qu'il", "refuse", "d'avancer."];
+var PRE_E3_INDEX_A_RAYER = 5; // « refuse » : c'est une interprétation, pas une observation
+
+function _preRenderE3() {
+  var motsHtml = PRE_E3_MOTS.map(function(m, i) {
+    var cls = 'pre-e3-mot';
+    if (_preE3Resolu && i === PRE_E3_INDEX_A_RAYER) cls += ' pre-e3-mot-raye';
+    if (_preE3MotVacille === i) cls += ' pre-e3-mot-vacille';
+    var onclick = _preE3Resolu ? '' : ' onclick="preE3TapMot(' + i + ')"';
+    return '<span class="' + cls + '"' + onclick + '>' + esc(m) + '</span>';
+  }).join(' ');
+  return '<div style="text-align:center;font-size:30px;margin-bottom:6px;">🦅</div>'
+    + '<div class="pre-e3-carnet">'
+    +   '<div class="pre-e3-phrase">' + motsHtml + '</div>'
+    +   '<div class="pre-e3-consigne">Raye ce qui ne va pas.</div>'
+    + '</div>'
+    + '<div class="rws-kiro-bubble">' + esc(_preE3Bulle) + '</div>';
+}
+
+function preE3TapMot(i) {
+  if (_preE3Resolu) return;
+  if (i === PRE_E3_INDEX_A_RAYER || _preE3Tentatives >= 1) {
+    _preE3Resolu = true;
+    _preE3Bulle = 'Il ne peut pas savoir ça.';
+    preRender();
+    _preSetTimeout(preE3Avancer, 1400);
+    return;
+  }
+  _preE3Tentatives++;
+  _preE3MotVacille = i;
+  _preE3Bulle = 'Ça, je l\'ai vu de mes yeux.';
+  preRender();
+  _preSetTimeout(function() {
+    _preE3MotVacille = null;
+    preRender();
+  }, 400);
+}
+
+function preE3Avancer() {
+  _prePhase = 'e4';
+  preRender();
+}
+
+// ── Épreuve 4 — ⚖️ Jusqu'où tu vas ? (curseur, seul geste de glissement) ───
+// Zone attendue : le milieu, légèrement vers « PISTE SOLIDE » (45–70 / 100).
+// oninput = suivi en direct pendant le glissement (aucun verrouillage tant
+// que le doigt n'est pas relevé) ; onchange = relâchement, seul moment où
+// l'on statue (verrouille, résiste-et-recule, ou ne fait rien).
+function _preRenderE4() {
+  return '<div class="pre-e4-rappel">Les naseaux sont dilatés.<br>Un cheval inconnu vient d\'approcher.</div>'
+    + '<div class="pre-e4-consigne">Jusqu\'où tu vas ?</div>'
+    + '<div class="pre-e4-track-wrap">'
+    +   '<div class="pre-e4-labels"><span>PAS ASSEZ D\'ÉLÉMENTS</span><span>PISTE SOLIDE</span></div>'
+    +   '<input type="range" id="pre-e4-slider" class="pre-e4-slider" min="0" max="100" value="' + _preE4Valeur + '"'
+    +     ' oninput="preE4Input(this.value)" onchange="preE4Change(this.value)"' + (_preE4Verrou ? ' disabled' : '') + '>'
+    + '</div>'
+    + '<div class="pre-feedback-mini" id="pre-e4-feedback"></div>';
+}
+
+function preE4Input(val) {
+  if (_preE4Verrou) return;
+  _preE4Valeur = parseInt(val, 10);
+  var fb = document.getElementById('pre-e4-feedback');
+  if (fb) { fb.textContent = ''; fb.classList.remove('pre-feedback-ok'); }
+}
+
+function preE4Change(val) {
+  if (_preE4Verrou) return;
+  var v = parseInt(val, 10);
+  _preE4Valeur = v;
+  var slider = document.getElementById('pre-e4-slider');
+  var fb = document.getElementById('pre-e4-feedback');
+  if (v >= 96) {
+    _preE4Valeur = 85;
+    if (slider) {
+      slider.value = 85;
+      slider.classList.remove('pre-shake');
+      void slider.offsetWidth;
+      slider.classList.add('pre-shake');
+    }
+    if (fb) fb.textContent = 'Avec ça seul ? Pas encore.';
+    return;
+  }
+  if (v >= 45 && v <= 70) {
+    _preE4Verrou = true;
+    if (slider) slider.disabled = true;
+    if (fb) { fb.textContent = '✨ Juste ce qu\'il faut.'; fb.classList.add('pre-feedback-ok'); }
+    _preSetTimeout(preE4Avancer, 1300);
+    return;
+  }
+  if (fb) fb.textContent = '';
+}
+
+function preE4Avancer() {
+  _prePhase = 'fin';
+  preRender();
+}
+
+// ── Écran final — factice, affiché en dur ───────────────────────────────────
+function _preRenderFin() {
+  var cases = '';
+  for (var i = 0; i < 12; i++) {
+    var remplie = i < 3;
+    var pulse = (i === 3);
+    cases += '<div class="pre-grille-case' + (remplie ? ' pre-grille-case-remplie' : '') + (pulse ? ' pre-grille-case-pulse' : '') + '">' + (remplie ? '🔎' : '') + '</div>';
+  }
+  return '<div class="pre-fin">'
+    + _preDotsHtml(4)
+    + '<div class="pre-fin-titre">Mission accomplie ✨</div>'
+    + '<div class="pre-jeton">🔎 INDICE — 3 sur 12</div>'
+    + '<div class="pre-grille">' + cases + '</div>'
+    + '<div class="pre-fin-teaser">Demain : l\'affaire du van.</div>'
+    + '<button class="radar-btn-primary" onclick="preRelancer()">Encore une →</button>'
+    + '</div>';
+}
+
+function preRelancer() {
+  preReset();
+  preRender();
+}
+// ── fin [PROTOTYPE QG — L'Affaire du Pré] ───────────────────────────────────
 
 // ============================================================
 // KIRO S'EST TROMPÉ — Rendu et logique

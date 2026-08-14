@@ -6790,14 +6790,12 @@ body {
     <div class="fiche-detail-title" id="fd-title"></div>
     <div class="fiche-detail-desc" id="fd-desc"></div>
   </div>
-  <div class="fiche-section">
-    <div class="fiche-section-label">Points clés</div>
-    <ul class="fiche-points" id="fd-points"></ul>
-  </div>
-  <div class="fiche-section">
-    <div class="fiche-section-label">À observer en pratique</div>
-    <div class="fiche-pratique-text" id="fd-pratique"></div>
-  </div>
+  <!-- Rempli par openFiche() : soit Points clés / À observer en pratique
+       (fiches à l'ancienne structure desc/points/pratique), soit Ce que tu
+       peux observer / Ce que ça ne suffit pas à dire / Sur le terrain
+       (fiches réécrites — id 3, 4, 5 pour l'instant). Réutilise .fiche-section,
+       .fiche-section-label, .fiche-points, .fiche-pratique-text existants. -->
+  <div id="fd-sections"></div>
   <div class="fiche-section">
     <div class="fiche-section-label">Illustration</div>
     <div class="fiche-image-placeholder">
@@ -8061,43 +8059,77 @@ const fiches = [
     pratique: 'En situation nouvelle, comparez la respiration au repos. Une respiration accélérée sans exercice signale un stress actif. Donnez du temps et de l\'espace avant d\'aller plus loin.'
   },
   {
+    // Structure réécrite août 2026 — remplace desc/points/pratique par
+    // chapeau + 3 blocs (voir openFiche() dans le bloc FICHES FUNCTIONS).
     id: 3, icon: '🌊', title: 'Le langage de la queue',
-    teaser: 'Position, tonus et mouvement : la queue ne ment pas.',
-    desc: 'La queue exprime les états émotionnels avec précision. Son tonus, son mouvement et sa position varient selon l\'humeur et le niveau de tension interne du cheval.',
-    points: [
-      'Agitation latérale → irritation, mécontentement',
-      'Queue serrée contre les fesses → peur ou douleur',
-      'Queue relevée → excitation ou alerte vive',
-      'Mouvements doux et amples → détente',
-      'Queue bloquée en travail → tension ou douleur dorsale'
+    teaser: 'Elle bouge beaucoup, et pas toujours pour la raison qu\'on croit.',
+    chapeau: 'La queue est très mobile, et une partie de ses mouvements n\'a rien à voir avec l\'état émotionnel du cheval. Avant de lire une émotion, il faut écarter les explications les plus simples.',
+    ceQueTuPeuxObserver: [
+      'Des mouvements pour chasser un insecte ou déloger quelque chose, souvent au niveau du ventre ou entre les cuisses',
+      'Une queue serrée contre les fesses',
+      'Une queue relevée — soit tenue droite et raide, soit simplement décollée des fesses et restée souple',
+      'Des mouvements doux et amples',
+      'Une queue qui se bloque pendant le travail'
     ],
-    pratique: 'Distinguez l\'agitation anti-insectes (verticale, rythmée) de l\'agitation d\'irritation (latérale, irrégulière, associée à d\'autres signaux de tension).'
+    ceQueCaNeSuffitPasADire: [
+      'Le sens du mouvement ne tranche rien. Un cheval qui chasse une mouche peut agiter la queue verticalement comme latéralement. Il n\'y a pas de règle à en tirer.',
+      'Une queue relevée n\'a pas un seul sens. Tenue droite et raide, elle accompagne plutôt l\'excitation. Simplement décollée et souple, elle peut au contraire accompagner un relâchement. C\'est la qualité du port, pas la hauteur, qui fait la différence.',
+      'Une queue serrée contre les fesses peut accompagner de la peur. Cela ne suffit pas à dire ce qui se passe.'
+    ],
+    surLeTerrain: [
+      'Y a-t-il des insectes, ou quelque chose qui gêne le cheval ?',
+      'Cette queue relevée est-elle raide, ou souple ?',
+      'Que font les oreilles et le reste du corps au même moment ?'
+    ]
   },
   {
+    // Structure réécrite août 2026 — voir note ci-dessus (fiche id 3).
     id: 4, icon: '🐴', title: 'La posture générale',
-    teaser: 'La silhouette entière raconte l\'état intérieur du cheval.',
-    desc: 'La posture d\'ensemble révèle instantanément le niveau d\'activation du système nerveux. De la décontraction totale à la tension maximale, chaque position a un sens.',
-    points: [
-      'Corps bas, muscles relâchés → repos et confiance',
-      'Posture haute, encolure tendue → alerte ou stress',
-      'Poids sur trois membres → repos normal (alternant)',
-      'Corps orienté vers vous → engagement positif',
-      'Dos tourné, corps de biais → retrait ou avertissement'
+    teaser: 'Ce n\'est pas une position qui parle, c\'est un enchaînement.',
+    chapeau: 'La posture d\'ensemble change progressivement avec le niveau d\'éveil, et une suite de postures peut annoncer une réaction à venir. C\'est la combinaison et l\'enchaînement qui portent l\'information — pas un indice figé dans l\'instant.',
+    ceQueTuPeuxObserver: [
+      'Le poids réparti sur trois membres, un postérieur au repos',
+      'Yeux mi-clos, lèvre inférieure pendante, encolure légèrement basse, oreilles légèrement en arrière : la posture de repos debout',
+      'Une tête portée haute, seule, sans autre signe : orientation ou vigilance simple',
+      'Une tête très haute avec des oreilles fixes vers l\'avant et une queue légèrement relevée : une alerte plus marquée',
+      'Un enchaînement dans le temps — par exemple, entre deux chevaux : l\'encolure qui se relève, puis les oreilles qui se couchent, puis la croupe qui pivote',
+      'Un corps orienté vers toi',
+      'Un corps de biais, ou dos tourné'
     ],
-    pratique: 'Observez la ligne du dessus : un dos tendu et une encolure haute indiquent une activation sympathique. Un dos souple et une encolure basse signalent le relâchement.'
+    ceQueCaNeSuffitPasADire: [
+      'Un corps de biais n\'est pas un avertissement. Ce peut être simplement un cheval peu porté sur le contact humain, qui n\'a pas envie qu\'on l\'approche — sans aucune agressivité.',
+      'Un même élément pris seul ne dit pas à quel niveau on se trouve : une tête haute sans autre signe et une tête très haute combinée ne se lisent pas pareil.',
+      'Chez un cheval monté, la position de l\'encolure dépend aussi des mains du cavalier. Un facteur extérieur peut produire une posture qu\'on lirait autrement comme un état émotionnel.',
+      'Le tonus musculaire varie selon la race, indépendamment de l\'état du moment.',
+      'Un seul élément d\'un enchaînement ne permet pas de prédire la suite.'
+    ],
+    surLeTerrain: [
+      'Est-ce que je vois un seul signe, ou plusieurs qui vont dans le même sens ?',
+      'Ce que je lis comme une posture pourrait-il venir d\'autre chose que du cheval — un cavalier, du matériel, le terrain ?',
+      'Si c\'est un enchaînement : est-ce que ça continue de monter, ou est-ce que ça s\'arrête ?'
+    ]
   },
   {
+    // Structure réécrite août 2026 — voir note ci-dessus (fiche id 3).
     id: 5, icon: '👁️', title: 'Le regard et la tête',
-    teaser: 'Œil, mâchoire, naseaux : la tête ne ment jamais.',
-    desc: 'La tête du cheval forme un tableau expressif cohérent. L\'œil, les tensions musculaires et la position des naseaux révèlent l\'état émotionnel avec précision.',
-    points: [
-      'Œil doux et arrondi → calme et confiance',
-      'Blanc de l\'œil visible → peur ou tension forte',
-      'Rides au-dessus de l\'œil (forme triangulaire) → inconfort',
-      'Mâchoire crispée, lèvres pincées → stress ou douleur',
-      'Naseaux souples et détendus → bien-être'
+    teaser: 'Avant de lire une émotion, savoir à quoi ressemble ce cheval-là au repos.',
+    chapeau: 'L\'œil et la tête donnent des informations, mais plusieurs d\'entre elles dépendent d\'abord de la conformation du cheval, pas de son état du moment. C\'est la zone où l\'on se trompe le plus vite.',
+    ceQueTuPeuxObserver: [
+      'Un œil doux et arrondi',
+      'Le blanc de l\'œil visible',
+      'Des naseaux contractés, resserrés',
+      'Une mâchoire crispée, des lèvres pincées'
     ],
-    pratique: 'Regardez la peau autour de l\'œil. Des rides ou une forme triangulaire au coin interne révèlent une tension subtile mais fiable — l\'un des meilleurs indicateurs de douleur chronique.'
+    ceQueCaNeSuffitPasADire: [
+      'Certains chevaux ont naturellement le blanc de l\'œil visible. C\'est une conformation, pas un état. Avant d\'y lire une tension, il faut connaître l\'œil de ce cheval quand il est calme.',
+      'Une mâchoire crispée montre un cheval tendu. Dire s\'il s\'agit de stress, de douleur ou de concentration demande d\'autres éléments — la crispation seule ne le dit pas.',
+      'Des naseaux « souples » ne s\'observent pas vraiment : ce sont des naseaux normaux. C\'est la contraction qui se voit, pas la détente.'
+    ],
+    surLeTerrain: [
+      'À quoi ressemble l\'œil de ce cheval quand il est calme ? C\'est ta seule référence utile.',
+      'Est-ce que je vois plusieurs signes qui vont dans le même sens ?',
+      'Que se passe-t-il autour du cheval au même moment ?'
+    ]
   },
   {
     id: 6, icon: '🔴', title: 'Les signes d\'inconfort',
@@ -9905,21 +9937,36 @@ function renderFiches() {
   });
 }
 
+// Bloc <div class="fiche-section"> réutilisable : un label + une liste à
+// puces (.fiche-points), même style que l'ancien "Points clés".
+function _ficheSectionHtml(label, items) {
+  return '<div class="fiche-section">'
+    +   '<div class="fiche-section-label">' + esc(label) + '</div>'
+    +   '<ul class="fiche-points">' + items.map(p => '<li>' + esc(p) + '</li>').join('') + '</ul>'
+    + '</div>';
+}
+
 function openFiche(id) {
   const f = fiches[id] || fichesEmergentes.find(fe => fe.id === id);
   document.getElementById('fd-icon').textContent = f.icon;
   document.getElementById('fd-title').textContent = f.title;
-  document.getElementById('fd-desc').textContent = f.desc;
 
-  const list = document.getElementById('fd-points');
-  list.innerHTML = '';
-  f.points.forEach(p => {
-    const li = document.createElement('li');
-    li.textContent = p;
-    list.appendChild(li);
-  });
-
-  document.getElementById('fd-pratique').textContent = f.pratique;
+  const sections = document.getElementById('fd-sections');
+  if (f.chapeau !== undefined) {
+    // Structure réécrite (chapeau + 3 blocs) — fiches id 3, 4, 5.
+    document.getElementById('fd-desc').textContent = f.chapeau;
+    sections.innerHTML =
+        _ficheSectionHtml('Ce que tu peux observer', f.ceQueTuPeuxObserver)
+      + _ficheSectionHtml('Ce que ça ne suffit pas à dire', f.ceQueCaNeSuffitPasADire)
+      + _ficheSectionHtml('Sur le terrain', f.surLeTerrain);
+  } else {
+    // Ancienne structure (desc/points/pratique) — toutes les autres fiches.
+    document.getElementById('fd-desc').textContent = f.desc;
+    sections.innerHTML =
+        _ficheSectionHtml('Points clés', f.points)
+      + '<div class="fiche-section"><div class="fiche-section-label">À observer en pratique</div>'
+      +   '<div class="fiche-pratique-text">' + esc(f.pratique) + '</div></div>';
+  }
   showScreen('fiche-detail');
 
   // V1 — Mission dossier : afficher bouton complétion si applicable

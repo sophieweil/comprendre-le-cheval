@@ -11682,14 +11682,37 @@ function _renderDossierLecture(el) {
   if (data.ficheId !== undefined) {
     var fiche = fiches[data.ficheId];
     if (!fiche) { el.innerHTML = '<div class="ds-error">Contenu introuvable.</div>'; return; }
-    src = { teaser: fiche.teaser, desc: fiche.desc, points: fiche.points, pratique: fiche.pratique };
+    src = {
+      teaser: fiche.teaser, desc: fiche.desc, points: fiche.points, pratique: fiche.pratique,
+      chapeau: fiche.chapeau, ceQueTuPeuxObserver: fiche.ceQueTuPeuxObserver,
+      ceQueCaNeSuffitPasADire: fiche.ceQueCaNeSuffitPasADire, surLeTerrain: fiche.surLeTerrain
+    };
   } else {
     src = data; // contenu inline
   }
 
-  var pointsHtml = src.points.map(function(p) {
-    return '<li class="ds-point">' + esc(p) + '</li>';
-  }).join('');
+  // Patch anti-plantage : certaines fiches sources (id 3, 4, 5) ont été
+  // réécrites en chapeau + 3 blocs (voir openFiche()). Contenu affiché tel
+  // quel selon la structure réellement présente, rien n'est reformulé ici —
+  // le traitement complet des Dossiers de So reste à faire dans sa propre passe.
+  var bodyHtml;
+  if (src.chapeau !== undefined) {
+    bodyHtml =
+        '<div class="ds-desc">' + esc(src.chapeau) + '</div>'
+      + _dsBlocHtml('Ce que tu peux observer', src.ceQueTuPeuxObserver)
+      + _dsBlocHtml('Ce que ça ne suffit pas à dire', src.ceQueCaNeSuffitPasADire)
+      + _dsBlocHtml('Sur le terrain', src.surLeTerrain);
+  } else {
+    var pointsHtml = src.points.map(function(p) {
+      return '<li class="ds-point">' + esc(p) + '</li>';
+    }).join('');
+    bodyHtml =
+        '<div class="ds-desc">' + esc(src.desc) + '</div>'
+      + '<div class="ds-points-label">📌 Ce qu\'il faut retenir</div>'
+      + '<ul class="ds-points">' + pointsHtml + '</ul>'
+      + '<div class="ds-pratique-label">🌿 Sur le terrain</div>'
+      + '<div class="ds-pratique">' + esc(src.pratique) + '</div>';
+  }
 
   el.innerHTML = (_dossierTestMode ? _testBannerHtml() : '')
     + '<div class="ds-lecture">'
@@ -11697,15 +11720,18 @@ function _renderDossierLecture(el) {
     + '<div class="ds-titre">' + esc(data.titre) + '</div>'   // TOUJOURS le titre du dossier
     + '<div class="ds-teaser">' + esc(src.teaser) + '</div>'
     + '<div class="ds-divider"></div>'
-    + '<div class="ds-desc">' + esc(src.desc) + '</div>'
-    + '<div class="ds-points-label">📌 Ce qu\'il faut retenir</div>'
-    + '<ul class="ds-points">' + pointsHtml + '</ul>'
-    + '<div class="ds-pratique-label">🌿 Sur le terrain</div>'
-    + '<div class="ds-pratique">' + esc(src.pratique) + '</div>'
+    + bodyHtml
     + (_dossierRevue
         ? '<button class="ds-cta" onclick="showScreen(\'bibliotheque-so\')">← Retour à la bibliothèque</button>'
         : '<button class="ds-cta" onclick="terminerLectureDossier()">J\'ai tout lu — à moi les questions →</button>')
     + '</div>';
+}
+
+// Bloc "Ce que tu peux observer" / etc. réutilisé par le patch anti-plantage
+// ci-dessus — mêmes classes CSS que l'ancien bloc "Ce qu'il faut retenir".
+function _dsBlocHtml(label, items) {
+  return '<div class="ds-points-label">' + esc(label) + '</div>'
+    + '<ul class="ds-points">' + (items || []).map(function(p) { return '<li class="ds-point">' + esc(p) + '</li>'; }).join('') + '</ul>';
 }
 
 // Rendu dédié au dossier "Ce que le Cheval Retient" — prototype de lecture

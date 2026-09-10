@@ -11426,12 +11426,13 @@ var DOSSIERS_SO = {
     ficheId: 0,
     questions: [
       { type:'qcm',
-        enonce: 'Des oreilles couchées contre la nuque chez le cheval indiquent :',
-        options: ['De la curiosité', 'Un avertissement fort', 'Une phase de repos', 'De la fatigue'],
-        bonne: 1 },
+        enonce: 'Des oreilles couchées contre la nuque, qu\'est-ce que tu peux en dire ?',
+        options: ['Que son attention est portée vers l\'arrière', 'Qu\'il va mordre', 'Qu\'il est en colère'],
+        bonne: 0 },
       { type:'vf',
-        enonce: 'Une seule oreille orientée vers vous signifie que le cheval vous écoute.',
-        bonne: true },
+        enonce: 'Une seule oreille orientée vers toi suffit à dire que le cheval t\'écoute.',
+        bonne: false,
+        explication: 'Elle indique où va son attention. Ce qu\'il fait de cette attention demande d\'autres éléments.' },
       { type:'qcm',
         enonce: 'Des oreilles très mobiles en permanence signalent :',
         options: ['Un endormissement imminent', 'Une attention partagée entre plusieurs stimuli', 'De la douleur dorsale'],
@@ -11463,16 +11464,16 @@ var DOSSIERS_SO = {
     ficheId: 3, // Le langage de la queue
     questions: [
       { type:'qcm',
-        enonce: 'Une queue serrée contre les fesses du cheval exprime :',
-        options: ['Une vive excitation', 'De la peur ou de la douleur', 'Une détente profonde'],
-        bonne: 1 },
+        enonce: 'Une queue serrée contre les fesses :',
+        options: ['Peut accompagner de la peur, sans permettre de conclure', 'Signifie que le cheval a mal', 'Est un signe de détente'],
+        bonne: 0 },
       { type:'vf',
-        enonce: 'L\'agitation verticale et régulière de la queue indique généralement de l\'irritation.',
+        enonce: 'Le sens du mouvement de la queue (latéral ou vertical) suffit à lui seul à distinguer une irritation d\'un geste anti-insectes.',
         bonne: false },
       { type:'qcm',
-        enonce: 'Une queue relevée chez le cheval signale :',
-        options: ['De la fatigue', 'De la douleur chronique', 'De l\'excitation ou une alerte vive'],
-        bonne: 2 }
+        enonce: 'Une queue relevée :',
+        options: ['Se lit différemment selon qu\'elle est raide ou souple', 'Signale toujours de l\'excitation', 'Indique une alerte'],
+        bonne: 0 }
     ]
   },
 
@@ -11488,9 +11489,9 @@ var DOSSIERS_SO = {
         enonce: 'Un cheval a besoin de se déplacer environ 10 à 20 km par jour pour satisfaire ses besoins physiologiques.',
         bonne: true },
       { type:'qcm',
-        enonce: 'Le trépignement ou les stéréotypies dans le budget-temps signalent :',
-        options: ['Un excès d\'énergie à dépenser', 'Un manque à combler dans le milieu de vie', 'Une curiosité normale pour la nouveauté'],
-        bonne: 1 }
+        enonce: 'Une stéréotypie observée aujourd\'hui :',
+        options: ['Peut persister après la disparition de ce qui l\'a déclenchée', 'Signale un manque actuel', 'Disparaît si on corrige l\'environnement'],
+        bonne: 0 }
     ]
   },
 
@@ -11499,12 +11500,13 @@ var DOSSIERS_SO = {
     ficheId: 7, // Les signes de détente
     questions: [
       { type:'qcm',
-        enonce: 'Un bâillement observé chez le cheval après une séance est :',
-        options: ['Un signe de faim', 'Un signe de décompression du système nerveux', 'Un signe de maladie à surveiller'],
-        bonne: 1 },
+        enonce: 'Un bâillement après une séance :',
+        options: ['Se lit selon sa fréquence et le contexte', 'Est un signe fiable de relâchement', 'Indique une décompression du système nerveux'],
+        bonne: 0 },
       { type:'vf',
-        enonce: 'Un cheval qui baisse spontanément la tête lors de votre présence exprime une confiance profonde.',
-        bonne: true },
+        enonce: 'Un cheval qui baisse spontanément la tête en ta présence exprime une confiance profonde.',
+        bonne: false,
+        explication: 'Un cheval détendu peut l\'être pour des raisons qui n\'ont rien à voir avec la personne en face.' },
       { type:'qcm',
         enonce: 'Laquelle de ces observations indique un état de détente profonde ?',
         options: ['Oreilles couchées, regard dur', 'Naseaux dilatés, corps rigide', 'Lèvre inférieure pendante, yeux mi-clos'],

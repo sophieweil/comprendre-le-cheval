@@ -6269,8 +6269,9 @@ body {
       <div class="home-door-arrow">→</div>
     </div>
 
-    <!-- Porte 2 : AGIR (inchangée) -->
-    <div class="home-door home-door-agir" onclick="showScreen('formation')" role="button" tabindex="0">
+    <!-- Porte 2 : AGIR — masquée (assainissement) : Formation n'a pas encore
+         de contenu. Code conservé, réactiver en retirant ce style. -->
+    <div class="home-door home-door-agir" style="display:none" onclick="showScreen('formation')" role="button" tabindex="0">
       <span class="home-door-badge badge-soon">Bientôt</span>
       <div class="home-door-icon">🎓</div>
       <div class="home-door-label">Agir</div>
@@ -6490,7 +6491,9 @@ body {
       <div class="home-door-arrow">→</div>
     </div>
 
-    <div class="home-door home-door-agir" onclick="showScreen('formation')" role="button" tabindex="0">
+    <!-- Porte 2 : AGIR — masquée (assainissement) : Formation n'a pas encore
+         de contenu. Code conservé, réactiver en retirant ce style. -->
+    <div class="home-door home-door-agir" style="display:none" onclick="showScreen('formation')" role="button" tabindex="0">
       <span class="home-door-badge badge-soon">Bientôt</span>
       <div class="home-door-icon">🎓</div>
       <div class="home-door-label">Agir</div>
@@ -6595,7 +6598,9 @@ body {
   <!-- ══ KIRO — PHRASE DISCRÈTE ══ -->
   <p class="kiro-bottom-phrase" id="kiro-card-text">Kiro est en veille. Une nouvelle affaire vous attend.</p>
 
-  <div class="home-footer">Académie des Enquêteurs Ride With So <em id="expert-toggle" title="">✦</em> · <span onclick="localStorage.removeItem('academie_welcome_done');showScreen('welcome');" style="cursor:pointer;text-decoration:underline;text-underline-offset:3px;opacity:0.6;">Revoir l'introduction</span></div>
+  <!-- Mode expert : point d'entrée cliquable retiré (assainissement). La
+       fonction toggleExpertMode() reste appelable depuis la console. -->
+  <div class="home-footer">Académie des Enquêteurs Ride With So · <span onclick="localStorage.removeItem('academie_welcome_done');showScreen('welcome');" style="cursor:pointer;text-decoration:underline;text-underline-offset:3px;opacity:0.6;">Revoir l'introduction</span></div>
 
   <!-- ══ [TEST TEMPORAIRE QG] ══════════════════════════════════════════════
        Bloc de test du parcours Mission Terrain.
@@ -7795,6 +7800,12 @@ function showScreen(id) {
     showScreen('home');
     return;
   }
+  // Première connexion : montre l'introduction avant d'entrer à l'Académie.
+  // Le lien "Revoir l'introduction" retire ce flag pour la revoir à volonté.
+  if (id === 'academie' && localStorage.getItem('academie_welcome_done') !== '1') {
+    showScreen('welcome');
+    return;
+  }
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('screen-' + id).classList.add('active');
   window.scrollTo(0, 0);
@@ -7811,7 +7822,9 @@ function showScreen(id) {
   if (id === 'budget-temps') populateBtHorseSelect();
   if (id === 'main') { renderSessionBar(); }
   if (id === 'academie') {
-    renderAcademieDate(); renderMainDashboard(); renderRituelDuJour(); renderDefis(); renderDiscoveryBanner(); renderKiroMessage();
+    // renderDefis() retiré (assainissement) : écran "défis" inaccessible,
+    // fonction conservée et toujours appelée si on atteint 'defis' directement.
+    renderAcademieDate(); renderMainDashboard(); renderRituelDuJour(); renderDiscoveryBanner(); renderKiroMessage();
     if (_focusEnqueteSuiteApresAcademie) {
       _focusEnqueteSuiteApresAcademie = false; // consommé immédiatement — ne vise que ce seul retour
       setTimeout(function() {
@@ -9617,9 +9630,14 @@ function renderDossierEnqueteur() {
     + '</div>'
 
     // ──── EXISTANT : sections obs (conservées) ────
+    // Assainissement : le XP/palier ci-dessus est la seule progression
+    // officielle. Les diplômes (ancien système par nb. d'observations)
+    // sont désormais présentés comme des accomplissements annexes,
+    // explicitement distingués du grade — pas une seconde échelle.
     + '<div class="de-section">'
-    +   '<div class="de-section-label">Mes diplômes</div>'
+    +   '<div class="de-section-label">Accomplissements — observations</div>'
     +   '<div class="de-diplome-wrap">' + diplomesHtml + '</div>'
+    +   '<div class="de-brevets-note">Distinct de ton grade ci-dessus : ce sont des accomplissements liés à tes observations immersives, pas une seconde progression.</div>'
     + '</div>'
 
     + '<div class="de-section">'

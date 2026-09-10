@@ -8041,17 +8041,24 @@ const fiches = [
     ]
   },
   {
+    // Structure réécrite août 2026 — voir note fiche id 3.
     id: 1, icon: '👃', title: 'Comprendre le flehmen',
-    teaser: 'Ce geste fascinant qui révèle une analyse olfactive profonde.',
-    desc: 'Le cheval retrousse la lèvre supérieure pour diriger des molécules vers l\'organe voméronasal, un organe sensoriel très spécialisé situé dans le palais.',
-    points: [
+    teaser: 'Un geste qui sert à sentir autrement.',
+    chapeau: 'Le cheval retrousse la lèvre supérieure pour diriger des molécules vers l\'organe voméronasal, situé dans le palais. C\'est un geste d\'analyse olfactive, dont la mécanique est bien documentée.',
+    ceQueTuPeuxObserver: [
       'Tête levée, lèvre supérieure retroussée vers le haut',
-      'Permet d\'analyser phéromones et odeurs complexes',
-      'Fréquent chez l\'étalon face à une jument en chaleur',
-      'Observable dans les deux sexes face à une odeur insolite',
-      'Dure quelques secondes, souvent répété plusieurs fois'
+      'Une séquence : arrêt, reniflage intense, élévation de la tête, retroussement',
+      'Quelques secondes, souvent répété plusieurs fois',
+      'Le contexte dans lequel il apparaît'
     ],
-    pratique: 'Proposez une herbe aromatique ou un objet inconnu. Observez la séquence : arrêt, reniflage intense, élévation de tête, retroussement de la lèvre.'
+    ceQueCaNeSuffitPasADire: [
+      'Le flehmen indique que le cheval analyse une odeur. Il ne dit pas ce qu\'il en pense, ni si l\'odeur lui plaît.',
+      'Il est fréquent chez l\'étalon face à une jument en chaleur, mais s\'observe dans les deux sexes face à une odeur inhabituelle : le contexte sexuel n\'est pas le seul.'
+    ],
+    surLeTerrain: [
+      'Propose une herbe aromatique ou un objet inconnu, et observe la séquence complète.',
+      'Note ce que le cheval était en train de sentir juste avant.'
+    ]
   },
   {
     // Structure réécrite août 2026 — voir note fiche id 3.
@@ -8151,17 +8158,27 @@ const fiches = [
     ]
   },
   {
+    // Structure réécrite août 2026 — voir note fiche id 3.
     id: 6, icon: '🔴', title: 'Les signes d\'inconfort',
-    teaser: 'L\'inconfort précède toujours la réaction défensive.',
-    desc: 'Le cheval signale son inconfort bien avant d\'exprimer une réaction franche. Lire ces signaux précoces évite les escalades et renforce la relation de confiance.',
-    points: [
-      'Recul ou détournement de tête à l\'approche',
-      'Pincement des lèvres, regard qui se durcit',
-      'Mouvements d\'évitement pendant le pansage',
-      'Changement soudain d\'attitude en cours de travail',
-      'Piétinement, dérobade, refus d\'avancer'
+    teaser: 'Ce qu\'un cheval montre quand quelque chose ne lui convient pas.',
+    chapeau: 'Pendant une manipulation, un cheval gêné le manifeste souvent par des signes discrets avant d\'en venir à une réaction plus nette. Ces signes sont faciles à manquer, et c\'est à ce moment-là qu\'il est le plus simple de s\'arrêter.',
+    ceQueTuPeuxObserver: [
+      'Un recul ou un détournement de tête à l\'approche',
+      'Un pincement des lèvres',
+      'Des mouvements d\'évitement pendant le pansage',
+      'Un changement d\'attitude en cours de travail',
+      'Du piétinement, une dérobade, un refus d\'avancer'
     ],
-    pratique: 'Notez quand le cheval cherche à terminer l\'interaction (recul, tête tournée, pas en arrière). Ce sont des demandes d\'espace. Les respecter construit la confiance ; les ignorer l\'érode.'
+    ceQueCaNeSuffitPasADire: [
+      'Ces signes ne se produisent pas toujours dans le même ordre, et tous les chevaux ne les montrent pas de la même façon. Un cheval peut réagir sans en avoir donné.',
+      'Un refus d\'avancer ou une dérobade peuvent avoir une origine physique, un problème de matériel, ou venir de l\'apprentissage. Si le comportement revient toujours au même moment, ça mérite d\'être vérifié — vétérinaire ou matériel selon le cas.',
+      'Un cheval qui se détourne exprime quelque chose, mais on ne peut pas savoir quoi à partir du seul geste.'
+    ],
+    surLeTerrain: [
+      'Note à quel moment précis le comportement apparaît.',
+      'Arrête-toi et laisse un temps plutôt que d\'insister.',
+      'Regarde si c\'est toujours la même zone du corps, le même matériel, ou le même exercice.'
+    ]
   },
   {
     // Structure réécrite août 2026 — voir note fiche id 3.
@@ -11434,9 +11451,9 @@ var DOSSIERS_SO = {
         bonne: false,
         explication: 'Elle indique où va son attention. Ce qu\'il fait de cette attention demande d\'autres éléments.' },
       { type:'qcm',
-        enonce: 'Des oreilles très mobiles en permanence signalent :',
-        options: ['Un endormissement imminent', 'Une attention partagée entre plusieurs stimuli', 'De la douleur dorsale'],
-        bonne: 1 }
+        enonce: 'Des oreilles très mobiles en permanence :',
+        options: ['Montrent une attention qui se déplace, sans dire vers quoi', 'Signalent une attention partagée entre plusieurs stimuli', 'Indiquent de la nervosité'],
+        bonne: 0 }
     ]
   },
 

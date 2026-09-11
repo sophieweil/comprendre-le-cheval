@@ -4527,59 +4527,10 @@ body {
   color: #C9963E; letter-spacing: 0.04em; padding: 10px 0;
 }
 
-/* ===== CONTINUER L'ENQUÊTE — après Mission du jour accomplie ===== */
-.enquete-suite {
-  margin-top: 18px; padding: 20px 18px 18px;
-  background: var(--soft);
-  border: 1px solid rgba(139,94,60,0.14);
-  border-radius: 16px;
-}
-.enquete-suite-header {
-  font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 600;
-  color: var(--dark); margin-bottom: 6px;
-}
-.enquete-suite-intro {
-  font-family: 'DM Sans', sans-serif; font-size: 13px; font-style: italic;
-  color: var(--earth); opacity: 0.85; line-height: 1.55; margin-bottom: 16px;
-}
-.enquete-suite-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-}
-@media (max-width: 640px) {
-  .enquete-suite-grid { grid-template-columns: 1fr; }
-}
-.enquete-suite-card {
-  background: var(--cream); border: 1px solid rgba(139,94,60,0.16);
-  border-radius: 13px; padding: 14px 14px 13px; cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
-}
-.enquete-suite-card:hover {
-  transform: translateY(-2px); box-shadow: 0 6px 18px rgba(139,94,60,0.14);
-  border-color: rgba(201,150,62,0.45);
-}
-.enquete-suite-card-empty { cursor: default; opacity: 0.65; }
-.enquete-suite-card-empty:hover { transform: none; box-shadow: none; border-color: rgba(139,94,60,0.16); }
-.enquete-suite-card-head {
-  display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
-}
-.enquete-suite-icon { font-size: 18px; line-height: 1; }
-.enquete-suite-title {
-  font-family: 'Lato', sans-serif; font-size: 13px; font-weight: 700;
-  color: var(--dark); letter-spacing: 0.02em;
-}
-.enquete-suite-sub {
-  font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--earth);
-  opacity: 0.85; line-height: 1.5; margin-bottom: 8px;
-}
-.enquete-suite-duree {
-  display: inline-block; font-family: 'Lato', sans-serif; font-size: 10.5px;
-  font-weight: 700; letter-spacing: 0.06em; color: var(--gold);
-  background: rgba(201,150,62,0.12); border-radius: 100px; padding: 3px 10px;
-}
-.enquete-suite-footnote {
-  font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--earth);
-  opacity: 0.65; text-align: center; margin-top: 14px;
-}
+/* ===== PROPOSITION SUIVANTE — après Mission du jour accomplie ===== */
+/* Mise en page dans #screen-academie ci-dessous (.acad-next-*).
+   .enquete-suite-highlight reste utilisée telle quelle (id DOM et
+   déclenchement JS inchangés) pour la mise en évidence au retour. */
 .enquete-suite-highlight { animation: enqueteSuitePulse 1.4s ease-out 1; outline: none; }
 @keyframes enqueteSuitePulse {
   0%   { box-shadow: 0 0 0 0 rgba(201,150,62,0.5); border-color: rgba(201,150,62,0.7); }
@@ -6173,6 +6124,196 @@ body {
 .lb-history-week { flex: 1; opacity: 0.75; }
 .lb-history-xp   { font-weight: 700; color: #2F4A3D; }
 
+/* ══════════════════════════════════════════════════════════════════════
+   REFONTE VISUELLE — ACADÉMIE UNIQUEMENT (V1)
+   ────────────────────────────────────────────────────────────────────
+   Périmètre strict : chaque règle ci-dessous est préfixée #screen-academie,
+   elle ne peut donc s'appliquer à aucun autre écran, même quand elle porte
+   sur une classe partagée (.hd-xp-fill, .acad-page-wrap, .mission-hero-card…).
+   Aucune règle existante n'est supprimée : celles-ci les surchargent.
+
+   Deux couleurs porteuses de sens, réutilisées depuis la palette de marque
+   existante (aucune couleur inventée) :
+   --ax-obs (bleu-vert, #2F4A3D — déjà le vert forêt de la marque) = tout ce
+   qui relève de l'observation, du factuel, de ce qui est déjà acquis.
+   --ax-hyp (ocre, var(--gold) #C9963E — déjà utilisé pour Kiro et les
+   découvertes) = tout ce qui relève de l'hypothèse, de l'interprétation,
+   de ce qu'on va découvrir : la mission du jour et la proposition suivante.
+   ══════════════════════════════════════════════════════════════════════ */
+#screen-academie {
+  --ax-obs:      #2F4A3D;
+  --ax-obs-soft: #E8EFEB;
+  --ax-hyp:      var(--gold);
+  --ax-hyp-soft: #FBEFDC;
+}
+
+/* ── Écrin : moins « carnet papier », plus numérique contemporain ── */
+#screen-academie .acad-page-wrap {
+  background: #FBF9F4;
+  background-image: none;
+  box-shadow: 0 1px 3px rgba(31,42,36,0.06), 0 12px 32px rgba(31,42,36,0.08);
+  border: 1px solid rgba(47,74,61,0.08);
+  padding: 40px 22px 56px;
+}
+@media (min-width: 701px) {
+  #screen-academie .acad-page-wrap { padding: 56px 56px 68px; }
+}
+
+/* ── Surtitres : on retire les petites capitales espacées (air administratif),
+   on garde le repère de section en italique discret ── */
+#screen-academie .acad-section-label {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ax-obs);
+}
+#screen-academie .acad-section { margin-bottom: 40px; }
+#screen-academie .acad-section-line { background: rgba(47,74,61,0.10); }
+#screen-academie .acad-explorer-toggle { cursor: pointer; }
+#screen-academie .acad-explorer-hint {
+  font-family: 'DM Sans', sans-serif; font-size: 12.5px; color: var(--ax-obs);
+  opacity: 0.55; white-space: nowrap;
+}
+
+/* ── Respiration : plus d'espace entre le tableau de bord et la suite ── */
+#screen-academie #main-dashboard-zone { margin-bottom: 40px; padding-bottom: 32px; }
+
+/* ── Barre d'XP : seul moment animé de l'écran ── */
+#screen-academie .hd-xp-fill { transition: width 0.9s cubic-bezier(0.22,0.61,0.36,1); }
+
+/* ── Mission du jour : dominante, ocre = à découvrir ── */
+#screen-academie .mission-hero-card {
+  background: linear-gradient(165deg, #FFFDF9 0%, var(--ax-hyp-soft) 130%);
+  border: 1px solid rgba(201,150,62,0.20);
+  border-left: none;
+  border-radius: 20px;
+  padding: 28px 24px 26px;
+  box-shadow: 0 1px 2px rgba(120,80,20,0.06), 0 16px 36px rgba(120,80,20,0.10);
+}
+#screen-academie .mission-hero-eyebrow { margin-bottom: 14px; }
+#screen-academie .mission-hero-format-pill {
+  width: 44px; height: 44px; font-size: 22px;
+  background: rgba(255,255,255,0.75);
+}
+#screen-academie .mission-hero-type {
+  font-family: 'DM Sans', sans-serif; font-weight: 600; letter-spacing: 0.02em;
+  text-transform: none; font-size: 13px; color: var(--ax-obs);
+}
+#screen-academie .mission-hero-duree {
+  font-family: 'DM Sans', sans-serif; font-size: 11.5px; font-weight: 600;
+  color: var(--ax-obs); background: var(--ax-obs-soft); border-radius: 100px;
+  padding: 5px 12px; border: 1px solid rgba(47,74,61,0.10);
+}
+#screen-academie .mission-hero-title {
+  font-family: 'Playfair Display', serif; font-weight: 700; font-style: italic;
+  font-size: clamp(24px, 5vw, 30px); color: #22301D; margin-bottom: 24px;
+}
+#screen-academie .mission-hero-cta {
+  background: var(--ax-hyp); color: #3A2508; border-radius: 100px;
+  font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 14.5px;
+  letter-spacing: 0.01em; padding: 17px 28px; min-height: 56px;
+  box-shadow: 0 8px 20px rgba(201,150,62,0.30);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+#screen-academie .mission-hero-cta:hover { background: var(--ax-hyp); transform: translateY(-1px); box-shadow: 0 10px 24px rgba(201,150,62,0.38); }
+#screen-academie .mission-hero-cta:active { transform: translateY(0); box-shadow: 0 4px 10px rgba(201,150,62,0.28); }
+#screen-academie .mission-hero-later {
+  display: inline-block; margin: 14px 0 0 4px; min-height: 44px; line-height: 44px;
+  font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ax-obs);
+  opacity: 0.55; cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+}
+
+/* ── Clôture : factuelle, bleu-vert = ce qui vient de se passer ── */
+#screen-academie .acad-closure-card {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--ax-obs-soft); border: 1px solid rgba(47,74,61,0.14);
+  border-radius: 18px; padding: 20px 22px;
+}
+#screen-academie .acad-closure-check {
+  flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%;
+  background: var(--ax-obs); color: #F4F8F5; font-size: 18px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+#screen-academie .acad-closure-title {
+  font-family: 'Playfair Display', serif; font-style: italic; font-size: 19px;
+  color: var(--ax-obs); margin-bottom: 2px;
+}
+#screen-academie .acad-closure-sub {
+  font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ax-obs); opacity: 0.75;
+}
+
+/* ── Proposition suivante : UNE seule carte, ocre = à découvrir ── */
+#screen-academie .acad-next-card { margin-top: 16px; }
+#screen-academie .acad-next-eyebrow {
+  font-family: 'DM Sans', sans-serif; font-size: 12.5px; color: var(--ax-obs);
+  opacity: 0.6; margin-bottom: 8px;
+}
+#screen-academie .acad-next-body {
+  display: flex; align-items: center; gap: 14px; cursor: pointer;
+  background: var(--ax-hyp-soft); border: 1px solid rgba(201,150,62,0.28);
+  border-radius: 18px; padding: 18px 20px; min-height: 56px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+#screen-academie .acad-next-body:hover {
+  transform: translateY(-2px); box-shadow: 0 10px 26px rgba(201,150,62,0.20);
+  border-color: rgba(201,150,62,0.5);
+}
+#screen-academie .acad-next-icon { font-size: 24px; flex-shrink: 0; }
+#screen-academie .acad-next-text { flex: 1; min-width: 0; }
+#screen-academie .acad-next-title {
+  font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 14.5px; color: #3A2508;
+}
+#screen-academie .acad-next-sub {
+  font-family: 'DM Sans', sans-serif; font-size: 12.5px; color: #6B5230; opacity: 0.85;
+  margin-top: 2px; line-height: 1.45;
+}
+#screen-academie .acad-next-duree {
+  flex-shrink: 0; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700;
+  color: var(--ax-hyp); white-space: nowrap;
+}
+#screen-academie .acad-next-footnote {
+  font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--ax-obs);
+  opacity: 0.55; text-align: center; margin-top: 12px;
+}
+#screen-academie .enquete-suite-highlight .acad-next-body {
+  animation: acadNextPulse 1.4s ease-out 1;
+}
+@keyframes acadNextPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(201,150,62,0.55); border-color: rgba(201,150,62,0.8); }
+  70%  { box-shadow: 0 0 0 14px rgba(201,150,62,0); border-color: rgba(201,150,62,0.8); }
+  100% { box-shadow: 0 0 0 0 rgba(201,150,62,0); border-color: rgba(201,150,62,0.28); }
+}
+
+/* ── Journée bouclée (état 4) ── */
+#screen-academie .acad-day-done {
+  margin-top: 16px; text-align: center; padding: 20px;
+  font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px;
+  color: var(--ax-obs); opacity: 0.75;
+}
+
+/* ── Explorer : replié par défaut, déplié seulement quand tout est fait ── */
+#screen-academie #section-archives .acad-archives-grid { display: none; }
+#screen-academie #section-archives.acad-explorer-open .acad-archives-grid { display: grid; margin-top: 16px; }
+#screen-academie #section-archives.acad-explorer-open .acad-explorer-hint { display: none; }
+
+/* ── Cartes Explorer / Mon Dossier : plus discrètes que la mission dominante,
+   pas de rectangles identiques répétés — coins plus doux, ombre légère ── */
+#screen-academie .acad-archive-card,
+#screen-academie .acad-dossier-door {
+  border-radius: 18px; min-height: 56px;
+  box-shadow: 0 1px 2px rgba(47,74,61,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+#screen-academie .acad-archive-card:active,
+#screen-academie .acad-dossier-door:active { transform: scale(0.98); }
+
+/* ── Pied de page : discret, sans capitales ── */
+#screen-academie .home-footer { opacity: 0.35; }
+#screen-academie .kiro-bottom-phrase { opacity: 0.85; }
+
 </style>
 </head>
 <body>
@@ -6538,17 +6679,20 @@ body {
   <!-- ══ MISSION DU JOUR ══ -->
   <section class="acad-section" id="section-mission">
     <div class="acad-section-header">
-      <span class="acad-section-label">🎯 Mission du jour</span>
+      <span class="acad-section-label">Mission du jour</span>
       <div class="acad-section-line"></div>
     </div>
     <div id="rituel-du-jour" class="rituel-wrap"></div>
   </section>
 
-  <!-- ══ EXPLORER ══ -->
+  <!-- ══ EXPLORER — replié par défaut, déplié quand tout est fait (état 4) ══
+       Le repli est automatique ; le lien "Explorer quand même" permet de
+       déplier manuellement à tout moment, sans attendre la fin de journée. -->
   <section class="acad-section" id="section-archives">
-    <div class="acad-section-header">
-      <span class="acad-section-label">📚 Explorer</span>
+    <div class="acad-section-header acad-explorer-toggle" onclick="document.getElementById('section-archives').classList.toggle('acad-explorer-open')" role="button" tabindex="0">
+      <span class="acad-section-label">Explorer</span>
       <div class="acad-section-line"></div>
+      <span class="acad-explorer-hint">quand même</span>
     </div>
     <div class="acad-archives-grid">
       <div class="acad-archive-card" onclick="showScreen('quiz-home')" role="button" tabindex="0">
@@ -6576,7 +6720,7 @@ body {
   <!-- ══ MON DOSSIER ══ -->
   <section class="acad-section" id="section-dossier">
     <div class="acad-section-header">
-      <span class="acad-section-label">📁 Mon Dossier</span>
+      <span class="acad-section-label">Mon Dossier</span>
       <div class="acad-section-line"></div>
     </div>
     <div class="acad-dossier-doors">
@@ -8987,9 +9131,11 @@ function renderRituelDuJour() {
     mission_cheval:'Sur le terrain, chaque réaction devient un indice.',
     kiro_erreur:   'Trouve l\'erreur dans le raisonnement de Kiro.'
   };
+  var typeDuree = { quiz: '2 minutes', observer: '4 minutes', dossier: '5 minutes', mission_cheval: '5 minutes', kiro_erreur: '3 minutes' };
   var icon    = typeIcon[mission.type]  || '✦';
   var label   = typeLabel[mission.type] || '';
   var ambiance = typeAmb[mission.type]  || '';
+  var duree   = typeDuree[mission.type] || '5 minutes';
 
   var ctaFn;
   if (mission.type === 'quiz') {
@@ -9013,30 +9159,51 @@ function renderRituelDuJour() {
     && obsVisitedToday
     && !doneToday;
 
-  var ctaHtml;
-  if (doneToday) {
-    ctaHtml = '<div class="mission-hero-completed">✓ Mission accomplie aujourd\'hui</div>';
-  } else if (showValidateObs) {
-    ctaHtml = '<div style="display:flex;gap:10px;flex-wrap:wrap;">'
-      + '<button class="mission-hero-cta" onclick="' + ctaFn + '">Revoir →</button>'
-      + '<button class="mission-hero-cta" onclick="completeMission(' + mission.xp + ')">✓ Terminer · +' + mission.xp + ' XP</button>'
+  var html;
+
+  if (!doneToday) {
+    // ── État 1 : Mission du jour pas encore faite → la mission en grand ──
+    var ctaHtml;
+    if (showValidateObs) {
+      ctaHtml = '<div style="display:flex;gap:10px;flex-wrap:wrap;">'
+        + '<button class="mission-hero-cta" onclick="' + ctaFn + '">Revoir →</button>'
+        + '<button class="mission-hero-cta" onclick="completeMission(' + mission.xp + ')">✓ Terminer · +' + mission.xp + ' XP</button>'
+        + '</div>';
+    } else {
+      ctaHtml = '<button class="mission-hero-cta" onclick="' + ctaFn + '">Commencer · +' + mission.xp + ' XP →</button>';
+    }
+    html = '<div class="mission-hero-card">'
+      + '<div class="mission-hero-eyebrow">'
+      +   '<span class="mission-hero-format-pill">' + icon + '</span>'
+      +   '<span class="mission-hero-type">' + label + '</span>'
+      +   '<span class="mission-hero-duree">' + duree + '</span>'
+      + '</div>'
+      + (ambiance ? '<div class="mission-hero-ambiance">' + esc(ambiance) + '</div>' : '')
+      + '<div class="mission-hero-title">' + esc(mission.titre) + '</div>'
+      + ctaHtml
+      + '<div class="mission-hero-later" onclick="document.getElementById(\'section-archives\').scrollIntoView({behavior:\'smooth\',block:\'start\'})">Plus tard</div>'
       + '</div>';
   } else {
-    ctaHtml = '<button class="mission-hero-cta" onclick="' + ctaFn + '">Commencer →</button>';
+    // ── Clôture : la mission est faite, on l'annonce avant toute autre chose ──
+    var closureHtml = '<div class="acad-closure-card">'
+      + '<span class="acad-closure-check">✓</span>'
+      + '<div class="acad-closure-text">'
+      +   '<div class="acad-closure-title">Mission accomplie</div>'
+      +   '<div class="acad-closure-sub">+' + mission.xp + ' XP ajoutés à ton dossier.</div>'
+      + '</div>'
+      + '</div>';
+    if (_acadEntrainementFaitToday()) {
+      // ── État 4 : tout est fait → clôture de journée ──
+      html = closureHtml
+        + '<div class="acad-day-done">Journée bouclée. Reviens demain pour une nouvelle enquête.</div>';
+    } else {
+      // ── États 2 → 3 : clôture puis UNE SEULE proposition suivante ──
+      html = closureHtml + renderAcadNextProposalHtml(mission);
+    }
   }
 
-  var _mtClass = {quiz:'mt-quiz', observer:'mt-observer', dossier:'mt-dossier', mission_cheval:'mt-cheval', kiro_erreur:'mt-kiro'}[mission.type] || '';
-  el.innerHTML = '<div class="mission-hero-card ' + _mtClass + (doneToday ? ' mission-hero-done' : '') + '">'
-    + '<div class="mission-hero-eyebrow">'
-    +   '<span class="mission-hero-format-pill">' + icon + '</span>'
-    +   '<span class="mission-hero-type">' + label + '</span>'
-    +   '<span class="mission-hero-xp">+' + mission.xp + ' XP</span>'
-    + '</div>'
-    + (ambiance ? '<div class="mission-hero-ambiance">' + esc(ambiance) + '</div>' : '')
-    + '<div class="mission-hero-title">' + esc(mission.titre) + '</div>'
-    + ctaHtml
-    + '</div>'
-    + (doneToday ? renderContinuerEnqueteHtml(mission) : '');
+  el.innerHTML = html;
+  document.getElementById('section-archives').classList.toggle('acad-explorer-open', doneToday && _acadEntrainementFaitToday());
 
   // Numéro sur le dossier empilé (compatibilité ancienne UI)
   var stackNum = document.getElementById('dossier-stack-num');
@@ -9047,12 +9214,37 @@ function renderRituelDuJour() {
 }
 
 // ============================================================
-// CONTINUER L'ENQUÊTE — prototype de continuité après la Mission du jour
+// PROPOSITION SUIVANTE — après la Mission du jour (refonte Académie V1)
 // Réutilise exclusivement des contenus et fonctions déjà existants
-// (Interrogatoire Flash, Dossier de So, Carnet). N'attribue aucun XP
-// bonus : les entrées "mission" réelles restent protégées par la garde
+// (Interrogatoire Flash, Dossier de So, Quête terrain). N'attribue aucun
+// XP bonus : les entrées "mission" réelles restent protégées par la garde
 // anti-doublon déjà présente dans completeMission().
+//
+// Suivi de l'état "entraînement fait aujourd'hui" en mémoire de session
+// uniquement (aucun stockage ajouté, conformément au périmètre demandé) —
+// remis à zéro si la page est rechargée. Limitation connue de cette V1 :
+// un rechargement en cours de journée fait réafficher la proposition.
 // ============================================================
+var _acadEntrainementFaitAujourdhui = false;
+var _acadEntrainementDate = null;
+
+function _acadEntrainementFaitToday() {
+  return _acadEntrainementFaitAujourdhui && _acadEntrainementDate === todayStr();
+}
+function _acadMarquerEntrainementFait() {
+  _acadEntrainementFaitAujourdhui = true;
+  _acadEntrainementDate = todayStr();
+}
+
+// Type d'effort de la Mission du jour, pour alterner la proposition suivante :
+// après de la lecture (dossier) → du terrain ; après du terrain
+// (mission cheval / observation) → du léger ; après du léger (quiz) → de
+// la lecture si un dossier est disponible, sinon à nouveau du léger.
+function _acadTypeEffort(missionType) {
+  if (missionType === 'dossier') return 'lecture';
+  if (missionType === 'mission_cheval' || missionType === 'observer') return 'terrain';
+  return 'leger';
+}
 
 // Choisit un quiz Flash pour l'Indice bonus — différent de la Mission du
 // jour si elle est elle-même un quiz, en priorisant celui joué le moins
@@ -9107,51 +9299,44 @@ function pickApprofondirContent(todayMission) {
   return candidates[0].mission;
 }
 
-// Rendu du bloc "Continuer l'enquête" — affiché uniquement quand la
-// Mission du jour est déjà accomplie.
-function renderContinuerEnqueteHtml(todayMission) {
-  var approfondir = pickApprofondirContent(todayMission);
+// Rendu de la proposition suivante — UNE SEULE carte, jamais un menu.
+// Affichée uniquement quand la Mission du jour est déjà accomplie et que
+// l'entraînement du jour n'a pas encore été lancé (voir _acadEntrainementFaitToday).
+function renderAcadNextProposalHtml(todayMission) {
+  var effort = _acadTypeEffort(todayMission.type);
+  var prop;
 
-  var approfondirCard = approfondir
-    ? '<div class="enquete-suite-card" onclick="lancerApprofondir()" role="button" tabindex="0">'
-      + '<div class="enquete-suite-card-head">'
-      +   '<span class="enquete-suite-icon">📚</span>'
-      +   '<span class="enquete-suite-title">Approfondir</span>'
-      + '</div>'
-      + '<div class="enquete-suite-sub">Poursuis avec un dossier, un quiz ou une Mission Cheval déjà disponible.</div>'
-      + '<span class="enquete-suite-duree">Environ 5 minutes</span>'
-      + '</div>'
-    : '<div class="enquete-suite-card enquete-suite-card-empty">'
-      + '<div class="enquete-suite-card-head">'
-      +   '<span class="enquete-suite-icon">📚</span>'
-      +   '<span class="enquete-suite-title">Approfondir</span>'
-      + '</div>'
-      + '<div class="enquete-suite-sub">Rien de nouveau à explorer pour l\'instant — reviens bientôt.</div>'
-      + '</div>';
+  if (effort === 'lecture') {
+    // Après de la lecture → du terrain.
+    prop = { icon: '🐴', titre: 'Une observation terrain', sub: 'Un instant avec ton cheval, à partir de ta dernière séance.', duree: '3 à 5 minutes', fn: 'ouvrirQueteTerrain()' };
+  } else if (effort === 'terrain') {
+    // Après du terrain → du léger.
+    var qid = pickBonusQuizId(todayMission);
+    var qz  = quizzes.filter(function(q) { return q.id === qid; })[0];
+    prop = { icon: '⚡', titre: qz ? qz.titrePublic : 'Un indice bonus', sub: 'Une question rapide pour garder l\'œil en alerte.', duree: '1 minute', fn: 'lancerIndiceBonus()' };
+  } else {
+    // Après du léger → de la lecture si un dossier est disponible, sinon du léger à nouveau.
+    var appro = pickApprofondirContent(todayMission);
+    if (appro && appro.type === 'dossier') {
+      prop = { icon: '📂', titre: appro.titre, sub: 'Un dossier pour affiner ton regard.', duree: '5 minutes', fn: 'lancerApprofondir()' };
+    } else {
+      var qid2 = pickBonusQuizId(todayMission);
+      var qz2  = quizzes.filter(function(q) { return q.id === qid2; })[0];
+      prop = { icon: '⚡', titre: qz2 ? qz2.titrePublic : 'Un indice bonus', sub: 'Une question rapide pour garder l\'œil en alerte.', duree: '1 minute', fn: 'lancerIndiceBonus()' };
+    }
+  }
 
-  return '<div class="enquete-suite" id="enquete-suite-block" tabindex="-1">'
-    + '<div class="enquete-suite-header">🔎 Continuer l\'enquête</div>'
-    + '<div class="enquete-suite-intro">Ta Mission du jour est terminée. Tu peux t\'arrêter ici… ou suivre une nouvelle piste.</div>'
-    + '<div class="enquete-suite-grid">'
-    +   '<div class="enquete-suite-card" onclick="lancerIndiceBonus()" role="button" tabindex="0">'
-    +     '<div class="enquete-suite-card-head">'
-    +       '<span class="enquete-suite-icon">⚡</span>'
-    +       '<span class="enquete-suite-title">Indice bonus</span>'
-    +     '</div>'
-    +     '<div class="enquete-suite-sub">Une question rapide pour garder l\'œil en alerte.</div>'
-    +     '<span class="enquete-suite-duree">Environ 1 minute</span>'
+  return '<div class="acad-next-card" id="enquete-suite-block" tabindex="-1">'
+    + '<div class="acad-next-eyebrow">Ensuite, si tu veux</div>'
+    + '<div class="acad-next-body" onclick="_acadMarquerEntrainementFait();' + prop.fn + '" role="button" tabindex="0">'
+    +   '<span class="acad-next-icon">' + prop.icon + '</span>'
+    +   '<div class="acad-next-text">'
+    +     '<div class="acad-next-title">' + esc(prop.titre) + '</div>'
+    +     '<div class="acad-next-sub">' + esc(prop.sub) + '</div>'
     +   '</div>'
-    +   '<div class="enquete-suite-card" onclick="ouvrirQueteTerrain()" role="button" tabindex="0">'
-    +     '<div class="enquete-suite-card-head">'
-    +       '<span class="enquete-suite-icon">🐴</span>'
-    +       '<span class="enquete-suite-title">Quête terrain</span>'
-    +     '</div>'
-    +     '<div class="enquete-suite-sub">Une petite observation à réaliser avec ton cheval ou à partir de ta dernière séance.</div>'
-    +     '<span class="enquete-suite-duree">Environ 3 à 5 minutes</span>'
-    +   '</div>'
-    +   approfondirCard
+    +   '<span class="acad-next-duree">' + esc(prop.duree) + '</span>'
     + '</div>'
-    + '<div class="enquete-suite-footnote">Facultatif — ta Mission du jour reste acquise, quel que soit ton choix.</div>'
+    + '<div class="acad-next-footnote">Facultatif — ta Mission du jour reste acquise, quel que soit ton choix.</div>'
     + '</div>';
 }
 
@@ -10950,6 +11135,12 @@ function renderMainDashboard() {
   var gradesInPalier = xpGrades.filter(function(gr) { return gr.palier === g.palier; });
   var gradePosDans = gradesInPalier.indexOf(g) + 1;
 
+  // Le remplissage de la barre d'XP est le seul moment animé de l'écran :
+  // on repart visuellement de l'ancien pourcentage (mémorisé en session,
+  // aucun stockage ajouté) pour glisser jusqu'au nouveau.
+  var prevPct = (typeof _acadLastXpPct === 'number') ? _acadLastXpPct : pct;
+  _acadLastXpPct = pct;
+
   el.innerHTML = '<div class="home-dashboard">'
     + '<div class="hd-academie-sig">🎓 Académie des Enquêteurs Ride With So</div>'
     + '<div class="hd-greeting-zone">'
@@ -10969,9 +11160,18 @@ function renderMainDashboard() {
     +     '<span>' + xp + ' XP</span>'
     +     '<span class="hd-xp-next">' + nextLabel + '</span>'
     +   '</div>'
-    +   '<div class="hd-xp-bar"><div class="hd-xp-fill" style="width:' + pct + '%"></div></div>'
+    +   '<div class="hd-xp-bar"><div class="hd-xp-fill" id="hd-xp-fill-el" style="width:' + prevPct + '%"></div></div>'
     + '</div>'
     + '</div>';
+
+  if (prevPct !== pct) {
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        var f = document.getElementById('hd-xp-fill-el');
+        if (f) f.style.width = pct + '%';
+      });
+    });
+  }
 }
 
 function updateMainMissionBtn() {

@@ -4471,45 +4471,6 @@ body {
   position: relative;
   box-shadow: 0 3px 18px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.04);
 }
-.mission-hero-card.mission-hero-done {
-  border-left-color: #C9963E; opacity: 0.85;
-}
-/* Interrogatoire Flash — carte plus lumineuse et plus chaleureuse (test v2) */
-.mission-hero-card.mt-quiz {
-  border-left-width: 8px;
-  background: linear-gradient(160deg, #FDF3E6 0%, #FBE2C9 100%);
-}
-.mission-hero-card.mt-quiz .mission-hero-format-pill {
-  background: rgba(255,255,255,0.88);
-  box-shadow: 0 2px 9px rgba(138,62,34,0.20);
-}
-.mission-hero-card.mt-quiz .mission-hero-xp {
-  background: rgba(255,255,255,0.85);
-  border-color: rgba(138,62,34,0.16);
-}
-.mission-hero-eyebrow {
-  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
-}
-.mission-hero-format-pill {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
-  background: rgba(255,255,255,0.65); font-size: 21px;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.10); border: 1px solid rgba(255,255,255,0.50);
-}
-.mission-hero-type {
-  font-family: 'Lato', sans-serif; font-size: 10px; font-weight: 700;
-  letter-spacing: 0.18em; text-transform: uppercase; color: var(--mission-dark); flex: 1;
-}
-.mission-hero-xp {
-  font-family: 'Lato', sans-serif; font-size: 11px; font-weight: 700;
-  letter-spacing: 0.06em; color: var(--mission-dark);
-  background: rgba(255,255,255,0.70); border-radius: 100px; padding: 4px 12px;
-  border: 1px solid rgba(0,0,0,0.06);
-}
-.mission-hero-ambiance {
-  font-family: 'DM Sans', sans-serif; font-size: 12.5px; font-style: italic;
-  color: var(--mission-dark); opacity: 0.70; margin-bottom: 6px; line-height: 1.5;
-}
 .mission-hero-title {
   font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600;
   color: #1A2C22; line-height: 1.2; margin-bottom: 20px;
@@ -4521,11 +4482,6 @@ body {
   transition: background 0.18s; display: inline-block;
 }
 .mission-hero-cta:hover { background: var(--mission-accent); }
-.mission-hero-completed {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-family: 'Lato', sans-serif; font-size: 13px; font-weight: 700;
-  color: #C9963E; letter-spacing: 0.04em; padding: 10px 0;
-}
 
 /* ===== PROPOSITION SUIVANTE — après Mission du jour accomplie ===== */
 /* Mise en page dans #screen-academie ci-dessous (.acad-next-*).
@@ -6125,26 +6081,37 @@ body {
 .lb-history-xp   { font-weight: 700; color: #2F4A3D; }
 
 /* ══════════════════════════════════════════════════════════════════════
-   REFONTE VISUELLE — ACADÉMIE UNIQUEMENT (V1)
+   REFONTE VISUELLE — ACADÉMIE UNIQUEMENT (V1 + passe 2 : contraste & lisibilité)
    ────────────────────────────────────────────────────────────────────
    Périmètre strict : chaque règle ci-dessous est préfixée #screen-academie,
    elle ne peut donc s'appliquer à aucun autre écran, même quand elle porte
    sur une classe partagée (.hd-xp-fill, .acad-page-wrap, .mission-hero-card…).
    Aucune règle existante n'est supprimée : celles-ci les surchargent.
 
-   Deux couleurs porteuses de sens, réutilisées depuis la palette de marque
-   existante (aucune couleur inventée) :
-   --ax-obs (bleu-vert, #2F4A3D — déjà le vert forêt de la marque) = tout ce
-   qui relève de l'observation, du factuel, de ce qui est déjà acquis.
-   --ax-hyp (ocre, var(--gold) #C9963E — déjà utilisé pour Kiro et les
-   découvertes) = tout ce qui relève de l'hypothèse, de l'interprétation,
-   de ce qu'on va découvrir : la mission du jour et la proposition suivante.
+   Trois couleurs identifient une famille de contenu à son pictogramme,
+   avant lecture (réutilisées depuis la palette de marque existante,
+   aucune couleur inventée) :
+   --ax-obs  (bleu-vert, #2F4A3D — déjà le vert forêt de la marque)
+             = Dossiers de So, lecture.
+   --ax-hyp  (ocre, var(--gold) #C9963E — déjà utilisé pour Kiro et les
+             découvertes) = Terrain, Mission Cheval.
+   --ax-quiz (corail, #E8834F — déjà la teinte .mt-quiz existante)
+             = Entraînement, Interrogatoire Flash.
+   Appliquées au pictogramme et à un marqueur (liseré) — jamais au fond
+   entier d'une carte. --ax-dark est le seul fond sombre de l'écran,
+   réservé à la Mission du jour pour qu'elle tranche réellement sur le
+   reste, resté clair.
    ══════════════════════════════════════════════════════════════════════ */
 #screen-academie {
-  --ax-obs:      #2F4A3D;
-  --ax-obs-soft: #E8EFEB;
-  --ax-hyp:      var(--gold);
-  --ax-hyp-soft: #FBEFDC;
+  --ax-obs:        #2F4A3D;
+  --ax-obs-soft:   #E8EFEB;
+  --ax-obs-bright: #75A18E;
+  --ax-hyp:        var(--gold);
+  --ax-hyp-soft:   #FBEFDC;
+  --ax-quiz:       #E8834F;
+  --ax-quiz-soft:  #FBE8D6;
+  --ax-dark:       #1B2A22;
+  --ax-cream:      #FAF6EC;
 }
 
 /* ── Écrin : moins « carnet papier », plus numérique contemporain ── */
@@ -6184,46 +6151,54 @@ body {
 /* ── Barre d'XP : seul moment animé de l'écran ── */
 #screen-academie .hd-xp-fill { transition: width 0.9s cubic-bezier(0.22,0.61,0.36,1); }
 
-/* ── Mission du jour : dominante, ocre = à découvrir ── */
+/* ── Mission du jour : LE bloc sombre de l'écran — rupture franche avec
+   le reste, resté clair. Un seul point d'accroche (le pictogramme, 56px,
+   coloré selon la famille de contenu) avant tout texte. ── */
 #screen-academie .mission-hero-card {
-  background: linear-gradient(165deg, #FFFDF9 0%, var(--ax-hyp-soft) 130%);
-  border: 1px solid rgba(201,150,62,0.20);
-  border-left: none;
+  background: var(--ax-dark);
+  border: none;
+  border-left: 5px solid var(--ax-hyp);
   border-radius: 20px;
-  padding: 28px 24px 26px;
-  box-shadow: 0 1px 2px rgba(120,80,20,0.06), 0 16px 36px rgba(120,80,20,0.10);
+  padding: 30px 24px 26px;
+  box-shadow: 0 20px 44px rgba(0,0,0,0.30), 0 2px 8px rgba(0,0,0,0.20);
 }
-#screen-academie .mission-hero-eyebrow { margin-bottom: 14px; }
-#screen-academie .mission-hero-format-pill {
-  width: 44px; height: 44px; font-size: 22px;
-  background: rgba(255,255,255,0.75);
+#screen-academie .mission-hero-card.acad-fam-lecture { border-left-color: var(--ax-obs-bright); }
+#screen-academie .mission-hero-card.acad-fam-terrain { border-left-color: var(--ax-hyp); }
+#screen-academie .mission-hero-card.acad-fam-leger   { border-left-color: var(--ax-quiz); }
+
+#screen-academie .mission-hero-pictogram {
+  width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; margin-bottom: 18px;
+  background: var(--ax-hyp);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.28);
 }
-#screen-academie .mission-hero-type {
-  font-family: 'DM Sans', sans-serif; font-weight: 600; letter-spacing: 0.02em;
-  text-transform: none; font-size: 13px; color: var(--ax-obs);
-}
-#screen-academie .mission-hero-duree {
-  font-family: 'DM Sans', sans-serif; font-size: 11.5px; font-weight: 600;
-  color: var(--ax-obs); background: var(--ax-obs-soft); border-radius: 100px;
-  padding: 5px 12px; border: 1px solid rgba(47,74,61,0.10);
-}
+#screen-academie .mission-hero-card.acad-fam-lecture .mission-hero-pictogram { background: var(--ax-obs-bright); }
+#screen-academie .mission-hero-card.acad-fam-terrain .mission-hero-pictogram { background: var(--ax-hyp); }
+#screen-academie .mission-hero-card.acad-fam-leger   .mission-hero-pictogram { background: var(--ax-quiz); }
+
 #screen-academie .mission-hero-title {
   font-family: 'Playfair Display', serif; font-weight: 700; font-style: italic;
-  font-size: clamp(24px, 5vw, 30px); color: #22301D; margin-bottom: 24px;
+  font-size: clamp(26px, 6.5vw, 34px); line-height: 1.15;
+  color: var(--ax-cream); margin-bottom: 8px;
+}
+#screen-academie .mission-hero-duree {
+  font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600;
+  color: rgba(250,246,236,0.55); margin-bottom: 22px;
 }
 #screen-academie .mission-hero-cta {
-  background: var(--ax-hyp); color: #3A2508; border-radius: 100px;
+  background: var(--ax-hyp); color: #2A1B05; border-radius: 100px;
   font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 14.5px;
   letter-spacing: 0.01em; padding: 17px 28px; min-height: 56px;
-  box-shadow: 0 8px 20px rgba(201,150,62,0.30);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  border: none; box-shadow: 0 8px 20px rgba(0,0,0,0.30);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-#screen-academie .mission-hero-cta:hover { background: var(--ax-hyp); transform: translateY(-1px); box-shadow: 0 10px 24px rgba(201,150,62,0.38); }
-#screen-academie .mission-hero-cta:active { transform: translateY(0); box-shadow: 0 4px 10px rgba(201,150,62,0.28); }
+#screen-academie .mission-hero-cta:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,0,0,0.38); }
+#screen-academie .mission-hero-cta:active { transform: translateY(0); box-shadow: 0 4px 10px rgba(0,0,0,0.28); }
 #screen-academie .mission-hero-later {
   display: inline-block; margin: 14px 0 0 4px; min-height: 44px; line-height: 44px;
-  font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ax-obs);
-  opacity: 0.55; cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+  font-family: 'DM Sans', sans-serif; font-size: 13px; color: rgba(250,246,236,0.5);
+  cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
 }
 
 /* ── Clôture : factuelle, bleu-vert = ce qui vient de se passer ── */
@@ -6233,8 +6208,8 @@ body {
   border-radius: 18px; padding: 20px 22px;
 }
 #screen-academie .acad-closure-check {
-  flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%;
-  background: var(--ax-obs); color: #F4F8F5; font-size: 18px; font-weight: 700;
+  flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%;
+  background: var(--ax-obs); color: #F4F8F5; font-size: 20px; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
 }
 #screen-academie .acad-closure-title {
@@ -6245,46 +6220,54 @@ body {
   font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ax-obs); opacity: 0.75;
 }
 
-/* ── Proposition suivante : UNE seule carte, ocre = à découvrir ── */
+/* ── Proposition suivante : UNE seule carte. Pictogramme (48px, coloré
+   selon la famille de contenu) + titre en grand + durée en petit, rien
+   d'autre. Le liseré reprend la même couleur, en second marqueur. ── */
 #screen-academie .acad-next-card { margin-top: 16px; }
 #screen-academie .acad-next-eyebrow {
   font-family: 'DM Sans', sans-serif; font-size: 12.5px; color: var(--ax-obs);
   opacity: 0.6; margin-bottom: 8px;
 }
 #screen-academie .acad-next-body {
-  display: flex; align-items: center; gap: 14px; cursor: pointer;
-  background: var(--ax-hyp-soft); border: 1px solid rgba(201,150,62,0.28);
-  border-radius: 18px; padding: 18px 20px; min-height: 56px;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  display: flex; align-items: center; gap: 16px; cursor: pointer;
+  background: var(--ax-cream); border: 1px solid rgba(47,74,61,0.12);
+  border-left: 5px solid var(--ax-hyp);
+  border-radius: 16px; padding: 16px 18px; min-height: 56px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 #screen-academie .acad-next-body:hover {
-  transform: translateY(-2px); box-shadow: 0 10px 26px rgba(201,150,62,0.20);
-  border-color: rgba(201,150,62,0.5);
+  transform: translateY(-2px); box-shadow: 0 10px 24px rgba(47,74,61,0.14);
 }
-#screen-academie .acad-next-icon { font-size: 24px; flex-shrink: 0; }
+#screen-academie .acad-next-body.acad-fam-lecture { border-left-color: var(--ax-obs); }
+#screen-academie .acad-next-body.acad-fam-terrain { border-left-color: var(--ax-hyp); }
+#screen-academie .acad-next-body.acad-fam-leger   { border-left-color: var(--ax-quiz); }
+
+#screen-academie .acad-next-pictogram {
+  flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; background: var(--ax-hyp);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+#screen-academie .acad-next-body.acad-fam-lecture .acad-next-pictogram { background: var(--ax-obs); }
+#screen-academie .acad-next-body.acad-fam-terrain .acad-next-pictogram { background: var(--ax-hyp); }
+#screen-academie .acad-next-body.acad-fam-leger   .acad-next-pictogram { background: var(--ax-quiz); }
+
 #screen-academie .acad-next-text { flex: 1; min-width: 0; }
 #screen-academie .acad-next-title {
-  font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 14.5px; color: #3A2508;
-}
-#screen-academie .acad-next-sub {
-  font-family: 'DM Sans', sans-serif; font-size: 12.5px; color: #6B5230; opacity: 0.85;
-  margin-top: 2px; line-height: 1.45;
+  font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 20px;
+  color: #22301D; line-height: 1.25;
 }
 #screen-academie .acad-next-duree {
-  flex-shrink: 0; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700;
-  color: var(--ax-hyp); white-space: nowrap;
-}
-#screen-academie .acad-next-footnote {
-  font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--ax-obs);
-  opacity: 0.55; text-align: center; margin-top: 12px;
+  font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 600;
+  color: var(--ax-obs); opacity: 0.65; margin-top: 3px;
 }
 #screen-academie .enquete-suite-highlight .acad-next-body {
   animation: acadNextPulse 1.4s ease-out 1;
 }
 @keyframes acadNextPulse {
-  0%   { box-shadow: 0 0 0 0 rgba(201,150,62,0.55); border-color: rgba(201,150,62,0.8); }
-  70%  { box-shadow: 0 0 0 14px rgba(201,150,62,0); border-color: rgba(201,150,62,0.8); }
-  100% { box-shadow: 0 0 0 0 rgba(201,150,62,0); border-color: rgba(201,150,62,0.28); }
+  0%   { box-shadow: 0 0 0 0 rgba(201,150,62,0.55); }
+  70%  { box-shadow: 0 0 0 14px rgba(201,150,62,0); }
+  100% { box-shadow: 0 0 0 0 rgba(201,150,62,0); }
 }
 
 /* ── Journée bouclée (état 4) ── */
@@ -9127,19 +9110,10 @@ function renderRituelDuJour() {
   var doneToday = isMissionV1DoneToday();
 
   var typeIcon  = { quiz: '🧠', observer: '👁️', dossier: '📂', mission_cheval: '🐴', kiro_erreur: '🦅' };
-  var typeLabel = { quiz: 'Interrogatoire Flash', observer: 'Observation', dossier: 'Dossier de So', mission_cheval: 'Mission Cheval', kiro_erreur: 'Kiro s\'est trompé' };
-  var typeAmb   = {
-    quiz:          'Entraîne ta lecture comportementale.',
-    observer:      'Observe. Note. Comprends.',
-    dossier:       'Un dossier, un regard affiné.',
-    mission_cheval:'Sur le terrain, chaque réaction devient un indice.',
-    kiro_erreur:   'Trouve l\'erreur dans le raisonnement de Kiro.'
-  };
   var typeDuree = { quiz: '2 minutes', observer: '4 minutes', dossier: '5 minutes', mission_cheval: '5 minutes', kiro_erreur: '3 minutes' };
   var icon    = typeIcon[mission.type]  || '✦';
-  var label   = typeLabel[mission.type] || '';
-  var ambiance = typeAmb[mission.type]  || '';
   var duree   = typeDuree[mission.type] || '5 minutes';
+  var famille = _acadTypeEffort(mission.type); // 'lecture' | 'terrain' | 'leger' — pilote la couleur du pictogramme
 
   var ctaFn;
   if (mission.type === 'quiz') {
@@ -9176,14 +9150,10 @@ function renderRituelDuJour() {
     } else {
       ctaHtml = '<button class="mission-hero-cta" onclick="' + ctaFn + '">Commencer · +' + mission.xp + ' XP →</button>';
     }
-    html = '<div class="mission-hero-card">'
-      + '<div class="mission-hero-eyebrow">'
-      +   '<span class="mission-hero-format-pill">' + icon + '</span>'
-      +   '<span class="mission-hero-type">' + label + '</span>'
-      +   '<span class="mission-hero-duree">' + duree + '</span>'
-      + '</div>'
-      + (ambiance ? '<div class="mission-hero-ambiance">' + esc(ambiance) + '</div>' : '')
+    html = '<div class="mission-hero-card acad-fam-' + famille + '">'
+      + '<div class="mission-hero-pictogram">' + icon + '</div>'
       + '<div class="mission-hero-title">' + esc(mission.titre) + '</div>'
+      + '<div class="mission-hero-duree">' + duree + '</div>'
       + ctaHtml
       + '<div class="mission-hero-later" onclick="document.getElementById(\'section-archives\').scrollIntoView({behavior:\'smooth\',block:\'start\'})">Plus tard</div>'
       + '</div>';
@@ -9326,21 +9296,21 @@ function renderAcadNextProposalHtml(todayMission) {
 
   if (effort === 'lecture') {
     // Après de la lecture → du terrain.
-    prop = { kind: 'terrain', ref: 'null', icon: '🐴', titre: 'Une observation terrain', sub: 'Un instant avec ton cheval, à partir de ta dernière séance.', duree: '3 à 5 minutes', fn: 'ouvrirQueteTerrain()' };
+    prop = { kind: 'terrain', ref: 'null', icon: '🐴', titre: 'Une observation terrain', duree: '3 à 5 minutes', fn: 'ouvrirQueteTerrain()' };
   } else if (effort === 'terrain') {
     // Après du terrain → du léger.
     var qid = pickBonusQuizId(todayMission);
     var qz  = quizzes.filter(function(q) { return q.id === qid; })[0];
-    prop = { kind: 'leger', ref: qid, icon: '⚡', titre: qz ? qz.titrePublic : 'Un indice bonus', sub: 'Une question rapide pour garder l\'œil en alerte.', duree: '1 minute', fn: 'lancerIndiceBonus()' };
+    prop = { kind: 'leger', ref: qid, icon: '⚡', titre: qz ? qz.titrePublic : 'Un indice bonus', duree: '1 minute', fn: 'lancerIndiceBonus()' };
   } else {
     // Après du léger → de la lecture si un dossier est disponible, sinon du léger à nouveau.
     var appro = pickApprofondirContent(todayMission);
     if (appro && appro.type === 'dossier') {
-      prop = { kind: 'lecture', ref: "'" + (appro.dossierId || appro.ref) + "'", icon: '📂', titre: appro.titre, sub: 'Un dossier pour affiner ton regard.', duree: '5 minutes', fn: 'lancerApprofondir()' };
+      prop = { kind: 'lecture', ref: "'" + (appro.dossierId || appro.ref) + "'", icon: '📂', titre: appro.titre, duree: '5 minutes', fn: 'lancerApprofondir()' };
     } else {
       var qid2 = pickBonusQuizId(todayMission);
       var qz2  = quizzes.filter(function(q) { return q.id === qid2; })[0];
-      prop = { kind: 'leger', ref: qid2, icon: '⚡', titre: qz2 ? qz2.titrePublic : 'Un indice bonus', sub: 'Une question rapide pour garder l\'œil en alerte.', duree: '1 minute', fn: 'lancerIndiceBonus()' };
+      prop = { kind: 'leger', ref: qid2, icon: '⚡', titre: qz2 ? qz2.titrePublic : 'Un indice bonus', duree: '1 minute', fn: 'lancerIndiceBonus()' };
     }
   }
 
@@ -9350,15 +9320,13 @@ function renderAcadNextProposalHtml(todayMission) {
   // _renderFlashResultat et validerQuizDossier).
   return '<div class="acad-next-card" id="enquete-suite-block" tabindex="-1">'
     + '<div class="acad-next-eyebrow">Ensuite, si tu veux</div>'
-    + '<div class="acad-next-body" onclick="_acadPropositionEnCours=\'' + prop.kind + '\';_acadPropositionRef=' + prop.ref + ';' + prop.fn + '" role="button" tabindex="0">'
-    +   '<span class="acad-next-icon">' + prop.icon + '</span>'
+    + '<div class="acad-next-body acad-fam-' + prop.kind + '" onclick="_acadPropositionEnCours=\'' + prop.kind + '\';_acadPropositionRef=' + prop.ref + ';' + prop.fn + '" role="button" tabindex="0">'
+    +   '<span class="acad-next-pictogram">' + prop.icon + '</span>'
     +   '<div class="acad-next-text">'
     +     '<div class="acad-next-title">' + esc(prop.titre) + '</div>'
-    +     '<div class="acad-next-sub">' + esc(prop.sub) + '</div>'
+    +     '<div class="acad-next-duree">' + esc(prop.duree) + '</div>'
     +   '</div>'
-    +   '<span class="acad-next-duree">' + esc(prop.duree) + '</span>'
     + '</div>'
-    + '<div class="acad-next-footnote">Facultatif — ta Mission du jour reste acquise, quel que soit ton choix.</div>'
     + '</div>';
 }
 

@@ -7881,6 +7881,10 @@ function nextFlashQuestion() {
 function _renderFlashResultat(el, qz) {
   // Déblocage idempotent — ignoré en mode test (aucun effet sur la bibliothèque)
   if (_fqContext !== 'test') { debloqueQuiz(qz.id); }
+  // Proposition "Indice bonus" (contexte 'library') réellement terminée : on
+  // ne marque l'entraînement du jour comme fait qu'ici, pas au clic, et
+  // seulement si c'est bien ce quiz-là qui était proposé.
+  if (_fqContext === 'library' && _acadPropositionEnCours === 'leger' && _acadPropositionRef === qz.id) { _acadMarquerEntrainementFait(); }
   // Contexte "test" : aucun appel à completeMission(), aucun XP, aucun overlay
   // Contexte "mission" : valide la mission du jour une seule fois
   // Contexte "library" : lecture seule, pas de mission
@@ -9224,9 +9228,21 @@ function renderRituelDuJour() {
 // uniquement (aucun stockage ajouté, conformément au périmètre demandé) —
 // remis à zéro si la page est rechargée. Limitation connue de cette V1 :
 // un rechargement en cours de journée fait réafficher la proposition.
+//
+// _acadPropositionEnCours mémorise QUELLE proposition a été lancée
+// ('lecture' | 'terrain' | 'leger') et _acadPropositionRef LAQUELLE
+// précisément (id du quiz ou du dossier proposé), pour ne marquer
+// l'entraînement comme fait qu'à sa véritable fin — et seulement si c'est
+// bien ce contenu-là qui a été terminé, pas un autre quiz/dossier ouvert
+// entre-temps depuis Explorer. Jamais au simple clic. Ouvrir une
+// proposition sans la terminer (retour en arrière, "Continuer sans
+// enregistrer", navigation ailleurs) la laisse donc disponible au
+// prochain retour sur l'Académie.
 // ============================================================
 var _acadEntrainementFaitAujourdhui = false;
 var _acadEntrainementDate = null;
+var _acadPropositionEnCours = null;
+var _acadPropositionRef = null;
 
 function _acadEntrainementFaitToday() {
   return _acadEntrainementFaitAujourdhui && _acadEntrainementDate === todayStr();
@@ -9234,6 +9250,8 @@ function _acadEntrainementFaitToday() {
 function _acadMarquerEntrainementFait() {
   _acadEntrainementFaitAujourdhui = true;
   _acadEntrainementDate = todayStr();
+  _acadPropositionEnCours = null;
+  _acadPropositionRef = null;
 }
 
 // Type d'effort de la Mission du jour, pour alterner la proposition suivante :
@@ -9308,27 +9326,31 @@ function renderAcadNextProposalHtml(todayMission) {
 
   if (effort === 'lecture') {
     // Après de la lecture → du terrain.
-    prop = { icon: '🐴', titre: 'Une observation terrain', sub: 'Un instant avec ton cheval, à partir de ta dernière séance.', duree: '3 à 5 minutes', fn: 'ouvrirQueteTerrain()' };
+    prop = { kind: 'terrain', ref: 'null', icon: '🐴', titre: 'Une observation terrain', sub: 'Un instant avec ton cheval, à partir de ta dernière séance.', duree: '3 à 5 minutes', fn: 'ouvrirQueteTerrain()' };
   } else if (effort === 'terrain') {
     // Après du terrain → du léger.
     var qid = pickBonusQuizId(todayMission);
     var qz  = quizzes.filter(function(q) { return q.id === qid; })[0];
-    prop = { icon: '⚡', titre: qz ? qz.titrePublic : 'Un indice bonus', sub: 'Une question rapide pour garder l\'œil en alerte.', duree: '1 minute', fn: 'lancerIndiceBonus()' };
+    prop = { kind: 'leger', ref: qid, icon: '⚡', titre: qz ? qz.titrePublic : 'Un indice bonus', sub: 'Une question rapide pour garder l\'œil en alerte.', duree: '1 minute', fn: 'lancerIndiceBonus()' };
   } else {
     // Après du léger → de la lecture si un dossier est disponible, sinon du léger à nouveau.
     var appro = pickApprofondirContent(todayMission);
     if (appro && appro.type === 'dossier') {
-      prop = { icon: '📂', titre: appro.titre, sub: 'Un dossier pour affiner ton regard.', duree: '5 minutes', fn: 'lancerApprofondir()' };
+      prop = { kind: 'lecture', ref: "'" + (appro.dossierId || appro.ref) + "'", icon: '📂', titre: appro.titre, sub: 'Un dossier pour affiner ton regard.', duree: '5 minutes', fn: 'lancerApprofondir()' };
     } else {
       var qid2 = pickBonusQuizId(todayMission);
       var qz2  = quizzes.filter(function(q) { return q.id === qid2; })[0];
-      prop = { icon: '⚡', titre: qz2 ? qz2.titrePublic : 'Un indice bonus', sub: 'Une question rapide pour garder l\'œil en alerte.', duree: '1 minute', fn: 'lancerIndiceBonus()' };
+      prop = { kind: 'leger', ref: qid2, icon: '⚡', titre: qz2 ? qz2.titrePublic : 'Un indice bonus', sub: 'Une question rapide pour garder l\'œil en alerte.', duree: '1 minute', fn: 'lancerIndiceBonus()' };
     }
   }
 
+  // Mémorise quelle proposition est ouverte et laquelle précisément — ne
+  // marque l'entraînement comme fait qu'à sa véritable fin, et seulement
+  // si c'est ce contenu-là (voir les hooks dans saveQueteTerrainNote,
+  // _renderFlashResultat et validerQuizDossier).
   return '<div class="acad-next-card" id="enquete-suite-block" tabindex="-1">'
     + '<div class="acad-next-eyebrow">Ensuite, si tu veux</div>'
-    + '<div class="acad-next-body" onclick="_acadMarquerEntrainementFait();' + prop.fn + '" role="button" tabindex="0">'
+    + '<div class="acad-next-body" onclick="_acadPropositionEnCours=\'' + prop.kind + '\';_acadPropositionRef=' + prop.ref + ';' + prop.fn + '" role="button" tabindex="0">'
     +   '<span class="acad-next-icon">' + prop.icon + '</span>'
     +   '<div class="acad-next-text">'
     +     '<div class="acad-next-title">' + esc(prop.titre) + '</div>'
@@ -9433,6 +9455,7 @@ function saveQueteTerrainNote() {
   });
   saveCarnetData();
   _queteTerrainText = '';
+  if (_acadPropositionEnCours === 'terrain') { _acadMarquerEntrainementFait(); }
   showQueteTerrainConfirmation();
 }
 
@@ -12558,6 +12581,10 @@ function validerQuizDossier() {
   });
   _dossierPhase = 'resultats';
   _dossierScore = score;
+  // Proposition "Approfondir" (un dossier) réellement terminée : on ne
+  // marque l'entraînement du jour comme fait qu'ici, pas au clic, et
+  // seulement si c'est bien ce dossier-là qui était proposé.
+  if (!_dossierTestMode && _acadPropositionEnCours === 'lecture' && _acadPropositionRef === _dossierRef) { _acadMarquerEntrainementFait(); }
   renderDossierSo();
 }
 

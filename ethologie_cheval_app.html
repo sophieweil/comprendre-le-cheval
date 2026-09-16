@@ -6203,9 +6203,12 @@ body {
 
 /* ── Clôture : factuelle, bleu-vert = ce qui vient de se passer ── */
 #screen-academie .acad-closure-card {
-  display: flex; align-items: center; gap: 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
   background: var(--ax-obs-soft); border: 1px solid rgba(47,74,61,0.14);
   border-radius: 18px; padding: 20px 22px;
+}
+#screen-academie .acad-closure-info {
+  display: flex; align-items: center; gap: 14px; min-width: 0;
 }
 #screen-academie .acad-closure-check {
   flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%;
@@ -6218,6 +6221,16 @@ body {
 }
 #screen-academie .acad-closure-sub {
   font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ax-obs); opacity: 0.75;
+}
+/* TEST D'INTÉGRATION (réversible) — nouvelle mascotte Kiro, pose neutre,
+   uniquement sur la clôture de la Mission du jour. Taille d'affichage
+   seule adaptée ici ; fichier, ratio, couleurs et transparence inchangés. */
+#screen-academie .acad-closure-kiro {
+  flex-shrink: 0; display: block;
+  width: 72px; height: auto;
+}
+@media (max-width: 360px) {
+  #screen-academie .acad-closure-kiro { width: 56px; }
 }
 
 /* ── Proposition suivante : UNE seule carte. Pictogramme (48px, coloré
@@ -9159,12 +9172,18 @@ function renderRituelDuJour() {
       + '</div>';
   } else {
     // ── Clôture : la mission est faite, on l'annonce avant toute autre chose ──
+    // TEST D'INTÉGRATION (réversible) — nouvelle mascotte Kiro (mascotte-neutre.png).
+    // Pose neutre utilisée uniquement ici pour ce test technique et visuel ; ne pas
+    // généraliser ailleurs avant validation. Voir .acad-closure-kiro ci-dessous.
     var closureHtml = '<div class="acad-closure-card">'
-      + '<span class="acad-closure-check">✓</span>'
-      + '<div class="acad-closure-text">'
-      +   '<div class="acad-closure-title">Mission accomplie</div>'
-      +   '<div class="acad-closure-sub">+' + mission.xp + ' XP ajoutés à ton dossier.</div>'
+      + '<div class="acad-closure-info">'
+      +   '<span class="acad-closure-check">✓</span>'
+      +   '<div class="acad-closure-text">'
+      +     '<div class="acad-closure-title">Mission accomplie</div>'
+      +     '<div class="acad-closure-sub">+' + mission.xp + ' XP ajoutés à ton dossier.</div>'
+      +   '</div>'
       + '</div>'
+      + '<img src="mascotte-neutre.png" alt="Kiro" class="acad-closure-kiro">'
       + '</div>';
     if (_acadEntrainementFaitToday()) {
       // ── État 4 : tout est fait → clôture de journée ──

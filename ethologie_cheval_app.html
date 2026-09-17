@@ -6203,12 +6203,14 @@ body {
 
 /* ── Clôture : factuelle, bleu-vert = ce qui vient de se passer ── */
 #screen-academie .acad-closure-card {
-  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  position: relative;
+  display: flex; align-items: center; gap: 14px;
   background: var(--ax-obs-soft); border: 1px solid rgba(47,74,61,0.14);
   border-radius: 18px; padding: 20px 22px;
 }
 #screen-academie .acad-closure-info {
   display: flex; align-items: center; gap: 14px; min-width: 0;
+  padding-right: 84px; /* réserve la zone où vit Kiro (positionné en absolu) — évite tout chevauchement avec le texte */
 }
 #screen-academie .acad-closure-check {
   flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%;
@@ -6223,24 +6225,52 @@ body {
   font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ax-obs); opacity: 0.75;
 }
 /* TEST D'INTÉGRATION (réversible) — nouvelle mascotte Kiro, pose neutre,
-   uniquement sur la clôture de la Mission du jour. Taille d'affichage
-   seule adaptée ici ; fichier, ratio, couleurs et transparence inchangés.
-   Entrée en douceur, une seule fois par apparition de la carte (pas de
-   boucle, pas de rebond) : un cycle unique par montage du DOM. */
+   uniquement sur la clôture de la Mission du jour.
+
+   Taille : sensiblement agrandie (72px → 116px, 88px sous 360px) pour
+   une vraie présence. Ratio, fichier, transparence inchangés — seule la
+   taille CSS d'affichage change.
+
+   Débordement : positionnement absolu (relatif à .acad-closure-card,
+   seul changement structurel — la carte elle-même n'est pas
+   réorganisée) avec un décalage négatif fixe vers le haut, indépendant
+   de la hauteur de la carte ou de la longueur du texte voisin (contrairement
+   à une marge négative sur un item flex, qui aurait varié avec eux).
+   .acad-closure-card garde overflow visible (par défaut, non modifié),
+   ainsi que tous ses parents (.rituel-wrap a déjà overflow:visible,
+   aucun ancêtre n'a overflow:hidden) : rien ne coupe Kiro. La réserve
+   .acad-closure-info (padding-right) évite que le texte ne passe sous lui.
+
+   Animation : déclenchée par JS (classe .acad-closure-kiro-play), pas
+   automatiquement au montage — voir renderRituelDuJour() et les hooks
+   dans closeGradeUpOverlay()/closePalierUpOverlay(). Nécessaire car un
+   overlay de palier/grade peut s'afficher PAR-DESSUS la carte juste
+   après complétion : l'animation ne doit se jouer qu'une fois la carte
+   réellement visible par l'utilisateur, pas pendant qu'elle est cachée
+   derrière l'overlay. */
 #screen-academie .acad-closure-kiro {
-  flex-shrink: 0; display: block;
-  width: 72px; height: auto;
-  animation: acadKiroEntree 0.6s ease-out 1;
+  position: absolute;
+  right: 14px;
+  top: -12px;
+  width: 116px; height: auto;
+  opacity: 0;
+  transform: translateY(20px) scale(0.9) rotate(-4deg);
+  transform-origin: bottom center;
 }
 @media (max-width: 360px) {
-  #screen-academie .acad-closure-kiro { width: 56px; }
+  #screen-academie .acad-closure-kiro { width: 80px; top: -12px; right: 8px; }
+  #screen-academie .acad-closure-info { padding-right: 84px; }
+}
+#screen-academie .acad-closure-kiro.acad-closure-kiro-play {
+  animation: acadKiroEntree 0.7s cubic-bezier(0.16,1,0.3,1) 1 forwards;
 }
 @keyframes acadKiroEntree {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(20px) scale(0.9) rotate(-4deg); }
+  to   { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
 }
 @media (prefers-reduced-motion: reduce) {
-  #screen-academie .acad-closure-kiro { animation: none; }
+  #screen-academie .acad-closure-kiro { opacity: 1; transform: none; }
+  #screen-academie .acad-closure-kiro.acad-closure-kiro-play { animation: none; }
 }
 
 /* ── Proposition suivante : UNE seule carte. Pictogramme (48px, coloré
@@ -9126,6 +9156,27 @@ function renderAcademieDate() {
   if (pd) pd.textContent = d.getDate() + ' ' + mois[d.getMonth()] + ' ' + d.getFullYear();
 }
 
+// TEST D'INTÉGRATION (réversible) — déclenche l'entrée animée de Kiro sur la
+// carte de clôture, uniquement quand elle est réellement visible. Un overlay
+// de palier/grade (showPalierUpOverlay/showGradeUpOverlay) peut s'afficher
+// PAR-DESSUS la carte juste après completeMission() : jouer l'animation à ce
+// moment-là la ferait passer inaperçue, cachée derrière l'overlay. On la
+// reporte donc à la fermeture de l'overlay (voir closeGradeUpOverlay /
+// closePalierUpOverlay). No-op partout ailleurs (l'élément n'existe que sur
+// cette carte).
+function _acadTriggerKiroEntree() {
+  var img = document.querySelector('.acad-closure-kiro');
+  if (!img || img.classList.contains('acad-closure-kiro-play')) return;
+  var overlayGrade  = document.getElementById('overlay-grade-up');
+  var overlayPalier = document.getElementById('overlay-palier-up');
+  var overlayVisible = (overlayGrade && overlayGrade.style.display === 'flex')
+    || (overlayPalier && overlayPalier.style.display === 'flex');
+  if (overlayVisible) return; // sera redéclenché à la fermeture de l'overlay
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() { img.classList.add('acad-closure-kiro-play'); });
+  });
+}
+
 function renderRituelDuJour() {
   var el = document.getElementById('rituel-du-jour');
   if (!el) return;
@@ -9207,6 +9258,7 @@ function renderRituelDuJour() {
 
   el.innerHTML = html;
   document.getElementById('section-archives').classList.toggle('acad-explorer-open', doneToday && _acadEntrainementFaitToday());
+  _acadTriggerKiroEntree();
 
   // Numéro sur le dossier empilé (compatibilité ancienne UI)
   var stackNum = document.getElementById('dossier-stack-num');
@@ -12752,6 +12804,7 @@ function showGradeUpOverlay(gradeObj) {
 
 function closeGradeUpOverlay() {
   document.getElementById('overlay-grade-up').style.display = 'none';
+  _acadTriggerKiroEntree(); // TEST D'INTÉGRATION (réversible) — no-op hors carte de clôture Kiro
 }
 
 function showPalierUpOverlay(palierObj) {
@@ -12766,6 +12819,7 @@ function showPalierUpOverlay(palierObj) {
 
 function closePalierUpOverlay() {
   document.getElementById('overlay-palier-up').style.display = 'none';
+  _acadTriggerKiroEntree(); // TEST D'INTÉGRATION (réversible) — no-op hors carte de clôture Kiro
 }
 
 // ============================================================

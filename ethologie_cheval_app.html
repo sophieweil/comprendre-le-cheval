@@ -6252,13 +6252,13 @@ body {
   position: absolute;
   right: 14px;
   top: -12px;
-  width: 116px; height: auto;
+  width: 92px; height: auto;
   opacity: 0;
   transform: translateY(20px) scale(0.9) rotate(-4deg);
   transform-origin: bottom center;
 }
 @media (max-width: 360px) {
-  #screen-academie .acad-closure-kiro { width: 80px; top: -12px; right: 8px; }
+  #screen-academie .acad-closure-kiro { width: 64px; top: -12px; right: 8px; }
   #screen-academie .acad-closure-info { padding-right: 84px; }
 }
 #screen-academie .acad-closure-kiro.acad-closure-kiro-play {
@@ -6349,6 +6349,46 @@ body {
 /* ── Pied de page : discret, sans capitales ── */
 #screen-academie .home-footer { opacity: 0.35; }
 #screen-academie .kiro-bottom-phrase { opacity: 0.85; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   TEST D'INTÉGRATION (réversible) — poses Kiro dans le parcours
+   Mission du jour (Quiz Flash, Dossier de So, Mission Cheval).
+   Fichiers fournis, utilisés tels quels (aucun redétourage, aucune
+   recréation). Aucune carte/cercle/bordure ajoutée autour des images.
+   Pas d'animation. Positionnement en absolu dans un conteneur existant
+   (position:relative ajouté sans autre effet visuel sur les conteneurs
+   qui ne l'avaient pas) ou en ligne dans un encart déjà flex existant
+   (.mc-peda-box, .fq-feedback) — aucune restructuration de carte.
+   ══════════════════════════════════════════════════════════════════════ */
+.mission-kiro-pose { display: block; height: auto; pointer-events: none; }
+
+/* Début de mission (kiro-enquete) — même gabarit sur les 3 écrans de
+   départ pour une lecture cohérente : coin haut-droit, contenu. */
+.mc-mission-zone, .ds-lecture { position: relative; }
+.mc-mission-zone.has-kiro-start, .ds-lecture.has-kiro-start { padding-right: 132px; }
+.mission-kiro-start {
+  position: absolute; top: 16px; right: 16px;
+  width: 108px;
+}
+@media (max-width: 380px) {
+  .mc-mission-zone.has-kiro-start, .ds-lecture.has-kiro-start { padding-right: 100px; }
+  .mission-kiro-start { width: 80px; top: 12px; right: 12px; }
+}
+
+/* Quiz Flash — bonne/mauvaise réponse : à côté du texte de feedback déjà
+   existant, dans son propre encart (mise en page flex, sans changer sa
+   structure de fond). */
+.fq-feedback.show { display: flex; align-items: center; gap: 14px; }
+.fq-feedback-body { flex: 1; min-width: 0; }
+.mission-kiro-feedback { width: 72px; flex-shrink: 0; }
+@media (max-width: 380px) {
+  .mission-kiro-feedback { width: 58px; }
+}
+
+/* Mission Cheval — fin de mission, encart pédagogique existant
+   (.mc-peda-box) : l'icône 🦅 est remplacée par Kiro Idée, même mise
+   en page flex déjà en place. */
+.mission-kiro-peda { width: 64px; flex-shrink: 0; }
 
 </style>
 </head>
@@ -7861,16 +7901,26 @@ function _renderFlashStep(el, qz) {
   var fbClass = '';
   var fbHead  = '';
   var fbText  = '';
+  var fbKiro  = '';
   if (_fqAnswered) {
     var ans = _fqAnswers[_fqStep] || {};
     var isOk = ans.correct;
     fbClass = isOk ? 'fq-feedback-ok' : 'fq-feedback-ko';
     fbHead  = isOk ? '✅ Exact !' : '❌ Pas tout à fait.';
     fbText  = step.explanation || '';
+    // TEST D'INTÉGRATION (réversible) — Kiro accompagne le feedback existant,
+    // ne remplace aucun texte.
+    fbKiro  = isOk ? 'kiro-applaudit.png' : 'kiro-oups-erreur.png';
   }
   var nextLabel = (_fqStep < total - 1) ? 'Question suivante →' : 'Voir mon résultat →';
+  // TEST D'INTÉGRATION (réversible) — Kiro Enquête uniquement sur la toute
+  // première question, pour marquer le début de la mission.
+  var kiroStartHtml = (_fqStep === 0)
+    ? '<img class="mission-kiro-pose mission-kiro-start" src="kiro-enquete.png" alt="Kiro">'
+    : '';
   el.innerHTML = (_fqContext === 'test' ? _testBannerHtml() : '')
-    + '<div class="mc-mission-zone">'
+    + '<div class="mc-mission-zone' + (_fqStep === 0 ? ' has-kiro-start' : '') + '">'
+    + kiroStartHtml
     + '<div class="mc-eyebrow">⚡ Interrogatoire Flash</div>'
     + '<div class="mc-title">' + esc(qz.icon + ' ' + (qz.titrePublic || qz.title)) + '</div>'
     + '</div>'
@@ -7882,7 +7932,10 @@ function _renderFlashStep(el, qz) {
     + '<div class="fq-question">' + esc(step.question) + '</div>'
     + '<div class="fq-cards">' + cardsHtml + '</div>'
     + '<div class="fq-feedback' + (_fqAnswered ? ' show ' + fbClass : '') + '">'
-    + '<span class="fq-feedback-head">' + fbHead + '</span>' + esc(fbText)
+    +   '<div class="fq-feedback-body">'
+    +     '<span class="fq-feedback-head">' + fbHead + '</span>' + esc(fbText)
+    +   '</div>'
+    +   (fbKiro ? '<img class="mission-kiro-pose mission-kiro-feedback" src="' + fbKiro + '" alt="Kiro">' : '')
     + '</div>'
     + '<button class="fq-next-btn' + (_fqAnswered ? ' show' : '') + '" onclick="nextFlashQuestion()">'
     + nextLabel + '</button>'
@@ -9233,9 +9286,9 @@ function renderRituelDuJour() {
       + '</div>';
   } else {
     // ── Clôture : la mission est faite, on l'annonce avant toute autre chose ──
-    // TEST D'INTÉGRATION (réversible) — nouvelle mascotte Kiro (mascotte-neutre.png).
-    // Pose neutre utilisée uniquement ici pour ce test technique et visuel ; ne pas
-    // généraliser ailleurs avant validation. Voir .acad-closure-kiro ci-dessous.
+    // TEST D'INTÉGRATION (réversible) — Kiro Bon Élève (kiro-bon-eleve.png)
+    // remplace la pose neutre à cet emplacement, validé lors du test précédent.
+    // mascotte-neutre.png reste dans le projet mais n'est plus référencée ici.
     var closureHtml = '<div class="acad-closure-card">'
       + '<div class="acad-closure-info">'
       +   '<span class="acad-closure-check">✓</span>'
@@ -9244,7 +9297,7 @@ function renderRituelDuJour() {
       +     '<div class="acad-closure-sub">+' + mission.xp + ' XP ajoutés à ton dossier.</div>'
       +   '</div>'
       + '</div>'
-      + '<img src="mascotte-neutre.png" alt="Kiro" class="acad-closure-kiro">'
+      + '<img src="kiro-bon-eleve.png" alt="Kiro" class="acad-closure-kiro">'
       + '</div>';
     if (_acadEntrainementFaitToday()) {
       // ── État 4 : tout est fait → clôture de journée ──
@@ -12096,7 +12149,9 @@ function _renderDossierLecture(el) {
   }
 
   el.innerHTML = (_dossierTestMode ? _testBannerHtml() : '')
-    + '<div class="ds-lecture">'
+    + '<div class="ds-lecture has-kiro-start">'
+    // TEST D'INTÉGRATION (réversible) — Kiro Enquête au début de la mission.
+    + '<img class="mission-kiro-pose mission-kiro-start" src="kiro-enquete.png" alt="Kiro">'
     + '<div class="ds-eyebrow">📚 Dossier de So</div>'
     + '<div class="ds-titre">' + esc(data.titre) + '</div>'   // TOUJOURS le titre du dossier
     + '<div class="ds-teaser">' + esc(src.teaser) + '</div>'
@@ -13065,7 +13120,9 @@ function _renderMCStep(el, mission) {
   // En-tête mission (étape 1 seulement)
   var headerHtml = '';
   if (_mcStep === 0) {
-    headerHtml = '<div class="mc-mission-zone">'
+    headerHtml = '<div class="mc-mission-zone has-kiro-start">'
+      // TEST D'INTÉGRATION (réversible) — Kiro Enquête au début de la mission.
+      + '<img class="mission-kiro-pose mission-kiro-start" src="kiro-enquete.png" alt="Kiro">'
       + '<div class="mc-eyebrow">🐴 Mission Cheval</div>'
       + '<div class="mc-title">' + esc(mission.titre) + '</div>'
       + '<div class="mc-xp-badge">+' + mission.xp + ' XP</div>'
@@ -13233,8 +13290,11 @@ function _renderMCRecap(el, mission) {
   html += '<div class="mc-recap-rows">' + rowsHtml + '</div>';
 
   if (kiro) {
+    // TEST D'INTÉGRATION (réversible) — Kiro Idée remplace l'icône 🦅 dans cet
+    // encart pédagogique uniquement (les autres .mc-peda-box de l'app, hors
+    // Mission du jour, ne sont pas concernés). Texte inchangé.
     html += '<div class="mc-peda-box">'
-      + '<span class="mc-peda-icon">🦅</span>'
+      + '<img class="mission-kiro-pose mission-kiro-peda" src="kiro-idee.png" alt="Kiro">'
       + '<span class="mc-peda-text">« ' + esc(kiro) + ' »</span>'
       + '</div>';
   }

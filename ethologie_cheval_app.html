@@ -6377,18 +6377,24 @@ body {
 
 /* Quiz Flash — bonne/mauvaise réponse : à côté du texte de feedback déjà
    existant, dans son propre encart (mise en page flex, sans changer sa
-   structure de fond). */
+   structure de fond). Agrandi (passe 2) pour que l'expression/posture de
+   Kiro soit immédiatement reconnaissable, plus une simple icône. */
 .fq-feedback.show { display: flex; align-items: center; gap: 14px; }
 .fq-feedback-body { flex: 1; min-width: 0; }
-.mission-kiro-feedback { width: 72px; flex-shrink: 0; }
+.mission-kiro-feedback { width: 96px; flex-shrink: 0; }
 @media (max-width: 380px) {
-  .mission-kiro-feedback { width: 58px; }
+  .mission-kiro-feedback { width: 76px; }
 }
 
 /* Mission Cheval — fin de mission, encart pédagogique existant
    (.mc-peda-box) : l'icône 🦅 est remplacée par Kiro Idée, même mise
-   en page flex déjà en place. */
-.mission-kiro-peda { width: 64px; flex-shrink: 0; }
+   en page flex déjà en place. Agrandi (passe 2), quitte à dépasser
+   légèrement de la géométrie de l'encart plutôt que de rester un
+   simple pictogramme. */
+.mission-kiro-peda { width: 84px; flex-shrink: 0; }
+@media (max-width: 380px) {
+  .mission-kiro-peda { width: 68px; }
+}
 
 </style>
 </head>

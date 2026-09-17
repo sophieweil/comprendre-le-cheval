@@ -6224,13 +6224,23 @@ body {
 }
 /* TEST D'INTÉGRATION (réversible) — nouvelle mascotte Kiro, pose neutre,
    uniquement sur la clôture de la Mission du jour. Taille d'affichage
-   seule adaptée ici ; fichier, ratio, couleurs et transparence inchangés. */
+   seule adaptée ici ; fichier, ratio, couleurs et transparence inchangés.
+   Entrée en douceur, une seule fois par apparition de la carte (pas de
+   boucle, pas de rebond) : un cycle unique par montage du DOM. */
 #screen-academie .acad-closure-kiro {
   flex-shrink: 0; display: block;
   width: 72px; height: auto;
+  animation: acadKiroEntree 0.6s ease-out 1;
 }
 @media (max-width: 360px) {
   #screen-academie .acad-closure-kiro { width: 56px; }
+}
+@keyframes acadKiroEntree {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #screen-academie .acad-closure-kiro { animation: none; }
 }
 
 /* ── Proposition suivante : UNE seule carte. Pictogramme (48px, coloré

@@ -1059,7 +1059,7 @@ body {
 .welcome-kiro { background: rgba(122,146,104,0.07); border: 1px solid rgba(122,146,104,0.18); border-radius: 22px; padding: 32px 28px; opacity: 0; animation: oiFadeIn 0.9s ease 1.6s forwards; }
 .welcome-kiro-label { font-size: 8px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #7A9268; margin-bottom: 18px; }
 .welcome-kiro-top { display: flex; align-items: center; gap: 18px; margin-bottom: 20px; }
-.welcome-kiro-visual { width: 56px; height: 56px; border-radius: 50%; background: rgba(200,166,85,0.10); border: 1px solid rgba(200,166,85,0.28); display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+.welcome-kiro-visual { width: 72px; height: auto; flex-shrink: 0; display: block; }
 .welcome-kiro-name { font-family: 'Playfair Display', serif; font-size: 21px; font-weight: 700; color: #26160A; }
 .welcome-kiro-text { font-size: 14px; color: #7A6050; line-height: 1.85; }
 .welcome-kiro-text em { color: #26160A; font-style: italic; }
@@ -4045,9 +4045,13 @@ body {
   to   { transform: translateY(0);    opacity: 1; }
 }
 .celeb-kiro {
-  font-size: 28px;
+  width: 150px;
+  height: auto;
   margin-bottom: 14px;
-  line-height: 1;
+  pointer-events: none;
+}
+@media (max-width: 380px) {
+  .celeb-kiro { width: 110px; }
 }
 .celeb-sur {
   font-family: 'Lato', sans-serif;
@@ -6396,6 +6400,23 @@ body {
   .mission-kiro-peda { width: 68px; }
 }
 
+/* ══════════════════════════════════════════════════════════════════════
+   DEUXIÈME PASSE — Kiro Progression (overlays grade/palier), Kiro
+   Réfléchit / Kiro Interrogation (Carnet). Fichiers fournis, utilisés
+   tels quels. Aucune carte/cercle/bordure ajoutée. Pas d'animation.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* Carnet — formulaire "Nouvelle observation" : Kiro à côté du libellé,
+   dans une rangée flex normale (pas de position absolue) — garantit
+   qu'il ne peut jamais recouvrir le textarea, quelle que soit sa
+   hauteur. */
+.form-label-kiro-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.form-label-kiro-row .form-label { margin-bottom: 0; }
+.carnet-kiro-pose { width: 76px; flex-shrink: 0; }
+@media (max-width: 380px) {
+  .carnet-kiro-pose { width: 60px; }
+}
+
 </style>
 </head>
 <body>
@@ -6616,12 +6637,12 @@ body {
     <div class="welcome-kiro">
       <div class="welcome-kiro-label">Votre guide</div>
       <div class="welcome-kiro-top">
-        <div class="welcome-kiro-visual">🦅</div>
+        <img class="welcome-kiro-visual" src="mascotte-neutre.png" alt="Kiro">
         <div class="welcome-kiro-name">Kiro</div>
       </div>
       <div class="welcome-kiro-text">
-        C'est un faucon crécerelle.<br><br>
-        Le crécerelle possède une capacité rare : immobile dans le vent, la tête parfaitement fixe, il perçoit des détails que les autres ratent entièrement. Il ne cherche pas à tout voir — il cherche à voir <em>juste</em>.<br><br>
+        Voici Kiro, le petit cheval pie qui vous accompagnera dans l'Académie.<br><br>
+        Curieux et attentif, Kiro vous invite à regarder les détails, à distinguer ce que vous observez de ce que vous interprétez, et à garder certaines questions ouvertes quand il manque encore des indices.<br><br>
         Kiro ne vous donnera pas les réponses.<br>
         Il vous apprendra à poser les bonnes questions.
       </div>
@@ -7231,14 +7252,20 @@ body {
 
       <!-- Mon interprétation -->
       <div class="form-field">
-        <label class="form-label" for="obs-interpretation">Mon interprétation</label>
+        <div class="form-label-kiro-row">
+          <label class="form-label" for="obs-interpretation">Mon interprétation</label>
+          <img class="mission-kiro-pose carnet-kiro-pose" src="kiro-reflechit.png" alt="Kiro">
+        </div>
         <textarea class="form-input form-textarea" id="obs-interpretation"
           placeholder="Ce que je pense que le cheval ressentait dans ce moment…"></textarea>
       </div>
 
       <!-- À vérifier -->
       <div class="form-field">
-        <label class="form-label" for="obs-a-verifier">À vérifier plus tard</label>
+        <div class="form-label-kiro-row">
+          <label class="form-label" for="obs-a-verifier">À vérifier plus tard</label>
+          <img class="mission-kiro-pose carnet-kiro-pose" src="kiro-interrogation.png" alt="Kiro">
+        </div>
         <textarea class="form-input form-textarea" id="obs-a-verifier"
           placeholder="Questions ouvertes, points à observer lors des prochaines sessions…"></textarea>
       </div>
@@ -15220,7 +15247,7 @@ if (localStorage.getItem('userIsLoggedIn') === 'true') {
 <!-- ========== OVERLAY GRADE-UP ========== -->
 <div id="overlay-grade-up" class="celeb-overlay" style="display:none;" onclick="closeGradeUpOverlay()">
   <div class="celeb-card" onclick="event.stopPropagation()">
-    <div class="celeb-kiro">🦅</div>
+    <img class="celeb-kiro" src="kiro-progression.png" alt="Kiro">
     <div class="celeb-sur">Nouveau grade</div>
     <div class="celeb-icon" id="celeb-grade-icon"></div>
     <div class="celeb-titre" id="celeb-grade-label"></div>
@@ -15232,7 +15259,7 @@ if (localStorage.getItem('userIsLoggedIn') === 'true') {
 <!-- ========== OVERLAY PALIER-UP ========== -->
 <div id="overlay-palier-up" class="celeb-overlay celeb-overlay-palier" style="display:none;" onclick="closePalierUpOverlay()">
   <div class="celeb-card celeb-card-palier" onclick="event.stopPropagation()">
-    <div class="celeb-kiro">🦅</div>
+    <img class="celeb-kiro" src="kiro-progression.png" alt="Kiro">
     <div class="celeb-sur">Nouveau palier débloqué</div>
     <div class="celeb-icon celeb-icon-lg" id="celeb-palier-icon"></div>
     <div class="celeb-titre celeb-titre-lg" id="celeb-palier-label"></div>

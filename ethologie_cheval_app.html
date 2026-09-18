@@ -3754,16 +3754,18 @@ body {
 }
 .fq-next-btn.show { display: block; animation: fadeIn 0.25s ease both; }
 .fq-next-btn:hover { background: var(--mission-accent); }
-/* Résultat Flash */
-.fq-result-card {
-  background: #FDFAF4; border-radius: 18px; padding: 28px 20px 24px;
-  box-shadow: 0 3px 18px rgba(0,0,0,0.13);
-  display: flex; flex-direction: column; align-items: center; gap: 12px;
+/* Résultat Flash — même ticket que les 3 états précédents (identité
+   corail + zone bilan crème), score en point focal, message en second
+   niveau, XP/déblocage en informations secondaires. */
+.fq-result-headline {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  text-align: center;
 }
-.fq-result-icon { font-size: 54px; line-height: 1; margin-bottom: 4px; }
+.fq-result-focal { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.fq-result-icon { font-size: 38px; line-height: 1; }
 .fq-result-score {
-  font-family: 'Playfair Display', serif; font-size: 26px;
-  font-weight: 700; color: #2F4A3D;
+  font-family: 'Playfair Display', serif; font-size: 42px;
+  font-weight: 800; color: #2F4A3D; line-height: 1;
 }
 .fq-result-label {
   font-family: 'DM Sans', sans-serif; font-size: 14px;
@@ -3773,11 +3775,11 @@ body {
   background: var(--mission-soft); border-radius: 100px;
   padding: 6px 18px; font-family: 'Lato', sans-serif;
   font-size: 13px; font-weight: 700; color: var(--mission-dark);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.05em; align-self: center;
 }
 .fq-result-kiro {
   background: rgba(74,124,89,0.07); border-radius: 12px;
-  padding: 12px 16px; display: flex; gap: 10px; align-items: flex-start;
+  padding: 12px 16px;
   font-family: 'DM Sans', sans-serif; font-size: 13px;
   font-style: italic; color: #2F4A3D; line-height: 1.5; width: 100%;
   box-sizing: border-box;
@@ -8071,16 +8073,30 @@ function _renderFlashResultat(el, qz) {
     : '';
   var backFn    = (_fqContext === 'library') ? "showScreen('quiz-home')" : "showScreen('academie')";
   var backLabel = (_fqContext === 'library') ? '← Retour à la bibliothèque' : '← Retour à l\'Académie';
+  var doneSegs = '';
+  for (var i = 0; i < total; i++) { doneSegs += '<span class="fq-header-progress-seg is-done"></span>'; }
   el.innerHTML = ''
-    + '<div class="fq-result-card">'
-    + '<div class="fq-result-icon">' + icons[iconIdx] + '</div>'
-    + '<div class="fq-result-score">' + _fqScore + ' / ' + total + '</div>'
-    + '<div class="fq-result-label">' + esc(msgs[iconIdx]) + '</div>'
+    + '<div class="fq-ticket">'
+    + '<div class="fq-header">'
+    + '<div class="fq-header-title">' + esc(qz.icon + ' ' + (qz.titrePublic || qz.title)) + '</div>'
+    + '<div class="fq-header-progress">'
+    +   '<div class="fq-header-progress-text">Quiz terminé</div>'
+    +   '<div class="fq-header-progress-track">' + doneSegs + '</div>'
+    + '</div>'
+    + '</div>'
+    + '<div class="fq-step-card">'
+    + '<div class="fq-result-headline">'
+    +   '<div class="fq-result-focal">'
+    +     '<span class="fq-result-icon">' + icons[iconIdx] + '</span>'
+    +     '<span class="fq-result-score">' + _fqScore + ' / ' + total + '</span>'
+    +   '</div>'
+    +   '<div class="fq-result-label">' + esc(msgs[iconIdx]) + '</div>'
+    + '</div>'
     + xpHtml
     + (unlockText ? '<div class="fq-result-unlock">' + unlockText + '</div>' : '')
-    + '<div class="fq-result-kiro"><span style="font-size:20px;flex-shrink:0;">🦅</span>'
-    + '<span>« Ce que tu sais vraiment se voit quand tu ne peux pas chercher. »</span></div>'
+    + '<div class="fq-result-kiro"><span>« Ce que tu sais vraiment se voit quand tu ne peux pas chercher. »</span></div>'
     + '<button class="fq-result-btn" onclick="' + backFn + '">' + backLabel + '</button>'
+    + '</div>'
     + '</div>';
 }
 

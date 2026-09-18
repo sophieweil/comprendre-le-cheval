@@ -3661,25 +3661,24 @@ body {
    directement connectée à la carte question crème dessous (silhouette
    visuelle unique — prototype visuel, question/bonne/mauvaise réponse). */
 .fq-ticket {
-  border-radius: 18px; overflow: hidden;
+  border-radius: 18px;
   box-shadow: 0 3px 18px rgba(0,0,0,0.13);
   margin-bottom: 20px;
+  overflow: visible;
 }
 .fq-header {
   background: var(--mission-dark);
   padding: 22px 24px 16px;
   position: relative;
+  border-radius: 18px 18px 0 0;
 }
-.fq-header.has-kiro { padding-right: 120px; }
-.fq-header-kiro { position: absolute; top: 14px; right: 14px; width: 92px; }
-@media (max-width: 380px) {
-  .fq-header.has-kiro { padding-right: 92px; }
-  .fq-header-kiro { width: 70px; top: 10px; right: 10px; }
-}
-.fq-header-eyebrow {
-  display: block; font-family: 'Lato', sans-serif; font-size: 10px;
-  font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-  color: #F2C9A8; margin-bottom: 6px;
+/* Kiro Enquête : léger débordement au-dessus du ticket, pour un rôle de
+   posture reconnaissable plutôt qu'un simple sticker. */
+.fq-header.has-kiro { padding-right: 118px; }
+.fq-header-kiro { position: absolute; top: -10px; right: 14px; width: 96px; }
+@media (max-width: 340px) {
+  .fq-header.has-kiro { padding-right: 102px; }
+  .fq-header-kiro { width: 84px; top: -8px; right: 10px; }
 }
 .fq-header-title {
   font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600;
@@ -3705,6 +3704,7 @@ body {
   background: #FDFAF4;
   padding: 24px 20px 22px;
   display: flex; flex-direction: column; gap: 20px;
+  border-radius: 0 0 18px 18px;
 }
 .fq-question {
   font-family: 'Playfair Display', serif; font-size: 19px;
@@ -3742,7 +3742,7 @@ body {
   border-left: 4px solid #C05A2A; color: #4A2010;
 }
 .fq-feedback-head {
-  font-weight: 700; display: block; margin-bottom: 6px; font-size: 13px;
+  font-weight: 800; display: block; margin-bottom: 8px; font-size: 17px;
 }
 .fq-next-btn {
   display: none; width: 100%;
@@ -6411,11 +6411,11 @@ body {
 /* Quiz Flash — bonne/mauvaise réponse : Kiro en « poke-out », débordant
    du bandeau de feedback existant (même principe que sur l'Académie),
    dans une réserve d'espace dédiée pour ne jamais masquer le texte. */
-.fq-feedback { padding-right: 100px; }
-.mission-kiro-feedback { position: absolute; top: -20px; right: 12px; width: 80px; }
+.fq-feedback { padding-right: 112px; }
+.mission-kiro-feedback { position: absolute; top: -22px; right: 12px; width: 92px; }
 @media (max-width: 380px) {
-  .fq-feedback { padding-right: 80px; }
-  .mission-kiro-feedback { width: 64px; top: -16px; right: 8px; }
+  .fq-feedback { padding-right: 92px; }
+  .mission-kiro-feedback { width: 76px; top: -18px; right: 8px; }
 }
 
 /* Mission Cheval — fin de mission, encart pédagogique existant
@@ -7981,7 +7981,6 @@ function _renderFlashStep(el, qz) {
     + '<div class="fq-ticket">'
     + '<div class="fq-header' + (_fqStep === 0 ? ' has-kiro' : '') + '">'
     + kiroStartHtml
-    + '<div class="fq-header-eyebrow">⚡ Interrogatoire Flash</div>'
     + '<div class="fq-header-title">' + esc(qz.icon + ' ' + (qz.titrePublic || qz.title)) + '</div>'
     + '<div class="fq-header-progress">'
     +   '<div class="fq-header-progress-text">Question ' + (_fqStep + 1) + ' sur ' + total + '</div>'

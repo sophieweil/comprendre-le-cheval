@@ -3657,29 +3657,55 @@ body {
 .de-diplome-empty { opacity:.5; font-size:13px; padding:10px 0; }
 
 /* ── Interrogatoire Flash ────────────────────────────────────────────── */
+/* Bloc « ticket à deux volets » : identité Flash foncée en haut,
+   directement connectée à la carte question crème dessous (silhouette
+   visuelle unique — prototype visuel, question/bonne/mauvaise réponse). */
+.fq-ticket {
+  border-radius: 18px; overflow: hidden;
+  box-shadow: 0 3px 18px rgba(0,0,0,0.13);
+  margin-bottom: 20px;
+}
+.fq-header {
+  background: var(--mission-dark);
+  padding: 22px 24px 16px;
+  position: relative;
+}
+.fq-header.has-kiro { padding-right: 120px; }
+.fq-header-kiro { position: absolute; top: 14px; right: 14px; width: 92px; }
+@media (max-width: 380px) {
+  .fq-header.has-kiro { padding-right: 92px; }
+  .fq-header-kiro { width: 70px; top: 10px; right: 10px; }
+}
+.fq-header-eyebrow {
+  display: block; font-family: 'Lato', sans-serif; font-size: 10px;
+  font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: #F2C9A8; margin-bottom: 6px;
+}
+.fq-header-title {
+  font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600;
+  color: #FDFAF4; line-height: 1.2;
+}
+/* Progression : volontairement fine et secondaire, ne doit jamais
+   concurrencer le titre ni la question (ajustement validé). */
+.fq-header-progress { margin-top: 14px; }
+.fq-header-progress-text {
+  display: block; font-family: 'Lato', sans-serif; font-size: 9.5px;
+  font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: #F2E4D8; opacity: 0.75; margin-bottom: 6px;
+}
+.fq-header-progress-track { display: flex; gap: 4px; }
+.fq-header-progress-seg {
+  flex: 1; height: 3px; border-radius: 2px;
+  background: rgba(255,255,255,0.20);
+  transition: background 0.2s;
+}
+.fq-header-progress-seg.is-done { background: rgba(255,255,255,0.55); }
+.fq-header-progress-seg.is-active { background: var(--mission-accent); }
 .fq-step-card {
   background: #FDFAF4;
-  border-radius: 18px;
-  padding: 26px 20px 22px;
-  box-shadow: 0 3px 18px rgba(0,0,0,0.13);
+  padding: 24px 20px 22px;
   display: flex; flex-direction: column; gap: 20px;
 }
-.fq-progress {
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-  padding-bottom: 6px; border-bottom: 1px solid rgba(47,74,61,0.10);
-}
-.fq-progress-text {
-  font-family: 'Lato', sans-serif; font-size: 11px; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase; color: #8A9E8D;
-}
-.fq-progress-dots { display: flex; gap: 8px; align-items: center; }
-.fq-dot {
-  width: 9px; height: 9px; border-radius: 50%;
-  background: rgba(47,74,61,0.15);
-  transition: background 0.2s, transform 0.2s;
-}
-.fq-dot-done { background: rgba(47,74,61,0.35); }
-.fq-dot-active { background: var(--mission-accent); transform: scale(1.4); }
 .fq-question {
   font-family: 'Playfair Display', serif; font-size: 19px;
   font-weight: 700; color: #2F4A3D; line-height: 1.35; text-align: center;
@@ -3695,22 +3721,25 @@ body {
 }
 .fq-card:active { transform: scale(0.97); }
 .fq-card-sel { border-color: var(--mission-accent); background: var(--mission-soft); }
-.fq-card-correct { border-color: #4A7C59; background: rgba(74,124,89,0.12); }
-.fq-card-wrong { border-color: #C05A2A; background: rgba(192,90,42,0.07); }
+/* Asymétrie volontaire : la bonne réponse reçoit un traitement affirmé,
+   l'erreur reste en simple bordure + léger fond (non punitive). */
+.fq-card-correct { border-color: #4A7C59; border-width: 2.5px; background: rgba(74,124,89,0.20); }
+.fq-card-wrong { border-color: #C05A2A; background: rgba(192,90,42,0.08); }
 .fq-card-emoji { font-size: 26px; flex-shrink: 0; line-height: 1; }
 .fq-card-label { font-size: 15px; font-weight: 600; color: #2F4A3D; line-height: 1.3; }
 .fq-feedback {
-  display: none; border-radius: 12px; padding: 14px 16px;
+  display: none; position: relative; border-radius: 12px;
+  padding: 14px 16px;
   font-family: 'DM Sans', sans-serif; font-size: 13.5px; line-height: 1.55;
 }
 .fq-feedback.show { display: block; animation: fadeIn 0.3s ease both; }
 .fq-feedback-ok {
   background: rgba(74,124,89,0.10); border: 1px solid rgba(74,124,89,0.25);
-  color: #2F4A3D;
+  border-left: 4px solid #4A7C59; color: #2F4A3D;
 }
 .fq-feedback-ko {
   background: rgba(192,90,42,0.08); border: 1px solid rgba(192,90,42,0.22);
-  color: #4A2010;
+  border-left: 4px solid #C05A2A; color: #4A2010;
 }
 .fq-feedback-head {
   font-weight: 700; display: block; margin-bottom: 6px; font-size: 13px;
@@ -6379,15 +6408,14 @@ body {
   .mission-kiro-start { width: 80px; top: 12px; right: 12px; }
 }
 
-/* Quiz Flash — bonne/mauvaise réponse : à côté du texte de feedback déjà
-   existant, dans son propre encart (mise en page flex, sans changer sa
-   structure de fond). Agrandi (passe 2) pour que l'expression/posture de
-   Kiro soit immédiatement reconnaissable, plus une simple icône. */
-.fq-feedback.show { display: flex; align-items: center; gap: 14px; }
-.fq-feedback-body { flex: 1; min-width: 0; }
-.mission-kiro-feedback { width: 96px; flex-shrink: 0; }
+/* Quiz Flash — bonne/mauvaise réponse : Kiro en « poke-out », débordant
+   du bandeau de feedback existant (même principe que sur l'Académie),
+   dans une réserve d'espace dédiée pour ne jamais masquer le texte. */
+.fq-feedback { padding-right: 100px; }
+.mission-kiro-feedback { position: absolute; top: -20px; right: 12px; width: 80px; }
 @media (max-width: 380px) {
-  .mission-kiro-feedback { width: 76px; }
+  .fq-feedback { padding-right: 80px; }
+  .mission-kiro-feedback { width: 64px; top: -16px; right: 8px; }
 }
 
 /* Mission Cheval — fin de mission, encart pédagogique existant
@@ -7908,10 +7936,10 @@ function renderFlashQuiz() {
 function _renderFlashStep(el, qz) {
   var total = qz.flash.length;
   var step  = qz.flash[_fqStep];
-  var dots  = '';
+  var segs  = '';
   for (var i = 0; i < total; i++) {
-    dots += '<span class="fq-dot'
-      + (i < _fqStep ? ' fq-dot-done' : i === _fqStep ? ' fq-dot-active' : '')
+    segs += '<span class="fq-header-progress-seg'
+      + (i < _fqStep ? ' is-done' : i === _fqStep ? ' is-active' : '')
       + '"></span>';
   }
   var cardsHtml = '';
@@ -7947,29 +7975,29 @@ function _renderFlashStep(el, qz) {
   // TEST D'INTÉGRATION (réversible) — Kiro Enquête uniquement sur la toute
   // première question, pour marquer le début de la mission.
   var kiroStartHtml = (_fqStep === 0)
-    ? '<img class="mission-kiro-pose mission-kiro-start" src="kiro-enquete.png" alt="Kiro">'
+    ? '<img class="mission-kiro-pose fq-header-kiro" src="kiro-enquete.png" alt="Kiro">'
     : '';
   el.innerHTML = (_fqContext === 'test' ? _testBannerHtml() : '')
-    + '<div class="mc-mission-zone' + (_fqStep === 0 ? ' has-kiro-start' : '') + '">'
+    + '<div class="fq-ticket">'
+    + '<div class="fq-header' + (_fqStep === 0 ? ' has-kiro' : '') + '">'
     + kiroStartHtml
-    + '<div class="mc-eyebrow">⚡ Interrogatoire Flash</div>'
-    + '<div class="mc-title">' + esc(qz.icon + ' ' + (qz.titrePublic || qz.title)) + '</div>'
+    + '<div class="fq-header-eyebrow">⚡ Interrogatoire Flash</div>'
+    + '<div class="fq-header-title">' + esc(qz.icon + ' ' + (qz.titrePublic || qz.title)) + '</div>'
+    + '<div class="fq-header-progress">'
+    +   '<div class="fq-header-progress-text">Question ' + (_fqStep + 1) + ' sur ' + total + '</div>'
+    +   '<div class="fq-header-progress-track">' + segs + '</div>'
+    + '</div>'
     + '</div>'
     + '<div class="fq-step-card">'
-    + '<div class="fq-progress">'
-    + '<div class="fq-progress-text">Question ' + (_fqStep + 1) + ' sur ' + total + '</div>'
-    + '<div class="fq-progress-dots">' + dots + '</div>'
-    + '</div>'
     + '<div class="fq-question">' + esc(step.question) + '</div>'
     + '<div class="fq-cards">' + cardsHtml + '</div>'
     + '<div class="fq-feedback' + (_fqAnswered ? ' show ' + fbClass : '') + '">'
-    +   '<div class="fq-feedback-body">'
-    +     '<span class="fq-feedback-head">' + fbHead + '</span>' + esc(fbText)
-    +   '</div>'
+    +   '<span class="fq-feedback-head">' + fbHead + '</span>' + esc(fbText)
     +   (fbKiro ? '<img class="mission-kiro-pose mission-kiro-feedback" src="' + fbKiro + '" alt="Kiro">' : '')
     + '</div>'
     + '<button class="fq-next-btn' + (_fqAnswered ? ' show' : '') + '" onclick="nextFlashQuestion()">'
     + nextLabel + '</button>'
+    + '</div>'
     + '</div>';
 }
 

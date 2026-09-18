@@ -6409,13 +6409,11 @@ body {
 /* Carnet — formulaire "Nouvelle observation" : Kiro à côté du libellé,
    dans une rangée flex normale (pas de position absolue) — garantit
    qu'il ne peut jamais recouvrir le textarea, quelle que soit sa
-   hauteur. */
+   hauteur. ~95px (passe 3) : vérifié sans débordement ni chevauchement
+   du libellé de 320 à 428px, aucune réduction responsive nécessaire. */
 .form-label-kiro-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .form-label-kiro-row .form-label { margin-bottom: 0; }
-.carnet-kiro-pose { width: 76px; flex-shrink: 0; }
-@media (max-width: 380px) {
-  .carnet-kiro-pose { width: 60px; }
-}
+.carnet-kiro-pose { width: 95px; flex-shrink: 0; }
 
 </style>
 </head>
